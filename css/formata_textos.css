@@ -1,0 +1,463 @@
+@charset "utf-8";
+
+.nome_usuario {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	color: #00C;
+	text-align: right;
+	
+}
+/*# sourceMappingURL=bootstrap.css.map */
+.rodape {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 9px;
+	font-style: normal;
+	color: #AAA;
+	text-align: center;
+}
+.rodapeSigla {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 9px;
+	font-style: normal;
+	color: #F00;
+	text-align: center;
+}
+
+
+/* CSS Document */
+.text_fundo_azul_letrabranca {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 14px;
+	color: #FFF;
+	text-align: center;
+	background-color: #009;
+	font-weight: bold;
+	line-height: 1.42857px;
+	-webkit-transition: all;
+	-moz-transition: all;
+	-ms-transition: all;
+	-o-transition: all;
+	transition: all;
+	height: auto;
+	width: 100%;
+	background-image: none;
+	border: thin solid #999;
+}
+.text_fundo_amarelo_letraazul {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 14px;
+	color: #0800D8;
+	text-align: center;
+	background-color: #FF0;
+	font-weight: bold;
+	line-height: 1.42857px;
+	-webkit-transition: all;
+	-moz-transition: all;
+	-ms-transition: all;
+	-o-transition: all;
+	transition: all;
+	height: auto;
+	width: 100%;
+	background-image: none;
+	border: thin solid #999;
+}
+.text_fundo_azul_letraamarela {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 14px;
+	color: #FF0;
+	text-align: center;
+	background-color: #009;
+	font-weight: bold;
+	line-height: 1.42857px;
+	-webkit-transition: all;
+	-moz-transition: all;
+	-ms-transition: all;
+	-o-transition: all;
+	transition: all;
+	height: 34px;
+	width: 100%;
+	background-image: none;
+	border: thin solid #999;
+}
+.text_fundo_verde_letraverde {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 14px;
+	color: #00FF00;
+	text-align: center;
+	background-color: #063;
+	font-weight: normal;
+	line-height: 1.42857px;
+	-webkit-transition: all;
+	-moz-transition: all;
+	-ms-transition: all;
+	-o-transition: all;
+	transition: all;
+	height: 34px;
+	width: 100%;
+	background-image: none;
+	border: thin solid #999;
+}
+
+.text_fundo_rosa_letrapreta {
+	font-family: Tahoma;
+	font-size: 14px;
+	color: #FFFFFF;
+	text-align: center;
+	vertical-align: baseline;	
+	background-color: #F300F1;
+	font-weight: normal;
+	line-height: 1.42857px;
+	-webkit-transition: all;
+	-moz-transition: all;
+	-ms-transition: all;
+	-o-transition: all;
+	transition: all;
+	height: auto;
+	width: auto;
+	background-image: none;
+	border: thin solid #999;
+}
+
+
+
+.sistema {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	color: #036;
+	text-align: center;
+}
+.sigla_sistema {
+	font-family: Tahoma;
+	font-size: 14px;
+	font-weight: bold;
+	color: #AFAAAA;
+	text-align: center;
+}
+.funcaotela {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	color: #060;
+	text-align: center;
+	display: block;
+	position: relative;
+	-webkit-transition: crop, text-shadow;
+	-moz-transition: crop, text-shadow;
+	-ms-transition: crop, text-shadow;
+	-o-transition: crop, text-shadow;
+	transition: crop, text-shadow;
+}
+.politico {
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: 16;
+	font-weight: bold;
+	color: #878282;
+	text-align: center;
+	text-decoration-color: cadetblue;
+}
+.endereco {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-weight: bold;
+	color: #03C;
+}
+.imgflag {
+	border: thin solid #666;
+	height: 14px;
+	width: 20px;
+}
+
+.usuario_nome {
+	display: inline;
+	padding: .2em .6em .3em;
+	font-size: 75%;
+	font-weight: 700;
+	line-height: 1;
+	color: #fff;
+	text-align: right;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: .25em
+}
+a.usuario_nome:focus, a.usuario_nome:hover {
+	color: #fff;
+	text-decoration: none;
+	cursor: pointer
+}
+.usuario_nome:empty {
+	display: none
+}
+.usuario_nome-default {
+	background-color: #777
+}
+.usuario_nome-default[href]:focus, .label-default[href]:hover {
+	background-color: #5e5e5e
+}
+
+
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?9yfogv');
+  src:  url('../fonts/icomoon.eot?9yfogv#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?9yfogv') format('truetype'),
+    url('../fonts/icomoon.woff?9yfogv') format('woff'),
+    url('../fonts/icomoon.svg?9yfogv#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-lock:before {
+  content: "\f06a";
+}
+.icon-remove-user:before {
+  content: "\e900";
+}
+.icon-add-user:before {
+  content: "\e901";
+}
+.icon-lock-open:before {
+  content: "\e902";
+}
+.icon-man:before {
+  content: "\e903";
+}
+.icon-news:before {
+  content: "\e904";
+}
+.icon-user:before {
+  content: "\e905";
+}
+.icon-users:before {
+  content: "\e906";
+}
+.icon-dollar:before {
+  content: "\e907";
+}
+.icon-dollar2:before {
+  content: "\e908";
+}
+.icon-car:before {
+  content: "\e909";
+}
+.icon-bus:before {
+  content: "\e90a";
+}
+.form-local-control {
+	display: block;
+	width: 100%;
+	height: 34px;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	background-image: none;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+	-webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+	-o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+	padding: 6px;
+}
+.form-local-control:focus {
+	border-color: #66afe9;
+	outline: 0;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.6)
+}
+.form-local-control::-moz-placeholder {
+color:#999;
+opacity:1
+}
+.form-local-control:-ms-input-placeholder {
+color:#999
+}
+.form-local-control::-webkit-input-placeholder {
+color:#999
+}
+.form-control::-ms-expand {
+border:0;
+background-color:transparent
+}
+.form-local-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+	background-color: #eee;
+	opacity: 1
+}
+.form-local-control[disabled], fieldset[disabled] .form-control {
+	cursor: not-allowed
+}
+textarea.form-local-control {
+	height: auto
+}
+input-local[type="search"] {
+	-webkit-appearance: none
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+input-local[type="date"].form-local-control, input-local[type="time"].form-local-control, input-local[type="datetime-local"].form-local-control, input-local[type="month"].form-local-control {
+	line-height: 20px
+}
+input-local[type="date"].input-sm, input-local[type="time"].input-sm, input-local[type="datetime-local"].input-sm, input-local[type="month"].input-sm, .input-group-sm input-local[type="date"], .input-group-sm input-local-[type="time"], .input-group-sm input-local[type="datetime-local"], .input-group-sm input-local[type="month"] {
+	line-height: 30px
+}
+input-local[type="date"].input-lg, input-local[type="time"].input-lg, input-local[type="datetime-local"].input-lg, input-local[type="month"].input-lg, .input-group-lg input-local[type="date"], .input-group-lg input-local[type="time"], .input-group-lg input-local[type="datetime-local"], .input-group-lg input-local[type="month"] {
+	line-height: 40px
+}
+}
+.form-local-group {
+	margin-bottom: 10px
+}
+.btn-uva {
+	color: #fff;
+	background-color: #667bff;
+	border-color: #667bff
+}
+.btn-uva:hover {
+	color: #fff;
+	background-color: #6669d9;
+	border-color: #6662cc
+}
+.btn-uva.focus, .btn-uva:focus {
+box-shadow:0 0 0 .2rem rgba(0,123,255,.5)
+}
+.btn-uva.disabled, .btn-uva:disabled {
+	color: #fff;
+	background-color: #667bff;
+	border-color: #667bff
+}
+.btn-uva:not(:disabled):not(.disabled).active, .btn-uva:not(:disabled):not(.disabled):active, .show>.btn-uva.dropdown-toggle {
+	color: #fff;
+	background-color: #6662cc;
+	border-color: #665cbf
+}
+.btn-uva:not(:disabled):not(.disabled).active:focus, .btn-uva:not(:disabled):not(.disabled):active:focus, .show>.btn-uva.dropdown-toggle:focus {
+box-shadow:0 0 0 .2rem rgba(0,123,255,.5)
+}
+.btn-pink {
+	color: #fff;
+	background-color: #cc7bff;
+	border-color: #cc7bff
+}
+.btn-pink:hover {
+	color: #fff;
+	background-color: #cc69d9;
+	border-color: #cc62cc
+}
+.btn-pink.focus, .btn-pink:focus {
+box-shadow:0 0 0 .2rem rgba(0,123,255,.5)
+}
+.btn-pink.disabled, .btn-pink:disabled {
+	color: #fff;
+	background-color: #cc7bff;
+	border-color: #cc7bff
+}
+.btn-pink:not(:disabled):not(.disabled).active, .btn-pink:not(:disabled):not(.disabled):active, .show>.btn-pink.dropdown-toggle {
+	color: #fff;
+	background-color: #cc62cc;
+	border-color: #cc5cbf
+}
+.btn-pink:not(:disabled):not(.disabled).active:focus, .btn-pink:not(:disabled):not(.disabled):active:focus, .show>.btn-pink.dropdown-toggle:focus {
+box-shadow:0 0 0 .2rem rgba(0,123,255,.5)
+}
+
+#subirTopo {
+text-decoration: none;
+background: rgba(30,156,161,.9);
+bottom: 30px;
+right: 30px;
+color: #fff;
+text-align: center;
+cursor: pointer;
+padding: 15px;
+font-size: 15px;
+font-weight: bold;
+text-transform: uppercase;
+position: fixed;
+border: 0;
+font-family: sans-serif;
+opacity: .8;
+}
+
+#subirTopo:hover {
+opacity:1;
+}
+
+.animacao {
+  width: 100px;
+  height: 30px;
+  background-color: red;
+  color: #fff;
+  -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+  animation-name: example;
+  animation-duration: 4s;
+  animation-direction: alternate;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+  from {background-color: red;}
+  to {background-color: yellow;}
+}
+
+/* Standard syntax */
+@keyframes example {
+  from {background-color: red;
+	margin-left: 100%;
+	width: 100%;}
+  to {background-color: yellow;
+	margin-left: 100%;
+	width: 200%;}
+}
+
+
+
+.slidein {
+  animation-duration: 3s;
+  animation-name: slidein;
+  animation-iteration-count: 15;
+  animation-direction: alternate;
+  color: #fff;
+  background-color: #F90000;
+
+}
+
+@keyframes slidein {
+  from {
+    margin-left:100%;
+    width:100%;
+  }
+  
+  to {
+    margin-left:200%;
+    width:100%;
+  }

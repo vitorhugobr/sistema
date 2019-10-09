@@ -1,0 +1,120 @@
+<?php 
+include_once("../seguranca.php"); // Inclui o arquivo com o sistema de segurança
+protegePagina(); // Chama a função que protege a página
+// exportar Excel
+$_SESSION['funcao']="Exportar Excel";
+$_sql = "SELECT * FROM cadastro_backup";    //retornam valores nestas duas variáveis da função monta_sql()
+$_res = $_con->query($_sql);
+if($_res->num_rows>0){
+	$arquivo = 'cadastro_geral.xls';
+	$tabela = '<table border="1">';
+	$tabela .= '<tr>';
+	$tabela .= '<td>CODIGO</td>';
+	$tabela .= '<td>NOME</td>';
+	$tabela .= '<td>SEXO</td>';
+	$tabela .= '<td>DTCAD</td>';
+	$tabela .= '<td>DTNASC</td>';
+	$tabela .= '<td>CARGO</td>';
+	$tabela .= '<td>FONE_RES</td>';
+	$tabela .= '<td>FONE_CEL</td>';
+	$tabela .= '<td>FONE_COM</td>';
+	$tabela .= '<td>CPF</td>';
+	$tabela .= '<td>CONDICAO</td>';
+	$tabela .= '<td>EMAIL</td>';
+	$tabela .= '<td>GRUPO</td>';
+	$tabela .= '<td>ORIGEM</td>';
+	$tabela .= '<td>PROFISSAO</td>';
+	$tabela .= '<td>ZONAL</td>';
+	$tabela .= '<td>SECCAO</td>';
+	$tabela .= '<td>PAI_MAE</td>';
+	$tabela .= '<td>FILIADO</td>';
+	$tabela .= '<td>RECEBEMAT</td>';
+	$tabela .= '<td>RESPCADASTRO</td>';
+	$tabela .= '<td>DTULTALT</td>';
+	$tabela .= '<td>EMPRESA</td>';
+	$tabela .= '<td>VOTOU</td>';
+	$tabela .= '<td>RAMO</td>';
+	$tabela .= '<td>RECEBEMAIL</td>';
+	$tabela .= '<td>IMPRESSO</td>';
+	$tabela .= '<td>ENVIADO</td>';
+	$tabela .= '<td>CAMPANHA</td>';
+	$tabela .= '<td>FACEBOOK</td>';
+	$tabela .= '<td>TWITTER</td>';
+	$tabela .= '<td>OUTRAREDE</td>';
+	$tabela .= '<td>APELIDO</td>';
+	$tabela .= '<td>EST_CIVIL</td>';
+	$tabela .= '<td>CLASSI</td>';
+	$tabela .=  '<td>OBS</td>';
+	$tabela .=  '<td>cep</td>';
+	$tabela .=  '<td>tipolog</td>';
+	$tabela .=  '<td>logradouro</td>';
+	$tabela .=  '<td>bairro</td>';
+	$tabela .=  '<td>cidade</td>';
+	$tabela .=  '<td>uf</td>';
+	$tabela .=  '<td>numero</td>';
+	$tabela .=  '<td>complemento</td>';
+	$tabela .=  '<td>tipo</td>';
+	$tabela .=  '<td>padrao</td>';
+	$tabela .=  '<td>reg</td>';
+	$tabela .= '</tr>';	
+	while($_row = $_res->fetch_assoc()) {
+		$tabela .= '<tr>';
+		$tabela .= '<td>'.$_row['CODIGO'].'</td>';
+		$tabela .= '<td>'.utf8_decode($_row['NOME']).'</td>';
+		$tabela .= '<td>'.$_row['SEXO'].'</td>';
+		$tabela .= '<td>'.$_row['DTCAD'].'</td>';
+		$tabela .= '<td>'.$_row['DTNASC'].'</td>';
+		$tabela .= '<td>'.utf8_decode($_row['CARGO']).'</td>';
+		$tabela .= '<td>'.$_row['FONE_RES'].'</td>';
+		$tabela .= '<td>'.$_row['FONE_CEL'].'</td>';
+		$tabela .= '<td>'.$_row['FONE_COM'].'</td>';
+		$tabela .= '<td>'.$_row['CPF'].'</td>';
+		$tabela .= '<td>'.$_row['CONDICAO'].'</td>';
+		$tabela .= '<td>'.$_row['EMAIL'].'</td>';
+		$tabela .= '<td>'.$_row['GRUPO'].'</td>';
+		$tabela .= '<td>'.$_row['ORIGEM'].'</td>';
+		$tabela .= '<td>'.$_row['PROFISSAO'].'</td>';
+		$tabela .= '<td>'.$_row['ZONAL'].'</td>';
+		$tabela .= '<td>'.$_row['SECCAO'].'</td>';
+		$tabela .= '<td>'.$_row['PAI_MAE'].'</td>';
+		$tabela .= '<td>'.$_row['FILIADO'].'</td>';
+		$tabela .= '<td>'.$_row['RECEBEMAT'].'</td>';
+		$tabela .= '<td>'.$_row['RESPCADASTRO'].'</td>';
+		$tabela .= '<td>'.$_row['DTULTALT'].'</td>';
+		$tabela .= '<td>'.$_row['EMPRESA'].'</td>';
+		$tabela .= '<td>'.$_row['VOTOU'].'</td>';
+		$tabela .= '<td>'.$_row['RAMO'].'</td>';
+		$tabela .= '<td>'.$_row['RECEBEMAIL'].'</td>';
+		$tabela .= '<td>'.$_row['IMPRESSO'].'</td>';
+		$tabela .= '<td>'.$_row['ENVIADO'].'</td>';
+		$tabela .= '<td>'.$_row['CAMPANHA'].'</td>';
+		$tabela .= '<td>'.$_row['FACEBOOK'].'</td>';
+		$tabela .= '<td>'.$_row['TWITTER'].'</td>';
+		$tabela .= '<td>'.$_row['OUTRAREDE'].'</td>';
+		$tabela .= '<td>'.$_row['APELIDO'].'</td>';
+		$tabela .= '<td>'.$_row['EST_CIVIL'].'</td>';
+		$tabela .= '<td>'.$_row['CLASSI'].'</td>';
+		$tabela .= '<td>'.utf8_decode($_row['OBS']).'</td>';
+		$tabela .=  '<td>'.$_row['cep'].'</td>';
+		$tabela .=  '<td>'.$_row['tipolog'].'</td>';
+		$tabela .=  '<td>'.utf8_decode($_row['rua']).'</td>';
+		$tabela .=  '<td>'.utf8_decode($_row['bairro']).'</td>';
+		$tabela .=  '<td>'.utf8_decode($_row['cidade']).'</td>';
+		$tabela .=  '<td>'.$_row['uf'].'</td>';
+		$tabela .=  '<td>'.$_row['numero'].'</td>';
+		$tabela .=  '<td>'.utf8_decode($_row['complemento']).'</td>';
+		$tabela .=  '<td>'.$_row['tipo'].'</td>';
+		$tabela .=  '<td>'.$_row['padrao'].'</td>';
+		$tabela .=  '<td>'.$_row['reg'].'</td>';
+		$tabela .= '</tr>';
+	}
+	$tabela .= '</table>';
+	header('Content-Type: text/csv; charset=utf-8');
+	header ('Cache-Control: no-cache, must-revalidate');
+	header ('Pragma: no-cache');
+	header ("Content-Disposition: attachment; filename=\"{$arquivo}\"");
+	echo $tabela;
+	$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> Cadastro Exportado para Excel<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  		
+
+}
+?>

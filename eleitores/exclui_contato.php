@@ -1,0 +1,14 @@
+<?php 
+include_once("../seguranca.php"); // Inclui o arquivo com o sistema de segurança
+
+protegePagina(); // Chama a função que protege a página
+
+$codigo = $_GET["id"];	
+
+$strsql = "DELETE FROM `visitas` WHERE `Visita`= ".$codigo;
+
+gravaoperacoes("visitas","E", $_SESSION["usuarioUser"],"Excluída visita #: ".$codigo);
+
+executa_sql($strsql,"Exclusão da Contato OK!","ERRO na exclusão de contato",true,true);
+
+?>

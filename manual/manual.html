@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Cadastro de árbitros">
+<meta name="author" content="Vitor H M Oliveira">
+<link rel="stylesheet" href="../css/bootstrap.min.css">
+<link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+<link href="../css/formata_textos.css" rel="stylesheet">
+<link href="../css/sticky-footer-navbar.css" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="../css/font-awesome.css"/>
+<link rel="icon" href="../imagens/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="../css/ajax.css"/>
+<link rel="stylesheet" href="../css/all.css">
+<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+<script src="../js/ie-emulation-modes-warning.js"></script>
+<link type="text/css" rel="stylesheet" href="../fpdf/fpdf.css">
+<style type="text/css">
+ul {list-style-type:none; margin:0; padding:0}
+ul#answers li {margin-top:1.8em}
+.question {font-weight:bold; color:#900000}
+</style>
+</head>
+<body>
+<div id="carregando"></div>
+<div class="container-fluid ml-3">
+<div class="row">
+	<div class='col-1 text-center'>
+		<img class="float" src="../imagens/vhmo.png" width="22" height="22"/> 
+	</div>
+	<div class="col-1 text-center" align="center"> 
+	</div>
+
+	<div class='col-6 text-center'>
+		<span class="sigla_sistema">SIGRE - </span> <span class="politico">Sistema Integrado de Gestão e Relacionamento com Eleitor
+		</span>
+	</div>
+	<div class='col-3 text-center'>
+		<span class="text-danger"><strong>Manual</strong></span>
+	</div>
+	<div class='col-1 text-right'>
+		<span class="badge badge-info"></span>
+	</div>
+	<div class="text-dark fa-1x">
+		Este Sistema se destina ao uso por parte de políticos. Sem uso é gratuito (free) desde que seja autorizado pelo proprietário.
+	</div>
+	<div class="alert-warning fa-1x">
+		Em <strong>todo sistema</strong>, sempre que aperecer a lupa <i class="fas fa-search"></i>, significa que este campo é destinado à pesquisa. Utiliza o recurso igual ao Google, onde o usuário começa digitar o texto e logo abaixo é sugerida a informação que já consta no banco de dados.<br>
+		É só clicar em cima de um item da lista que a pesquisa é realizada.
+	</div>
+	<div class="figure">
+	  <img src="consulta.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo de tela com a LUPA</figcaption>
+	</div>
+</div>
+<hr>
+
+<ul>
+<li><b>1.</b> <a href="#q1">Agenda</a></li>
+<li><b>2.</b> <a href="#q2">Cadastros de Apoio</a></li>
+<li><b>3.</b> <a href="#q3">Cadastro de ELEITORES</a></li>
+<li><b>4.</b> <a href='#q4'>Demandas</a></li>
+<li><b>5.</b> <a href='#q5'>Relatórios/Etiquetas</a></li>
+<li><b>6.</b> <a href='#q6'>Segurança</a></li>
+<li><b>7.</b> <a href='#q7'>Tarefas</a></li>
+</ul>
+<hr>
+<ul id='answers'>
+<li id='q1'>
+<p><b>1.</b> <span class='question'>Agenda</span><a href="#carregando"><img src="../imagens/toppage.png" class="rounded float-right"></a></p>
+O Sistema utiliza o Google Agenda. É criada uma conta só para utilização no sistema. Você poderá compartilhá-la e configurá-la como desejar, desde que faça login com esta conta no Google.
+	<div class="figure">
+	  <img src="agenda.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da Agenda</figcaption>
+	</div>
+
+</li>
+<hr>
+<li id='q2'>
+	<p><b>2.</b> <span class='question'>Cadastros de Apoio</span><a href="#carregando"><img src="../imagens/toppage.png" class="rounded float-right"></a></p>
+	Ao cadastrar um eleitor, alguns campos têm informações pré-determinadas e não aceitam digitação. Estas informações podem ser adicionadas, excluídas ou alteradas<br>
+	São os chamados Cadastros de Apoio. São eles:<br>
+	<b><span class='question'>CAMPANHA</b></span> = Cadastro com os códigos da relação do eleitor para com a campanha política. Ele auxilia na informação correta e padronizada.<br>
+	<div class="figure">
+	  <img src="campanha.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da tela do cadastro de Campanha </figcaption>
+	</div>
+	<hr>
+	<b><span class='question'>CEP</b>
+		</span> = Cadastro com os CEPs do Brasil. Para inclusão de endereços dos eleitores, ele auxilia na informação correta e padronizada.<br>
+  	<div class="figure">
+	  <img src="ceps.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da tela do cadastro de Ceps </figcaption>
+	</div>
+	<hr>
+	<b><span class='question'>GRUPOS</b></span> = Cadastro com os códigos dos Grupos. Ele auxilia na informação correta e padronizada.<br>
+		Se a quantidade de registros for maior que zero, clique na descrição que listará na tela os cadastros pertencentes a este grupo
+	<div class="figure">
+	  <img src="grupos.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da tela do cadastro de Grupos </figcaption>
+	</div>
+	<hr>
+	<b><span class='question'>ORIGENS</b></span> = Cadastro com os códigos das Origens. Ele auxilia na informação correta e padronizada.<br>
+		Se a quantidade de registros for maior que zero, clique na descrição que listará na tela os cadastros pertencentes a esta origem
+	<div class="figure">
+	  <img src="origens.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da tela do cadastro de Origens </figcaption>
+	</div>
+	<hr>
+	<b><span class='question'>PROFISSÕES</b></span> = Cadastro com os códigos das Profissões. Ele auxilia na informação correta e padronizada.<br>
+		Se a quantidade de registros for maior que zero, clique na descrição que listará na tela os cadastros pertencentes a esta profissão
+	<div class="figure">
+	  <img src="profissoes.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da tela do cadastro de Pofissões </figcaption>
+	</div>
+	<hr>
+	<b><span class='question'>RAMOS DE ATIVIDADES</b></span> = Cadastro com os códigos dos Ramos de Atividades. Ele auxilia na informação correta e padronizada.<br>
+		Se a quantidade de registros for maior que zero, clique na descrição que listará na tela os cadastros pertencentes a este ramo de atividade
+	<div class="figure">
+	  <img src="ramos.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da tela do cadastro de Ramos de Atividades </figcaption>
+	</div>
+	<hr>
+	<b><span class='question'>SECRETARIAS</b></span> = Cadastro com os códigos das Secretarias. Ele auxilia na inclusão de demandas com informação correta e padronizada.<br>
+	<div class="figure">
+	  <img src="secretarias.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da tela do cadastro de Secretarias </figcaption>
+	</div>
+</li>
+<hr>
+<li id='q3'>
+<p><b>3.</b> <span class='question'>Cadastro de Eleitores</span><a href="#carregando"><img src="../imagens/toppage.png" class="rounded float-right"></a></p>
+Principal tabela do sistema, armazena as informações dos eleitores. 
+<div class="doc-source m-auto"  style="vertical-align: middle;">
+<pre><code>PARA INCLUIR, CLICAR NO BOTÃO <button type="button" class="btn btn-sm btn-primary">
+<i class="fas fa-user-plus" aria-hidden="true text-muted" aria-hidden="true"></i> NOVO
+</button> e após aparecer o <b>CÓDIGO</b> do Eleitor, são liberados os demais botões e poderão ser colocadas as informações.<br>Para efetivar as atualizações clicar em <button type="button" class="btn btn-sm btn-success">
+<i class="fas fa-save" aria-hidden="true text-muted" aria-hidden="true"></i> GRAVAR
+</button></code></pre>
+</div>
+	<div class="figure">
+	  <img src="cadastro.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da tela do Cadastro </figcaption>
+	</div>
+</li>
+<hr>
+<li id='q4'>
+<p><b>4.</b> <span class='question'>Demandas</span><a href="#carregando"><img src="../imagens/toppage.png" class="rounded float-right"></a></p>
+São solicitações feitas ao Gabinete que gerarão pedidos aos diversos órgãos públicos. Ao cadastrar uma demanda, ela fica "vinculada" a um eleitor e pode ser<br>
+facilmente consultada. É possível anexar documento formato pdf e imagens tipo jpg. Ao registrar uma resposta à demanda poderá ser enviado e-mail ao solicitante com esta resposta<br>
+Se for designado um responsável(usuário do gabinete) para a demanda, será gerada uma tarefa automaticamente para este usuário.<br>
+Para consultar a demanda, basta clicar no nome do eleitor.
+	<div class="figure">
+	  <img src="demandas.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da tela principal de demandas</figcaption>
+	</div>
+	<hr>
+	<div class="figure">
+	  <img src="demandas1.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da tela de consulta de uma demanda</figcaption>
+	</div>
+	<hr>
+	<div class="figure">
+	  <img src="demandas2.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Exemplo da tela de resposta de uma demanda</figcaption>
+	</div>
+</li>
+<hr>
+<li id='q5'>
+<p><b>5.</b> <span class='question'>Relatórios / Etiquetas</span><a href="#carregando"><img src="../imagens/toppage.png" class="rounded float-right"></a></p>
+O sistema tem dois <code>tipos</code> de relatórios/etiquetas:
+<div class="doc-source">
+<pre><code>Cadastro Geral
+    com opções de Relatório Gerencial, Etiquetas e Demandas;
+Aniversários
+    com opções de Etiquetas e Relação de Aniversariantes.
+</code></pre>
+</div>
+	<div class="figure">
+	  <img src="relat1.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Tela de Opções do Cadastro Geral</figcaption>
+	</div>
+	<hr>
+	<div class="figure">
+	  <img src="relat2.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Tela de Opções do Aniversário</figcaption>
+	</div>
+	<hr>
+	<div class="figure">
+	  <img src="relat3.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">As opções do Cadastro Geral</figcaption>
+	</div>
+	<hr>
+	<div class="figure">
+	  <img src="relat4.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">As opções das Demandas </figcaption>
+	</div>
+	<hr>
+</li>
+
+<li id='q6'>
+<p><b>6.</b> <span class='question'>Segurança.</span><a href="#carregando"><img src="../imagens/toppage.png" class="rounded float-right"></a></p>
+Nesta opção serão realizados os controles do sistema. Inclusão de usuários (do sistema), Controle de acesso ao sistema por usuário e Alteração de Senhas.
+<pre><code>Usuários são pessoas ligadas ao gabinete que poderão utilizar o sistema!</code></pre>
+	<div class="figure">
+	  <img src="usuarios.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Tela de Usuários</figcaption>
+	</div>
+	<hr>
+	<div class="figure">
+	  <img src="acessos.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Tela exemplo em que o administrador define o que cada usuário poderá fazer no sistema</figcaption>
+	</div>
+	<hr>
+</li>
+
+<li id='q7'>
+<p><b>7.</b> <span class='question'>Tarefas</span><a href="#carregando"><img src="../imagens/toppage.png" class="rounded float-right"></a></p>
+São "tarefas" que o Chefe do Gabinete/Administrador define aos usuários do sistema. O usuário registrará cada ação realizada na tarefa.
+	<div class="figure">
+	  <img src="tarefas.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Tela de Tarefas</figcaption>
+	</div>
+	<hr>
+	<div class="figure">
+	  <img src="tarefas1.png" class="figure-img img-fluid rounded" alt="...">
+	  <figcaption class="figure-caption text-center">Tela de Inclusão de Tarefas</figcaption>
+	</div>
+	<hr>
+</li>
+
+</div>
+<nav class="navbar shadow mt-0 mb-0 bg-transparent rounded fixed-bottom">
+  <div class="container-fluid"> 
+  	<span class="rodape">&copy;&nbsp;
+			Vitor H M Oliveira
+    </span>
+  	<span class="rodapeSigla">
+			SIGRE
+    </span>    
+  	<span class="rodape">
+			Sistema Integrado de Gestão e Relacionamento com Eleitor
+    </span>
+  </div>
+</nav>
+</body>
+</html>

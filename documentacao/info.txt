@@ -1,0 +1,54 @@
+Informações sobre o sistema e contas para agenda
+//==========================================================
+Id=0 Vitor
+
+//==========================================================
+
+Id=1 Dr Thiago Duarte
+email: duartethiago025@gmail.com.br
+senha: th1490du4rt3
+status: OK
+
+//==========================================================
+
+Id=2 Reginaldo Pujol
+email: pujol.sigre@gmail.com
+senha: puj0l519r3
+status:
+
+//==========================================================
+
+Id=3 Mauro Pinheiro
+email: maurop.sigre@gmail.com
+senha: m4ur0p519r3
+status:
+
+//==========================================================
+
+Id=4 Domingos Cunha
+email: domingos.sigre@gmail.com     
+senha: cunh451gr3
+status:
+
+//==========================================================
+
+Id=5 Nelcir Tessaro
+email: tessaro.sigre@gmail.com
+senha: t3554r0_519r3
+status:
+
+//==========================================================
+
+Id=6 Democratas Porto Alegre
+email: democrataspoa@gmail.com
+senha: dempoa25
+status:
+
+//==========================================================
+
+Id=7 Sebastião Melo
+email: melo.sigre@gmail.com
+senha: m3ll0519r3
+status:
+
+//==========================================================

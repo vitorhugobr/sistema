@@ -1,0 +1,90 @@
+.search_field {
+	background: #FFF url(search.gif) no-repeat right center;
+	color: #555;
+	font-weight: normal;
+	text-transform: none;
+	text-align: left;
+	height: 34px;
+	line-height: 1.42857px;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ccc;
+	border-radius: 0.25rem;
+	transition: border-color 0.15s ease-in-out 0s, all 0.15s ease-in-out 0s;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	width: 100%;
+	-webkit-transition: border-color 0.15s ease-in-out 0s, all 0.15s ease-in-out 0s;
+	-moz-transition: border-color 0.15s ease-in-out 0s, all 0.15s ease-in-out 0s;
+	-ms-transition: border-color 0.15s ease-in-out 0s, all 0.15s ease-in-out 0s;
+	-o-transition: border-color 0.15s ease-in-out 0s, all 0.15s ease-in-out 0s;
+	padding: 6px;
+}
+
+.search_field_spin {
+	background: #FFF url(search_spin.gif) no-repeat right center;
+	color: #555;
+	font-weight: normal;
+	text-transform: none;
+	text-align: left;
+	height: 34px;
+	line-height: 1.42857px;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ccc;
+	border-radius: 0.25rem;
+	transition: border-color 0.15s ease-in-out 0s, all 0.15s ease-in-out 0s;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	width: 100%;
+	-webkit-transition: border-color 0.15s ease-in-out 0s, all 0.15s ease-in-out 0s;
+	-moz-transition: border-color 0.15s ease-in-out 0s, all 0.15s ease-in-out 0s;
+	-ms-transition: border-color 0.15s ease-in-out 0s, all 0.15s ease-in-out 0s;
+	-o-transition: border-color 0.15s ease-in-out 0s, all 0.15s ease-in-out 0s;
+	padding: 6px;
+}
+
+.autocomplete_list * {
+	color: #000000;
+	font-weight: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+}
+
+.autocomplete_list b {
+	font-weight: bold;
+}
+
+.autocomplete_list { 
+	background: #FEFEFE;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	text-align: left; 
+	z-index: 99; 
+}
+
+.autocomplete_list, .autocomplete_list ol, .autocomplete_list li { 
+	list-style-type: none;
+	margin: 0; 
+	padding: 0;
+	clear: both;
+}
+
+.autocomplete_list li {
+	margin: 0;
+	text-align: left;
+	cursor: pointer;
+	padding: 6px;
+}
+
+.autocomplete_list .current_item {
+	background: #B4D5FE;
+	color: #000066;
+}
+
+.autocomplete_list li { 
+	color: #303030;
+}
+
+.autocomplete_list span { 
+	color: #111; float: right; padding-left: 2em; 
+}
