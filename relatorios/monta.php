@@ -1,7 +1,7 @@
 <?php 
 include_once("../seguranca.php"); // Inclui o arquivo com o sistema de segurança
 protegePagina(); // Chama a função que protege a página
-require_once("../utilitarios/funcoes.php");
+
 require_once("../fpdf/fpdf.php");
 "use strict";
 ob_start();
@@ -1595,6 +1595,33 @@ function monta_ani(){
 		$sql = 'SELECT * from relatorios_view where mes= '.$mes.' AND (dia >= '.$dia.' AND dia <= '.$diaf.') and condicao=1 and rua >"" and cep >0 ORDER BY reg, nome';
 	}
 	return $sql;	
+}
+//--------------------------------------------------------------------------------------------------------------------
+function busca_secretaria($codigo) {
+  $cons  = new mysqli(HOST,USER,PASS,DB);	
+  if(!$cons) {  
+	  echo "Não foi possivel conectar ao MySQL. Erro " .
+			  mysqli_connect_errno() . " : " . mysql_connect_error();
+	  exit;
+  }  
+  mysqli_set_charset($cons,"utf8");
+  mysqli_query($cons, "SET NAMES 'utf8'");
+  mysqli_query($cons, 'SET character_set_connection=utf8');
+  mysqli_query($cons, 'SET character_set_client=utf8');
+  mysqli_query($cons, 'SET character_set_results=utf8');
+
+  $query2 = "SELECT * FROM secretarias WHERE codigo=".$codigo;
+  $mysql_query2 = $cons->query($query2);
+  $qtderegs2 = $mysql_query2->num_rows;
+  if ($qtderegs2>0) {
+	  while ($dado2 = $mysql_query2->fetch_assoc()) {
+		$retorno = $dado2['descricao'];
+	  }	
+  }else{
+	  $retorno= $codigo." não cadastrado";					
+  }
+mysqli_close($cons);
+return $retorno;
 }
 
 // -------------------------------------------------------------------------------------------------------------------
