@@ -797,7 +797,7 @@ function executa_sql($sql, $msgok, $msgerro, $display_msg, $atualiza_pagina) {
 		$statementSql = $pdosql->prepare($sql);
 		$statementSql->execute();
 		if ($display_msg){
-			$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgok."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
+			$_SESSION['msg'] = "<div class='alert alert-success alert-dismissible fade show' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgok."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
 		}
 		if ($atualiza_pagina){
 			echo '<script>window.location.reload();</script>'; 
@@ -805,9 +805,9 @@ function executa_sql($sql, $msgok, $msgerro, $display_msg, $atualiza_pagina) {
 		return $statementSql->rowCount();
 	}catch(PDOException $e){  // Caso ocorra algum erro exibe a mensagem
 		if ($e->errorInfo[1] == 1062) {      // duplicate entry, do something else
- 			$_SESSION['msg'] = "<div class='alert alert-danger' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro.". JÁ EXISTE ESTE REGISTRO!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  		
+ 			$_SESSION['msg'] = "<div class='alert alert-danger alert-dismissible fade show'' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro.". JÁ EXISTE ESTE REGISTRO!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  		
 		} else {      // an error other than duplicate entry occurred
- 			$_SESSION['msg'] = "<div class='alert alert-danger' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro." Motivo:\n".$e->getMessage()."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  			
+ 			$_SESSION['msg'] = "<div class='alert alert-danger alert-dismissible fade show'' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro." Motivo:\n".$e->getMessage()."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  			
 		}
 		//die;
 		return false;

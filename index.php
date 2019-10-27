@@ -172,6 +172,8 @@ $_SESSION['ult_eleitor_pesquisado']=0;
 <?php echo date('d/m/Y')?></div></h5>
 	<div class="sigla_sistema">
 		<?php echo $_SESSION['sistemaabrev']?></div>
+	<div class="rodape">
+	<?php echo $_SESSION['versao'].'-'.$_SESSION['id'];?></div>
 	<div class="politico"><?php echo $_SESSION['politico'] ?>
   	</div>
    <div class="form-signin-heading text-danger">Área Restrita <?php echo $area_acesso; ?>
