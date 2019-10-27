@@ -24,7 +24,7 @@ $dtultalt = date("d/m/Y");
 $codigo2 = $codigo;
 $endereco = $tipolog." ".$rua." ".$numero." ".$compl.' '.$bairro.' '.$cidade.' '.$uf.' '.$cep;
 
-$_SESSION['CodRetorno']=$codigo;
+$_SESSION['ult_eleitor_pesquisado']=$codigo;
 
 // codigo
 $theValue = (!get_magic_quotes_gpc()) ? addslashes($codigo) : $codigo;
@@ -97,8 +97,6 @@ $theValue = (!get_magic_quotes_gpc()) ? addslashes($dtultalt) : $dtultalt;
 $theValue = ($theValue != "") ? " '" . ConvertDateToMysqlFormat($theValue) . "'" : "NULL";
 $dtultalt = $theValue;
 
-gravaoperacoes("enderecos","A", $_SESSION["usuarioUser"],"registro #: ".$codigo);
-
 $_sql = "Update enderecos set ";
 	$_sql.= "codigo=".$codigo;
 	$_sql.= ",cep=".$cep;
@@ -115,7 +113,9 @@ $_sql = "Update enderecos set ";
 	$_sql.= " where id=".$id;
 	$_res = $_con->query($_sql);
 
-executa_sql($_sql,"Endereço alterado com sucesso ","Endereço NÃO alterado",true,false);
+gravaoperacoes("enderecos","A", $_SESSION["usuarioUser"],"comando : ".$_sql);
+
+executa_sql($_sql,"Endereço alterado com sucesso ","Endereço NÃO alterado",false,false);
 	
 
 	// altera no banco
@@ -126,8 +126,7 @@ $strsql = 'UPDATE cadastro SET ';
 	$strsql .= ' WHERE CODIGO='.$codigo;
 /*	echo '<script>alert("'.$strsql.'")</script>';*/
 
-executa_sql($strsql,"Endereço alterado com sucesso ","Endereço NÃO alterado",true,false);
+executa_sql($strsql,"Endereço alterado com sucesso ","Endereço NÃO alterado",false,true);
 
-echo '<script>self.window.close();</script>';
 
 ?>

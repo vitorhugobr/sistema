@@ -226,9 +226,10 @@ $class = $theValue;
 
 // altera no banco
 //debug();
-$strsql = 'INSERT into cadastro (CODIGO, DTCAD, RESPCADASTRO, DTULTALT)  VALUES(';
+$strsql = 'INSERT into cadastro (CODIGO, DTCAD, CONDICAO, RESPCADASTRO, DTULTALT)  VALUES(';
 $strsql .= $codigo;
 $strsql .= ",'".date('Y-m-d H:i:s')."'";
+$strsql .= ",".$condicao;
 $strsql .= ",".$respcadastro;
 $strsql .= ",'".date('Y-m-d H:i:s')."'";
 $strsql .= ')';

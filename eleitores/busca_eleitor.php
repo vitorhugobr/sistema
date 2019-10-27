@@ -6,13 +6,64 @@ $codigo = $_GET['codigo'];
 unset($_SESSION['msgativo']);
 if (isset($codigo)){
 #	if ($codigo==0 ){
-		unset($_SESSION['ult_eleitor_pesquisado']);
+		$_SESSION['ult_eleitor_pesquisado']=0;
 #	}else{
-		$querycad = "SELECT * from cadastro WHERE cadastro.CODIGO = $codigo";
+		$querycad = "SELECT 
+  cadastro.CODIGO,
+  cadastro.NOME,
+  cadastro.SEXO,
+  cadastro.DTCAD,
+  cadastro.DTNASC,
+  cadastro.CARGO,
+  cadastro.FONE_RES,
+  cadastro.FONE_CEL,
+  cadastro.FONE_COM,
+  cadastro.CPF,
+  cadastro.CONDICAO,
+  cadastro.EMAIL,
+  cadastro.GRUPO,
+  cadastro.ORIGEM,
+  cadastro.PROFISSAO,
+  cadastro.ZONAL,
+  cadastro.SECCAO,
+  cadastro.PAI_MAE,
+  cadastro.FILIADO,
+  cadastro.RECEBEMAT,
+  cadastro.RESPCADASTRO,
+  cadastro.DTULTALT,
+  cadastro.EMPRESA,
+  cadastro.VOTOU,
+  cadastro.RAMO,
+  cadastro.RECEBEMAIL,
+  cadastro.IMPRESSO,
+  cadastro.ENVIADO,
+  cadastro.CAMPANHA,
+  cadastro.FACEBOOK,
+  cadastro.TWITTER,
+  cadastro.OUTRAREDE,
+  cadastro.APELIDO,
+  cadastro.EST_CIVIL,
+  cadastro.CLASSI,
+  cadastro.OBS,
+  enderecos.id,
+  enderecos.cep,
+  enderecos.tipolog,
+  enderecos.rua,
+  enderecos.reg,
+  enderecos.tipo,
+  enderecos.padrao,
+  enderecos.complemento,
+  enderecos.numero,
+  enderecos.uf,
+  enderecos.cidade,
+  enderecos.bairro
+FROM
+  cadastro
+  LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo) WHERE cadastro.CODIGO = $codigo";
 //		echo $query;
 		$mysql_query = $_con->query($querycad);
 		if ($mysql_query->num_rows<1) {
-			unset($_SESSION['ult_eleitor_pesquisado']);
+			$_SESSION['ult_eleitor_pesquisado']=0;
 			echo '<script>alert("ELEITOR '.$codigo.' não encontrado!");return false;</script>';					
 		}else{
 			while ($dados_busca = $mysql_query->fetch_assoc()) {
@@ -30,9 +81,12 @@ if (isset($codigo)){
 				$email = $dados_busca['EMAIL'];
 				if ($dados_busca["CONDICAO"]==0){
 					$condicao = false; 
-					#$_SESSION['msgativo'] = '<img src="../imagens/inativo.jpg" height="28"/>';  		
+					$msg_sistema = "<strong> ESTE REGISTRO ESTÁ INATIVO</strong>";  
+					$classe_div = "col-12 animacao text-center";
 				}else{
-					$condicao = true;	
+					$msg_sistema = "";
+					$condicao = true;
+					$classe_div = "col-12";
 				}
 				if ($dados_busca["FILIADO"]==0){
 					$filiado = false; 
@@ -78,43 +132,21 @@ if (isset($codigo)){
 				} else {
 					$imagem = "../imagens/fotos/sem.jpg";	
 				}		
+				$id_endereco = $dados_busca["id"];
+				$cep= $dados_busca["cep"];
+				$cep_ed = substr($cep, 0, 5) . '-' . substr($cep, 5, 3);
+				$tipolog= $dados_busca["tipolog"];
+				$rua= $dados_busca["rua"];
+				$bairro= $dados_busca["bairro"];
+				$cidade= $dados_busca["cidade"];
+				$uf= $dados_busca["uf"];
+				$numero= $dados_busca["numero"];
+				$compl = $dados_busca["complemento"];
+				$padrao= $dados_busca["padrao"];
+				$tipo= $dados_busca["tipo"];			
+				$reg= $dados_busca["reg"];			
+
 				//echo $imagem;
-			}	
-			//-------- endereços -----------------------------------------------------------------------------------------
-			$queryend = "SELECT * from enderecos WHERE codigo = ".$codigo;
-			$mysql_query_end = $_con->query($queryend);
-			$numregs = $mysql_query_end->num_rows;
-			$enderecoed="";
-			if ($numregs>0) {
-				while ($dados_endereco = $mysql_query_end->fetch_assoc()) {
-					$id= $dados_endereco["id"];
-					$codigo= $dados_endereco["codigo"];
-					$cep= $dados_endereco["cep"];
-					$cep_ed = substr($cep, 0, 5) . '-' . substr($cep, 5, 3);
-					$tipolog= $dados_endereco["tipolog"];
-					$rua= $dados_endereco["rua"];
-					$bairro= $dados_endereco["bairro"];
-					$cidade= $dados_endereco["cidade"];
-					$uf= $dados_endereco["uf"];
-					$numero= $dados_endereco["numero"];
-					$compl = $dados_endereco["complemento"];
-					$padrao= $dados_endereco["padrao"];
-					if ($padrao=="S"){
-						$padrao="SIM";
-						$classeend='class="fas fa-home"';
-					}else{
-						$classeend='class="fas fa-warehouse"';
-						$padrao= "NÃO";
-					}
-					$tipo= $dados_endereco["tipo"];			
-					$reg= $dados_endereco["reg"];			
-					#$nome= $dados_endereco["nome"];			
-					$param = $tipolog.' '.$rua.','.$numero.' '.$compl.' '.$bairro.' '.$cidade.' '.$uf.' '.$cep_ed;
-					$endereco = $rua.' '.$tipolog.'+'.$rua.',+'.$numero.',+'.$bairro.',+'.$cidade.',+'.$uf;
-					$enderecoed .= '<div class="row><i '.$classeend.' aria-hidden="true"></i>&nbsp;'.$tipolog.' '.$rua.', '.$numero.' '.$compl.' '.$bairro.' '.$cidade.', '.$uf.' - '.$cep_ed.', Brasil</div><div class="row"><strong>CDD:&nbsp</strong>'.$reg.'&nbsp;<strong>Tipo:&nbsp;</strong>'.$tipo.'&nbsp;<strong>Endereço Padrão: &nbsp;</strong>'.$padrao.'</div><div class="row"><button type="button" class="btn btn-sm btn-success" onClick="AlteraEnd('.$id.')"><i class="fas fa-save" aria-hidden="true"></i> Alterar</button>&nbsp;<button type="button" class="btn btn-sm btn-excluir" onClick="Exclui_ender('.$id.')"><i class="fas fa-trash" aria-hidden="true"></i> Excluir</button>&nbsp;<a href="https://maps.google.com.br/maps?q='.$endereco.'" target="_blank" class="btn btn-consultar btn-sm" role="button" ><i class="fas fa-map-marker-alt" aria-hidden="true"></i> Ver no Google Maps</a></div>';
-				}
-			}else{
-				$enderecoed .= "SEM ENDEREÇOS CADASTRADOS";
 			}	
 			//echo $enderecoed;
 			
@@ -347,7 +379,6 @@ if (isset($codigo)){
 			}
 // ---------------ENCERRA BUSCA DE DADOS DO ELEITOR. AGORA VAI MOSTRAR NA TELA --------------------------------------------	
 			?>
-			<div class="container">
 			<script>
 			//alert('info');
 			document.form1.txtcodigo.value = '<?php echo $codigo ?>';
@@ -373,9 +404,9 @@ if (isset($codigo)){
 			document.form1.txtempresa.value = '<?php echo $empresa ?>';
 			document.form1.txtcargo.value = '<?php echo $cargo ?>';
 			document.form1.txtramo.value = '<?php echo $ramo ?>';
-			document.getElementById("lbldtcad").innerHTML = '<?php echo $dtcad ?>';
-			document.getElementById("lbldtultalt").innerHTML = '<?php echo $dtultalt ?>';
-			document.getElementById("lblrespcad").innerHTML = '<?php echo $respcadastro ?>';
+			document.getElementById('lbldtcad').innerHTML = '<?php echo $dtcad ?>';
+			document.getElementById('lbldtultalt').innerHTML = '<?php echo $dtultalt ?>';
+			document.getElementById('lblrespcad').innerHTML = '<?php echo $respcadastro ?>';
 			document.form1.txtcampanha.value = '<?php echo $campanha ?>';			
 			document.form1.txtface.value = '<?php echo $facebook ?>';			
 			document.form1.txttwitter.value = '<?php echo $twitter ?>';			
@@ -383,21 +414,30 @@ if (isset($codigo)){
 			document.form1.txtoutra.value = '<?php echo $outrarede ?>';			
 			document.form1.txtestadocivil.value = '<?php echo $est_civil ?>';			
 			document.form1.txtclass.value = '<?php echo $classi ?>';	
-			document.getElementById("visit").innerHTML = '<?php echo $dadosvisita ?>';
-			document.getElementById("dados_enderecos").innerHTML = '<?php echo $enderecoed ?>';
-			document.getElementById("btnincend").disabled = false;
-			document.getElementById("solution").innerHTML = '<?php echo $dadosproblemas ?>';
-			document.getElementById("btnincvis").disabled = false;
-			document.getElementById("btnExcCad").disabled = false;
-			document.getElementById("btnAltCad").disabled = false;
-			document.getElementById("btnNovo").disabled = true;
-			document.getElementById("dados_prontuario").innerHTML = '<?php echo $prontuarios ?>';			
-			document.getElementById("dados_exames").innerHTML = '<?php echo $relacao_exames ?>';
-			document.getElementById("dados_receituario").innerHTML = '<?php echo $receitas_eleitor ?>';
+			document.getElementById('visit').innerHTML = '<?php echo $dadosvisita ?>';
+			document.form1.rua.value = '<?php echo $rua ?>';	
+			document.form1.cep.value = '<?php echo $cep ?>';	
+			document.form1.tipolog.value = '<?php echo $tipolog ?>';	
+			document.form1.bairro.value = '<?php echo $bairro ?>';	
+			document.form1.cidade.value = '<?php echo $cidade ?>';	
+			document.form1.uf.value = '<?php echo $uf ?>';	
+			document.form1.numero.value = '<?php echo $numero ?>';	
+			document.form1.complemento.value = '<?php echo $compl ?>';	
+			document.form1.id_endereco.value = '<?php echo $id_endereco ?>';	
+			document.form1.reg.value = '<?php echo $reg ?>';	
+			document.getElementById('mensagem_sistema').innerHTML = '<?php echo $msg_sistema ?>';
+			document.getElementById("mensagem_sistema").className = '<?php echo $classe_div ?>';	
+			document.getElementById('solution').innerHTML = '<?php echo $dadosproblemas ?>';
+			document.getElementById('btnincvis').disabled = false;
+			document.getElementById('btnExcCad').disabled = false;
+			document.getElementById('btnAltCad').disabled = false;
+			document.getElementById('btnNovo').disabled = true;
+			document.getElementById('dados_prontuario').innerHTML = '<?php echo $prontuarios ?>';			
+			document.getElementById('dados_exames').innerHTML = '<?php echo $relacao_exames ?>';
+			document.getElementById('dados_receituario').innerHTML = '<?php echo $receitas_eleitor ?>';
 			document.form1.txtobs.value = '<?php echo $obs ?>';	
 			document.form1.txtnome.focus();
 			</script>
-			</div>
 			<?php
 		}		
 	#}

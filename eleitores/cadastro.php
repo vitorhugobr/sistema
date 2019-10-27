@@ -45,6 +45,49 @@ $_SESSION['funcao']="Cadastro";
 <script src="../js/ajax.js" type="text/javascript"></script>
 <script src="../js/ie-emulation-modes-warning.js"></script>
 <script type="text/javascript" src="../js/autocomplete.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+function checkAnyFormFieldEdited() {
+    /*
+     * If any field is edited,then only it will enable Save button
+     */
+    $(':text').keypress(function(e) { // text written
+		alert("The text has been changed.");
+    });
+
+    $(':text').keyup(function(e) {
+        if (e.keyCode == 8 || e.keyCode == 46) { //backspace and delete key
+    	alert("The text has been changed.");
+        } else { // rest ignore
+            e.preventDefault();
+        }
+    });
+    $(':text').bind('paste', function(e) { // text pasted
+    	alert("The text has been changed.");
+    });
+
+    $('select').change(function(e) { // select element changed
+    	alert("The text has been changed.");
+    });
+
+    $(':radio').change(function(e) { // radio changed
+    	alert("The text has been changed.");
+    });
+}
+$(document).ready(function(){
+//    $(':text').keypress(function(e) { // text written
+//		alert("The text has been changed.");
+//    });
+	
+//  $("input").change(function(){
+//    alert("The text has been changed.");
+//  });
+//  $("select").change(function(){
+//    alert("Select has been changed.");
+//  });
+});
+</script>
+
 <script>
 function enableFields(verdade){
 	var totalFields = document.form1.elements.length;
@@ -65,7 +108,7 @@ function inclui_novo(){
 	document.getElementById("btnCancel").disabled = false;
 	document.getElementById("btnExcCad").disabled = false;
 	document.getElementById("btnAltCad").disabled = false;		
-	document.getElementById("btnincend").disabled = false;
+	document.getElementById("btn_endereco").disabled = false;
 	document.getElementById("btnincvis").disabled = false;
 	enableFields(false);
 	document.form1.txtcodigo.disabled = true;
@@ -81,7 +124,7 @@ function cancela_novo() {
 	</script>
 </head>
 
-<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" role="document" onLoad="javascript:enableFields(true);";>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" role="document" onLoad="javascript:enableFields(true);PesquisaEleitor(<?php echo $_SESSION['ult_eleitor_pesquisado']?>);" onFocus="PesquisaEleitor(<?php echo $_SESSION['ult_eleitor_pesquisado']?>);">
 
 <?php 
 	include("../utilitarios/cabecalho.php"); ?>	  
@@ -177,7 +220,8 @@ if(isset($_SESSION['msg'])){
 
 <form name="form1" method="post" action="">
 <div class="container-fluid">
-	 <div class="btn-toolbar mb-3" role="toolbar" aria-label="Informações">
+	<div class="btn-toolbar mb-3" role="toolbar" aria-label="Informações">
+ 	  <div id="mensagem_sistema" class="col-12"></div>
 	  <div class="btn-group btn-group-sm" role="group" aria-label="Principal" id="home">
 		<a href="#" class="btn btn-cancelar btn-sm">Dados Gerais</a>
 		<a href="#tela_enderecos" class="btn btn-cancelar btn-sm">Endereços</a>
@@ -194,10 +238,6 @@ if(isset($_SESSION['msg'])){
 				<a href="#tela_exames" class="btn btn-cancelar btn-sm">Exames</a>	  </div>
 	  <div class="input-group">&nbsp;&nbsp;
 		<?php } 
-			if(isset($_SESSION['msgativo'])){
-				echo $_SESSION['msgativo'];
-				unset($_SESSION['msgativo']); 
-			}
 		?>
 	  </div>
 	</div>
@@ -467,20 +507,80 @@ if(isset($_SESSION['msg'])){
   <!-- endereços-->
   <div class="jumbotron" id="tela_enderecos">
 	  <div class="form-row col-form-label-sm">
-		  <div class="h6 align-content-center" id="enderecos"><a href="#"><img src="../imagens/toppage.png"></a>&nbsp;Endereços</div>
-		  <div class="col-auto">
-		  	<button id="btnincend" name="btnincend" type="button" class="btn btn-sm btn-incluir" onClick="javascript:NewEnd();" disabled="disabled"><i class="fas fa-address-book" aria-hidden="true text-muted" aria-hidden="true"></i> Novo Endereço</button>
+		  <div class="col-1 h6 align-content-center" id="enderecos"><a href="#"><img src="../imagens/toppage.png">&nbsp;<sub>ENDEREÇO</sub></a>&nbsp;
 		  </div>
-		  <div class="col-auto">
-			<input type="text" id="txtpesqendereco" name="txtpesqendereco" maxlength="60" size="60" placeholder="Informe o endereço para pesquisar eleitor pelo endereço">
+		  <div class="col-8">
+			<input type="text" id="txtpesqendereco" name="txtpesqendereco" maxlength="80" size="'60" placeholder="Informe o endereço para pesquisar eleitor pelo endereço">
 		  </div>	
 	  </div>
-	  <div class="form-row col-form-label-sm">
-		<div class="col-sm-12">
-		  <input type="hidden" name="txtenderecos" id="txtenderecos">
-		  <div id="dados_enderecos">Sem Endereço cadastrado</div>
+	<div class="form-row col-form-label-sm">
+		<div class="col-sm-1" align="right">
+		  <label class="textoAzul" for="chkfiliado">Logradouro</label>							
+		</div>
+		<div class="col-sm-5">
+		  <input class="form form-control" name="rua" type="text" id="rua" size="50" maxlength="50" onChange="javascript:this.value=this.value.toUpperCase();">							
+		</div>
+		<div class="col-sm-1" align="right">
+		  <label for="cep" class="textoAzul">CEP</label>
+		</div>
+		<div class="col-sm=2">
+			<input type="text" id="cep" name="cep" class="form form-control" size="8" maxlength="8" >
+		</div>
+		<div class="col-sm-3">
+			<button name="btnUpdEnd" id="btnUpdEnd" class="btn btn-consultar btn-sm" onclick="javascript:buscacep(this.value);" type="button"><i class="fas fa-search"></i> Consultar</button>		
 		</div>
    	 </div>
+	<div class="form-row col-form-label-sm">
+		<div class="col-1" align="right">
+			<label class="textoAzul">Tipologia</label>
+		</div>
+		<div class="col-2">
+			<input class="form form-control" name="tipolog" type="text" id="tipolog" size="10" maxlength="10" onChange="javascript:this.value=this.value.toUpperCase();">
+		</div>
+		<div class="col-1" align="right">
+			<label class="textoAzul">Bairro</label>
+		</div>
+		<div class="col-2">
+			<input class="form form-control" name="bairro" type="text" id="bairro" size="20" maxlength="20" onChange="javascript:this.value=this.value.toUpperCase();"/>
+		</div>
+		<div class="col-1" align="right">
+			<label class="textoAzul">Cidade</label>
+		</div>
+		<div class="-col-3">
+			<input class="from form-control" name="cidade" type="text" id="cidade" size="30" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();"/>
+		</div>
+		<div class="col-1" align="right">
+			<label class="textoAzul">UF</label>
+		</div>
+		<div class="col-1">
+			<input class="form form-control" name="uf" type="text" id="uf" size="2" maxlength="2" onChange="javascript:this.value=this.value.toUpperCase();"/>
+		</div>
+	</div>	
+	<div class="form-row col-form-label-sm">
+		<div class="col-1" align="right">
+			<label class="textoAzul">Numero</label>
+		</div>
+		<div class="col-2">
+			<input class="form form-control" name="numero" type="text" id="numero" size="6" maxlength="6">
+		</div>
+		<div class="col-1">
+			<label class="textoAzul">Complemento</label>
+		</div>
+		<div class="col-8">
+			<input class="form form-control" name="complemento" type="text" id="complemento" size="20" maxlength="20" onChange="javascript:this.value=this.value.toUpperCase();"/>
+			<input name="tipo" type="hidden" id="tipo" value="RESIDENCIAL">
+			<input name="padrao" type="hidden" id="padrao" value="S">
+			<input name="id_endereco" type="hidden" id="id_endereco">
+			<input name="reg" type="hidden" id="reg">
+		</div>
+	</div>
+	<div class="form-row col-form-label-sm">
+		<div class="col-12 text-center">
+			  <button id="btn_endereco" name="btn_endereco" class="btn btn-alterar btn-sm" onclick='javascript:atual_ender();'>
+				<i class="fas fa-save" aria-hidden="true"></i> Gravar Endereço
+			  </button>
+		</div>
+	</div>
    </div>
   
   <!-- contatos -->

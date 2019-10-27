@@ -3,9 +3,9 @@
   protegePagina();
   include_once("../utilitarios/funcoes.php");
  
-	$demanda = filter_input(INPUT_POST, 'demanda',FILTER_DEFAULT);
-	$seq = filter_input(INPUT_POST, 'seq',FILTER_DEFAULT);
-	echo $demanda. " - ".$seq."<br>";
+	$demanda = $_SESSION['demanda'];
+	$seq = $_SESSION['sequencia'];
+	//echo $demanda. " - ".$seq."<br>";
 	$foto = $_FILES["foto"];
 
   	if ($foto["tmp_name"]!=""){
@@ -42,7 +42,7 @@
 			preg_match("/\.(jpg|jpeg){1}$/i", $foto["name"], $ext);
 			// Gera um nome único para a imagem
 			$nome_imagem =  "D".str_pad($demanda, 7, '0', STR_PAD_LEFT).str_pad($seq, 3, '0', STR_PAD_LEFT);
-			echo "nome imagem ".$nome_imagem."<br>";
+			//echo "nome imagem ".$nome_imagem."<br>";
 			// Caminho de onde ficará a imagem
 			$caminho_imagem = "../imagens/demandas/".$nome_imagem.".jpg";
 			// Faz o upload da imagem para seu respectivo caminho
@@ -59,7 +59,7 @@
 				echo $erro . "<br />";
 			}
 		}else{
-		  echo '<script>alert ("Envio de imagem com sucesso!\nSe necessário, pressione Recarregar Página.");</script>';
+		  //echo '<script>alert ("Envio de imagem com sucesso!\nSe necessário, pressione Recarregar Página.");</script>';
 		  echo "<script>self.window.close();</script>";
 		}
 	  }else{	  

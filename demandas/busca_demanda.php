@@ -319,7 +319,7 @@ $_SESSION['funcao']="Demanda # ".$numero;
 
 	</script>
 </head>
-<body>
+<body onFocus="javascript:location.reload();">
  <?php include_once("../utilitarios/cabecalho.php");?>
 
   	<?php

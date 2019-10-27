@@ -45,7 +45,7 @@ $mysql_query = $_con->query($result_demandas);
 					"lengthMenu": "Mostrar _MENU_ Demandas por página - clique na coluna do cabeçalho para classificar",
 					"zeroRecords": "Nenhum registro",
 					"info": "Visualizando pág _PAGE_ de _PAGES_",
-					"sInfoFiltered": "(filtro aplicado em _MAX_ demandas)",
+					"sInfoFiltered": "(filtro aplicado sobre _MAX_ demandas)",
 					"infoEmpty": "Sem registros",
 					"sSearch": "Pesquisar",
 					"sProcessing" :"Processando...",
@@ -123,7 +123,7 @@ $mysql_query = $_con->query($result_demandas);
 			  </div>		      
 		  </th>
 		  <th width="2%">
-			  <div align="left">Resp.
+			  <div align="left">Respostas
 			  </div>		      
 		  </th>
 		  <th width="10%">
@@ -131,7 +131,7 @@ $mysql_query = $_con->query($result_demandas);
 			  </div>		      
 		  </th>
 		  <th width="24%">
-			  <div align="left">Endereco
+			  <div align="left">Endereço
 			  </div>		      
 		  </th>
 		</tr>

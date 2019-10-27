@@ -5,6 +5,8 @@
  
  $demanda = filter_input(INPUT_GET, 'demanda',FILTER_DEFAULT);
  $seq = filter_input(INPUT_GET, 'seq',FILTER_DEFAULT);
+$_SESSION['demanda'] = $demanda;
+$_SESSION['sequencia'] = $seq;
 ?>
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br">
@@ -29,7 +31,7 @@
   <script src="../js/ie10-viewport-bug-workaround.js"></script>
   <script>
   //-------------------------------------------------------------------------------------------------------------
-  function atualiza_foto(demanda, seq) {
+  function atualiza_foto() {
 	  AjaxRequest();
 		if(!Ajax) {
 			alert('Não foi possível iniciar o AJAX');
@@ -41,7 +43,9 @@
 		  alert ("Nenhum Arquivo Selecionado.\nEscolha uma imagem\nTipo=jpg\nLargura Máx.: 1500px\nAltura Máx.: 2000px");
 		  return false;
 	  }else{
-		//alert(demanda+" - "+seq);
+		  var demanda = document.form1.demanda.value;
+		  var seq = document.form1.seq.value;
+		alert(demanda+" - "+seq+" - "+foto);
 		ajax2('salvar_imagem.php?demanda='+demanda+'&seq='+seq,'carregando');
 	  }
   }	
@@ -55,7 +59,7 @@
   <table width="100%" border="0" align="center" cellpadding="2" cellspacing="2">
   <tr>
   	<td width="50%" height="165" align="center">
-      <h4>Inclusão Imagem para Demanda<?php echo $demanda; ?> </h4>
+      <h4>Inclusão Imagem para Demanda <?php echo $demanda; ?> </h4>
       	<input type="hidden" id="demanda" name="demanda " value="<?php echo $demanda; ?>">
       	<input type="hidden" id="seq" name="seq" value="<?php echo $seq; ?>">
       <input type="file" name="foto"/>

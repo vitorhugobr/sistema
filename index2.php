@@ -8,6 +8,7 @@ $_SESSION['mudoutarefa'] = false;
 $_SESSION['id_exame'] = 0;
 $_SESSION['tab'] = 0;
 $_SESSION['mensagem'] = "";
+$_SESSION['set_alterou'] = false;
 $quadroavisos= "";
 unset($_SESSION['status']);
 /* vai ler arquivo de menu para inicializar variaveis globais de controle do menu com FALSE */
@@ -83,20 +84,12 @@ $diasemana = array('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 
 // buscar compromissos da agenda e formatar rela
 date_default_timezone_set('America/Sao_Paulo');
 $datahoje = date('d/m/Y');
-$datafinal = somadata($datahoje,8);	//pegará oito dias. eg.: de segunda a segunda inclusive
-$datafinaltela = somadata($datahoje,7); //mostrará na tela apenas 7 dias
-$datamaissete = $datafinal;
 $datatoday = ConvertDateToMysqlFormat($datahoje);
 $ex = explode("/", $datahoje);
 $anohj = $ex[2];
 $meshj = $ex[1];
 $diahj = $ex[0];
 
-$ex = explode("/", $datamaissete);	
-$anoft = $ex[2];
-$mesft = $ex[1];
-$diaft = $ex[0];
-$datamaissete = ConvertDateToMysqlFormat($datamaissete);
 
 if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
 	$_SESSION['mensagem'] .= '<strong><img src="imagens/natal_webix-com-br23.gif" height="40"><span class="text text-alert"> Boas Festas '.$_SESSION['primnome'].'! </span></strong>';
@@ -104,8 +97,8 @@ if ((($diahj>=6) and ($diahj<13)) AND ($meshj==4))   //datas para 2020
 	$_SESSION['mensagem'] .= '<strong><img src="imagens/coelho.gif" height="40"><span class="text text-red"> Feliz Páscoa '.$_SESSION['primnome'].'! </span></strong>';
 if ((($diahj>=9) and ($diahj<13)) AND ($meshj==10))   //datas para 2020
 	$_SESSION['mensagem'] .= '<strong><img src="imagens/crianças.png" height="40"><span class="text text-red"> Feliz Dias das Crianças '.$_SESSION['primnome'].'! </span></strong>';
-if (($diahj>=15) AND ($meshj==10))   //datas para 2020
-	$_SESSION['mensagem'] .= '<strong><img src="imagens/diadoprofessor.jpg" height="40"><span class="text text-red">Dia dos Professores  '.$_SESSION['primnome'].'! </span></strong>';
+if (($diahj==15) AND ($meshj==10))   //datas para 2020
+	$_SESSION['mensagem'] .= '<strong><img src="imagens/diadoprofessor.jpg" height="40"><span class="text text-red">Dia dos Professores! </span></strong>';
 
 ?>
 
@@ -256,7 +249,7 @@ if (($diahj>=15) AND ($meshj==10))   //datas para 2020
 		}
         ?>
       	<li> <a href="logout.php"><i class="fas fa-share-square"></i> Sair</a> </li>
-		<hr />
+     	
       	<?php 
 			$_SESSION['imagem_camp']= "../imagens/fundobranco.jpg";
 			if ($meshj==9){
@@ -264,7 +257,7 @@ if (($diahj>=15) AND ($meshj==10))   //datas para 2020
 				$_SESSION['imagem_camp'] = '../imagens/set_amarelo.png';			
 			} 
 			if ($meshj==10){
-				echo '<li class="text_fundo_rosa_letrapreta"> Outubro ROSA </li>';
+				echo '<li ><img class="figure-img" src="imagens/out_rosa_banner.png" height="60px"></li>';
 				$_SESSION['imagem_camp'] = '../imagens/out_rosa.png';			
 			} 
 			if ($meshj==11){

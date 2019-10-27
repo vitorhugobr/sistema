@@ -10,12 +10,12 @@ require_once ('../utilitarios/funcoes.php');
 	if ($result = mysqli_query($_con, $query)) {	
 		/* fetch associative array */
  		while ($row = mysqli_fetch_assoc($result)) {?>
-			<li onselect="this.text.value = '<?php echo $row["rua"]?>';PesquisaEleitor(<?php echo $row["CODIGO"]?>);">
+			<li onselect="this.text.value = ' ';PesquisaEleitor(<?php echo $row["CODIGO"]?>);">
 			<span ><?php echo $row["rua"].",".$row["numero"]." - ".$row["cidade"] ?></span>
       <?php 
-				echo $row["NOME"] ;
-				$_SESSION['CodRetorno']=$row["CODIGO"];
-				echo "<script>document.form1.txtcodigo.value=".$row["CODIGO"]."</script>";
+			echo $row["NOME"] ;
+			$_SESSION['CodRetorno']=$row["CODIGO"];
+			echo "<script>document.form1.txtcodigo.value=".$row["CODIGO"].";</script>";
 			?>
 			</li>
 	<?php

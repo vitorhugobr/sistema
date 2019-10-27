@@ -18,6 +18,6 @@ $strsql2 = "DELETE from cadastro where cadastro.CODIGO = ".$codigo;
 
 executa_sql($strsql2,"Cadastro excluído com sucesso","Cadastro NÃO excluído!",true,true);
 //	
-unset($_SESSION['ult_eleitor_pesquisado']);
+$_SESSION['ult_eleitor_pesquisado']=0;
 
 ?>

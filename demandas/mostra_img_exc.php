@@ -75,13 +75,13 @@ $_SESSION['funcao']="Excluir Imagens";
   ?>
     <script>
  function excluir_imagem_demanda(arq){
- 	if (confirm("Confirma a Exclusão da imagem?")){
+ 	if (confirm("Confirma a Exclusão da imagem da demanda?")){
 		AjaxRequest();
 		if(!Ajax) {
 			alert('não foi  possível iniciar o AJAX');
 			return;
 		}
-		var parametro = 'exclui_imagem.php?arq='+arq;
+		var parametro = 'exclui_imagem.php?arq='+arq+'&demanda='+<?php echo $demanda; ?>
 		//alert (parametro);
 		ajax2(parametro, 'carregando');
 	}

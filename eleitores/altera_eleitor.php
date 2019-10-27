@@ -302,11 +302,6 @@ $strsql .= ' WHERE CODIGO='.$codigo;
 //echo $strsql;
 //debug();
 gravaoperacoes("Cadastro","A", $_SESSION["usuarioUser"],$strsql);
-unset($_SESSION['msg']);
-executa_sql($strsql,"Cadastro atualizado com sucesso","ERRO ao atualizar cadastro",false,false);
-echo "<script>";
-echo "PesquisaEleitor($codigo);";
-echo 'alert("Cadastro atualizado com sucesso");';
-echo "</script>";
+executa_sql($strsql,"Cadastro atualizado com sucesso","ERRO ao atualizar cadastro",true,true);
 
 ?>

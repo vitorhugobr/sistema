@@ -19,7 +19,7 @@ $reg = $_GET['P12'];
 $codigo2 = $codigo;
 $endereco = $tipolog." ".$rua." ".$numero." ".$compl.' '.$bairro.' '.$cidade.' '.$uf.' '.$cep;
 
-$_SESSION['CodRetorno']=$codigo;
+$_SESSION['ult_eleitor_pesquisado']=$codigo;
 
 // id
 $theValue = (!get_magic_quotes_gpc()) ? addslashes($id) : $id;
@@ -91,5 +91,5 @@ gravaoperacoes("enderecos","I", $_SESSION["usuarioUser"],"Incluído endereço do
 
 $resposta = executa_sql($_sql,"Endereço incluído com sucesso","ERRO ao incluir endereço",true,false);
 
-echo '<script>self.window.close();</script>';
+#echo '<script>self.window.close();</script>';
 ?>
