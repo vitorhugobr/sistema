@@ -46,16 +46,12 @@ $comando_sql = "SELECT
   e.padrao,
   e.reg,
   g.NOMEGRP,
-  origem.Descricao,
-  profissao.Descricao2,
-  ramo.DESCRICAO AS nomeramo
+  origem.Descricao
 FROM
   cadastro c
   LEFT OUTER JOIN grupos g ON (c.GRUPO = g.GRUPO)
   LEFT OUTER JOIN enderecos e ON (c.CODIGO = e.codigo)
-  LEFT OUTER JOIN origem ON (c.ORIGEM = origem.Origem)
-  LEFT OUTER JOIN profissao ON (c.PROFISSAO = profissao.Profissao)
-  LEFT OUTER JOIN ramo ON (c.RAMO = ramo.CODIGO)";
+  LEFT OUTER JOIN origem ON (c.ORIGEM = origem.Origem)";
 
 $comando_sql .= " WHERE c.".$arquivo_leitura." = ".$chave." order by c.NOME";
 
