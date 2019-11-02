@@ -74,7 +74,7 @@ define("PASSCOMUM", $_SG['senhacomum']);
 define("DBCOMUM", $_SG['bancocomum']);
 $_concomum  = new mysqli($_SG['servidorcomum'],$_SG['usuariocomum'],$_SG['senhacomum'],$_SG['bancocomum']);	
 if(!$_concomum) {  
-	echo "Não foi possivel conectar ao MySQL. Erro " .
+	echo "Não foi possivel conectar ao MySQL " .$_SG['servidorcomum']."<br> Erro " .
 			mysqli_connect_errno() . " : " . mysql_connect_error();
 	exit;
 }
@@ -90,7 +90,7 @@ try{
   array(PDO::ATTR_PERSISTENT => true);
 }catch(PDOException $e){
   // Caso ocorra algum erro na conexão com o banco, exibe a mensagem
-  echo 'Falha ao conectar no banco de dados: '.$e->getMessage();
+  echo 'Falha ao conectar no banco de dados comum: '.$e->getMessage();
   die;
 }
 
@@ -103,7 +103,7 @@ define("ACESSO_LOC", $local_acesso);
 $conn = mysqli_connect($_SG['servidor'],$_SG['usuario'], $_SG['senha'],$_SG['banco']);
 $_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
 if(!$_con) {  
-	echo "Não foi possivel conectar ao MySQL. Erro " .
+	echo "Não foi possivel conectar ao MySQLi " .$_SG['servidor']."<br> Erro " .
 			mysqli_connect_errno() . " : " . mysql_connect_error();
 	exit;
 }
@@ -125,7 +125,7 @@ try{
   array(PDO::ATTR_PERSISTENT => true);
 }catch(PDOException $e){
   // Caso ocorra algum erro na conexão com o banco, exibe a mensagem
-  echo 'Falha ao conectar no banco de dados: '.$e->getMessage();
-  die;
+  echo 'Falha ao conectar no banco de dados(pdo): '.DB.'<br>'.$e->getMessage();
+  exit;
 }
 ?>
