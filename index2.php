@@ -10,6 +10,16 @@ $_SESSION['tab'] = 0;
 $_SESSION['mensagem'] = "";
 $_SESSION['set_alterou'] = false;
 $quadroavisos= "";
+// buscar compromissos da agenda e formatar rela
+date_default_timezone_set('America/Sao_Paulo');
+$datahoje = date('d/m/Y');
+$datatoday = ConvertDateToMysqlFormat($datahoje);
+$ex = explode("/", $datahoje);
+$anohj = $ex[2];
+$meshj = $ex[1];
+$diahj = $ex[0];
+
+
 unset($_SESSION['status']);
 /* vai ler arquivo de menu para inicializar variaveis globais de controle do menu com FALSE */
 $statement = $pdo->prepare('select cod_item_menu from menu');
@@ -44,6 +54,24 @@ while($row = $consulta->fetch()) {
 	  $_SESSION[$sessao] = TRUE;
   }
 }
+
+
+// Vê o que a data de hj significa, buscando no banco
+$query = "SELECT * FROM datas WHERE mes = $meshj AND dia = $diahj";
+
+$mysql_query = $_concomum->query($query);
+if ($mysql_query->num_rows<1) {
+  $datas_hoje = "";
+}else {
+  $datas_hoje = '<strong>'.$diahj.'/'.$meshj.'</strong>';					
+  while ($dados_hoje = $mysql_query->fetch_assoc()) {
+	  $datas_hoje .= '<br>'.$dados_hoje['comemoracao'];	
+  }
+}
+
+
+
+
 $imagem=false;
 
 if ($_SESSION['usuarioSenha']=="e10adc3949ba59abbe56e057f20f883e"){
@@ -81,15 +109,6 @@ $_SESSION['opcaoabrirpagina'] = "";
 
 $diasemana = array('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado');
 
-// buscar compromissos da agenda e formatar rela
-date_default_timezone_set('America/Sao_Paulo');
-$datahoje = date('d/m/Y');
-$datatoday = ConvertDateToMysqlFormat($datahoje);
-$ex = explode("/", $datahoje);
-$anohj = $ex[2];
-$meshj = $ex[1];
-$diahj = $ex[0];
-
 
 if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
 	$_SESSION['mensagem'] .= '<strong><img src="imagens/natal_webix-com-br23.gif" height="40"><span class="text text-alert"> Boas Festas '.$_SESSION['primnome'].'! </span></strong>';
@@ -123,7 +142,7 @@ if (($diahj==15) AND ($meshj==10))   //datas para 2020
 <link rel="stylesheet" type="text/css" href="css/ajax.css"/>
 <link href="css/simple-sidebar.css" rel="stylesheet">
 <link rel="stylesheet" href="css/all.css">
-<link rel="stylesheet" href="css/sb-admin-2.min.css">
+<link rel="stylesheet" href="css/sb-admin-2.css">
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script src="js/ie-emulation-modes-warning.js"></script>
 <script src="js/jquery.min.js"></script>
@@ -183,12 +202,11 @@ if (($diahj==15) AND ($meshj==10))   //datas para 2020
 			$arquivo = "imagens/fotos/users/".$_SESSION['foto']; ?>
 			<img class="img-profile rounded-circle" src="<?php echo $arquivo ?>" height="40px" width="40px" title="<?php echo $_SESSION['usuarioNome']?>">
 
-		</div>
 	</div>
 	<div id="wrapper" class="toggled"> 
   		<!-- Sidebar -->
   		<!-- ALTERAR CONFORME MÊS   -->
-		<div id="sidebar-wrapper">	
+		<div id="sidebar-wrapper">
      	<ul class="sidebar-nav">
       	<li class="sidebar-brand text-warning"><strong>Opções</strong></li>
       	<?php 
@@ -253,18 +271,17 @@ if (($diahj==15) AND ($meshj==10))   //datas para 2020
       	<?php 
 			$_SESSION['imagem_camp']= "../imagens/fundobranco.jpg";
 			if ($meshj==9){
-				echo '<li class="text_fundo_amarelo_letraazul"> Setembro AMARELO </li>';
 				$_SESSION['imagem_camp'] = '../imagens/set_amarelo.png';			
 			} 
 			if ($meshj==10){
-				echo '<li ><img class="figure-img" src="imagens/out_rosa_banner.png" height="60px"></li>';
 				$_SESSION['imagem_camp'] = '../imagens/out_rosa.png';			
 			} 
 			if ($meshj==11){
-				echo '<li class="text_fundo_azul_letrabranca"> Novembro AZUL </li>';
 				$_SESSION['imagem_camp'] = '../imagens/nov_azul.png';			 
 			} 
 		?>
+			<p></p>
+   		<div style="text-align: center; color: yellow; font-size: 11px "><?php echo $datas_hoje;?></div>
     	</ul>
   	</div>
   <!-- /#sidebar-wrapper --> 
@@ -279,7 +296,7 @@ if (($diahj==15) AND ($meshj==10))   //datas para 2020
     <!-- /#page-content-wrapper --> 
 	</div>    
   </div>
-
+		</div>
   <!-- /#wrapper -->
   <?php include_once("utilitarios/rodape-fixo.php");?>
   
