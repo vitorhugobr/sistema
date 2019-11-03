@@ -65,11 +65,9 @@ if ($mysql_query->num_rows<1) {
 }else {
   $datas_hoje = '<strong>'.$diahj.'/'.$meshj.'</strong>';					
   while ($dados_hoje = $mysql_query->fetch_assoc()) {
-	  $datas_hoje .= '<br>'.$dados_hoje['comemoracao'];	
+	  $datas_hoje .= '<br><i class="fas fa-asterisk"></i> '.$dados_hoje['comemoracao'];	
   }
 }
-
-
 
 
 $imagem=false;
