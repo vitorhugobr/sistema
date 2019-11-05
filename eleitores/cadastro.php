@@ -527,7 +527,7 @@ if(isset($_SESSION['msg'])){
 			<input type="text" id="cep" name="cep" class="form form-control" size="8" maxlength="8" >
 		</div>
 		<div class="col-sm-3">
-			<button name="btnUpdEnd" id="btnUpdEnd" class="btn btn-consultar btn-sm" onclick="javascript:buscacep(this.value);" type="button"><i class="fas fa-search"></i> Consultar</button>		
+			<button name="btnUpdEnd" id="btnUpdEnd" class="btn btn-consultar btn-sm" onclick="javascript:buscacep(document.form1.cep.value);" type="button"><i class="fas fa-search"></i> Consultar</button>		
 		</div>
    	 </div>
 	<div class="form-row col-form-label-sm">
@@ -690,7 +690,8 @@ ajax('zera_codigo.php','carregando');
 	new Autocomplete("txtcelular", function() { return "autocomplete_fone.php?campo=FONE_CEL&typing=" + this.text.value;});
 	new Autocomplete("txtresidencial", function() { return "autocomplete_fone.php?campo=FONE_RES&typing=" + this.text.value;});		new Autocomplete("txtresidencial", function() { return "autocomplete_fone.php?campo=FONE_RES&typing=" + this.text.value;});
 	new Autocomplete("txtcomercial", function() { return "autocomplete_fone.php?campo=FONE_COM&typing=" + this.text.value;});		
-	new Autocomplete("txtpesqendereco", function() { return "autocompletecad_endereco.php?typing=" + this.text.value;});		
+	new Autocomplete("txtpesqendereco", function() { return "autocompletecad_endereco.php?typing=" + this.text.value;});	
+  new Autocomplete("rua", function() { return "autocompleterua.php?typing=" + this.text.value+"&city="+document.form1.cidade.value;});	
 </script>
 
 <?php include_once("../utilitarios/rodape.php");?>
