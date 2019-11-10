@@ -19,7 +19,7 @@ mysqli_query($_con, 'SET character_set_connection=utf8');
 mysqli_query($_con, 'SET character_set_client=utf8');
 mysqli_query($_con, 'SET character_set_results=utf8');
 $limpeza="";
-$horaini = date("Y-m-d H:i:s");
+$horaini = date("d-m-Y H:i:s");
 for ($i = 1; $i <= 7; $i++) {
 	switch ($i) {
 		case 1:  //Dr Thiago
@@ -90,7 +90,7 @@ for ($i = 1; $i <= 7; $i++) {
 	$query = "select * from cdd";
 	$mysql_query = $_con->query($query);
 	$tot=0;
-	$limpeza .= $_SG['politico'].'<br>';
+	$limpeza .= "<strong><i>".$_SG['politico'].'</i></strong><br>';
 	while ($dados_s = $mysql_query->fetch_assoc()) {
 		$cepi = $dados_s["inicial"];
 		$cepf = $dados_s["final"];
@@ -104,11 +104,11 @@ for ($i = 1; $i <= 7; $i++) {
 		$mysqli->query($strsql);
 		$tot += $mysqli->affected_rows;
 		if ($mysqli->affected_rows>0) {
-			$limpeza .= "<strong>".str_pad($mysqli->affected_rows,3)."</strong> região ".$reg."<br>";
-		}	
+			$limpeza .= "<strong> ".str_pad($mysqli->affected_rows,3)."</strong> região ".$reg."<br>";
+		}	 
 		/* close connection */
 	}
-	$limpeza .= $tot.' registros alterados<br>';
+	$limpeza .= " ".$tot.' registros alterados<br>';
 	$mysqli->close();
 }
 require_once("../phpmailer/class.phpmailer.php");
