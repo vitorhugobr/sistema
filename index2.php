@@ -181,7 +181,11 @@ if (($diahj==15) AND ($meshj==10))   //datas para 2020
 		} 
 		if ($meshj==11){
 			$_SESSION['imagem_camp'] = 'imagens/nov_azul.png';			 
-		} ?>
+		} 
+		if ($meshj==12){
+			$_SESSION['imagem_camp'] = 'imagens/dezembro_laranja.jpg';			 
+		} 
+		?>
 		<img src="<?php echo $_SESSION['imagem_camp']?>" height="30"> <?php echo $_SESSION['politico'] ?>
 	</span>
 	</div>
