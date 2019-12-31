@@ -1,59 +1,10 @@
 <?php 
+session_start();
+$_SESSION['id']=2;
 include('../connections/banco.php');
-include ("../utilitarios/phpmkrfn.php");
-$_con  = new mysqli(HOST,USER,PASS,DB);
-if(!$_con) {  
-	echo "Não foi possivel conectar ao MySQL. Erro " .
-			mysqli_connect_errno() . " : " . mysql_connect_error();
-	exit;
-}
-$_sql = "SELECT * from config WHERE id = 1;";
-$_res = $_con->query($_sql);
-if($_res->num_rows==0) {
-	echo "ERRO";
-} else {
-	$_row = $_res->fetch_assoc();	
-	/* os campos da tabela TABLE `config` (
-  `politico` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `end_pol` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `email_pol` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cidade_pol` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `estado_pol` char(2) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `cep_pol` varchar(8) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `id` int(4) NOT NULL DEFAULT '0',
-  `endurl` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `endfoto` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
-  `ativo` int(1) NOT NULL,
-  `host` varchar(20) DEFAULT NULL,
-  `email_retorno` varchar(20) DEFAULT NULL,
-  `login` varchar(20) DEFAULT NULL,
-  `passw` varchar(20) DEFAULT NULL,
-  `telefones` varchar(35) DEFAULT NULL,
-  PRIMARY KEY (`id`) */
-	$indice = 1;
-	foreach ($_row as $campo => $valor) {
-		$_valor    = $valor;
-		$_campo    = $campo;
-		switch($indice) {
-			case 1:
-				$politico= $_valor;
-			case 2:	
-				$end_pol= $_valor;
-			case 3:
-				$email_pol= $_valor;
-			case 4:
-				$cidade_pol= $_valor;
-			case 5:
-				$estado_pol= $_valor;
-			case 6:
-				$cep_pol= $_valor;
-			default:			
-		}
-		$indice++;
-	}
-}
-echo $politico.'<br>';
-echo $email_pol.'<br>';
+
+$politico = 'Reginaldo Pujol';
+$email_pol ='vereadorpujol@gmail.com';
 $datatoday = getdate();
 $dia = $datatoday["mday"];
 $mes = $datatoday["mon"];
@@ -103,9 +54,60 @@ if($_res->num_rows==0) {
 			$to = $email;
 			/* assunto */
 			//$subject = $subj." ".$primnome;
-			$subject = $subj;
+			$subject = 'Posse Presidente Câmara Municipal de Porto Alegre';
 			/* mensagem */
-			$message = '<font size="4"><strong>'.$primnome.'</strong></font>'.$mensagem;
+			$message = '<html>
+			<head>
+			<title>Convite Posse Pujol</title>
+			<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+			</head>
+			<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+			<!-- Save for Web Slices (convite_pujol.jpg) -->
+			<table id="Tabela_01" width="785" height="555" border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_01.jpg" width="263" height="111" alt=""></td>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_02.jpg" width="263" height="111" alt=""></td>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_03.jpg" width="263" height="111" alt=""></td>
+				</tr>
+				<tr>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_04.jpg" width="263" height="111" alt=""></td>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_05.jpg" width="263" height="111" alt=""></td>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_06.jpg" width="263" height="111" alt=""></td>
+				</tr>
+				<tr>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_07.jpg" width="263" height="111" alt=""></td>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_08.jpg" width="263" height="111" alt=""></td>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_09.jpg" width="263" height="111" alt=""></td>
+				</tr>
+				<tr>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_10.jpg" width="263" height="111" alt=""></td>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_11.jpg" width="263" height="111" alt=""></td>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_12.jpg" width="263" height="111" alt=""></td>
+				</tr>
+				<tr>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_13.jpg" width="263" height="111" alt=""></td>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_14.jpg" width="263" height="111" alt=""></td>
+					<td>
+						<img style="display:block" border="0" src="https://www.rpujol.com.br/sigre/emails/images/convite_pujol_15.jpg" width="263" height="111" alt=""></td>
+				</tr>
+			</table>
+			<!-- End Save for Web Slices -->
+			</body>
+			</html>';
 			/* Para enviar email HTML, voc precisa definir o header Content-type. */
 			$headers  = "MIME-Version: 1.0\r\n";
 			$headers .= "Content-type: text/html; charset=utf-8\r\n";
@@ -119,9 +121,9 @@ if($_res->num_rows==0) {
 			}
 			echo 'Disparou email para: '.$nome.'<br>';
 			// incluir na tabela de visitas como contato feito						
+
 		}
-		//ALTERA O ARQUIVO controle_envio
-		$ult_enviado = $ultimo_registro + 25;
+		$ult_enviado = $ultimo_registro + 25;		//ALTERA O ARQUIVO controle_envio
 		$strsql6 = 'UPDATE controle_envio SET ultimo_registro = '.$ult_enviado.' where id=1';
 		$_res5 = $_con->query($strsql6);
 		if (!$_res5){
@@ -160,6 +162,3 @@ if($_res->num_rows==0) {
 	}
 }	
 ?>
-
-
-
