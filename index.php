@@ -30,10 +30,10 @@ require_once("utilitarios/funcoes.php");
 $sql = "SELECT * from config where id = ".$_SESSION['id'];
 try{
 	// Faz conexão com banco de daddos
-	if ($_SERVER['DOCUMENT_ROOT']=="D:/wampserver64/www"){
-		$area_acesso = "TESTES";
+	if ($_SERVER['DOCUMENT_ROOT']=="D:/wamp64/www"){
+		$area_acesso = "<strong>TESTES</strong>";
 	} else {
-		$area_acesso = "Web";
+		$area_acesso = "<strong>Web</strong>";
 	}
 	$pdo = new PDO("mysql:host=www.vitor.poa.br;dbname=vitorpoa_teste;","vitorpoa_user", "vhmo@2017");
 	$pdo->exec("set names utf8");
