@@ -16,7 +16,7 @@ require_once ('../utilitarios/funcoes.php');
 					$imagem = "../imagens/fotos/users/usuario.png";	
 				}		
            ?>
-            <li onselect="this.text.value = '<?php echo $row["usuario"] ?>';busca_user('<?php echo $row["usuario"] ?>')">
+            <li onselect="this.text.value = '<?php echo $row["usuario"] ?>';nome_usuario.value='<?php echo $row["usuario"] ?>';busca_user('<?php echo $row["usuario"] ?>')">
 			<span ><?php echo $row["codigo"] ?></span>
         	<?php echo $row["nome"] ;?>
 			</li>

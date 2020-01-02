@@ -7,16 +7,27 @@ $usuario   = $_GET['usu'];
 $nivel = $_GET['niv'];
 $nome  = strtoupper($_GET['nome']);
 $email  = $_GET['email'];
-
+$mudou = $_GET['mudou'];
+$usuario_original = $_GET['nomeusuario'];
 // codigo
 $theValue = (!get_magic_quotes_gpc()) ? addslashes($cod) : $cod;
 $theValue = ($theValue != "") ? intval($theValue) : "NULL";
 $cod = $theValue;
 
+// mudou
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($mudou) : $mudou;
+$theValue = ($theValue != "") ? intval($theValue) : "NULL";
+$mudou = $theValue;
+
 // usuario
 $theValue = (!get_magic_quotes_gpc()) ? addslashes($usuario) : $usuario;
 $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
 $usuario = $theValue;
+
+// usuario_original
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($usuario_original) : $usuario_original;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$usuario_original = $theValue;
 
 // nivel
 $theValue = (!get_magic_quotes_gpc()) ? addslashes($nivel) : $nivel;
@@ -33,6 +44,19 @@ $theValue = (!get_magic_quotes_gpc()) ? addslashes($email) : $email;
 $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
 $email = $theValue;
 
+if ($mudou==1){
+	$_sqlu = 'UPDATE liberacao SET ';
+	$_sqlu .= "username = ".$usuario;
+	$_sqlu .= ' where username = '.$usuario_original;
+
+	#echo $_sql;
+
+	executa_sql($_sqlu,"","",false,false);
+
+	gravaoperacoes("users","A",$_SESSION["usuarioUser"],"Alteradas liberacões do ".$usuario_original." para usário ".$usuario);
+	
+}
+
 $_sql = 'UPDATE users SET ';
 $_sql .= "usuario = ".$usuario;
 $_sql .= ", nivel = ".$nivel;
@@ -45,5 +69,7 @@ $_sql .= ' where codigo = '.$cod;
 executa_sql($_sql,"Usuário atualizado com sucesso!","Erro na atualização do Usuário",true,false);
 
 gravaoperacoes("users","A",$_SESSION["usuarioUser"],"Alterado usuário ".$usuario);
+
+
 
 ?>

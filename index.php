@@ -48,35 +48,35 @@ try{
 
 	die;
 }
-	//echo $sql;
-	$sql = $pdo->prepare($sql);
-	$sql->execute();
-	$total = $sql->rowCount();
-	if($total==0){
-    // Nenhum registro foi encontrado => o usuário é inválido
-    	$msg_erro= "Cliente ".$_SESSION['id']." não cadastrado";
-		echo '<script>alert('.$msg_erro.');</script>'; 
-	}else{
-		// Definimos a mensagem de erro
-		while($dados_s = $sql->fetch()) {	
-		  $_SESSION['id'] = $dados_s['id'];
-		  $_SESSION['politico'] = $dados_s['politico'];
-		  $_SESSION['ativo']= $dados_s['ativo'];
-		  $_SESSION['url']= $dados_s['endurl'];
-		  $_SESSION['host_pol']= $dados_s['host_pol'];
-		  $_SESSION['email_pol']= $dados_s['email_pol'];
-		  $_SESSION['fones_pol'] = $dados_s['fones_pol'];
-		  $_SESSION['email_pol'] = $dados_s['email_pol'];
-		  $_SESSION['partido'] = $dados_s['partido']; 
-		  $_SESSION['servidor']= $dados_s['host_pol'];
-		  $_SESSION['user_login']= $dados_s['login_pol'];
-		  $_SESSION['user_pass']= $dados_s['passw_pol'];	  
-	  	  $imagem = $dados_s['endfoto'];
-			if ($dados_s['ativo']==1){
-				header("Location: manutencao.html");		
-			}
+//echo $sql;
+$sql = $pdo->prepare($sql);
+$sql->execute();
+$total = $sql->rowCount();
+if($total==0){
+// Nenhum registro foi encontrado => o usuário é inválido
+	$msg_erro= "Cliente ".$_SESSION['id']." não cadastrado";
+	echo '<script>alert('.$msg_erro.');</script>'; 
+}else{
+	// Definimos a mensagem de erro
+	while($dados_s = $sql->fetch()) {	
+	  $_SESSION['id'] = $dados_s['id'];
+	  $_SESSION['politico'] = $dados_s['politico'];
+	  $_SESSION['ativo']= $dados_s['ativo'];
+	  $_SESSION['url']= $dados_s['endurl'];
+	  $_SESSION['host_pol']= $dados_s['host_pol'];
+	  $_SESSION['email_pol']= $dados_s['email_pol'];
+	  $_SESSION['fones_pol'] = $dados_s['fones_pol'];
+	  $_SESSION['email_pol'] = $dados_s['email_pol'];
+	  $_SESSION['partido'] = $dados_s['partido']; 
+	  $_SESSION['servidor']= $dados_s['host_pol'];
+	  $_SESSION['user_login']= $dados_s['login_pol'];
+	  $_SESSION['user_pass']= $dados_s['passw_pol'];	  
+	  $imagem = $dados_s['endfoto'];
+		if ($dados_s['ativo']==1){
+			header("Location: manutencao.html");		
 		}
 	}
+}
 
 
 $_SESSION['ult_eleitor_pesquisado']=0;

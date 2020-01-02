@@ -66,7 +66,7 @@ if($_res->num_rows==0) {
 
 	$_sql = 'SELECT * FROM cadastro_email limit '.$ultimo_registro.', 30';
 	// INIBIR LINHA ABAIXO QDO EM PRODUTO
-	$_sql = 'SELECT * FROM cadastro_email WHERE codigo=11650';
+	//$_sql = 'SELECT * FROM cadastro_email WHERE codigo=11650';
 
 	$_res = $_con->query($_sql);
 	$qtd_emails= 0;
@@ -199,7 +199,7 @@ if($_res->num_rows==0) {
 			}
 			
 		}
-		$ult_enviado = $ultimo_registro + 25;		//ALTERA O ARQUIVO controle_envio
+		$ult_enviado = $ultimo_registro + 30;		//ALTERA O ARQUIVO controle_envio
 		$strsql6 = 'UPDATE controle_envio SET ultimo_registro = '.$ult_enviado.' where id=1';
 		$_res5 = $_con->query($strsql6);
 		if (!$_res5){

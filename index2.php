@@ -173,7 +173,9 @@ if (($diahj==15) AND ($meshj==10))   //datas para 2020
 	</div>
 	<div class='col-2' align="center" style="align-items: baseline">
 		<span class="politico">
-		<?php if ($meshj==9){	
+		<?php 
+		$_SESSION['imagem_camp'] = '';	
+		if ($meshj==9){	
 			$_SESSION['imagem_camp'] = 'imagens/set_amarelo.png';			
 		} 
 		if ($meshj==10){
@@ -185,8 +187,11 @@ if (($diahj==15) AND ($meshj==10))   //datas para 2020
 		if ($meshj==12){
 			$_SESSION['imagem_camp'] = 'imagens/dezembro_laranja.jpg';			 
 		} 
-		?>
-		<img src="<?php echo $_SESSION['imagem_camp']?>" height="30"> <?php echo $_SESSION['politico'] ?>
+		if ($_SESSION['imagem_camp'] <> "") {
+		 echo '<img src="'.$_SESSION['imagem_camp'].'" height="30">'; 
+		}
+			?>
+		<?php echo $_SESSION['politico'] ?>
 	</span>
 	</div>
 	<div class='col-4 text-center'>  

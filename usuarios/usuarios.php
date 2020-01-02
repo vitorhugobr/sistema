@@ -28,6 +28,15 @@ $_SESSION['funcao'] = "Usuários";
 <script type="text/javascript" src="../js/autocomplete.js"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/bootstrap.min.js"></script>
+<script>
+	$(document).on('change', "[name='txtusuario']", function(){
+		if (document.form1.txtnome.value > ""){
+			document.getElementById('msg_alt_usu').innerHTML = "Nome do usuário ALTERADO! <strong>Login</strong> também será alterado.";
+			document.form1.mudou_usuario.value = 1;
+		}
+	});
+
+</script>
 </head>
 <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
 <?php include_once("../utilitarios/cabecalho.php");?>
@@ -52,12 +61,15 @@ if(isset($_SESSION['msg'])){
         <tr>
           <td class="nomedocampo">Usu&aacute;rio:</td>
           <td>
-          	<div class="col-sm-5">
-          	<input name="txtusuario" type="text" class="form-control" id="txtusuario" size="30" maxlength="100">
-          	<i class="help-block">Informe o nome ou parte do nome do usuário</i>	
-            <input type="hidden" name="txtcodigo" id="txtcodigo" />
-            </div>
-          </td>
+          	<div class="col-sm-7">
+				<input name="txtusuario" type="text" autofocus class="form-control" id="txtusuario" size="30" maxlength="100"  onChange="javascript:mudou();">
+				<i class="help-block">Informe o nome ou parte do nome do usuário</i>	
+				<input type="hidden" name="txtcodigo" id="txtcodigo" />
+				<div id="msg_alt_usu" class="text text-danger"></div>
+				<input type="hidden" name="mudou_usuario" value="0" id="mudou_usuario"> 
+				<input type="hidden" name="nome_usuario" value="" id="nome_usuario" placeholder="Nome Usuário"> 
+			</div>
+		  </td>
         </tr>
         <tr>
           <td class="nomedocampo">N&iacute;vel:</td>
@@ -115,7 +127,7 @@ if(isset($_SESSION['msg'])){
 			<button type="button" id="btncancela" name="btncancela" class="btn btn-sm btn-cancelar" onclick="deleta_cancela_usuario()" disabled>
 				<i class="fas fa-undo" aria-hidden="true text-muted" aria-hidden="true"></i> Cancelar
 			</button>
-			<button type="button" class="btn btn-sm btn-limpatela" onclick="javascript:reload_cadastro();">
+			<button type="button" class="btn btn-sm btn-limpatela" onclick="javascript:location.reload();">
 				<i class="fas fa-eraser" aria-hidden="true text-muted" aria-hidden="true"></i> Limpar Tela
 			</button>
 			<button type="button" class="btn btn-sm btn-voltar" onclick="voltaPag('../senhas/index.php')">
