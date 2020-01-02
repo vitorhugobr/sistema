@@ -45,14 +45,22 @@ function altera_usuario() {
 	  document.form1.txtemail.focus();
 	  return false;
   }
+  var mudou = document.form1.mudou_usuario.value;
+  var nomeusuario = document.form1.nome_usuario.value;
   AjaxRequest();
   if(!Ajax) {
 	  alert('Não foi  possível iniciar o AJAX');
 	  return;
   }	
   //alert('codigo='+cod+'usu='+usu+'&niv='+nivel+'&nome='+nome+'&email='+email);
-  if (confirm("Confirma a informações do usuário..: "+usu+" ?")){
-		ajax('altera_usuario.php?codigo='+cod+'&usu='+usu+'&niv='+nivel+'&nome='+nome+'&email='+email, 'carregando');
+  if (mudou=='0'){
+	  if (confirm("Confirma as informações do usuário..: "+usu+" ?")){
+			ajax('altera_usuario.php?codigo='+cod+'&usu='+usu+'&niv='+nivel+'&nome='+nome+'&email='+email+'&mudou='+mudou+'&nomeusuario='+nomeusuario, 'carregando');
+	  }
+  }else{
+	  if (confirm("Confirma as alteração com a mudança de LOGIN para o usuário..: "+usu+" ?")){
+			ajax('altera_usuario.php?codigo='+cod+'&usu='+usu+'&niv='+nivel+'&nome='+nome+'&email='+email+'&mudou='+mudou+'&nomeusuario='+nomeusuario, 'carregando');
+	  }
   }
   
 }
