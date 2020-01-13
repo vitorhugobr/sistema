@@ -9,57 +9,57 @@ if (isset($codigo)){
 		$_SESSION['ult_eleitor_pesquisado']=0;
 #	}else{
 		$querycad = "SELECT 
-  cadastro.CODIGO,
-  cadastro.NOME,
-  cadastro.SEXO,
-  cadastro.DTCAD,
-  cadastro.DTNASC,
-  cadastro.CARGO,
-  cadastro.FONE_RES,
-  cadastro.FONE_CEL,
-  cadastro.FONE_COM,
-  cadastro.CPF,
-  cadastro.CONDICAO,
-  cadastro.EMAIL,
-  cadastro.GRUPO,
-  cadastro.ORIGEM,
-  cadastro.PROFISSAO,
-  cadastro.ZONAL,
-  cadastro.SECCAO,
-  cadastro.PAI_MAE,
-  cadastro.FILIADO,
-  cadastro.RECEBEMAT,
-  cadastro.RESPCADASTRO,
-  cadastro.DTULTALT,
-  cadastro.EMPRESA,
-  cadastro.VOTOU,
-  cadastro.RAMO,
-  cadastro.RECEBEMAIL,
-  cadastro.IMPRESSO,
-  cadastro.ENVIADO,
-  cadastro.CAMPANHA,
-  cadastro.FACEBOOK,
-  cadastro.TWITTER,
-  cadastro.OUTRAREDE,
-  cadastro.APELIDO,
-  cadastro.EST_CIVIL,
-  cadastro.CLASSI,
-  cadastro.OBS,
-  enderecos.id,
-  enderecos.cep,
-  enderecos.tipolog,
-  enderecos.rua,
-  enderecos.reg,
-  enderecos.tipo,
-  enderecos.padrao,
-  enderecos.complemento,
-  enderecos.numero,
-  enderecos.uf,
-  enderecos.cidade,
-  enderecos.bairro
-FROM
-  cadastro
-  LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo) WHERE cadastro.CODIGO = $codigo";
+		  cadastro.CODIGO,
+		  cadastro.NOME,
+		  cadastro.SEXO,
+		  cadastro.DTCAD,
+		  cadastro.DTNASC,
+		  cadastro.CARGO,
+		  cadastro.FONE_RES,
+		  cadastro.FONE_CEL,
+		  cadastro.FONE_COM,
+		  cadastro.CPF,
+		  cadastro.CONDICAO,
+		  cadastro.EMAIL,
+		  cadastro.GRUPO,
+		  cadastro.ORIGEM,
+		  cadastro.PROFISSAO,
+		  cadastro.ZONAL,
+		  cadastro.SECCAO,
+		  cadastro.PAI_MAE,
+		  cadastro.FILIADO,
+		  cadastro.RECEBEMAT,
+		  cadastro.RESPCADASTRO,
+		  cadastro.DTULTALT,
+		  cadastro.EMPRESA,
+		  cadastro.VOTOU,
+		  cadastro.RAMO,
+		  cadastro.RECEBEMAIL,
+		  cadastro.IMPRESSO,
+		  cadastro.ENVIADO,
+		  cadastro.CAMPANHA,
+		  cadastro.FACEBOOK,
+		  cadastro.TWITTER,
+		  cadastro.OUTRAREDE,
+		  cadastro.APELIDO,
+		  cadastro.EST_CIVIL,
+		  cadastro.CLASSI,
+		  cadastro.OBS,
+		  enderecos.id,
+		  enderecos.cep,
+		  enderecos.tipolog,
+		  enderecos.rua,
+		  enderecos.reg,
+		  enderecos.tipo,
+		  enderecos.padrao,
+		  enderecos.complemento,
+		  enderecos.numero,
+		  enderecos.uf,
+		  enderecos.cidade,
+		  enderecos.bairro
+		FROM
+		  cadastro
+		  LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo) WHERE cadastro.CODIGO = $codigo";
 //		echo $query;
 		$mysql_query = $_con->query($querycad);
 		if ($mysql_query->num_rows<1) {
@@ -407,6 +407,7 @@ FROM
 			document.getElementById('lbldtcad').innerHTML = '<?php echo $dtcad ?>';
 			document.getElementById('lbldtultalt').innerHTML = '<?php echo $dtultalt ?>';
 			document.getElementById('lblrespcad').innerHTML = '<?php echo $respcadastro ?>';
+			document.form1.txtobs.value = '<?php echo $obs ?>';	
 			document.form1.txtcampanha.value = '<?php echo $campanha ?>';			
 			document.form1.txtface.value = '<?php echo $facebook ?>';			
 			document.form1.txttwitter.value = '<?php echo $twitter ?>';			
@@ -432,10 +433,11 @@ FROM
 			document.getElementById('btnExcCad').disabled = false;
 			document.getElementById('btnAltCad').disabled = false;
 			document.getElementById('btnNovo').disabled = true;
-			document.getElementById('dados_prontuario').innerHTML = '<?php echo $prontuarios ?>';			
-			document.getElementById('dados_exames').innerHTML = '<?php echo $relacao_exames ?>';
-			document.getElementById('dados_receituario').innerHTML = '<?php echo $receitas_eleitor ?>';
-			document.form1.txtobs.value = '<?php echo $obs ?>';	
+			if ($_SESSION['id']==1){
+				document.getElementById('dados_prontuario').innerHTML = '<?php echo $prontuarios ?>';			
+				document.getElementById('dados_exames').innerHTML = '<?php echo $relacao_exames ?>';
+				document.getElementById('dados_receituario').innerHTML = '<?php echo $receitas_eleitor ?>';
+			}
 			document.form1.txtnome.focus();
 			</script>
 			<?php

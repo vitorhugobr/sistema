@@ -47,45 +47,45 @@ $_SESSION['funcao']="Cadastro";
 <script type="text/javascript" src="../js/autocomplete.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-function checkAnyFormFieldEdited() {
-    /*
-     * If any field is edited,then only it will enable Save button
-     */
-    $(':text').keypress(function(e) { // text written
-		alert("The text has been changed.");
-    });
-
-    $(':text').keyup(function(e) {
-        if (e.keyCode == 8 || e.keyCode == 46) { //backspace and delete key
-    	alert("The text has been changed.");
-        } else { // rest ignore
-            e.preventDefault();
-        }
-    });
-    $(':text').bind('paste', function(e) { // text pasted
-    	alert("The text has been changed.");
-    });
-
-    $('select').change(function(e) { // select element changed
-    	alert("The text has been changed.");
-    });
-
-    $(':radio').change(function(e) { // radio changed
-    	alert("The text has been changed.");
-    });
-}
-$(document).ready(function(){
+//function checkAnyFormFieldEdited() {
+//    /*
+//     * If any field is edited,then only it will enable Save button
+//     */
 //    $(':text').keypress(function(e) { // text written
 //		alert("The text has been changed.");
 //    });
-	
-//  $("input").change(function(){
-//    alert("The text has been changed.");
-//  });
-//  $("select").change(function(){
-//    alert("Select has been changed.");
-//  });
-});
+//
+//    $(':text').keyup(function(e) {
+//        if (e.keyCode == 8 || e.keyCode == 46) { //backspace and delete key
+//    	alert("The text has been changed.");
+//        } else { // rest ignore
+//            e.preventDefault();
+//        }
+//    });
+//    $(':text').bind('paste', function(e) { // text pasted
+//    	alert("The text has been changed.");
+//    });
+//
+//    $('select').change(function(e) { // select element changed
+//    	alert("The text has been changed.");
+//    });
+//
+//    $(':radio').change(function(e) { // radio changed
+//    	alert("The text has been changed.");
+//    });
+//}
+//$(document).ready(function(){
+////    $(':text').keypress(function(e) { // text written
+////		alert("The text has been changed.");
+////    });
+//	
+////  $("input").change(function(){
+////    alert("The text has been changed.");
+////  });
+////  $("select").change(function(){
+////    alert("Select has been changed.");
+////  });
+//});
 </script>
 
 <script>
@@ -101,6 +101,13 @@ function enableFields(verdade){
 	}
 	document.getElementById("txtpesqendereco").disabled = false;
 	document.getElementById("txtpesqendereco").style.backgroundColor = '#FFFFFF';
+	document.getElementById("txtcpf").disabled = false;
+	document.getElementById("txtcpf").style.backgroundColor = '#FFFFFF';
+	document.getElementById("txtemail").disabled = false;
+	document.getElementById("txtemail").style.backgroundColor = '#FFFFFF';
+	document.getElementById("txtcelular").disabled = false;
+	document.getElementById("txtcelular").style.backgroundColor = '#FFFFFF';
+	
 }
 function inclui_novo(){
 	//document.getElementById('btnNovo').style.visibility = 'hidden';
@@ -308,7 +315,7 @@ if(isset($_SESSION['msg'])){
     </div>
     <div class="col-sm-2">
       <label for="txtcpf" class="textoAzul">CPF </label>
-      <input type="text" class="form-control" id="txtcpf" placeholder="CPF somente números">      
+      <input type="text" class="form-control" id="txtcpf" name="txtcpf" placeholder="CPF somente números">      
     </div>
     <div class="col-sm-2">
       <label for="txtestadocivil" class="textoAzul">Estado Civil </label>
@@ -475,13 +482,13 @@ if(isset($_SESSION['msg'])){
     <div class="col-sm-2">
 		<div class="custom-control custom-switch">
 			<input type="checkbox" class="custom-control-input" id="chkimpresso" name="chkimpresso">
-			<label class="custom-control-label textoAzul" for="chkimpresso">Recebe Impresso</label>
+			<label class="custom-control-label textoAzul" for="chkimpresso">Recebe WhatsApp/Impressos</label>
 		</div>
   </div>
     <div class="col-sm-2">
 		<div class="custom-control custom-switch">
 			<input type="checkbox" class="custom-control-input" id="chkfiliado" name="chkfiliado">
-			<label class="custom-control-label textoAzul" for="chkfiliado">Filiado</label>
+			<label class="custom-control-label textoAzul" for="chkfiliado">É Filiado</label>
 		</div>
     </div>
     <div class="col-sm-2">
@@ -688,8 +695,6 @@ ajax('zera_codigo.php','carregando');
 	new Autocomplete("txtcpf", function() { return "autocomplete_cpf.php?typing=" + this.text.value;});
 	new Autocomplete("txtcodigo", function() { return "autocomplete_codigo.php?typing=" + this.text.value;});
 	new Autocomplete("txtcelular", function() { return "autocomplete_fone.php?campo=FONE_CEL&typing=" + this.text.value;});
-	new Autocomplete("txtresidencial", function() { return "autocomplete_fone.php?campo=FONE_RES&typing=" + this.text.value;});		new Autocomplete("txtresidencial", function() { return "autocomplete_fone.php?campo=FONE_RES&typing=" + this.text.value;});
-	new Autocomplete("txtcomercial", function() { return "autocomplete_fone.php?campo=FONE_COM&typing=" + this.text.value;});		
 	new Autocomplete("txtpesqendereco", function() { return "autocompletecad_endereco.php?typing=" + this.text.value;});	
   new Autocomplete("rua", function() { return "autocompleterua.php?typing=" + this.text.value+"&city="+document.form1.cidade.value;});	
 </script>

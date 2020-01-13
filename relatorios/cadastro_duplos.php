@@ -212,7 +212,7 @@ while ($dados_s = $mysql_query->fetch_assoc()) {
 	$displayEnc .= $dados_s["NOMEGRP"];
 	$displayEnc .=  '</div></td>
 	<td>
-		<button type="button" class="btn btn-sm btn-excluir" onClick="javascript:exclui_duplo('.$dados_s["CODIGO"].')"><i class="fas fa-trash" aria-hidden="true"></i> Excluir Duplo</button>
+		<button type="button" class="btn btn-sm btn-excluir" onClick="javascript:excluir_cad_duplo('.$dados_s["CODIGO"].')"><i class="fas fa-trash" aria-hidden="true"></i>Excluir cód. '.$dados_s["CODIGO"].' de '.$dados_s["NOME"].'</button>
 	</td></tr>';
 }
 $displayEnc .= '</tbody></table>';
@@ -226,7 +226,13 @@ echo $displayEnc;
 <script src="../js/carrega_ajax.js" type="text/javascript"></script>
 <script src="../js/ajax.js" type="text/javascript"></script>
 <script src="../js/ie-emulation-modes-warning.js"></script>
-
+<script>
+function excluir_cad_duplo(cod_cadastro) {
+	if (confirm("Confirma a Exclusão do registro duplo")){
+		ajax('../eleitores/exclui_eleitor.php?P0='+cod_cadastro,'carregando');
+	}
+}
+</script>
 <script>
 function abrir_cadastro_pelo_apoio(cod_cadastro) {
 	ajax2("../cad_apoio/inicializa_global.php?cod_cadastro="+cod_cadastro,"carregando");
