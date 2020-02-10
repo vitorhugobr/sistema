@@ -58,7 +58,7 @@ $cidade = $theValue;
 
 // uf
 $theValue = (!get_magic_quotes_gpc()) ? addslashes($uf) : $uf;
-$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "RS";
 $uf = $theValue;
 
 // numero

@@ -331,7 +331,7 @@ if ($qtd_emails== 0){
 	$mail->FromName = $politico; // Seu nome
 	# Define os dados técnicos da Mensagem
 	$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
-	#$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
+	$mail->addAddress("vhmoliveira@gmail.com","Vitor H M Oliveira");
 	$mail->AddAddress('duharte@terra.com.br', 'Dr Thiago Duarte'); # Os campos podem ser substituidos por variáveis
 	$mail->Subject = "Resumo e-mails enviado - Dr Thiago"; # Assunto da mensagem
 	$mail->setFrom('sigre@vitor.poa.br', 'Sistema Sigre');

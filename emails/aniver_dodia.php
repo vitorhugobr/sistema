@@ -342,18 +342,13 @@ echo "Qtde emails ".$qtd_emails."<br>";
 $final = '<br><br><br><font color="#FF0004" style="font-family: Verdana; font-style: italic; font-size: 9px;">Este é um e-mail automático disparado pelo sistema. Favor não respondê-lo, pois esta conta não é monitorada. </font>';
 
 if ($qtd_emails== 0){
-	echo 'Nenhuma mensagem enviada em '.date("d/m/Y");
+	echo 'Nenhuma e-mail enviado em '.date("d/m/Y");
 }else{
-	#$mail->AddAddress('vereadorpujol@gmail.com', 'Otto Bede'); # Os campos podem ser substituidos por variáveis
-	#$mail->AddAddress('rpujol@globo.com', 'Reginaldo Pujol'); # Os campos podem ser substituidos por variáveis
-	#$mail->AddAddress('adm.jorgefraga@gmail.com', 'Jorge Fraga'); # Os campos podem ser substituidos por variáveis
-	#$mail->AddAddress($email_retorno, $politico); # Os campos podem ser substituidos por variáveis
 	if ($qtd_emails== 1){
-		$mens_qtde = 'Foi enviada 01 mensagem de e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final;
+		$mens_qtde = 'Foi enviado 01 e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final;
 	}else{
-		$mens_qtde = 'Foram enviadas '.$qtd_emails.' mensagens de e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final;
+		$mens_qtde = 'Foram enviados '.$qtd_emails.' e-mails de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final;
 	}
-	/* headers adicionais */
 	# Inicia a classe PHPMailer
 	$mail = new PHPMailer();
 
@@ -377,11 +372,11 @@ if ($qtd_emails== 0){
 	);
 
 	# Define o remetente (você)
-	$mail->From = $email_pol; # Seu e-mail
-	$mail->FromName = $politico; // Seu nome
+	$mail->From = $email_pol; # e-mail do politico
+	$mail->FromName = $politico; // Nome do político
 	# Define os dados técnicos da Mensagem
 	$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
-	#$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
+	$mail->addAddress("vhmoliveira@gmail.com","Vitor H M Oliveira");
 	$mail->AddAddress($email_pol, $politico); # Os campos podem ser substituidos por variáveis
 	$mail->Subject = "E-mails enviados aniversários- ".$politico; # Assunto da mensagem
 	$mail->setFrom('sigre@vitor.poa.br', 'Sistema Sigre');
