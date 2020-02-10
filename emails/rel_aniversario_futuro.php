@@ -82,11 +82,11 @@ $mes = substr($hoje,3,2);
 
 $ano = substr($hoje,6,4);
 
-echo "Hoje: ".$hoje."<br>Dia= ".$dia."<br>Mes= ".$mes."<br>Ano= ".$ano."<br>";
+//echo "Hoje: ".$hoje."<br>Dia= ".$dia."<br>Mes= ".$mes."<br>Ano= ".$ano."<br>";
 
 $_sql='SELECT * from aniversarios where MES = '.$mes.' AND DIA = '.$dia.' ORDER BY NOME';
 
-echo "Comando: ".$_sql."<br>";
+//echo "Comando: ".$_sql."<br>";
 
 $_res = $_con->query($_sql);
 
@@ -143,18 +143,18 @@ if($_res->num_rows>0){
 		$dtnasc = $theValue;
 		
 		if ($email==""){
-			$email= "<strong>--> SEM E-MAIL <--</strong>";			
+			$email= '<font color="#FF0004" style="font-family: Verdana; font-style: italic; font-size: 12px;"><strong>*** SEM E-MAIL CADASTRADO ***</strong></font>';			
 		}
-
-		$ender = $_row["tipolog"].' '.$_row["rua"].' '.$_row["numero"].' '.$_row["complemento"].' '.$_row["bairro"].' '.$_row["cidade"].' '.substr($_row["cep"],0,5).' '.substr($_row["cep"],5,3);
-
+		$ender = $_row["tipolog"].' '.$_row["rua"].' '.$_row["numero"].' '.$_row["complemento"].' '.$_row["bairro"].' '.$_row["cidade"].' '.substr($_row["cep"],0,5).' '.substr($_row["cep"],5,3).'<br />';		
 		$pessoas .= '<tr align="left" valign="top">
     <td nowrap="nowrap"><strong>'.$codigo.'</strong></td>
-    <td><strong>'.$nome.'</strong><br />
-      '.$ender.'<br />
-      <strong>'.$email.'</strong><br />
-      '.$dtnasc.'<br />
-      '.$foneres.'&nbsp;'.$fonecel.'&nbsp;'.$fonecom.'</td>
+    <td><strong>'.$nome.'</strong><br />';
+		if ($_row["rua"]>""){	
+			$pessoas .= $ender;
+		}else{
+			$pessoas .= '<font color="#FF0004" style="font-family: Verdana; font-style: italic; font-size: 12px;"><strong>** SEM ENDEREÇO CADASTRADO **</strong></font><br />';			
+		}
+		$pessoas .= '<strong>'.$email.'</strong><br />'.$dtnasc.'<br />'.$foneres.'&nbsp;'.$fonecel.'&nbsp;'.$fonecom.'</td>
   </tr>';
 		//$pessoas .= $codigo.' - '.$nome.' -> fone(s)- '.$foneres.' - '.$fonecel.' - '.$fonecel.'<br>';
 	}
@@ -168,7 +168,7 @@ $pessoas .= '  <tr>
 $final = '<br><br><br><font color="#FF0004" style="font-family: Verdana; font-style: italic; font-size: 9px;">Este é um e-mail automático disparado pelo sistema. Favor não respondê-lo, pois esta conta não é monitorada. </font>';
 
 if ($qtd_emails> 0){
-	$pessoas = $iniciohtml.'<br>'.$pessoas.$final'</body></html>';
+	$pessoas = $iniciohtml.'<br>'.$pessoas.$final.'</body></html>';
 	$subject = 'Relação Aniversariantes em ' .$hoje.' - Sistema SIGRE';
 
 	$headers  = "MIME-Version: 1.0\r\n";
@@ -186,7 +186,7 @@ if ($qtd_emails> 0){
 //	echo '<br>'.$headers;
 	
 	if (mail($to, $subject, $pessoas, $headers)){
-		echo "Enviado";
+		//echo "Enviado";
 	}else{
 		echo "NÃO ENVIADO";
 	}

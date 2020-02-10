@@ -186,14 +186,13 @@ if(isset($_SESSION['msg'])){
 //							  </a>
 //						</li>';
 //				}
-				if (liberado(1006)>0){  
+				if ((liberado(1006)>0) and ($_SESSION['id']=1)){  
 						echo '<li class="nav-item">
-						<a href="cadastro_to_excel.php" title="Exportar Cadastro para Excel" class="btn btn-imprimir btn-sm" role="button">
+						<a href="gera_excel.php" title="Exportar Cadastro para Excel" class="btn btn-imprimir btn-sm" role="button">
 						<i class="fas fa-copy" aria-hidden="true text-muted" aria-hidden="true"></i> Exportar Cad. Excel
 						</a>
 					</li>';
-				}
-
+				} 
 				?>
 				<li class="nav-item">
 					 <button type="button" class="btn btn-sm btn-limpatela" onclick="javascript:reload_cadastro();">
@@ -464,14 +463,13 @@ if(isset($_SESSION['msg'])){
   <!--  nova linha -->
   
    <div class="form-row col-form-label-sm">
-    <div class="col-sm-1"> </div>
     <div class="col-2">
 		<div class="custom-control custom-switch">
 			<input type="checkbox" class="custom-control-input" id="chkcondicao" name="chkcondicao">
 			<label class="custom-control-label textoAzul" for="chkcondicao">Cadastro ATIVO</label>
 		</div>
    	</div>
-    <div class="col-2">
+    <div class="col-3">
 		<div class="custom-control custom-switch">
 			<input type="checkbox" class="custom-control-input" id="chkemail" name="chkemail">
 			<label class="custom-control-label textoAzul" for="chkemail">Recebe E-mail</label>
@@ -479,7 +477,7 @@ if(isset($_SESSION['msg'])){
    	</div>
 <hr />
 
-    <div class="col-sm-2">
+    <div class="col-sm-3">
 		<div class="custom-control custom-switch">
 			<input type="checkbox" class="custom-control-input" id="chkimpresso" name="chkimpresso">
 			<label class="custom-control-label textoAzul" for="chkimpresso">Recebe WhatsApp/Impressos</label>

@@ -24,8 +24,6 @@ if(!$_con) {
 
 }
 
-
-
 mysqli_set_charset($_con,"utf8");
 
 mysqli_query($_con, "SET NAMES 'utf8'");
@@ -45,6 +43,7 @@ if (!file_exists($arqconfig)) {
 $linhas = explode("\n", file_get_contents($arqconfig));
 $id = $linhas[0]; // usuario =A(100,80);
 $versao= $linhas[1];
+$_SESSION['id'] = $id;
 
 $_sql = "SELECT * from config where id = ".$id;
 
@@ -230,68 +229,38 @@ if($_res->num_rows>0){
 //		echo 'ENTROU Regs '.$_res->num_rows;
 
 	while($_row = $_res->fetch_assoc()) {
-
 		$qtd_emails= $qtd_emails + 1;
-
 		$codigo = $_row["CODIGO"];
-
 		$nome = $_row["NOME"];
-
 		$person .= $nome.'<br>';			
-
 		$foneres = $_row["FONE_RES"];
-
 		$fonecel = $_row["FONE_CEL"];
-
 		$fonecom = $_row["FONE_COM"];
-
 		$email = $_row["EMAIL"];
-
 		$dtnasc  = $_row["DTNASC"];
-
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($dtnasc) : $dtnasc;
-
 		$theValue = ($theValue != "") ? " " . FormatDateTime($theValue,7) . "" : "___/___/____";
-
 		$dtnasc = $theValue;
-
 		$theValue = (!get_magic_quotes_gpc()) ? addslashes($email) : $email;
-
-		$theValue = ($theValue != "") ? " " . $theValue . " " : "<strong>****** SEM E-MAIL ******</strong>";
-
+		$theValue = ($theValue != "") ? " " . $theValue . " " : "<font color='#FF0004' style='ont-family: Verdana; font-style: italic; font-size: 12px;'><strong>*** SEM E-MAIL CADASTRADO ***</strong></font>";
 		$email = $theValue;
-
-		$ender = $_row["tipolog"].' '.$_row["rua"].', '.$_row["numero"].' '.$_row["complemento"].' - '.$_row["bairro"].' - '.$_row["cidade"].' - '.substr($_row["cep"],0,5).'-'.substr($_row["cep"],5,3);
-
+		if ($_row["rua"]==""){
+			$ender = "<font color='#FF0004' style='ont-family: Verdana; font-style: italic; font-size: 12px;'><strong>** SEM ENDEREÇO CADASTRADO **</strong></font>";
+		}else{		
+			$ender = $_row["tipolog"].' '.$_row["rua"].', '.$_row["numero"].' '.$_row["complemento"].' - '.$_row["bairro"].' - '.$_row["cidade"].' - '.substr($_row["cep"],0,5).'-'.substr($_row["cep"],5,3);
+		}
 		$pessoas .= '<tr align="left" valign="top">
-
     <td nowrap="nowrap"><strong>'.$codigo.'</strong></td>
-
     <td><strong>'.$nome.'</strong><br />
-
       '.$ender.'<br />
-
       <strong>'.$email.'</strong><br />
-
       '.$dtnasc.'<br />
-
-      '.$foneres.'&nbsp;&nbsp;'.$fonecel.'&nbsp;&nbsp;'.$fonecom.'</td>
-
-  </tr>';
-
-		//$pessoas .= $codigo.' - '.$nome.' -> fone(s)- '.$foneres.' - '.$fonecel.' - '.$fonecel.'<br>';
-
+      '.$foneres.'&nbsp;&nbsp;'.$fonecel.'&nbsp;&nbsp;'.$fonecom.'</td></tr>';
 	}
 
 }
 
-$pessoas .= '  <tr>
-
-    <td colspan="2"><hr /></td>
-
-  </tr>
-
-</table>';
+$pessoas .= '<tr><td colspan="2"><hr /></td></tr></table>';
 
 $final = '<br><br><br><font color="#FF0004" style="font-family: Verdana; font-style: italic; font-size: 9px;">Este &eacute; um e-mail autom&aacute;tico disparado pelo sistema. Favor n&atilde;o respond&ecirc;-lo, pois esta conta n&atilde;o &eacute; monitorada. </font>';
 
@@ -328,7 +297,7 @@ if ($qtd_emails== 0){
 	$mail->From = 'sigre@vitor.poa.br'; # e-mail remetente
 	$mail->FromName = 'Sistema SIGRE'; // nome remetente
 	$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
-	#$mail->AddAddress("vhmoliveira@gmail.com", "Vitor H M Oliveira"); # Os campos podem ser substituidos por variáveis
+	$mail->AddAddress("vhmoliveira@gmail.com", "Vitor H M Oliveira"); # Os campos podem ser substituidos por variáveis
 	$mail->AddAddress($email_pol, $politico); # Os campos podem ser substituidos por variáveis
 	if (!empty($email2)){
 		$mail->AddAddress($email2, $nome2); # Os campos podem ser substituidos por variáveis

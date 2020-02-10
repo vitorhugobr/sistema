@@ -1301,11 +1301,11 @@ function monta_sql(){
 	if ($qtde_param > 0){
 		$parametros2 = " (Todos Registros)"; 
 		if (isset($_POST['condicao'])) {
-			if ($_POST['condicao']=="A"){
+			if ($_POST['condicao']=="1"){
 				$stringWhere .= " and condicao = 1";
 				$parametros2= " (registros ATIVOS)"; 
 			}
-			if ($_POST['condicao']=="I"){
+			if ($_POST['condicao']=="0"){
 				$stringWhere .= " and condicao = 0";
 				$parametros2 = " (registros INATIVOS)"; 
 			}
