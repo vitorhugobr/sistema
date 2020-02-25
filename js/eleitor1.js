@@ -74,6 +74,7 @@ function AtualizaEleitor(y_funcao) {
 //	alert (parString);
 	if (y_funcao=="I") {
 		if (confirm("Confirma a Inclusão do registro de "+document.form1.txtNome.value)){
+			ajax('inclui_eleitor.php?'+parString,'carregando');	
 		}
 	}else{ 
 		if (y_funcao=="A"){

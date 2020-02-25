@@ -141,10 +141,9 @@ if(isset($_SESSION['msg'])){
     	<div class="row text-primary">
           	<strong>Usuário(s) Cadastrado(s):</strong></div>
           	<div class="row text-success">
-			<div class="col-3"><strong><i>Usuário</i></strong></div>
-			<div class="col-3"><strong><i>Nome do Usuário</i></strong></div>
-			<div class="col-3"><strong><i>Tipo de Usuário</i></strong></div>
-			<div class="col-3"><strong><i>E-mail do Usuário</i></strong></div>
+			<div class="col-4"><strong><i>Usuário</i></strong></div>
+			<div class="col-4"><strong><i>Nome do Usuário</i></strong></div>
+			<div class="col-4"><strong><i>E-mail do Usuário</i></strong></div>
 			<?php
 			$sql = "select * from users order by nome";
 			$mysql_query = $_con->query($sql);
@@ -160,33 +159,15 @@ if(isset($_SESSION['msg'])){
 							echo 'bg-white';
 							$set_corfundo = 0;
 						}
-						$nivel = $_row['nivel'];
-						switch($nivel) {
-						case 0:
-							$tipo_nivel= 'Desenvolvedor';
-							break;
-						case 1:
-							$tipo_nivel= 'Administrador';
-							break;
-						case 2:
-							$tipo_nivel= 'Gabinete';
-							break;
-						default:
-							$tipo_nivel= 'Web';
-							break;	
-						}
 						?>
 					  ">
-						<div class="col-3">
+						<div class="col-4">
 							<a href="javascript:busca_user('<?php echo $_row['usuario']?>')" class="text text-primary"><img class="rounded-circle" src="../imagens/fotos/users/<?php echo $_row['foto'] ?>" width="50" height="50">&nbsp;<?php echo $_row['usuario'];?></a>
 						</div>
-						<div class="col-3 text-dark" style="line-height: 20px; height: 20px; padding: 12px;"> 
+						<div class="col-4 text-dark" style="line-height: 20px; height: 20px; padding: 12px;"> 
 							<?php echo $_row['nome']; ?>
 						</div>
-						<div class="col-3 text-dark" style="line-height: 20px; height: 20px; padding: 12px;"> 
-							<?php echo $tipo_nivel; ?>
-						</div>
-						<div class="col-3 text-dark" style="line-height: 20px; height: 20px; padding: 12px;"> 
+						<div class="col-4 text-dark" style="line-height: 20px; height: 20px; padding: 12px;"> 
 							<?php echo $_row['email']; ?>
 						</div>
 					</div>

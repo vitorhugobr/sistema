@@ -3,54 +3,33 @@ include_once("../seguranca.php"); // Inclui o arquivo com o sistema de seguranç
 protegePagina(); // Chama a função que protege a página
 require_once("../utilitarios/funcoes.php");
 $_SESSION['funcao']="Config";
-
-$sql = "SELECT * from config where id = ".$_SESSION['id'];
-try{
-	$pdo = new PDO("mysql:host=www.vitor.poa.br;dbname=vitorpoa_teste;","vitorpoa_user", "vhmo@2017");
-	$pdo->exec("set names utf8");
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	array(PDO::ATTR_PERSISTENT => true);
-}catch(PDOException $e){
-	// Caso ocorra algum erro na conexão com o banco, exibe a mensagem
-	echo 'Falha ao conectar no banco de dados: '.$e->getMessage();
-	die;
-}
-//echo $sql;
-$sql = $pdo->prepare($sql);
-$sql->execute();
-$total = $sql->rowCount();
+$sqlstr = "SELECT * from config limit 1";
+$statement = $pdo->prepare($sqlstr);
+$statement->execute();
+$total = $statement->rowCount();
 if($total==0){
-// Nenhum registro foi encontrado => o usuário é inválido
-	$msg_erro= "Cliente ".$_SESSION['id']." não cadastrado";
-	echo '<script>alert('.$msg_erro.');</script>'; 
+  echo '<script>alert("Cliente não cadastrado");</script>'; 
 }else{
-	// Definimos a mensagem de erro
-	while($dados_s = $sql->fetch()) {	
+  // Definimos a mensagem de erro
+  while($dados_s = $statement->fetch()) {
+	  $politico = $dados_s['politico'];	  
 	  $id = $dados_s['id'];
-	  $politico  = $dados_s['politico'];
 	  $end_pol = $dados_s['end_pol'];
 	  $email_pol = $dados_s['email_pol'];
-	  $cidade_pol= $dados_s['cidade_pol'];
+	  $cidade_pol = $dados_s['cidade_pol'];
 	  $estado_pol = $dados_s['estado_pol'];
 	  $cep_pol = $dados_s['cep_pol'];
+	  $id = $dados_s['id'];
 	  $endurl = $dados_s['endurl'];
-	  $endfoto= $dados_s['endfoto'];
-	  $ativo= $dados_s['ativo'];
-	  $host_pol= $dados_s['host_pol'];
+	  $endfoto = $dados_s['endfoto'];
+	  $ativo = $dados_s['ativo'];
+	  $host_pol = $dados_s['host_pol'];
 	  $email_retorno = $dados_s['email_retorno'];
-	  $user_login= $dados_s['login_pol'];
-	  $user_pass = $dados_s['passw_pol'];	  
-	  $fones_pol = $dados_s['fones_pol'];
+	  $login_pol = $dados_s['login_pol'];
+	  $passw_pol = $dados_s['passw_pol'];
+		$fones_pol = $dados_s['fones_pol'];
 	  $versao = $dados_s['versao'];
-	  $partido = $dados_s['partido']; 
-	  $imagem = $dados_s['endfoto'];
-	  $nome2 = $dados_s['nome2'];
-	  $email2 = $dados_s['email2'];
-	  $nome3 = $dados_s['nome3'];
-	  $email3 = $dados_s['email3'];
-	  $nome4 = $dados_s['nome4'];
-	  $email4 = $dados_s['email4'];
-	}
+  }
 }
 
 ?>
@@ -72,28 +51,20 @@ if($total==0){
 </head>
 
 <body>
-<?php include_once("../utilitarios/cabecalho.php");
-
-if(isset($_SESSION['msg'])){
-	echo $_SESSION['msg'];
-	unset($_SESSION['msg']);
-}
-?>
+<?php include_once("../utilitarios/cabecalho.php");?>
+<p></p>
 <div class="container-fluid">
   <form name="form1" method="POST" action="gravar_config.php" enctype="multipart/form-data">
-    <input type="hidden" id="id_politico" name="id_politico" value="<?php echo $id?>">
     <div class="form-group row">
-      <label for="cidade" class="col-sm-2 col-form-label text-right">Nome</label>
+      <label for="politico" class="col-sm-2 col-form-label text-right"><strong>Nome</strong></label>
       <div class="col-sm-4">
-        <input type="text" class="form-control" id="cidpoliticoade" name="politico" placeholder="Cidade" value="<?php echo $politico ?>">
+        <input type="text" class="form-control" id="politico" name="politico" placeholder="Nome do Político" value="<?php echo $politico?>">
+        <input type="hidden" id="id_politico" name="id_politico" value="<?php echo $id?>">
       </div>
-      <label for="estado" class="col-sm-1 col-form-label text-right">Partido</label>
-      <div class="col-sm-2">
-        <input type="text" class="form-control" id="estado" name="estado" placeholder="UF" value="<?php echo $partido?>">
-      </div>
-    </div>    <div class="form-group row">
+    </div> 
+    <div class="form-group row">
       <label for="endereco" class="col-sm-2 col-form-label text-right">Endereço</label>
-      <div class="col-sm-10">
+      <div class="col-sm-6">
         <input type="text" class="form-control" id="endereco" name="endereco" placeholder="Endereço Completo" value="<?php echo $end_pol?>">
       </div>
     </div>
@@ -113,14 +84,14 @@ if(isset($_SESSION['msg'])){
     </div>
     <div class="form-group row">
       <label for="email" class="col-sm-2 col-form-label text-right">Email</label>
-      <div class="col-sm-10">
+      <div class="col-sm-6">
         <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?php echo $email_pol ?>">
       </div>
     </div>
     <div class="form-group row">
-      <label for="endurl" class="col-sm-2 col-form-label text-right">Endereço Sistema</label>
+      <label for="endurl" class="col-sm-2 col-form-label text-right">Endereço URL</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" id="endurl" name="endurl" placeholder="www.dominio.com.br/sigre/" value="<?php echo $endurl?>">
+        <input type="text" class="form-control" id="endurl" name="endurl" placeholder="Endereço URL" value="<?php echo $endurl?>">
       </div>
     </div>
     <div class="form-group row">
@@ -129,13 +100,7 @@ if(isset($_SESSION['msg'])){
         <input type="text" class="form-control" id="endfoto" name="endfoto" placeholder="Endereço Foto" value="<?php echo $endfoto?>">
       </div>
     </div>
-     <div class="form-group row">
-      <label for="fones_pol" class="col-sm-2 col-form-label text-right">Telefones</label>
-      <div class="col-sm-6">
-        <input type="text" class="form-control" id="fones_pol" name="fones_pol" placeholder="Telefones" value="<?php echo $fones_pol?>">
-      </div>
-    </div>
-   <div class="form-group row">
+    <div class="form-group row">
       <div class="col-sm-2 text-right">Sistema Ativo</div>
       <div class="col-sm-3">
         <div class="form-check">
@@ -156,9 +121,9 @@ if(isset($_SESSION['msg'])){
 
     </div>
     <div class="form-group row">
-      <label for="host_pol" class="col-sm-2 col-form-label text-right">iframe da Agenda</label>
-      <div class="col-sm-10">
-       <textarea name="host_pol" rows="3" class="form-control" id="host_pol" placeholder="Agenda"><?php echo $host_pol?></textarea>
+      <label for="host_pol" class="col-sm-2 col-form-label text-right">Host</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="host_pol" name="host_pol" placeholder="Host" value="<?php echo $host_pol?>">
       </div>
     </div>
     <div class="form-group row">
@@ -168,33 +133,21 @@ if(isset($_SESSION['msg'])){
       </div>
     </div>
     <div class="form-group row">
-      <label for="nome2" class="col-sm-2 col-form-label text-right">Nome Email 2</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="nome2" name="nome2" placeholder="Nome #2 para receber e-mails" value="<?php echo $nome2 ?>">
-      </div>
-      <label for="email2" class="col-sm-1 col-form-label text-right">Email2</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="email2" name="email2" placeholder="Email 2" value="<?php echo $email2?>">
+      <label for="login_pol" class="col-sm-2 col-form-label text-right">Login Cpanel</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="login_pol" name="login_pol" placeholder="Usuário Cpanel" value="<?php echo $login_pol?>">
       </div>
     </div>
     <div class="form-group row">
-      <label for="nome3" class="col-sm-2 col-form-label text-right">Nome Email 3</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="nome3" name="nome3" placeholder="Nome #3 para receber e-mails" value="<?php echo $nome3 ?>">
-      </div>
-      <label for="email3" class="col-sm-1 col-form-label text-right">Email 3</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="email3" name="email3" placeholder="Email 3" value="<?php echo $email3?>">
+      <label for="passw_pol" class="col-sm-2 col-form-label text-right">Senha Cpanel</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="passw_pol" name="passw_pol" placeholder="Senha Cpnael" value="<?php echo $passw_pol?>">
       </div>
     </div>
     <div class="form-group row">
-      <label for="nome4" class="col-sm-2 col-form-label text-right">Nome Email4</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="nome4" name="nome4" placeholder="Nome #4 para receber e-mails" value="<?php echo $nome4 ?>">
-      </div>
-      <label for="email4" class="col-sm-1 col-form-label text-right">Email4</label>
-      <div class="col-sm-4">
-        <input type="text" class="form-control" id="email4" name="email4" placeholder="Email 4" value="<?php echo $email4?>">
+      <label for="fones_pol" class="col-sm-2 col-form-label text-right">Telefones</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="fones_pol" name="fones_pol" placeholder="Telefones" value="<?php echo $fones_pol?>">
       </div>
     </div>
     <div class="form-group row">

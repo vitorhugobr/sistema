@@ -38,6 +38,7 @@ if (liberado(5600)==0){
   </head>
   
   <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+
 <?php include("../utilitarios/cabecalho.php"); ?>
 <form name="form1" method="post" action="">
     <nav class="navbar navbar-expand-sm navbar-light shadow-sm">
@@ -89,115 +90,18 @@ if(isset($_SESSION['msg'])){
 	unset($_SESSION['msg']);
 }
 ?>
+<pre><div class="col-12">
+                       <strong>CEP</strong>: <input  type="text"  id="cep" name="cep" maxlength="8" size="8" autofocus/> <button class="btn btn-consultar btn-sm" type="button" onclick="ajax('pesquisa_ajax.php?cep='+document.getElementById('cep').value+'&consulta=cep','carregando');"> <i class="fas fa-search" aria-hidden="true"></i> Pesquisar </button> <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm" title="Pesquisa Correios" target="_blank">Buscar no site dos Correios</a></div>
+<div class="col-12">                 <strong>Tipologia</strong>: <input  name="tipologia" type="text" id="tipologia" size="10" maxlength="10" placeholder="Rua, Avenida etc"  onChange="javascript:this.value=this.value.toUpperCase();" /></div>
+<div class="col-6">                <strong>Logradouro</strong>: <input name="rua" type="text" id="rua"  placeholder="NOME DO LOGRADOURO" maxlength="50" onChange="javascript:this.value=this.value.toUpperCase();" /></div>
+<div class="col-12">                 <strong>Numeração</strong>: <input name="numeracao" type="text" id="numeracao"  maxlength="50" onChange="javascript:this.value=this.value.toUpperCase();" /></div>		
+<div class="col-12">                 <strong>Bairro</strong>(1): <input name="bairro" type="text" id="bairro" size="30" placeholder="BAIRRO DO LOGRADOURO" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();" /> </div>       
+<div class="col-12">                 <strong>Bairro(2)</strong>: <input  name="bairro2" type="text" id="bairro2" size="30"  maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();" /></div>       
+<div class="col-12">                    <strong>Cidade</strong>: <input name="cidade" type="text" id="cidade" size="30" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();" /> </div>              
+<div class="col-12">                        <strong>UF</strong>: <input name="uf" type="text" id="uf" size="2" maxlength="2" onChange="javascript:this.value=this.value.toUpperCase();" /></div>
+<div class="col-12">  <strong> Região entrega ECT(CDD)</strong>: <input name="reg" type="text" id="reg" size="3" maxlength="3" onChange="javascript:this.value=this.value.toUpperCase();" /></div>
+<div class="col-12          <strong>Última alteração:</strong> <span id="dtcad"></span> <strong>por</strong> <span id="respcad"></span> </div></div>
 
-<table width="100%" border="0" cellspacing="2" cellpadding="2">
-    <tr>
-      <td align="right" width="15%">
-      	<label>CEP:</label>
-      </td>
-      <td>
-        <div class="input-group col-sm-4">
-          <input type="text" class="form-control" id="cep" name="cep" maxlength="8" size="8" aria-label="Código CEP" autofocus/>
-          <div class="input-group-append">
-          <button class="btn btn-consultar btn-sm" type="button" onclick="ajax('pesquisa_ajax.php?cep='+document.getElementById('cep').value+'&consulta=cep','carregando');"><i class="fas fa-search" aria-hidden="true"></i> Pesquisar
-          </button>
-          </div>
-        </div>
-      
-      </td>
-    </tr>
-    <tr>
-    	<td align="right">
-      	<label>Tipologia:</label>
-      </td>
-      <td>
-	  	<div class="col-sm-2">
-			<input class="form-control" name="tipologia" type="text" id="tipologia" size="10" maxlength="10" placeholder="Rua, Avenida etc"  onChange="javascript:this.value=this.value.toUpperCase();" />
-        </div>
-      </td>
-    </tr>
-    <tr>
-    	<td align="right">
-      		<label>Logradouro:</label>
-      	</td>
-      	<td>
-		<div class="col-sm-6">
-			<input class="form-control" name="rua" type="text" id="rua" size="50" placeholder="NOME DO LOGRADOURO" maxlength="50" onChange="javascript:this.value=this.value.toUpperCase();" />
-		</div>
-      	</td>
-    </tr>
-    <tr>
-    	<td align="right">
-      	<label>Numeração:</label>
-      	</td>
-      	<td>
-	     	<div class="col-sm-4">
-				<input class="form-control" name="numeracao" type="text" id="numeracao" size="50" maxlength="50" onChange="javascript:this.value=this.value.toUpperCase();" />		    
-        	</div>
-      	</td>
-    </tr>
-    <tr>
-    	<td align="right">
-      		<label>Bairro(1):</label>
-      	</td>
-      	<td>
-	    	<div class="col-sm-4">
-				<input class="form-control" name="bairro" type="text" id="bairro" size="30" placeholder="BAIRRO DO LOGRADOURO" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();" />        
-        	</div>
-      	</td>
-    </tr>
-    <tr>
-    	<td align="right">
-     	 	<label>Bairro(2):</label>
-      	</td>
-      	<td>
-	    	<div class="col-sm-4">
-				<input class="form-control" name="bairro2" type="text" id="bairro2" size="30"  maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();" />        
-        	</div>
-      	</td>
-    </tr>
-    <tr>
-    	<td align="right">
-    	  	<label>Cidade:</label>
-      	</td>
-      	<td>
-	     	<div class="col-sm-4">
-				<input class="form-control" name="cidade" type="text" id="cidade" size="30" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();" />        
-        	</div>
-      	</td>
-    </tr>
-    <tr>
-    	<td align="right">
-      		<label>UF:</label>
-      	</td>
-      	<td>
-	     	<div class="col-sm-1">
-				<input class="form-control" name="uf" type="text" id="uf" size="2" maxlength="2" onChange="javascript:this.value=this.value.toUpperCase();" />
-        	</div>
-      	</td>
-    </tr>
-    <tr>
-    	<td align="right">
-    	  	<label>Regi&atilde;o entrega ECT(CDD):</label>
-      	</td>
-      	<td>
-	     	<div class="col-sm-1">
-				<input class="form-control" name="reg" type="text" id="reg" size="3" maxlength="3" onChange="javascript:this.value=this.value.toUpperCase();" />
-        	</div>
-      	</td>
-    </tr>
-    <tr>
-    	<td align="right">
-      		<label>Última alteração:</label>
-      	</td>
-      	<td>
-	     	<div class="col-sm-3">
-        		<span id="respcad"></span> 
-        		<span id="dtcad"></span>
-        	</div>
-      	</td>
-    </tr>
-</table>
 </form>
 <script type="text/javascript">
 	new Autocomplete("rua", function() { return "../eleitores/autocompleterua2.php?typing=" + this.text.value+'&city='+document.getElementById('cidade').value;});
@@ -205,6 +109,7 @@ if(isset($_SESSION['msg'])){
 <?php
 include("../utilitarios/rodape-fixo.php");
 ?>
+</pre>
 </body>
 </html>
 <?php }?>

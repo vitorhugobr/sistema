@@ -30,10 +30,10 @@ require_once("utilitarios/funcoes.php");
 $sql = "SELECT * from config where id = ".$_SESSION['id'];
 try{
 	// Faz conexão com banco de daddos
-	if ($_SERVER['DOCUMENT_ROOT']=="D:/wamp64/www"){
-		$area_acesso = "<strong>TESTES</strong>";
+	if ($_SERVER['DOCUMENT_ROOT']=="D:/wampserver64/www"){
+		$area_acesso = "TESTES";
 	} else {
-		$area_acesso = "<strong>Web</strong>";
+		$area_acesso = "Web";
 	}
 	$pdo = new PDO("mysql:host=www.vitor.poa.br;dbname=vitorpoa_teste;","vitorpoa_user", "vhmo@2017");
 	$pdo->exec("set names utf8");
@@ -48,35 +48,35 @@ try{
 
 	die;
 }
-//echo $sql;
-$sql = $pdo->prepare($sql);
-$sql->execute();
-$total = $sql->rowCount();
-if($total==0){
-// Nenhum registro foi encontrado => o usuário é inválido
-	$msg_erro= "Cliente ".$_SESSION['id']." não cadastrado";
-	echo '<script>alert('.$msg_erro.');</script>'; 
-}else{
-	// Definimos a mensagem de erro
-	while($dados_s = $sql->fetch()) {	
-	  $_SESSION['id'] = $dados_s['id'];
-	  $_SESSION['politico'] = $dados_s['politico'];
-	  $_SESSION['ativo']= $dados_s['ativo'];
-	  $_SESSION['url']= $dados_s['endurl'];
-	  $_SESSION['host_pol']= $dados_s['host_pol'];
-	  $_SESSION['email_pol']= $dados_s['email_pol'];
-	  $_SESSION['fones_pol'] = $dados_s['fones_pol'];
-	  $_SESSION['email_pol'] = $dados_s['email_pol'];
-	  $_SESSION['partido'] = $dados_s['partido']; 
-	  $_SESSION['servidor']= $dados_s['host_pol'];
-	  $_SESSION['user_login']= $dados_s['login_pol'];
-	  $_SESSION['user_pass']= $dados_s['passw_pol'];	  
-	  $imagem = $dados_s['endfoto'];
-		if ($dados_s['ativo']==1){
-			header("Location: manutencao.html");		
+	//echo $sql;
+	$sql = $pdo->prepare($sql);
+	$sql->execute();
+	$total = $sql->rowCount();
+	if($total==0){
+    // Nenhum registro foi encontrado => o usuário é inválido
+    	$msg_erro= "Cliente ".$_SESSION['id']." não cadastrado";
+		echo '<script>alert('.$msg_erro.');</script>'; 
+	}else{
+		// Definimos a mensagem de erro
+		while($dados_s = $sql->fetch()) {	
+		  $_SESSION['id'] = $dados_s['id'];
+		  $_SESSION['politico'] = $dados_s['politico'];
+		  $_SESSION['ativo']= $dados_s['ativo'];
+		  $_SESSION['url']= $dados_s['endurl'];
+		  $_SESSION['host_pol']= $dados_s['host_pol'];
+		  $_SESSION['email_pol']= $dados_s['email_pol'];
+		  $_SESSION['fones_pol'] = $dados_s['fones_pol'];
+		  $_SESSION['email_pol'] = $dados_s['email_pol'];
+		  $_SESSION['partido'] = $dados_s['partido']; 
+		  $_SESSION['servidor']= $dados_s['host_pol'];
+		  $_SESSION['user_login']= $dados_s['login_pol'];
+		  $_SESSION['user_pass']= $dados_s['passw_pol'];	  
+	  	  $imagem = $dados_s['endfoto'];
+			if ($dados_s['ativo']==1){
+				header("Location: manutencao.html");		
+			}
 		}
 	}
-}
 
 
 $_SESSION['ult_eleitor_pesquisado']=0;
@@ -145,7 +145,7 @@ $_SESSION['ult_eleitor_pesquisado']=0;
   <div class="text-center mb-4">
     <img class="mb-4" src="imagens/vhmo.png" alt="" width="32" height="32"><br>
     <h5 align="center">
-<div id="time" class="rodape"></div>
+<div id="time" class="data_hora_index"></div>
 <script >
 	function checkTime(i) {
 			if (i < 10) {
@@ -168,13 +168,13 @@ $_SESSION['ult_eleitor_pesquisado']=0;
 	}
 	startTime();
 </script>
-<div id="time" class="rodape">
+<div id="time" class="data_hora_index">
 <?php echo date('d/m/Y')?></div></h5>
-	<div class="sigla_sistema">
+	<div class="nome_usuario_index" >
 		<?php echo $_SESSION['sistemaabrev']?></div>
-	<div class="rodape">
+	<div class="data_hora_index">
 	<?php echo $_SESSION['versao'].'-'.$_SESSION['id'];?></div>
-	<div class="politico"><?php echo $_SESSION['politico'] ?>
+	<div class="nome_usuario_index"><?php echo $_SESSION['politico'] ?>
   	</div>
    <div class="form-signin-heading text-danger">Área Restrita <?php echo $area_acesso; ?>
    </div>

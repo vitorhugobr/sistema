@@ -59,6 +59,13 @@ switch ($_SESSION['id']) {
 		$_SG['banco'] = "sebastia_sigre"; 
 		//	senha cpanel: "=1fTUSoRJ}Ru"  usuário: "sebastiaomelopoa"
 		break;
+	case 8:  // Luiz Braz
+		$_SG['servidor'] = "www.vitor.poa.br";
+		$_SG['usuario'] = "vitorpoa_luiz";
+		$_SG['senha'] = "braz@2020";
+		$_SG['banco'] = "vitorpoa_luizbraz"; 
+		//	senha cpanel: "=1fTUSoRJ}Ru"  usuário: "sebastiaomelopoa"
+		break;
 }
 
 // -------------------------------------------------------------------------

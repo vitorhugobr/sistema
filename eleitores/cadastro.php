@@ -188,7 +188,7 @@ if(isset($_SESSION['msg'])){
 //				}
 				if ((liberado(1006)>0) and ($_SESSION['id']=1)){  
 						echo '<li class="nav-item">
-						<a href="gera_excel.php" title="Exportar Cadastro para Excel" class="btn btn-imprimir btn-sm" role="button">
+						<a href="cadastro_to_excel.php" title="Exportar Cadastro para Excel" class="btn btn-imprimir btn-sm" role="button">
 						<i class="fas fa-copy" aria-hidden="true text-muted" aria-hidden="true"></i> Exportar Cad. Excel
 						</a>
 					</li>';

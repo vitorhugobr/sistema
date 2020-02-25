@@ -4,7 +4,7 @@
 
 $limpeza="";
 
-for ($i = 1; $i <= 7; $i++) {
+for ($i = 1; $i <= 8; $i++) {
 	switch ($i) {
 		case 1:  //Dr Thiago
 			$_SG['servidor'] = "191.252.101.58";
@@ -60,6 +60,13 @@ for ($i = 1; $i <= 7; $i++) {
 			$_SG['senha'] = "lmqY{uxa(WrL";
 			$_SG['banco'] = "sebastia_sigre"; 
 			$_SG['politico'] = "Sebastião Melo";
+			//	senha cpanel: "=1fTUSoRJ}Ru"  usuário: "sebastiaomelopoa"
+			break;
+		case 8:  // Luiz Braz
+			$_SG['servidor'] = "www.vitor.poa.br";
+			$_SG['usuario'] = "vitorpoa_luiz";
+			$_SG['senha'] = "braz@2020";
+			$_SG['banco'] = "vitorpoa_luizbraz"; 
 			//	senha cpanel: "=1fTUSoRJ}Ru"  usuário: "sebastiaomelopoa"
 			break;
 	}

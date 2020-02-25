@@ -3,6 +3,7 @@ include_once("../seguranca.php"); // Inclui o arquivo com o sistema de seguranç
 protegePagina(); // Chama a função que protege a página
 // exportar Excel
 $_SESSION['funcao']="Exportar Excel";
+$_SESSION['id'] = 1;
 $_sql = "SELECT * FROM cadastro_backup";    //retornam valores nestas duas variáveis da função monta_sql()
 $_res = $_con->query($_sql);
 if($_res->num_rows>0){

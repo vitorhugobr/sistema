@@ -104,11 +104,11 @@ for ($i = 1; $i <= 7; $i++) {
 		$mysqli->query($strsql);
 		$tot += $mysqli->affected_rows;
 		if ($mysqli->affected_rows>0) {
-			$limpeza .= "<strong> ".str_pad($mysqli->affected_rows,3)."</strong> região ".$reg."<br>";
+			$limpeza .= "<strong> ".str_pad($mysqli->affected_rows,3)."</strong> registros da região ".$reg."<br>";
 		}	 
 		/* close connection */
 	}
-	$limpeza .= " ".$tot.' registros alterados<br>';
+	$limpeza .= " <i>".$tot.'</i> registros alterados<br>';
 	$mysqli->close();
 }
 require_once("../phpmailer/class.phpmailer.php");
@@ -145,15 +145,20 @@ $mail->AddAddress("vhmoliveira@gmail.com", "Vitor H M Oliveira"); # Os campos po
 /* assunto */
 # Define a mensagem (Texto e Assunto)
 $mail->Subject = "Atualização CDDs SIGRE "; # Assunto da mensagem
+if ($limpeza=="") {
+	$limpeza = "Nenhum registro alterado!";
+}
+
 $mensagem = '<!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Atualização CDDs do Cadastro</title>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<title>Atualização CDDs do Cadastro de Endereços</title>
 </head>
 <body>
 <pre>
-<strong>Início da execução em  '.$horaini.':</strong><br>'.$limpeza.'<br>Final: '.date("d-m-Y H:i:s").'
+<h2>Atualização CDDs do Cadastro</h2>
+<strong>Início da execução em  '.$horaini.':</strong><br>'.$limpeza.'<br>Final: '.date("d-m-Y H:i:s").'<br><br>atualiza_cdd_enderecos.php
 </pre>
 </body>
 </html>';	
