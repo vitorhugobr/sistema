@@ -100,7 +100,7 @@ if(isset($_SESSION['msg'])){
 <div class="col-12">                    <strong>Cidade</strong>: <input name="cidade" type="text" id="cidade" size="30" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();" /> </div>              
 <div class="col-12">                        <strong>UF</strong>: <input name="uf" type="text" id="uf" size="2" maxlength="2" onChange="javascript:this.value=this.value.toUpperCase();" /></div>
 <div class="col-12">  <strong> Região entrega ECT(CDD)</strong>: <input name="reg" type="text" id="reg" size="3" maxlength="3" onChange="javascript:this.value=this.value.toUpperCase();" /></div>
-<div class="col-12          <strong>Última alteração:</strong> <span id="dtcad"></span> <strong>por</strong> <span id="respcad"></span> </div></div>
+<div class="col-12">          <strong>Última alteração:</strong> <span id="dtcad"></span> <strong>por</strong> <span id="respcad"></span> </div>
 
 </form>
 <script type="text/javascript">

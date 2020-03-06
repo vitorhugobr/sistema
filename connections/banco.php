@@ -27,8 +27,8 @@ switch ($_SESSION['id']) {
 	case 3:  // Mauro Pinheiro
 		$_SG['servidor'] = "www.mauropinheiro.net.br";
 		$_SG['banco'] = "mauropin_mauro";
-		$_SG['usuario'] = "mauropinheironet";
-		$_SG['senha'] = "UIT8765%kuyi&*";
+		$_SG['usuario'] = "mauropin_mauro";
+		$_SG['senha'] = "vitor@2020";
 		//	senha cpanel: "UIT8765%kuyi&*"  usuário: "mauropinheironet"
 		break;
 	case 4:  // Domingos Cunha
