@@ -31,8 +31,8 @@
 		case 3:  // Mauro Pinheiro
 			$_SG['servidor'] = "www.mauropinheiro.net.br";
 			$_SG['banco'] = "mauropin_mauro";
-			$_SG['usuario'] = "mauropinheironet";
-			$_SG['senha'] = "UIT8765%kuyi&*";
+			$_SG['usuario'] = "mauropin_mauro";
+			$_SG['senha'] = "vitor@2020";
 			break;
 		case 4:  // Domingos Cunha
 			$_SG['servidor'] = "www.domingoscunha.com.br";
@@ -57,6 +57,13 @@
 			$_SG['usuario'] = "sebastia_melo";
 			$_SG['senha'] = "lmqY{uxa(WrL";
 			$_SG['banco'] = "sebastia_sigre"; 
+			break;
+		case 8:  // Luiz Braz
+			$_SG['servidor'] = "www.vitor.poa.br";
+			$_SG['usuario'] = "vitorpoa_luiz";
+			$_SG['senha'] = "braz@2020";
+			$_SG['banco'] = "vitorpoa_luizbraz"; 
+			//	senha cpanel: "=1fTUSoRJ}Ru"  usuário: "sebastiaomelopoa"
 			break;
 	}
 
