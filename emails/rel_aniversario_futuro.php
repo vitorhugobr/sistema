@@ -154,7 +154,7 @@ if($_res->num_rows>0){
 		}else{
 			$pessoas .= '<font color="#FF0004" style="font-family: Verdana; font-style: italic; font-size: 12px;"><strong>** SEM ENDEREÇO CADASTRADO **</strong></font><br />';			
 		}
-		$pessoas .= '<strong>'.$email.'</strong><br />'.$dtnasc.'<br />'.$foneres.'&nbsp;'.$fonecel.'&nbsp;'.$fonecom.'</td>
+		$pessoas .= '<strong>'.$email.'</strong><br />'.$foneres.'&nbsp;'.$fonecel.'&nbsp;'.$fonecom.'</td>
   </tr>';
 		//$pessoas .= $codigo.' - '.$nome.' -> fone(s)- '.$foneres.' - '.$fonecel.' - '.$fonecel.'<br>';
 	}

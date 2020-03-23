@@ -302,9 +302,9 @@ if ($qtd_emails== 0){
 	echo 'Nenhuma mensagem enviada em '.date("d/m/Y");
 }else{
 	if ($qtd_emails== 1){
-		$mens_qtde = 'Foi enviada 01 mensagem de e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final;
+		$mens_qtde = '<pre>Foi enviada 01 mensagem de e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final.'</pre>';
 	}else{
-		$mens_qtde = 'Foram enviadas '.$qtd_emails.' mensagens de e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final;
+		$mens_qtde = '<pre>Foram enviadas '.$qtd_emails.' mensagens de e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final.'</pre>';
 	}
 	# Inicia a classe PHPMailer
 	$mail = new PHPMailer();

@@ -206,8 +206,6 @@ Endere&ccedil;o<br />
 
 E-mail<br />
 
-Data Nascimento<br>
-
 Fones</font></strong></th>
 
   </tr>
@@ -217,8 +215,6 @@ Fones</font></strong></th>
     <td colspan="5"><hr /></td>
 
   </tr>';
-
-
 
 $cor = 0;
 
@@ -254,7 +250,6 @@ if($_res->num_rows>0){
     <td><strong>'.$nome.'</strong><br />
       '.$ender.'<br />
       <strong>'.$email.'</strong><br />
-      '.$dtnasc.'<br />
       '.$foneres.'&nbsp;&nbsp;'.$fonecel.'&nbsp;&nbsp;'.$fonecom.'</td></tr>';
 	}
 
@@ -308,7 +303,7 @@ if ($qtd_emails== 0){
 	if (!empty($email4)){
 		$mail->AddAddress($email4, $nome4); # Os campos podem ser substituidos por variáveis
 	}
-	$mail->Subject = 'Relação Aniversariantes em ' .$hoje.' - '.$politico; # Assunto da mensagem
+	$mail->Subject = 'Aniversariantes em ' .$hoje.' - '.$politico; # Assunto da mensagem
 	$mail->setFrom('sigre@vitor.poa.br', 'Sistema SIGRE');		
 	$mail->Body    = stripslashes($mens_qtde);
 	$mail->AltBody = stripslashes($mens_qtde);

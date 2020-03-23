@@ -11,30 +11,35 @@
 
 	switch ($id) {
 		case 0:  // Local Testes
+			$_SG['site'] = 'Testes';
 			$_SG['servidor'] = "localhost";
 			$_SG['usuario'] = "root";
 			$_SG['senha'] = "";
 			$_SG['banco'] = "thiago_sigre"; // LOCAL thiago
 			break;		
 		case 1:  //Dr Thiago
+			$_SG['site'] = 'Dr Thiago';
 			$_SG['servidor'] = "191.252.101.58";
 			$_SG['banco'] = "drthiago_sigre";
 			$_SG['usuario'] = "sigre";
 			$_SG['senha'] = "sigre2018";
 			break;
 		case 2:  // Pujol
+			$_SG['site'] = 'Pujol';			
 			$_SG['servidor'] = "www.rpujol.com.br";
 			$_SG['banco'] = "rpujolco_pujol";
 			$_SG['usuario'] = "rpujolco_pujol";
 			$_SG['senha'] = "vhm@2019";
 			break;
 		case 3:  // Mauro Pinheiro
+			$_SG['site'] = 'Mauro Pinheiro';
 			$_SG['servidor'] = "www.mauropinheiro.net.br";
 			$_SG['banco'] = "mauropin_mauro";
 			$_SG['usuario'] = "mauropin_mauro";
 			$_SG['senha'] = "vitor@2020";
 			break;
 		case 4:  // Domingos Cunha
+			$_SG['site'] = 'Domingos Cunha';
 			$_SG['servidor'] = "www.domingoscunha.com.br";
 			$_SG['banco'] = "domingos_domingos";
 			$_SG['usuario'] = "domingos_domingo";
@@ -47,18 +52,21 @@
 			$_SG['senha'] = "tessaro@2019";
 			break;
 		case 6:  // Democratas Porto Alegre
+			$_SG['site'] = 'Democratas';
 			$_SG['servidor'] = "www.rpujol.com.br";
 			$_SG['banco'] = "rpujolco_dem";
 			$_SG['usuario'] = "rpujolco_dem";
 			$_SG['senha'] = "democrataspoa@2019";
 			break;
 		case 7:  // Sebastião Melo
+			$_SG['site'] = 'Sebastião Melo';
 			$_SG['servidor'] = "www.sebastiaomelo.poa.br";
 			$_SG['usuario'] = "sebastia_melo";
 			$_SG['senha'] = "lmqY{uxa(WrL";
 			$_SG['banco'] = "sebastia_sigre"; 
 			break;
 		case 8:  // Luiz Braz
+			$_SG['site'] = 'Luiz Braz';
 			$_SG['servidor'] = "www.vitor.poa.br";
 			$_SG['usuario'] = "vitorpoa_luiz";
 			$_SG['senha'] = "braz@2020";
@@ -115,7 +123,7 @@
 			<span class="sigla_sistema">SIGRE </div>
 		<div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2"" align="right"><span class="badge badge-info">Vitor</span></div>
 	  </div>		
-	  <h5 align="center">Operações dos Usuários</h5>';
+	  <h5 align="center">Operações dos Usuários '.$_SG["site"].'</h5>';
 		echo '<table id="listar-usuario" class="table table-striped" style="width:100%">
 			<thead class="thead-light">
 				<tr>

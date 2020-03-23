@@ -345,9 +345,9 @@ if ($qtd_emails== 0){
 	echo 'Nenhuma e-mail enviado em '.date("d/m/Y");
 }else{
 	if ($qtd_emails== 1){
-		$mens_qtde = 'Foi enviado 01 e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final;
+		$mens_qtde = '<pre>Foi enviado 01 e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final;
 	}else{
-		$mens_qtde = 'Foram enviados '.$qtd_emails.' e-mails de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final;
+		$mens_qtde = 'Foram enviados '.$qtd_emails.' e-mails de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final.'</pre>';
 	}
 	# Inicia a classe PHPMailer
 	$mail = new PHPMailer();
@@ -378,7 +378,7 @@ if ($qtd_emails== 0){
 	$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
 	$mail->addAddress("vhmoliveira@gmail.com","Vitor H M Oliveira");
 	$mail->AddAddress($email_pol, $politico); # Os campos podem ser substituidos por variáveis
-	$mail->Subject = "E-mails enviados aniversários- ".$politico; # Assunto da mensagem
+	$mail->Subject = "Aniversários - ".$politico; # Assunto da mensagem
 	$mail->setFrom('sigre@vitor.poa.br', 'Sistema Sigre');
 	$mail->Body    = stripslashes($mens_qtde);
 	$mail->AltBody = stripslashes($mens_qtde);
