@@ -198,7 +198,7 @@ $pessoas='<table width="100%" border="0" cellspacing="0" cellpadding="0">
 
   <tr valign="top">
 
-    <th width="7%" align="right" scope="col"><font face="Verdana, Geneva, sans-serif" size="2" color="#990000"><strong>C&oacute;digo</strong></font></th>
+    <th width="7%" align="right" scope="col"><font face="Verdana, Geneva, sans-serif" size="2" color="#990000"><strong>C&oacute;digo&nbsp;</strong></font></th>
 
     <th width="93%" align="left" scope="col"><strong><font face="Verdana, Geneva, sans-serif" size="2" color="#990000">Nome<br />
 
@@ -246,7 +246,7 @@ if($_res->num_rows>0){
 			$ender = $_row["tipolog"].' '.$_row["rua"].', '.$_row["numero"].' '.$_row["complemento"].' - '.$_row["bairro"].' - '.$_row["cidade"].' - '.substr($_row["cep"],0,5).'-'.substr($_row["cep"],5,3);
 		}
 		$pessoas .= '<tr align="left" valign="top">
-    <td width="7%" align="right"><strong>'.$codigo.'</strong></td>
+    <td width="7%" align="right"><strong>'.$codigo.'&nbsp;</strong></td>
     <td width="93%"><strong>'.$nome.'</strong><br />
       '.$ender.'<br />
       '.$email.'<br />
@@ -293,16 +293,16 @@ if ($qtd_emails== 0){
 	$mail->FromName = 'Sistema SIGRE'; // nome remetente
 	$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
 	$mail->AddAddress("vhmoliveira@gmail.com", "Vitor H M Oliveira"); # Os campos podem ser substituidos por variáveis
-//	$mail->AddAddress($email_pol, $politico); # Os campos podem ser substituidos por variáveis
-//	if (!empty($email2)){
-//		$mail->AddAddress($email2, $nome2); # Os campos podem ser substituidos por variáveis
-//	}
-//	if (!empty($email3)){
-//		$mail->AddAddress($email3, $nome3); # Os campos podem ser substituidos por variáveis
-//	}
-//	if (!empty($email4)){
-//		$mail->AddAddress($email4, $nome4); # Os campos podem ser substituidos por variáveis
-//	}
+	$mail->AddAddress($email_pol, $politico); # Os campos podem ser substituidos por variáveis
+	if (!empty($email2)){
+		$mail->AddAddress($email2, $nome2); # Os campos podem ser substituidos por variáveis
+	}
+	if (!empty($email3)){
+		$mail->AddAddress($email3, $nome3); # Os campos podem ser substituidos por variáveis
+	}
+	if (!empty($email4)){
+		$mail->AddAddress($email4, $nome4); # Os campos podem ser substituidos por variáveis
+	}
 	$mail->Subject = 'Aniversariantes em ' .$hoje.' - '.$politico; # Assunto da mensagem
 	$mail->setFrom('sigre@vitor.poa.br', 'Sistema SIGRE');		
 	$mail->Body    = stripslashes($mens_qtde);
