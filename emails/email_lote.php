@@ -61,7 +61,7 @@ if($_res->num_rows==0) {
 
 	$_sql = 'SELECT * FROM cadastro_email limit '.$ultimo_registro.', 30';
 	// INIBIR LINHA ABAIXO QDO EM PRODUÇÃO
-	$_sql = 'SELECT * FROM cadastro_email WHERE codigo=41293';
+	//$_sql = 'SELECT * FROM cadastro_email WHERE codigo=41293';
 
 	$_res = $_con->query($_sql);
 	$qtd_emails= 0;
