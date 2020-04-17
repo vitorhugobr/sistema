@@ -1,175 +1,48 @@
 <?php 
 
-session_start();
-
 include_once("../utilitarios/funcoes.php");
 
-$_SG['servidor'] = "www.vitor.poa.br";
+$id = 1; // usuario =A(100,80);
+$versao= '202004061009';
 
-$_SG['banco'] = "vitorpoa_teste";
+$id_pol= 1;
+$politico= 'Dep. Dr Thiago Duarte';
+$email_pol= 'dr.thiago@al.rs.gov.br';
 
-$_SG['usuario'] = "vitorpoa_user";
+echo 'iniciando... '.$id_pol.'<br>';
 
-$_SG['senha'] = "vhmo@2017";
+// conectar ao banco do usuário
+
+// conectar ao banco do usuário
+$_SG['servidor'] = "191.252.101.58";
+$_SG['banco'] = "drthiago_sigre";
+$_SG['usuario'] = "sigre";
+$_SG['senha'] = "sigre2018";
 
 $_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
 
 if(!$_con) {  
-
 	echo "Não foi possivel conectar ao MySQL. Erro " .
-
 			mysqli_connect_errno() . " : " . mysql_connect_error();
-
 	exit;
-
 }
 
 mysqli_set_charset($_con,"utf8");
-
 mysqli_query($_con, "SET NAMES 'utf8'");
-
 mysqli_query($_con, 'SET character_set_connection=utf8');
-
 mysqli_query($_con, 'SET character_set_client=utf8');
-
 mysqli_query($_con, 'SET character_set_results=utf8');
-
-$arqconfig = "../".md5("mapa").".txt";
-if (!file_exists($arqconfig)) {
-	echo 'IMPOSSÍVEL ACESSAR O SISTEMA.<br>Arquivo de configuração excluído ou danificado! ';
-	die;
-} 	
-
-$linhas = explode("\n", file_get_contents($arqconfig));
-$id = 1; // usuario =A(100,80);
-$versao= $linhas[1];
-$_SESSION['id'] = $id;
-
-$_sql = "SELECT * from config where id = ".$id;
-
-$_res = $_con->query($_sql);
-
-if($_res->num_rows==0) {
-
-	echo "ERRO";
-
-} else {
-
-	$_row = $_res->fetch_assoc();	
-
-	$indice = 1;
-
-	foreach ($_row as $campo => $valor) {
-
-		$_valor    = $valor;
-
-		$_campo    = $campo;
-
-		switch($indice) {
-			case 1:
-				$id_pol= $_valor;
-				break;
-			case 2:
-				$politico= $_valor;
-				break;
-			case 3:	
-				$end_pol= $_valor;
-				break;
-			case 4:
-				$email_pol= $_valor;
-				break;
-			case 5:
-				$cidade_pol= $_valor;
-				break;
-			case 6:
-				$estado_pol= $_valor;
-				break;
-			case 7:
-				$cep_pol= $_valor;
-				break;
-			case 8:
-				$url_pol= $_valor;
-				break;
-			case 9:
-				$endfoto= $_valor;
-				break;
-			case 10:
-				$ativo= $_valor;
-				break;
-			case 11:
-				$host_pol= $_valor;
-				break;
-			case 12:
-				$email_retorno = $_valor;
-				break;
-			case 13:
-				$login = $_valor;
-				break;
-			case 14:
-				$password = $_valor;
-				break;
-			case 15:
-				$fones = $_valor;
-				break;
-			case 16:
-				$versao = $_valor;
-				break;
-			case 17:
-				$partido = $_valor;
-				break;
-			case 18:
-				$email2 = $_valor;
-				break;
-			case 19:
-				$nome2 = $_valor;
-				break;
-			case 20:
-				$email3 = $_valor;
-				break;
-			case 21:
-				$nome3 = $_valor;
-				break;
-			case 22:
-				$email4 = $_valor;
-				break;
-			case 23:
-				$nome4 = $_valor;
-				break;
-			default:			
-
-		}
-
-		$indice++;
-
-	}
-
-}
-
-echo 'id '.$id_pol.'<br>';
-echo 'politico '.$politico.'<br>';
-echo 'end_pol '.$end_pol.'<br>';
-echo 'email_pol '.$email_pol.'<br>';
-
-// conectar ao banco do usuário
-
-include_once('../connections/banco.php');
 
 //$datatoday  = date('d/m/Y', strtotime("+1 days"));	AUMENTA X DIAS NA DATA DE HOJE
 
 $hoje  = date('d/m/Y');	
-
 $datatoday = getdate();
-
 $dia = $datatoday["mday"];
-
 $mes = $datatoday["mon"];
-
 $ano = $datatoday["year"];
-
 //	echo $hoje;
 
 $_sql='SELECT * from aniversarios where MES = '.$mes.' AND DIA = '.$dia.' ORDER BY NOME';
-
 $_res = $_con->query($_sql);
 
 $qtd_emails= 0;
@@ -189,31 +62,18 @@ $iniciohtml = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "h
 <body>';
 
 $pessoas='<table width="100%" border="0" cellspacing="0" cellpadding="0">
-
   <caption><strong><font face="Verdana, Geneva, sans-serif" color="#000066" size="3"> 
-
     Aniversariantes do Dia</font></strong>
-
   </caption>
-
   <tr valign="top">
-
     <th width="7%" align="right" scope="col"><font face="Verdana, Geneva, sans-serif" size="2" color="#990000"><strong>C&oacute;digo&nbsp;</strong></font></th>
-
     <th width="93%" align="left" scope="col"><strong><font face="Verdana, Geneva, sans-serif" size="2" color="#990000">Nome<br />
-
 Endere&ccedil;o<br />
-
 E-mail<br />
-
 Fones</font></strong></th>
-
   </tr>
-
   <tr>
-
     <td colspan="2"><hr /></td>
-
   </tr>';
 
 $cor = 0;
@@ -265,7 +125,7 @@ if ($qtd_emails== 0){
 	if ($qtd_emails== 1){
 		$mens_qtde = $iniciohtml.'01 aniversariante em '.$hoje.' conforme abaixo:<br><br>'.$pessoas.$final.'</body></html>';
 	}else{
-		$mens_qtde = $iniciohtml.'Existem '.$qtd_emails.' aniversariantes em '.$hoje.' conforme abaixo:<br><br>'.$pessoas.$final.'</body></html>';
+		$mens_qtde = $iniciohtml.$qtd_emails.' aniversariantes em '.$hoje.' conforme abaixo:<br><br>'.$pessoas.$final.'</body></html>';
 	}
 	require_once("../phpmailer/class.phpmailer.php");
 	require_once("../phpmailer/class.smtp.php");
@@ -294,15 +154,6 @@ if ($qtd_emails== 0){
 	$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
 	$mail->AddAddress("vhmoliveira@gmail.com", "Vitor H M Oliveira"); # Os campos podem ser substituidos por variáveis
 	$mail->AddAddress($email_pol, $politico); # Os campos podem ser substituidos por variáveis
-	if (!empty($email2)){
-		$mail->AddAddress($email2, $nome2); # Os campos podem ser substituidos por variáveis
-	}
-	if (!empty($email3)){
-		$mail->AddAddress($email3, $nome3); # Os campos podem ser substituidos por variáveis
-	}
-	if (!empty($email4)){
-		$mail->AddAddress($email4, $nome4); # Os campos podem ser substituidos por variáveis
-	}
 	$mail->Subject = 'Aniversariantes em ' .$hoje.' - '.$politico; # Assunto da mensagem
 	$mail->setFrom('sigre@vitor.poa.br', 'Sistema SIGRE');		
 	$mail->Body    = stripslashes($mens_qtde);

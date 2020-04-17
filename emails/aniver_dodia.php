@@ -174,9 +174,9 @@ if($_res->num_rows>0){
 				<table id="Table_01" width="900" height="591" border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_01.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_01.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_02.jpg" width="128" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_02.jpg" width="129" height="85" alt=""></td>
 						<td colspan="5" background="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_03.jpg"><font face="Tahoma, Geneva, sans-serif" size="+2" color="#003366" style="marquee-speed:normal"><strong>Amig'.$genero.' '.$primnome.'</strong></font>
 							</td>
 					</tr>
@@ -184,97 +184,97 @@ if($_res->num_rows>0){
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_04.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_05.jpg" width="128" height="85" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_05.jpg" width="129" height="85" alt=""></td>
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_06.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_07.jpg" width="128" height="85" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_07.jpg" width="129" height="85" alt=""></td>
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_08.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_09.jpg" width="128" height="85" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_09.jpg" width="129" height="85" alt=""></td>
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_10.jpg" width="129" height="85" alt=""></td>
 					</tr>
 					<tr>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_11.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_11.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_12.jpg" width="128" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_12.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_13.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_13.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_14.jpg" width="128" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_14.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_15.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_15.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_16.jpg" width="128" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_16.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_17.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_17.jpg" width="129" height="85" alt=""></td>
 					</tr>
 					<tr>
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_18.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_19.jpg" width="128" height="85" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_19.jpg" width="129" height="85" alt=""></td>
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_20.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_21.jpg" width="128" height="85" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_21.jpg" width="129" height="85" alt=""></td>
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_22.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_23.jpg" width="128" height="85" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_23.jpg" width="129" height="85" alt=""></td>
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_24.jpg" width="129" height="85" alt=""></td>
 					</tr>
 					<tr>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_25.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_25.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_26.jpg" width="128" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_26.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_27.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_27.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_28.jpg" width="128" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_28.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_29.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_29.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_30.jpg" width="128" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_30.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_31.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_31.jpg" width="129" height="85" alt=""></td>
 					</tr>
 					<tr>
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_32.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_33.jpg" width="128" height="85" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_33.jpg" width="129" height="85" alt=""></td>
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_34.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_35.jpg" width="128" height="85" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_35.jpg" width="129" height="85" alt=""></td>
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_36.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_37.jpg" width="128" height="85" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_37.jpg" width="129" height="85" alt=""></td>
 						<td>
 							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_38.jpg" width="129" height="85" alt=""></td>
 					</tr>
 					<tr>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_39.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_39.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_40.jpg" width="128" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_40.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_41.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_41.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_42.jpg" width="128" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_42.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_43.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_43.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_44.jpg" width="128" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_44.jpg" width="129" height="85" alt=""></td>
 						<td>
-							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_45.jpg" width="129" height="84" alt=""></td>
+							<img style="display:block" border="0" src="'.$url_pol.'emails/imagens/'.$id.'/aniver2017_45.jpg" width="129" height="85" alt=""></td>
 					</tr>
 				</table>
 				<!-- End Save for Web Slices -->
@@ -295,8 +295,11 @@ if($_res->num_rows>0){
 		
 		$mail->Body    = stripslashes($mensagem);
 		$mail->AltBody = stripslashes($mensagem);
+		$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
+		
 		#echo stripslashes($mensagem);
 		#echo "<br>";
+		#$enviado =false;
 		$enviado = $mail->Send();
 		
 		$pessoas .= str_pad($codigo,7)." - ".$nome.' - '.$email.'<br>';

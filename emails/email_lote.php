@@ -59,9 +59,9 @@ if($_res->num_rows==0) {
 	echo 'Lote aberto: '.$lote_aberto.'<br>';
 	echo 'registros ...'.$_res->num_rows.'<br>';
 
-	$_sql = 'SELECT * FROM cadastro_email limit '.$ultimo_registro.', 30';
+	//$_sql = 'SELECT * FROM cadastro_email limit '.$ultimo_registro.', 30';
 	// INIBIR LINHA ABAIXO QDO EM PRODUÇÃO
-	//$_sql = 'SELECT * FROM cadastro_email WHERE codigo=41293';
+	$_sql = 'SELECT * FROM cadastro_email WHERE codigo=41293';
 
 	$_res = $_con->query($_sql);
 	$qtd_emails= 0;
