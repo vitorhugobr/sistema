@@ -159,7 +159,7 @@ if($_res->num_rows>0){
 		}
 		# Define os destinatário(s)
 		$mail->AddAddress($email, $nome); # Os campos podem ser substituidos por variáveis
-		#$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
+		$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
 		/* assunto */
 		# Define a mensagem (Texto e Assunto)
 		$mail->Subject = "Feliz Aniversário ".$primnome; # Assunto da mensagem
@@ -295,7 +295,6 @@ if($_res->num_rows>0){
 		
 		$mail->Body    = stripslashes($mensagem);
 		$mail->AltBody = stripslashes($mensagem);
-		$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
 		
 		#echo stripslashes($mensagem);
 		#echo "<br>";
