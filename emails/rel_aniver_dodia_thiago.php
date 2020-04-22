@@ -152,7 +152,7 @@ if ($qtd_emails== 0){
 	$mail->From = 'sigre@vitor.poa.br'; # e-mail remetente
 	$mail->FromName = 'Sistema SIGRE'; // nome remetente
 	$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
-	$mail->AddAddress("vhmoliveira@gmail.com", "Vitor H M Oliveira"); # Os campos podem ser substituidos por variáveis
+	$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
 	$mail->AddAddress($email_pol, $politico); # Os campos podem ser substituidos por variáveis
 	$mail->Subject = 'Aniversariantes em ' .$hoje.' - '.$politico; # Assunto da mensagem
 	$mail->setFrom('sigre@vitor.poa.br', 'Sistema SIGRE');		

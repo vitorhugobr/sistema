@@ -276,7 +276,7 @@ if ($tot_pessoas_select== 0){
 		$mail->FromName = 'Sistema Sigre'; // Seu nome
 		# Define os dados técnicos da Mensagem
 		$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
-		$mail->addAddress("vhmoliveira@gmail.com","Vitor H M Oliveira");
+		$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
 		$mail->AddAddress($email_pol, $politico); # Os campos  podem ser substituidos por variáveis
 		$mail->Subject = "E-mails para Aniversariantes - Dr Thiago"; # Assunto da mensagem
 		$mail->setFrom('sigre@vitor.poa.br', 'Sistema Sigre');
