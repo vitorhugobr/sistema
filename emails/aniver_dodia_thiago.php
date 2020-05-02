@@ -38,7 +38,7 @@ require_once("../phpmailer/class.phpmailer.php");
 require_once("../phpmailer/class.smtp.php");
 
 $_sql = 'SELECT * from emails_aniver where MONTH(aniver)= '.$mes.' AND DAYOFMONTH(aniver) = '.$dia;
-#$_sql = 'SELECT * FROM emails_aniver WHERE codigo=23731'; // este é o código que deu errado no enviar
+#$_sql = 'SELECT * FROM emails_aniver WHERE codigo=6955'; // este é o código que deu errado no enviar
 #$_sql = 'SELECT * FROM emails_aniver WHERE codigo=41293';  //Este é meu código no cadastro
 $_res = $_con->query($_sql);
 $qtd_emails= 0;
@@ -196,6 +196,7 @@ if($_res->num_rows>0){
 			$mail->AltBody = stripslashes($mensagem);
 			#echo stripslashes($mensagem);
 			#echo "<br>";
+		#   ENVIO DA MENSAGEM  #
 			$mail->Send();
 			$qtd_emails= $qtd_emails + 1;
 		    $pessoas .= str_pad($codigo,7)." - ".$nome.' - '.$email.' - SUCESSO!<br>';
@@ -228,10 +229,10 @@ if($_res->num_rows>0){
 			$resposta = $_con->query($strsql5);			
 		} catch (phpmailerException $e) {
 		  echo $e->errorMessage(); //Pretty error messages from PHPMailer
-		  $pessoas .= '<b>'.str_pad($codigo,7).' - '.$nome.' - '.$email.' - ERRO! <br><i>   Informações do erro: ' . $e->errorMessage();'</i></b><br>';
+		  $pessoas .= '<strong>'.str_pad($codigo,7).' - '.$nome.' - ERRO! <br><i>   Informações do erro: ' . $e->errorMessage();'</i></strong><br>';
 		} catch (Exception $e) {
 		  echo $e->getMessage(); //Boring error messages from anything else!
-		  $pessoas .= '<b>'.str_pad($codigo,7).' - '.$nome.' - '.$email.' - ERRO! <br><i>   Informações do erro: ' . $e->getMessage();'</i></b><br>';
+		  $pessoas .= '<strong>'.str_pad($codigo,7).' - '.$nome.' - '.$email.' - ERRO! <br><i>   Informações do erro: ' . $e->getMessage();'</i></strong><br>';
 		}
 	}
 }

@@ -177,9 +177,9 @@ if ($qtd_emails> 0){
 
 	/* headers adicionais */
 	
-	$to = "Vitor H M Oliveira <vhmoliveira@gmail.com>";
+	#$to = "Vitor H M Oliveira <vhmoliveira@gmail.com>";
 
-	$headers .= "From: ".$politico." <".$email_pol.">\r\n";
+	$headers .= "From: Sistema SIGRE<sigre@vitor.poa.br>";
 	$headers .= "To: Jorge Fraga<adm.jorgefraga@gmail.com>";
 
 //	echo $pessoas;
