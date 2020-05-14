@@ -81,7 +81,7 @@ case 1:{
 	$numpag = 0;
 	$numlin=99;
 	list ($_sql, $parametros) = monta_sql();    //retornam valores nestas duas variáveis da função monta_sql()
-	//$_sql = monta_sql();	
+	//$_sql = "SELECT * FROM relatorios_view WHERE ((cidade = 'VIAMÃO' and rua > '') and (grupo = 140 or grupo = 131 )) order by rua, reg";	
 	#echo $_sql;
 
 	if ($_sql==""){
@@ -193,6 +193,8 @@ case 1:{
 			$pdf->Cell(0, 0, "Total de registros listados = ".str_pad($registros,20),0, 0);
 			$pdf->ln(3);
 			$pdf->MultiCell(0,3, utf8_decode("Parâmetros : ".$parametros),0,'L',0);
+			//$pdf->ln(3);
+			//$pdf->MultiCell(0,3, utf8_decode("SQL : ".$_sql),0,'L',0);
 			$pdf->Output("D","gerencial.pdf");	
 			ob_end_flush();
 			$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Relatório Gerencial criado <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			

@@ -1,7 +1,7 @@
 /// JavaScript Document
 "use strict";
 function AlteraEnd(id){
-	"use stricts";
+
 	//alert(comando);
 	var comando = 'enderecos.php?otipo=A&id='+id;
 	//alert("OK novo endereço para "+parametros);
@@ -19,7 +19,7 @@ function AtualizaEleitor(y_funcao) {
 	CadArray[0]  = document.form1.txtcodigo.value;
 	CadArray[1]  = document.form1.txtnome.value;
 	CadArray[2]  = document.form1.txtsexo.value;
-	if (y_funcao=="A"){
+	if (y_funcao==="A"){
 		CadArray[3]  = document.getElementById('lbldtcad').innerHTML;  // data cadastramento
 	}else{
 		  CadArray[3]  =  "";
@@ -171,18 +171,8 @@ function exclui_visita(id) {
 
 }
 
-//----------------------------------------------------------------------------------
-function getDados(objForm){
-	var params = new Array();
-	for (var i=0; i<objForm.elements.length;i++){
-		var parametro = encodeURIComponent(objForm.elements[i].name);
-		parametro += "=";
-		parametro += encodeURIComponent(objForm.elements[i].value);
-		params.push(parametro)
-	}
-	return params.join("&");
-}
-//---------------------------------------------------------------------------------------------------------
+
+//--------------------------------------------------------------------------------------------------------
 function grava_prontuario(){
 //	var id = document.form1.id_prontuario.value;falta
 //	var diagnos = CKEDITOR.instances.diagnostic.getData();
@@ -238,21 +228,7 @@ function imprime_receituario(id) {
 	//alert(remedios);
 	open(parametro,null,'top=100,left=100,status=no,titlebar=no,toolbar=no,scrollbars=yes,menubar=no,location=no');
 }
-//-----------------------------------------------------------------------------------------------------------------
 
-function imprimir(formulario){
-	AjaxRequest();
-	if(!Ajax) {
-		alert('Não foi possível iniciar o AJAX');
-	return;
-	}
-	var $dados = getDados(formulario);
-	Ajax.onreadystatechange = printcadastro(document.form1.txtcodigo.value);						
-	Ajax.open('POST', 'eleitor_fpdf.php', true);
-	Ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-	Ajax.send($dados);				
-	return false;
-}
 
 //-----------------------------------------------------------------------------------------------------------------
 
@@ -424,7 +400,7 @@ function atual_ender() {
 	var tipo;
 	//alert(' Atualiza endereço');
 		//return;
-	if(document.form1.numero.value=="0" || document.form1.numero.value=="") {
+/*	if(document.form1.numero.value=="0" || document.form1.numero.value=="") {
 		alert('Obrigatório informar o Número');
 		document.form1.numero.select();
 		return false;
@@ -433,7 +409,7 @@ function atual_ender() {
 		alert('Obrigatório informar o Número');
 		document.form1.numero.select();
 		return false;
-	}
+	}*/
 
 	var CadArray = new Array(13);
 	if (document.form1.id_endereco.value ==''){

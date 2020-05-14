@@ -25,8 +25,8 @@ for ($i = 1; $i <= 8; $i++) {
 		case 3:  // Mauro Pinheiro
 			$_SG['servidor'] = "www.mauropinheiro.net.br";
 			$_SG['banco'] = "mauropin_mauro";
-			$_SG['usuario'] = "mauropinheironet";
-			$_SG['senha'] = "UIT8765%kuyi&*";
+			$_SG['usuario'] = "mauropin_mauro";
+			$_SG['senha'] = "vitor@2020";
 			$_SG['politico'] = "Mauro Pinheiro";
 			//	senha cpanel: "UIT8765%kuyi&*"  usuário: "mauropinheironet"
 			break;
@@ -67,6 +67,7 @@ for ($i = 1; $i <= 8; $i++) {
 			$_SG['usuario'] = "vitorpoa_luiz";
 			$_SG['senha'] = "braz@2020";
 			$_SG['banco'] = "vitorpoa_luizbraz"; 
+			$_SG['politico'] = "Luiz Braz";			
 			//	senha cpanel: "=1fTUSoRJ}Ru"  usuário: "sebastiaomelopoa"
 			break;
 	}
