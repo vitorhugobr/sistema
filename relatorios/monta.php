@@ -82,7 +82,6 @@ case 1:{
 	$numlin=99;
 	list ($_sql, $parametros) = monta_sql();    //retornam valores nestas duas variáveis da função monta_sql()
 	//$_sql = "SELECT * FROM relatorios_view WHERE ((cidade = 'VIAMÃO' and rua > '') and (grupo = 140 or grupo = 131 )) order by rua, reg";	
-	#echo $_sql;
 
 	if ($_sql==""){
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>NENHUMA OPÇÃO INFORMADA<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
@@ -165,7 +164,15 @@ case 1:{
 				$pdf->Cell(45, 0, ' '.utf8_decode($nomegrupo), 0, 0,'L');
 				$pdf->Cell(45, 0, utf8_decode($nomeorigem), 0, 0,'L');
 				$pdf->ln(3);
-				$pdf->Cell(91, 0, $tipolog.' '.utf8_decode($rua).', '.$numero.' '.utf8_decode($compl), 0, 0);
+				if ($rua <> '') {
+					if ($numero<>""){
+						$pdf->Cell(91, 0, $tipolog.' '.utf8_decode($rua).', '.$numero.' '.utf8_decode($compl), 0, 0);
+					}else{
+						$pdf->Cell(91, 0, $tipolog.' '.utf8_decode($rua).', '.utf8_decode($compl), 0, 0);
+					}
+				}else{
+					$pdf->Cell(91, 0, ' ', 0, 0);
+				}
 				$pdf->Cell(40, 0, utf8_decode($bairro), 0, 0);
 				$pdf->Cell(40, 0, utf8_decode($cidade), 0, 0);
 				$pdf->Cell(7, 0, $uf, 0, 0);
@@ -197,10 +204,10 @@ case 1:{
 			//$pdf->MultiCell(0,3, utf8_decode("SQL : ".$_sql),0,'L',0);
 			$pdf->Output("D","gerencial.pdf");	
 			ob_end_flush();
-			$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Relatório Gerencial criado <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
+			$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Relatório Gerencial criado com ".$_res->num_rows." registros<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
 			echo '<script>self.window.close();</script>';
 		}else{
-			$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>NENHUM REGISTRO SELECIONADO<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+			$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>NENHUM REGISTRO SELECIONADO <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 			echo '<script>self.window.close();</script>';
 		}
 	break;
@@ -1146,10 +1153,12 @@ function monta_sql(){
 	$jatemnumero=false;
 	$jatemcomplemento=false;
 	$jatemrecebemat=false;
+
 	while ($linha < 13) {
 		$varcampo = $_POST["campo".$linha];
 		$varoperador = $_POST["operador".$linha];
-		$varexpressao = $_POST["valorexpressao".$linha];
+		$varexpressao = $_POST["expressao".$linha];
+		
 		if (isset($_POST["expressao".$linha])){
 			$varconteudoexp = $_POST["textoexpressao".$linha];
 		}else{
@@ -1160,6 +1169,7 @@ function monta_sql(){
 		$strconector= "";
 		if ($varcampo <> "") {
 			$qtde_param++;
+			
 			if ($primwhere == 0){
 				$primwhere = 1;
 				$stringWhere ="(";
@@ -1167,7 +1177,7 @@ function monta_sql(){
 			if ($varoperador == "like") {
 				$varexpressao = "%" . $varexpressao . "%";				
 			}
-			if ($varcampo == "nome" || $varcampo=="cidade"|| $varcampo=="rua" || $varcampo=="bairro" || $varcampo=="complemento"){
+			if ($varcampo == "nome" || $varcampo == "cidade" || $varcampo == "rua" || $varcampo == "bairro" || $varcampo == "complemento"){
 				$varexpressao= "'" . $varexpressao . "'";				
 			}
 			$conector = "";
@@ -1185,6 +1195,7 @@ function monta_sql(){
 			}
 			$strwhere[$linha] = $varcampo ." ". $varoperador ." ". $varexpressao. " ". $strconector;
 			$stringWhere .= $strwhere[$linha];
+			//echo $stringWhere.'<br>';
 			if ($varclassifica <> "") {
 				$compoesort=false;
 				switch ($varcampo) {
@@ -1286,7 +1297,7 @@ function monta_sql(){
 			} 
 	// -------- variáveis abaixo montadas para imprimir os parâmetros da consulta -------------------
 			if ($varclassifica=="S"){
-				$classificado = "**CLASSIFICADO**";
+				$classificado = " **CLASSIFICADO** ";
 			}else{
 				$classificado = "";
 			}		
@@ -1331,7 +1342,7 @@ function monta_sql(){
 
 		$sql .= $stringWhere .' '. $strorderby;
 
-		#echo $sql."<br>".$parametros;
+		//echo $sql."<br>".$parametros;
 		#debug();
 		return array ($sql,$parametros);
 	} else {

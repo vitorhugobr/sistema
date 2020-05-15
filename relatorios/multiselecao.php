@@ -57,7 +57,7 @@ if ($opcao==8){
 <script type="text/javascript" src="../js/autocomplete.js"></script>
 <script src="../js/ie10-viewport-bug-workaround.js"></script>
 </head>
-<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" role="document"  onFocus="javascript:location.reload();">
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" role="document" onFocus="javascript:location.reload();">
 
 <?php include_once("../utilitarios/cabecalho.php");?>
 	<?php
