@@ -88,8 +88,11 @@ if ($imagem)
 $tarefas_aberto=0;
 if ($_SESSION['usuarioNivel']<9){
 	$sqlt = "select * from tarefas_qtde where usuario = '".$_SESSION['usuarioUser']."' and status = 0";
-	$rest = $_con->query($sqlt);
-	$tarefas_aberto = $rest->num_rows;
+	if ($rest = $_con->query($sqlt)) {
+		$tarefas_aberto = $rest->num_rows;
+	}else{
+		$tarefas_aberto = 0;
+	}
 }
 
 //verifica se existe encaminhamentos em aberto

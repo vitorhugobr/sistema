@@ -8,7 +8,7 @@ switch ($_SESSION['id']) {
 		$_SG['servidor'] = "localhost";
 		$_SG['usuario'] = "root";
 		$_SG['senha'] = "";
-		$_SG['banco'] = "thiago_sigre"; // LOCAL thiago
+		$_SG['banco'] = "sigre_local"; // LOCAL thiago
 		break;		
 	case 1:  //Dr Thiago
 		$_SG['servidor'] = "191.252.101.58";
