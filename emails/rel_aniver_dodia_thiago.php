@@ -1,5 +1,5 @@
 <?php 
-
+// TAREFA CRON NO SITE VITOR.POA
 include_once("../utilitarios/funcoes.php");
 
 $id = 1; // usuario =A(100,80);

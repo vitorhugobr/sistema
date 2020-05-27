@@ -1,5 +1,6 @@
 <?php
-# formato da imagem a enviar: (9 colunas por 5 linhas no photoshop) CRON NO SITE PUJOL
+# comando https://www.rpujol.com.br/sigre/emails/aniver_dodia_pujol_informado.php?codigo= 
+$codigo = $_GET['codigo'];
 
 include_once("../utilitarios/funcoes.php");
 
@@ -38,8 +39,7 @@ $mes = $datatoday["mon"];
 require_once("../phpmailer/class.phpmailer.php");
 require_once("../phpmailer/class.smtp.php");
 
-$_sql = 'SELECT * from emails_aniver where MONTH(aniver)= '.$mes.' AND DAYOFMONTH(aniver) = '.$dia;
-#$_sql = 'SELECT * FROM emails_aniver WHERE codigo=41293';
+$_sql = 'SELECT * from emails_aniver where codigo ='.$codigo;
 $_res = $_con->query($_sql);
 $qtd_emails= 0;
 $pessoas="";
@@ -217,7 +217,7 @@ if($_res->num_rows>0){
 			$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
 			# Define os destinatário(s)
 			$mail->AddAddress($email, $nome); # Os campos podem ser substituidos por variáveis
-			#$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
+			$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
 			/* assunto */
 			# Define a mensagem (Texto e Assunto)
 			$mail->Subject = "Parabéns ".$primnome; # Assunto da mensagem
@@ -226,8 +226,8 @@ if($_res->num_rows>0){
 			$mail->AltBody = stripslashes($mensagem);
 			#echo stripslashes($mensagem);
 			#echo "<br>";
-			$mail->Send();
 			$qtd_emails= $qtd_emails + 1;
+			$mail->Send();
 		    $pessoas .= str_pad($codigo,7)." - ".$nome.' - '.$email.' - SUCESSO!<br>';
 			#echo "E-mail enviado com sucesso para ".$nome."<br>";
 			$data = date("d/m/Y");
@@ -269,7 +269,7 @@ if($_res->num_rows>0){
 $final = '<br><br><font color="#FF0004" style="font-family: Verdana; font-style: italic; font-size: 9px;">Este é um e-mail automático disparado pelo sistema. Favor não respondê-lo, pois esta conta não é monitorada. </font>';
 
 if ($tot_pessoas_select== 0){
-	echo 'Nenhuma mensagem enviada em '.date("d/m/Y");
+	echo 'Nenhuma mensagem enviada em '.date("d/m/Y").'<br>'.$pessoas;
 }else{
 	if ($tot_pessoas_select== 1){
 		if ($tot_pessoas_select == $qtd_emails){
@@ -305,7 +305,7 @@ if ($tot_pessoas_select== 0){
 	$mail->FromName = 'Sistema Sigre'; // Seu nome
 	# Define os dados técnicos da Mensagem
 	$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
-	#$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
+	$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
 	$mail->addAddress("adm.jorgefraga@gmail.com","Jorge Fraga");	
 	$mail->AddAddress($email_pol, $politico); # Os campos  podem ser substituidos por variáveis
 	$mail->Subject = "E-mails para Aniversariantes - Pujol"; # Assunto da mensagem

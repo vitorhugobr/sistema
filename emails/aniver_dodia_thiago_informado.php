@@ -1,6 +1,6 @@
 <?php
-# formato da imagem a enviar: (9 colunas por 5 linhas no photoshop) -- TAREFA CRON NO SITE VITOR.POA
-
+# comando https://www.vitor.poa.br/sigre/emails/aniver_dodia_pujol_informado.php?codigo = 
+$codigo = $_GET['codigo'];
 include_once("../utilitarios/funcoes.php");
 
 $id = 1; // usuario =A(100,80);
@@ -37,13 +37,11 @@ $mes = $datatoday["mon"];
 require_once("../phpmailer/class.phpmailer.php");
 require_once("../phpmailer/class.smtp.php");
 
-$_sql = 'SELECT * from emails_aniver where MONTH(aniver)= '.$mes.' AND DAYOFMONTH(aniver) = '.$dia;
-#$_sql = 'SELECT * FROM emails_aniver WHERE codigo=6955'; // este é o código que deu errado no enviar
-#$_sql = 'SELECT * FROM emails_aniver WHERE codigo=41293';  //Este é meu código no cadastro
+$_sql = 'SELECT * from emails_aniver where MONTH(aniver)= '.$mes.' AND DAYOFMONTH(aniver) = '.$dia.' AND codigo='.$codigo;
+echo $_sql.'<br'>
 $_res = $_con->query($_sql);
 $qtd_emails= 0;
 $pessoas="";
-$emailserrados = '';
 $tot_pessoas_select = 0;
 if($_res->num_rows>0){
 	$tot_pessoas_select = $_res->num_rows;
@@ -197,10 +195,9 @@ if($_res->num_rows>0){
 			$mail->AltBody = stripslashes($mensagem);
 			#echo stripslashes($mensagem);
 			#echo "<br>";
-		#   ENVIO DA MENSAGEM  #
- 			$mail->Send();
+			$mail->Send();
 			$qtd_emails= $qtd_emails + 1;
-			$pessoas .= str_pad($codigo,7)." - ".$nome.' - '.$email.' - SUCESSO!<br>';
+		    $pessoas .= str_pad($codigo,7)." - ".$nome.' - '.$email.' - SUCESSO!<br>';
 			#echo "E-mail enviado com sucesso para ".$nome."<br>";
 			$data = date("d/m/Y");
 			$assunto = "ENVIADO E-MAIL DE ANIVERSARIO PELO SISTEMA";
@@ -227,14 +224,14 @@ if($_res->num_rows>0){
 			$strsql5 .= ") VALUES (";
 			$strsql5 .= implode(",", array_values($fieldList));
 			$strsql5 .= ")";
-			$resposta = $_con->query($strsql5);				
- 		} catch (phpmailerException $e) {
-			$pessoas .= '<b>'.str_pad($codigo,7).' - '.$nome.' - ERRO! <br><i>   Erro: ' . $e->errorMessage();'</i></b><br>';
-			$emailserrados .= '<b>'.str_pad($codigo,7).' - '.$nome.' - ERRO! <br><i>   Erro: ' . $e->errorMessage();'</i></b><br>';	
+			$resposta = $_con->query($strsql5);			
+		} catch (phpmailerException $e) {
+		  echo $e->errorMessage(); //Pretty error messages from PHPMailer
+		  $pessoas .= '<b>'.str_pad($codigo,7).' - '.$nome.' - '.$email.' - ERRO! <br><i>   Informações do erro: ' . $e->errorMessage();'</i></b><br>';
 		} catch (Exception $e) {
-			$pessoas .= '<b>'.str_pad($codigo,7).' - '.$nome.' - '.$email.' - ERRO! <br><i>   Erro: ' . $e->getMessage();'</i></b><br>';
-			$emailserrados .= '<b>'.str_pad($codigo,7).' - '.$nome.' - ERRO! <br><i>   Erro: ' . $e->getMessage();'</i></b><br>';
-		} 
+		  echo $e->getMessage(); //Boring error messages from anything else!
+		  $pessoas .= '<b>'.str_pad($codigo,7).' - '.$nome.' - '.$email.' - ERRO! <br><i>   Informações do erro: ' . $e->getMessage();'</i></b><br>';
+		}
 	}
 }
 
@@ -253,12 +250,9 @@ if ($tot_pessoas_select== 0){
 		$mens_qtde = '<pre>Foram enviadas '.$qtd_emails.' de '.$tot_pessoas_select.' possíveis mensagens de e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final.'</pre>';
 	}
 	# Inicia a classe PHPMailer
+	$mail = new PHPMailer(true);
 	try {
-		$mail = new PHPMailer(true);
-		$mail->ClearAllRecipients();
-		$mail->ClearAttachments();
 		# Define os dados do servidor e tipo de conexão
-		$mail-> SMTPDebug = 2 ;
 		$mail->IsSMTP(); // Define que a mensagem será SMTP
 		$mail->Host = "empregosnainternet.com.br"; # Endereço do servidor SMTP
 		$mail->Port = 587; // Porta TCP para a conexão
@@ -281,48 +275,36 @@ if ($tot_pessoas_select== 0){
 		$mail->FromName = 'Sistema Sigre'; // Seu nome
 		# Define os dados técnicos da Mensagem
 		$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
-		#$mail->AddAddress("vhmoliveira@msn.com","Vitor H M Oliveira");
+		$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
 		$mail->AddAddress($email_pol, $politico); # Os campos  podem ser substituidos por variáveis
 		$mail->Subject = "E-mails para Aniversariantes - Dr Thiago"; # Assunto da mensagem
 		$mail->setFrom('sigre@vitor.poa.br', 'Sistema Sigre');
 		$mail->Body    = stripslashes($mens_qtde);
 		$mail->AltBody = stripslashes($mens_qtde);
-		echo $mens_qtde."<br>";
+		#echo $mens_qtde."<br>";
 		$mail->Send();
 		echo "E-mail enviado com sucesso!";
 	} catch (phpmailerException $e) {
 		$headers  = "MIME-Version: 1.0\r\n";
 		$headers .= "Content-type: text/html; charset=utf-8\r\n";
 		$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-		$subject = "Erro Rel Aniver Dia - Dr Thiago"; # Assunto da mensagem
-		$message = "Não foi possível enviar o e-mail final.<br><b>Erro do PHPMailer:</b> " . $e->errorMessage().'<br><br>'.stripslashes($mens_qtde);//Pretty error messages from PHPMailer
+		$subject = "Erro Aniver Dia Info - Dr Thiago"; # Assunto da mensagem
+		$message = "Não foi possível enviar e-mail aniver do dia informado.<br><b>Erro do PHPMailer:</b> " . $e->errorMessage().'<br><br>'.stripslashes($mens_qtde);//Pretty error messages from PHPMailer
 		$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
 		mail($to, $subject, $message, $headers);
-
+		echo "Não foi possível enviar o e-mail final.";
+		echo "<b>Erro do PHPMailer:</b> " . $e->errorMessage();//Pretty error messages from PHPMailer
 	} catch (Exception $e) {
 		$headers  = "MIME-Version: 1.0\r\n";
 		$headers .= "Content-type: text/html; charset=utf-8\r\n";
 		$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-		$subject = "Erro Rel Aniver Dia - Dr Thiago"; # Assunto da mensagem
-		$message = "Não foi possível enviar o e-mail final.<br><b>Erro Qq Natureza:</b> " . $e->getMessage().'<br><br>'.stripslashes($mens_qtde);//Pretty error messages from PHPMailer
+		$subject = "Erro Aniver Dia Info - Dr Thiago"; # Assunto da mensagem
+		$message = "Não foi possível enviar e-mail aniver do dia informado.<br><b>Erro do PHPMailer:</b> " . $e->getMessage().'<br><br>'.stripslashes($mens_qtde);//Pretty error messages from PHPMailer
 		$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
 		mail($to, $subject, $message, $headers);
+		echo "Não foi possível enviar o e-mail final.";
+		echo "<b>Erro de Qq outra natureza:</b> " . $e->getMessage(); //Boring error messages from anything else!
 	}		
-	if ($emailserrados<>'') {
-		try {
-			$headers  = "MIME-Version: 1.0\r\n";
-			$headers .= "Content-type: text/html; charset=utf-8\r\n";
-			$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-			$subject = 'E-mails ERRO de Aniversariantes - Dr Thiago'; # Assunto da mensagem
-			$message = stripslashes($emailserrados);
-			$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
-			mail($to, $subject, $message, $headers);
-			echo "E-mail enviado com sucesso!";
-		} catch (Exception $e) {
-			echo "Não foi possível enviar o e-mail com erros.";
-			echo "<b>Erro de Qq outra natureza:</b> " . $e->getMessage(); //Boring error messages from anything else!
-		}	
-	}
 }
 	
 ?>

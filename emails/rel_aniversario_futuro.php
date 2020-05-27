@@ -1,5 +1,5 @@
 <?php 
-// somente utilizado pelo Pujol = id=2
+// somente utilizado pelo Pujol = id=2 --  CRON NO SITE PUJOL
 include_once("../utilitarios/funcoes.php");
 $_SG['servidor'] = "www.vitor.poa.br";
 $_SG['banco'] = "vitorpoa_teste";
