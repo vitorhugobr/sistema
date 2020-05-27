@@ -9,7 +9,8 @@ $versao= "4.0.3";
 
 $id_pol= 1;
 $politico= 'Dep. Dr Thiago';
-$email_pol= 'dr.thiago@al.rs.gov.br';
+#$email_pol= 'dr.thiago@al.rs.gov.br';
+$email_pol = 'duharte@terra.com.br'
 
 // conectar ao banco do usuário
 $_SG['servidor'] = "191.252.101.58";

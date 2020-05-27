@@ -7,7 +7,8 @@ $versao= '202004061009';
 
 $id_pol= 1;
 $politico= 'Dep. Dr Thiago Duarte';
-$email_pol= 'dr.thiago@al.rs.gov.br';
+#$email_pol= 'dr.thiago@al.rs.gov.br';
+$email_pol = 'duharte@terra.com.br'
 
 echo 'iniciando... '.$id_pol.'<br>';
 
