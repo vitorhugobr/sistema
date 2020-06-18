@@ -1,14 +1,14 @@
 <?php 
 // TAREFA CRON NO SITE VITOR.POA
 include_once("../utilitarios/funcoes.php");
-
+$prg = $_SERVER['SCRIPT_NAME'];
 $id = 1; // usuario =A(100,80);
-$versao= '202004061009';
+$versao= '202011062100';
 
 $id_pol= 1;
 $politico= 'Dep. Dr Thiago Duarte';
 #$email_pol= 'dr.thiago@al.rs.gov.br';
-$email_pol = 'duharte@terra.com.br'
+$email_pol = 'duharte@terra.com.br';
 
 echo 'iniciando... '.$id_pol.'<br>';
 
@@ -128,78 +128,25 @@ if ($qtd_emails== 0){
 	}else{
 		$mens_qtde = $iniciohtml.$qtd_emails.' aniversariantes em '.$hoje.' conforme abaixo:<br><br>'.$pessoas.$final.'</body></html>';
 	}
-	require_once("../phpmailer/class.phpmailer.php");
-	require_once("../phpmailer/class.smtp.php");
-	# Inicia a classe PHPMailer
-	$mail = new PHPMailer();
-	# Define os dados do servidor e tipo de conexão
-	$mail->IsSMTP(); // Define que a mensagem será SMTP
-	$mail->Host = "empregosnainternet.com.br"; # Endereço do servidor SMTP
-	$mail->Port = 587; // Porta TCP para a conexão
-	$mail->SMTPAuth = true; # Usar autenticação SMTP - Sim
-	$mail->Username = 'folder'; # Usuário de e-mail
-	$mail->Password = 'cfcd378b6'; // # Senha do usuário de e-mail
-	$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-	$mail->CharSet = "UTF-8";
-	$mail->smtpConnect(
-		array(
-			"ssl" => array(
-			"verify_peer" => false,
-			"verify_peer_name" => false,
-			"allow_self_signed" => true
-			)
-		)
-	);
-	$mail->From = 'sigre@vitor.poa.br'; # e-mail remetente
-	$mail->FromName = 'Sistema SIGRE'; // nome remetente
-	$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
-	#$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
-	$mail->AddAddress($email_pol, $politico); # Os campos podem ser substituidos por variáveis
-	$mail->Subject = 'Aniversariantes em ' .$hoje.' - '.$politico; # Assunto da mensagem
-	$mail->setFrom('sigre@vitor.poa.br', 'Sistema SIGRE');		
-	$mail->Body    = stripslashes($mens_qtde);
-	$mail->AltBody = stripslashes($mens_qtde);
-	$enviado = $mail->Send();
+	$headers  = "MIME-Version: 1.0\r\n";
+	$headers .= "Content-type: text/html; charset=utf-8\r\n";
+	$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
+	$subject = "E-mails para Aniversariantes - Dr Thiago"; # Assunto da mensagem
+	$message = $mens_qtde;
+	$to = $email_pol;
+	#$to .= ', vhmoliveira@gmail.com';
+	$enviado = mail($to, $subject, $message, $headers);
 	if ($enviado) {
-		echo "Relação de aniversariantes enviada com sucesso!";
+		echo "E-mail enviado";
 	} else {
-		$erroenvio = $mail->ErrorInfo;
-		# Limpa os destinatários e os anexos
-		$mail->ClearAllRecipients();
-		$mail = new PHPMailer();
-		# Define os dados do servidor e tipo de conexão
-		$mail->IsSMTP(); // Define que a mensagem será SMTP
-		$mail->Host = "empregosnainternet.com.br"; # Endereço do servidor SMTP
-		$mail->Port = 587; // Porta TCP para a conexão
-		$mail->SMTPAuth = true; # Usar autenticação SMTP - Sim
-		$mail->Username = 'folder'; # Usuário de e-mail
-		$mail->Password = 'cfcd378b6'; // # Senha do usuário de e-mail
-		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-		$mail->CharSet = "UTF-8";
-		$mail->smtpConnect(
-		array(
-			"ssl" => array(
-			"verify_peer" => false,
-			"verify_peer_name" => false,
-			"allow_self_signed" => true
-			)
-		)
-		);
-		$mail->From = 'sigre@vitor.poa.br'; # e-mail remetente
-		$mail->FromName = 'Sistema SIGRE'; // nome remetente
-		$mail->IsHTML(true); # Define que o e-mail será enviado como HTML	
-		$mail->AddAddress('vhmoliveira@gmail.com','Vitor H M Oliveira'); # Os campos podem ser substituidos por variáveis
-		$message_erro = "Não foi possível enviar a relação de aniversariantes.<br> <b>Informações do erro:</b> " . $erroenvio;
-		$mail->Body    = stripslashes($message_erro);
-		$mail->AltBody = stripslashes($message_erro);	
-		$mail->Subject = 'Problemas no envio Relação Aniversariantes em ' .$hoje.' - Dr Thiago'; # Assunto da mensagem
-		$enviado = $mail->Send();
-		if ($enviado) {
-			echo "Relação de aniversariantes ENCERRADA com ERRO!";
-		} else {
-			echo "não foi possível enviar msg com erro! ". $mail->ErrorInfo;
-		}
-	}
+		$headers  = "MIME-Version: 1.0\r\n";
+		$headers .= "Content-type: text/html; charset=utf-8\r\n";
+		$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
+		$subject = "Erro Rel Aniver Dia - Dr Thiago"; # Assunto da mensagem
+		$message = 'Erro ao enviar e-mail com resumo de aniversariantes.<br>'.stripslashes($mens_qtde).'<br>'.$pessoas.'<br>'.$prg;//Pretty error messages from PHPMailer
+		$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
+		mail($to, $subject, $message, $headers);
+		echo "Não foi possível enviar o e-mail - ".$prg;
+	}	
 }
-
 ?>

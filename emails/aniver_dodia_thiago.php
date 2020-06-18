@@ -2,16 +2,15 @@
 # formato da imagem a enviar: (9 colunas por 5 linhas no photoshop) -- TAREFA CRON NO SITE VITOR.POA
 
 include_once("../utilitarios/funcoes.php");
-
+$prg = $_SERVER['SCRIPT_NAME'];
 $id = 1; // usuario =A(100,80);
-$versao= "4.0.3";
+$versao= '202011062100';
 
 
 $id_pol= 1;
 $politico= 'Dep. Dr Thiago';
 #$email_pol= 'dr.thiago@al.rs.gov.br';
-$email_pol = 'duharte@terra.com.br'
-
+$email_pol = 'duharte@terra.com.br';
 // conectar ao banco do usuário
 $_SG['servidor'] = "191.252.101.58";
 $_SG['banco'] = "drthiago_sigre";
@@ -253,68 +252,22 @@ if ($tot_pessoas_select== 0){
 	}else{
 		$mens_qtde = '<pre>Foram enviadas '.$qtd_emails.' de '.$tot_pessoas_select.' possíveis mensagens de e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final.'</pre>';
 	}
-	# Inicia a classe PHPMailer
-	try {
-		$mail = new PHPMailer(true);
-		$mail->ClearAllRecipients();
-		$mail->ClearAttachments();
-		# Define os dados do servidor e tipo de conexão
-		$mail-> SMTPDebug = 2 ;
-		$mail->IsSMTP(); // Define que a mensagem será SMTP
-		$mail->Host = "empregosnainternet.com.br"; # Endereço do servidor SMTP
-		$mail->Port = 587; // Porta TCP para a conexão
-		$mail->SMTPAuth = true; # Usar autenticação SMTP - Sim
-		$mail->Username = 'folder'; # Usuário de e-mail
-		$mail->Password = 'cfcd378b6'; // # Senha do usuário de e-mail
-		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-		$mail->CharSet = "UTF-8";
-		$mail->smtpConnect(
-			array(
-				"ssl" => array(
-				"verify_peer" => false,
-				"verify_peer_name" => false,
-				"allow_self_signed" => true
-				)
-			)
-		);
-		# Define o remetente (você)
-		$mail->From = 'sigre@vitor.poa.br'; # Seu e-mail
-		$mail->FromName = 'Sistema Sigre'; // Seu nome
-		# Define os dados técnicos da Mensagem
-		$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
-		#$mail->AddAddress("vhmoliveira@msn.com","Vitor H M Oliveira");
-		$mail->AddAddress($email_pol, $politico); # Os campos  podem ser substituidos por variáveis
-		$mail->Subject = "E-mails para Aniversariantes - Dr Thiago"; # Assunto da mensagem
-		$mail->setFrom('sigre@vitor.poa.br', 'Sistema Sigre');
-		$mail->Body    = stripslashes($mens_qtde);
-		$mail->AltBody = stripslashes($mens_qtde);
-		echo $mens_qtde."<br>";
-		$mail->Send();
-		echo "E-mail enviado com sucesso!";
-	} catch (phpmailerException $e) {
-		$headers  = "MIME-Version: 1.0\r\n";
-		$headers .= "Content-type: text/html; charset=utf-8\r\n";
-		$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-		$subject = "Erro Rel Aniver Dia - Dr Thiago"; # Assunto da mensagem
-		$message = "Não foi possível enviar o e-mail final.<br><b>Erro do PHPMailer:</b> " . $e->errorMessage().'<br><br>'.stripslashes($mens_qtde);//Pretty error messages from PHPMailer
-		$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
-		mail($to, $subject, $message, $headers);
 
-	} catch (Exception $e) {
-		$headers  = "MIME-Version: 1.0\r\n";
-		$headers .= "Content-type: text/html; charset=utf-8\r\n";
-		$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-		$subject = "Erro Rel Aniver Dia - Dr Thiago"; # Assunto da mensagem
-		$message = "Não foi possível enviar o e-mail final.<br><b>Erro Qq Natureza:</b> " . $e->getMessage().'<br><br>'.stripslashes($mens_qtde);//Pretty error messages from PHPMailer
-		$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
-		mail($to, $subject, $message, $headers);
-	}		
+	$headers  = "MIME-Version: 1.0\r\n";
+	$headers .= "Content-type: text/html; charset=utf-8\r\n";
+	$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
+	$subject = 'E-mails para Aniversariantes - Dr Thiago'; # Assunto da mensagem
+	$message = stripslashes($mens_qtde);
+	$to = 'Dr Thiago Duarte<duharte@terra.com.br>';
+	mail($to, $subject, $message, $headers);
+	echo "E-mail enviado com sucesso!";
 	if ($emailserrados<>'') {
 		try {
 			$headers  = "MIME-Version: 1.0\r\n";
 			$headers .= "Content-type: text/html; charset=utf-8\r\n";
 			$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-			$subject = 'E-mails ERRO de Aniversariantes - Dr Thiago'; # Assunto da mensagem
+			$subject = 'E-mails c/ ERRO de Aniversariantes - Dr Thiago'; # Assunto da mensagem
+		 	$emailserrados .= '<br>'.$prg;
 			$message = stripslashes($emailserrados);
 			$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
 			mail($to, $subject, $message, $headers);

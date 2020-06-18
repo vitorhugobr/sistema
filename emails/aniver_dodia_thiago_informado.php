@@ -10,7 +10,7 @@ $versao= "4.0.3";
 $id_pol= 1;
 $politico= 'Dep. Dr Thiago';
 #$email_pol= 'dr.thiago@al.rs.gov.br';
-$email_pol = 'duharte@terra.com.br'
+$email_pol = 'duharte@terra.com.br';
 // conectar ao banco do usuário
 $_SG['servidor'] = "191.252.101.58";
 $_SG['banco'] = "drthiago_sigre";
@@ -275,7 +275,7 @@ if ($tot_pessoas_select== 0){
 		$mail->FromName = 'Sistema Sigre'; // Seu nome
 		# Define os dados técnicos da Mensagem
 		$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
-		$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
+		#$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
 		$mail->AddAddress($email_pol, $politico); # Os campos  podem ser substituidos por variáveis
 		$mail->Subject = "E-mails para Aniversariantes - Dr Thiago"; # Assunto da mensagem
 		$mail->setFrom('sigre@vitor.poa.br', 'Sistema Sigre');
@@ -289,7 +289,7 @@ if ($tot_pessoas_select== 0){
 		$headers .= "Content-type: text/html; charset=utf-8\r\n";
 		$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
 		$subject = "Erro Aniver Dia Info - Dr Thiago"; # Assunto da mensagem
-		$message = "Não foi possível enviar e-mail aniver do dia informado.<br><b>Erro do PHPMailer:</b> " . $e->errorMessage().'<br><br>'.stripslashes($mens_qtde);//Pretty error messages from PHPMailer
+		$message = "Não foi possível enviar e-mail aniver do dia informado.<br><b>Erro do PHPMailer:</b> " . $e->errorMessage().'<br><br>'.stripslashes($mens_qtde).'<br>'.$pessoas;//Pretty error messages from PHPMailer
 		$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
 		mail($to, $subject, $message, $headers);
 		echo "Não foi possível enviar o e-mail final.";
@@ -299,7 +299,7 @@ if ($tot_pessoas_select== 0){
 		$headers .= "Content-type: text/html; charset=utf-8\r\n";
 		$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
 		$subject = "Erro Aniver Dia Info - Dr Thiago"; # Assunto da mensagem
-		$message = "Não foi possível enviar e-mail aniver do dia informado.<br><b>Erro do PHPMailer:</b> " . $e->getMessage().'<br><br>'.stripslashes($mens_qtde);//Pretty error messages from PHPMailer
+		$message = "Não foi possível enviar e-mail aniver do dia informado.<br><b>Erro do PHPMailer:</b> " . $e->getMessage().'<br><br>'.stripslashes($mens_qtde).'<br>'.$pessoas;//Pretty error messages from PHPMailer
 		$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
 		mail($to, $subject, $message, $headers);
 		echo "Não foi possível enviar o e-mail final.";
