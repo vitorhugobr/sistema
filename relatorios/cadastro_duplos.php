@@ -236,7 +236,7 @@ function excluir_cad_duplo(cod_cadastro) {
 <script>
 function abrir_cadastro_pelo_apoio(cod_cadastro) {
 	ajax2("../cad_apoio/inicializa_global.php?cod_cadastro="+cod_cadastro,"carregando");
-	var param = '../eleitores/cadastro.php';
+	var param = '../eleitores/cadastro.php?codigo='+cod_cadastro;
 	//alert(param);
 	open(param,"_self");		
 	

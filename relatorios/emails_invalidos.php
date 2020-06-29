@@ -38,7 +38,8 @@ if ($mysql_query->num_rows<1) {
 				</thead><tbody>';
 	$qtdinv = 0;
 	while ($dados_s = $mysql_query->fetch_assoc()) {
-		if (!Verify_Email_Address($dados_s["EMAIL"]) ){
+		#if (!Verify_Email_Address($dados_s["EMAIL"]) ){
+		if (!filter_var($dados_s["EMAIL"], FILTER_VALIDATE_EMAIL)) {
 			$displayEnc .=  '<tr><td><div align="center">';
 			$displayEnc .= '<strong><a href="javascript:abrir_cadastro_pelo_apoio('.$dados_s["CODIGO"].')" class="alert-link">'.$dados_s["CODIGO"].'</a></strong>';
 			$displayEnc .=  '</div></td>';
@@ -69,7 +70,7 @@ if ($mysql_query->num_rows<1) {
 
 }
 
-$_SESSION['funcao']="E-mails inválidos";
+$_SESSION['funcao']="E-mails inválidos ".$qtdinv;
 
 ?>
 
@@ -142,10 +143,10 @@ $_SESSION['funcao']="E-mails inválidos";
 
 <script>
 function abrir_cadastro_pelo_apoio(cod_cadastro) {
-	ajax2("../cad_apoio/inicializa_global.php?cod_cadastro="+cod_cadastro,"carregando");
-	var param = '../eleitores/cadastro.php';
+	var param = '../eleitores/cadastro.php?codigo='+cod_cadastro;
 	//alert(param);
-	open(param,"_self");		
+	//ajax5('../eleitores/cadastro.php?codigo='+cod_cadastro, 'carregando');
+	open(param,"_self");	
 	
 }
 	  

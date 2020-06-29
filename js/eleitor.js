@@ -360,19 +360,28 @@ function valida_cadastro(x_funcao) {
 				return false;
 			}
 		}
-				
-		if (!document.form1.txtemail.value=="") { 
+			
+		if (!document.form1.txtemail.value=="") { 		
+			var er = new RegExp(/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/);
+			var email = $('#txtemail').val();		
+			if( email == '' || !er.test(email) ) { 
+				alert('Preencha o campo email corretamente\nApenas com caracteres válidos'); 
+				document.form1.txtemail.focus();
+				return false; 
+			}
 			if (document.form1.txtemail.value.indexOf('@', 0) == -1 || document.form1.txtemail.value.indexOf('.', 0) == -1) {
-				alert ("E-mail inválido.");
+				alert ("E-mail inválido\nPreencha o campo email corretamente.");
 				document.form1.txtemail.focus();
 				return false;
 			}
 		}
+					
 		if (document.form1.txtorigem.value.length<1 || document.form1.txtorigem.value==0 || document.form1.txtorigem.value=="") {
 			alert('Campo ORIGEM é obrigatório');
 			document.form1.txtorigem.focus();
 			return;
 		}
+		
 		if (document.form1.txtgrupo.value.length<1 || document.form1.txtgrupo.value==0 || document.form1.txtgrupo.value=="") {
 			alert('Campo GRUPO é obrigatório');
 			document.form1.txtgrupo.focus();
@@ -383,6 +392,7 @@ function valida_cadastro(x_funcao) {
 return true;
 
 }
+//---------------------------------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------------------------------
 function validaA(){
 	valida_cadastro("A");

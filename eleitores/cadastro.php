@@ -10,6 +10,14 @@ if (liberado(1000)==0){
 }
 $_SESSION['funcao']="Cadastro";
 
+$cod_cadastro = $_GET['codigo'];
+
+if (isset($cod_cadastro)){
+	$_SESSION['ult_eleitor_pesquisado'] = $cod_cadastro;	
+}else{
+	$_SESSION['ult_eleitor_pesquisado'] = 0;
+}
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -684,8 +692,10 @@ Exames</div>
 </form>
 <script language="javascript">
 function reload_cadastro() {
-ajax('zera_codigo.php','carregando');
+	var param = 'cadastro.php?codigo=0';
+	open(param,"_self");	
 }
+
 </script>
 <script type="text/javascript">
 	new Autocomplete("txtnome", function() { return "autocomplete_nome.php?typing=" + this.text.value;});
