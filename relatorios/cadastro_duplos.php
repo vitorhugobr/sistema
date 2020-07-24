@@ -13,7 +13,7 @@ $comando_sql.= " ORDER BY NOME";
 $mysql_query = $_con->query($comando_sql);
 if ($mysql_query->num_rows<1) {
 	$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Nenhum registro Duplicado<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
-	exit('<script>location.href = "../eleitores/cadastro.php"</script>'); 
+	exit('<script>location.href = "../eleitores/cadastro.php?codigo=0"</script>'); 
 	
 }
 $_SESSION['funcao']="Cadastro com ".$mysql_query->num_rows." registros com nomes iguais.";

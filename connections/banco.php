@@ -97,7 +97,7 @@ try{
   array(PDO::ATTR_PERSISTENT => true);
 }catch(PDOException $e){
   // Caso ocorra algum erro na conexão com o banco, exibe a mensagem
-  echo 'Falha ao conectar no banco de dados comum: '.$e->getMessage();
+  echo 'Falha ao conectar no banco de dados comum: '.$e->getMessage();'<br>Favor avisar ao Vitor informando a falha no banco COMUM';
   die;
 }
 

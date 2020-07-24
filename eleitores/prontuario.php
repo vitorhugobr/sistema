@@ -155,7 +155,7 @@ $_SESSION['tab']=5;
   <button type="submit" class="btn btn-sm btn-success">
     <i class="fas fa-save" aria-hidden="true"></i> Gravar
   </button>
-  <button type="button" class="btn btn-sm btn-voltar" onclick="javascript:voltaPag('cadastro.php#tela_prontuarios');">
+  <button type="button" class="btn btn-sm btn-voltar" onclick="javascript:voltaPag('cadastro.php?codigo=0');">
     <i class="fas fa-arrow-left" aria-hidden="true"></i> Cadastro
   </button>
 </div>

@@ -64,7 +64,7 @@ if(isset($_SESSION['msg'])){
   <button type="submit" class="btn btn-sm btn-success">
     <i class="fas fa-save" aria-hidden="true"></i> Gravar Dados Receita
   </button>
-  <button type="button" class="btn btn-sm btn-voltar" onclick="javascript:voltaPag('cadastro.php#tela_receituarios');">
+  <button type="button" class="btn btn-sm btn-voltar" onclick="javascript:voltaPag('cadastro.php?codigo=0');">
     <i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar Cadastro
   </button>
 </div>

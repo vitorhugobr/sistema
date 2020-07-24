@@ -115,7 +115,7 @@ $_SESSION['tab']=6;
 </section>
 <div class="col-12 text-center">
   <button type="submit" class="btn btn-sm btn-warning"><i class="fas fa-save" aria-hidden="true"></i> Gravar</button>
-  <button type="button" class="btn btn-sm btn-dark" onclick="javascript:voltaPag('cadastro.php#tela_receituarios');"><i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar Cadastro</button>
+  <button type="button" class="btn btn-sm btn-dark" onclick="javascript:voltaPag('cadastro.php?codigo=0');"><i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar Cadastro</button>
 </div>
 </form>
 

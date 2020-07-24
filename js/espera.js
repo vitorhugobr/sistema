@@ -8,7 +8,7 @@ function abrir_cadastro(cod_cadastro) {
 	}
 
 	ajax2("inicializa_global.php?cod_cadastro="+cod_cadastro,"carregando");
-	var param = '../eleitores/cadastro.php';
+	var param = '../eleitores/cadastro.php?codigo='+cod_cadastro;
 	//alert(param);
 	open(param,"_self");		
 	

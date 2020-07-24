@@ -26,6 +26,6 @@ date_default_timezone_set('America/Sao_Paulo');
 	
 	$ret = executa_sql($strsql,"Prontuário gravado com sucesso","ERRO ao gravar prontuário",true,false);
 
-echo "<script>document.location='cadastro.php#tela_prontuarios';</script>";
+echo "<script>document.location='cadastro.php?codigo=0';</script>";
 
 ?>

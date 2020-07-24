@@ -84,7 +84,7 @@ $_SESSION['funcao']="Solicitação de Exames";
             <div class="text-center">
               <button type="button" class="btn btn-sm btn-incluir" onclick="javascript:gravar_exames(<?php echo $cod_cadastro;?>,<?php echo $mysql_query2->num_rows;?>)">
                 <i class="fas fa-save" aria-hidden="true"></i> Gravar </button>
-              <button type="button" class="btn btn-sm btn-voltar" onclick="javascript:voltaPag('cadastro.php#tela_exames');">
+              <button type="button" class="btn btn-sm btn-voltar" onclick="javascript:voltaPag('cadastro.php?codigo=0');">
                 <i class="fas fa-arrow-left" aria-hidden="true"></i> Voltar Cadastro
               </button>
             </div>

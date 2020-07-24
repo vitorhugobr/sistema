@@ -10,13 +10,26 @@ if (liberado(1000)==0){
 }
 $_SESSION['funcao']="Cadastro";
 
-$cod_cadastro = $_GET['codigo'];
-
-if (isset($cod_cadastro)){
-	$_SESSION['ult_eleitor_pesquisado'] = $cod_cadastro;	
+	$codigo =  $_GET['codigo'];
+	$theValue = (!get_magic_quotes_gpc()) ? addslashes($codigo) : $codigo;
+	$theValue = ($theValue != "") ? intval($theValue) : "NULL";
+	$codigo = $theValue;
+//echo 'Codigo recebido -> '.$codigo.' <-<br>';
+if (($codigo == 0) OR ($codigo=NULL)){ 
+//	echo 'vlr session '. $_SESSION['ult_eleitor_pesquisado'].'<br>';
+	if ($_SESSION['ult_eleitor_pesquisado'] > 0){
+//		echo 'tem valr session<br>';
+		$codigo = $_SESSION['ult_eleitor_pesquisado'];
+	}else{
+//		echo 'session não criada';
+		$_SESSION['ult_eleitor_pesquisado'] = 0;
+	}
 }else{
-	$_SESSION['ult_eleitor_pesquisado'] = 0;
+	$_SESSION['ult_eleitor_pesquisado'] = $codigo;
+//    echo 'alguma coisa';
 }
+
+
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

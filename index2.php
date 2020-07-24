@@ -3,6 +3,15 @@ require_once("seguranca.php"); // Inclui o arquivo com o sistema de segurança
 require_once("utilitarios/funcoes.php");
 protegePagina(); // Chama a função que protege a p&Aacute;gina
 $primMenu = 0;
+$arqconfig = md5("mapa").".txt";
+if (!file_exists($arqconfig)) {
+	echo 'IMPOSSÍVEL ACESSAR O SISTEMA.<br>Arquivo de configuração excluído ou danificado! ';
+	die;
+} 	
+
+$linhas = explode("\n", file_get_contents($arqconfig));
+$_SESSION['id'] = $linhas[0]; // usuario =A(100,80);
+$_SESSION['versao']= $linhas[1];
 $_SESSION['recarrega'] = false;
 $_SESSION['mudoutarefa'] = false;
 $_SESSION['id_exame'] = 0;
@@ -110,15 +119,8 @@ $_SESSION['opcaoabrirpagina'] = "";
 
 $diasemana = array('Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado');
 
-
 if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
 	$_SESSION['mensagem'] .= '<strong><img src="imagens/natal_webix-com-br23.gif" height="40"><span class="text text-alert"> Boas Festas '.$_SESSION['primnome'].'! </span></strong>';
-if ((($diahj>=6) and ($diahj<13)) AND ($meshj==4))   //datas para 2020
-	$_SESSION['mensagem'] .= '<strong><img src="imagens/coelho.gif" height="40"><span class="text text-red"> Feliz Páscoa '.$_SESSION['primnome'].'! </span></strong>';
-if ((($diahj>=9) and ($diahj<13)) AND ($meshj==10))   //datas para 2020
-	$_SESSION['mensagem'] .= '<strong><img src="imagens/crianças.png" height="40"><span class="text text-red"> Feliz Dias das Crianças '.$_SESSION['primnome'].'! </span></strong>';
-if (($diahj==15) AND ($meshj==10))   //datas para 2020
-	$_SESSION['mensagem'] .= '<strong><img src="imagens/diadoprofessor.jpg" height="40"><span class="text text-red">Dia dos Professores! </span></strong>';
 
 ?>
 
@@ -218,7 +220,7 @@ if (($diahj==15) AND ($meshj==10))   //datas para 2020
   		<!-- ALTERAR CONFORME MÊS   -->
 		<div id="sidebar-wrapper">
      	<ul class="sidebar-nav">
-      	<li class="sidebar-brand text-warning"><strong>Opções</strong></li>
+      	<li><div align="center"><img src="imagens/prevencao.png" height="85"></div></li>
       	<?php 
 		if ($_SESSION['id']<2){
         	$sqlLib = "SELECT * FROM liberado where username = '" . $_SESSION['usuarioUser'] . "' and nivel = 1 and liberada_sistema= 1 order by descricao_menu";
@@ -232,7 +234,7 @@ if (($diahj==15) AND ($meshj==10))   //datas para 2020
                 </li>';
         }else{
 			if ((liberado(6800)>0) AND ($_SESSION['id'] == 0)){
-				echo '<li><a href="https://calendar.google.com/calendar/embed?src=cobravvp%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
+				echo '<li><a href="https://calendar.google.com/calendar/embed?src=duartethiago025%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
 			}
 			if ((liberado(6800)>0) AND ($_SESSION['id'] == 2)){
 				echo '<li><a href="https://calendar.google.com/calendar/embed?src=pujol.sigre%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
@@ -292,6 +294,7 @@ if (($diahj==15) AND ($meshj==10))   //datas para 2020
 		?>
 			<p></p>
    		<div style="text-align: center; color: yellow; font-size: 11px "><?php echo $datas_hoje;?></div>
+   		<div align="center"><img src="imagens/alcool_gel.png" height="40"></div>
     	</ul>
   	</div>
   <!-- /#sidebar-wrapper --> 

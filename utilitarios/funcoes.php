@@ -800,7 +800,9 @@ function executa_sql($sql, $msgok, $msgerro, $display_msg, $atualiza_pagina) {
 			$_SESSION['msg'] = "<div class='alert alert-success alert-dismissible fade show' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgok."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
 		}
 		if ($atualiza_pagina){
-			echo '<script>window.location.reload();</script>'; 
+
+				echo '<script>window.location.reload();</script>'; 
+			
 		}
 		return $statementSql->rowCount();
 	}catch(PDOException $e){  // Caso ocorra algum erro exibe a mensagem

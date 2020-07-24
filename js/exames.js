@@ -156,7 +156,7 @@ function gravar_exames(cod_cadastro,total) {
 			}
 		}
 	}
-	//window.location.replace("cadastro.php");
+	//window.location.replace("cadastro.php?codigo=0");
 
 }
 //--------------------------------------------------------------------------------------------------------------------			
