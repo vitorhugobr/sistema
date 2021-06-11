@@ -3,17 +3,46 @@ include_once("../seguranca.php");
 protegePagina();
 include_once("../utilitarios/funcoes.php");
 date_default_timezone_set('America/Sao_Paulo');
-
-$comando_sql = "SELECT * FROM cadastro_enderecos_grupo 
-WHERE NOME IN ( SELECT B.NOME FROM cadastro_enderecos_grupo B GROUP BY B.NOME HAVING COUNT(*) > 1 ) ";
-
+$comando_sql= "select 
+    DISTINCT `c`.`CODIGO` AS `CODIGO`,
+    `c`.`NOME` AS `NOME`,
+    `c`.`SEXO` AS `SEXO`,
+    `c`.`DTNASC` AS `DTNASC`,
+    `c`.`FONE_RES` AS `FONE_RES`,
+    `c`.`FONE_CEL` AS `FONE_CEL`,
+    `c`.`FONE_COM` AS `FONE_COM`,
+    `c`.`EMAIL` AS `EMAIL`,
+    `c`.`GRUPO` AS `GRUPO`,
+    `c`.`ORIGEM` AS `ORIGEM`,
+    `c`.`PROFISSAO` AS `PROFISSAO`,
+    `c`.`ZONAL` AS `ZONAL`,
+    `c`.`PAI_MAE` AS `PAI_MAE`,
+    `c`.`FILIADO` AS `FILIADO`,
+    `c`.`RECEBEMAT` AS `RECEBEMAT`,
+    `c`.`VOTOU` AS `VOTOU`,
+    `c`.`RAMO` AS `RAMO`,
+    `c`.`RECEBEMAIL` AS `RECEBEMAIL`,
+    `e`.`cep` AS `cep`,
+    `e`.`tipolog` AS `tipolog`,
+    `e`.`rua` AS `rua`,
+    `e`.`bairro` AS `bairro`,
+    `e`.`cidade` AS `cidade`,
+    `e`.`uf` AS `uf`,
+    `e`.`numero` AS `numero`,
+    `e`.`complemento` AS `complemento`,
+    `e`.`tipo` AS `tipo`,
+    `e`.`padrao` AS `padrao`,
+    `e`.`reg` AS `reg`,
+    `g`.`NOMEGRP` AS `NOMEGRP` 
+  from 
+    ((`cadastro` `c` left join `grupos` `g` on(`c`.`GRUPO` = `g`.`GRUPO`)) left join `enderecos` `e` on(`c`.`CODIGO` = `e`.`codigo`)) WHERE NOME IN ( SELECT B.NOME FROM cadastro B GROUP BY B.NOME HAVING COUNT(*) > 1 ) ";
 $comando_sql.= " ORDER BY NOME";
 
 //echo "<br><br>".$comando_sql;
 $mysql_query = $_con->query($comando_sql);
 if ($mysql_query->num_rows<1) {
 	$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Nenhum registro Duplicado<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
-	exit('<script>location.href = "../eleitores/cadastro.php?codigo=0"</script>'); 
+	exit('<script>location.href = "../eleitores/cadastro.php"</script>'); 
 	
 }
 $_SESSION['funcao']="Cadastro com ".$mysql_query->num_rows." registros com nomes iguais.";
@@ -88,7 +117,8 @@ $_SESSION['funcao']="Cadastro com ".$mysql_query->num_rows." registros com nomes
     </style>
   </head>
   <body>
-  <div id="carregando"></div>
+  <div id="modal"></div>
+  <div id="fade"></div>
 <div id="_VReportHeader"> 
 <div class="nav fixed-top container-fluid">	
 	<div class='col-2 text-center'>
@@ -113,15 +143,15 @@ $_SESSION['funcao']="Cadastro com ".$mysql_query->num_rows." registros com nomes
 		<span class="badge badge-info"><?php echo $_SESSION['nometela']?></span>
 	</div>
 </div>
-
-</div>
  <?php
 
 if(isset($_SESSION['msg'])){
-	echo "<br><br>".$_SESSION['msg'];
+	echo $_SESSION['msg'];
 	unset($_SESSION['msg']);
 }
 ?>
+
+</div>
 <div id="_VReportContent" style="margin-top: 35px">
   <?php
 #echo $comando_sql."<br>";
@@ -182,7 +212,7 @@ $displayEnc .= '<thead class="thead-dark">
 while ($dados_s = $mysql_query->fetch_assoc()) {
 	$displayEnc .=  '<tr>
 				<td><div align="center">';
-		$displayEnc .= '<strong><a href="javascript:abrir_cadastro_pelo_apoio('.$dados_s["CODIGO"].')" class="alert-link">'.$dados_s["CODIGO"].'</a></strong>';
+    $displayEnc .= '<strong><a href="javascript:abrir_cadastro_pelo_apoio('.$dados_s["CODIGO"].')" class="text-primary">'.$dados_s["CODIGO"].'</a></strong>';
 		$displayEnc .=  '</div></td>';
 		$displayEnc .=  '<td><div class="textoAzul" align="left">';
 			$displayEnc .=  $dados_s["NOME"];
@@ -212,7 +242,7 @@ while ($dados_s = $mysql_query->fetch_assoc()) {
 	$displayEnc .= $dados_s["NOMEGRP"];
 	$displayEnc .=  '</div></td>
 	<td>
-		<button type="button" class="btn btn-sm btn-excluir" onClick="javascript:excluir_cad_duplo('.$dados_s["CODIGO"].')"><i class="fas fa-trash" aria-hidden="true"></i>Excluir cód. '.$dados_s["CODIGO"].' de '.$dados_s["NOME"].'</button>
+		<button type="button" class="btn btn-sm btn-excluir" onClick="javascript:excluir_cad_duplo('.$dados_s["CODIGO"].')"><i class="fas fa-trash" aria-hidden="true"></i>Excluir '.$dados_s["CODIGO"].' - '.$dados_s["NOME"].'</button>
 	</td></tr>';
 }
 $displayEnc .= '</tbody></table>';
@@ -228,20 +258,13 @@ echo $displayEnc;
 <script src="../js/ie-emulation-modes-warning.js"></script>
 <script>
 function excluir_cad_duplo(cod_cadastro) {
-	if (confirm("Confirma a Exclusão do registro duplo")){
-		ajax('../eleitores/exclui_eleitor.php?P0='+cod_cadastro,'carregando');
+    var msg = "Confirma a Exclusão do registro "+cod_cadastro+"?";
+	if (confirm(msg)){
+		var parString = 'P0='+cod_cadastro;
+		ajax('../eleitores/exclui_eleitor.php?'+parString,'modal');
+
 	}
 }
-</script>
-<script>
-function abrir_cadastro_pelo_apoio(cod_cadastro) {
-	ajax2("../cad_apoio/inicializa_global.php?cod_cadastro="+cod_cadastro,"carregando");
-	var param = '../eleitores/cadastro.php?codigo='+cod_cadastro;
-	//alert(param);
-	open(param,"_self");		
-	
-}
-	  
 </script>
 <script src="../js/jquery-3.2.1.slim.min.js"></script>
       <script>window.jQuery || document.write('<script src="/../js/jquery-3.2.1.slim.min.js"><\/script>')</script>

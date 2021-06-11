@@ -82,11 +82,11 @@ if (isset($codigo)){
 				if ($dados_busca["CONDICAO"]==0){
 					$condicao = false; 
 					$msg_sistema = "<strong> ESTE REGISTRO ESTÁ INATIVO</strong>";  
-					$classe_div = "col-12 animacao text-center";
+					$classe_div = "col-12 badge badge-danger animacao";
 				}else{
-					$msg_sistema = "";
+					$msg_sistema = "Campos em VERMELHO - preenchimento obrigatório";
 					$condicao = true;
-					$classe_div = "col-12";
+					$classe_div = "col-12 badge badge-danger";
 				}
 				if ($dados_busca["FILIADO"]==0){
 					$filiado = false; 
@@ -433,11 +433,12 @@ if (isset($codigo)){
 			document.getElementById('btnExcCad').disabled = false;
 			document.getElementById('btnAltCad').disabled = false;
 			document.getElementById('btnNovo').disabled = true;
-			if ($_SESSION['id']==1){
+            <?php    
+			if ($_SESSION['id']==1){ ?>
 				document.getElementById('dados_prontuario').innerHTML = '<?php echo $prontuarios ?>';			
 				document.getElementById('dados_exames').innerHTML = '<?php echo $relacao_exames ?>';
 				document.getElementById('dados_receituario').innerHTML = '<?php echo $receitas_eleitor ?>';
-			}
+			<?php } ?>
 			document.form1.txtnome.focus();
 			</script>
 			<?php

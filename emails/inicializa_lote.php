@@ -2,7 +2,7 @@
 include_once("../seguranca.php"); // Inclui o arquivo com o sistema de segurança
 protegePagina(); // Chama a função que protege a página
 
-$_con  = new mysqli(HOST,USER,PASS,DB);
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
 
 if(!$_con) {  
 	echo "Não foi possivel conectar ao MySQL. Erro " .

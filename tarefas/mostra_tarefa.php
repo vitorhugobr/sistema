@@ -4,7 +4,7 @@ protegePagina(); // Chama a função que protege a página
 require_once ('../utilitarios/funcoes.php');
 $_SESSION['mudoutarefa'] = false;
 $id_tarefa = $_GET['tarefa'];
-
+$_SESSION['funcao']="Consulta Tarefa";
 $sql = "SELECT id, data_tarefa, (SELECT users.usuario FROM users WHERE users.codigo= tarefas.usuario) AS usuario, assunto, tarefa, data_inicio, data_fim, CASE WHEN status = 0 THEN 'ABERTA' ELSE 'ENCERRADA' END AS status, CASE WHEN prioridade = 1 THEN 'BAIXA' WHEN prioridade = 2 THEN 'MÉDIA' ELSE 'ALTA' END as prioridade, demanda from tarefas where id=".$id_tarefa;
 
 $mysql_query = $_con->query($sql);
@@ -111,11 +111,6 @@ if ($mysql_query2->num_rows<1) {
 							<i class="fas fa-arrow-left"></i> Voltar
 							</button>
                     </li>
-                    <li class="nav-item">
-                        &nbsp;<a href="../index2.php" class="btn btn-menu btn-sm" role="button">
-                            <i class="fas fa-list-ul" aria-hidden="true"></i>  Menu
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -197,7 +192,7 @@ if ($mysql_query2->num_rows<1) {
         </td>
     </tr>
   </table>
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <table width="100%" border="1" cellspacing="0" cellpadding="0">
     <tr>
       <td width="50%" nowrap="nowrap" align="center"><font color="#003399" size="+1" face="Tahoma, Geneva, sans-serif"><strong><i class="fas fa-tasks"></i> Tarefa</strong></font></td>
       <td width="50%" nowrap="nowrap" align="center"><font color="#003399" size="+1" face="Tahoma, Geneva, sans-serif"><strong><i class="fas fa-history"></i> Histórico</strong></font></td>

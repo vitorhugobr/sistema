@@ -8,7 +8,7 @@ $nivel = $_GET['niv'];
 $nome  = strtoupper($_GET['nome']);
 $email  = $_GET['email'];
 $mudou = $_GET['mudou'];
-$usuario_original = $_GET['nomeusuario'];
+$usuario_original = $_GET['usuario_original'];
 // codigo
 $theValue = (!get_magic_quotes_gpc()) ? addslashes($cod) : $cod;
 $theValue = ($theValue != "") ? intval($theValue) : "NULL";
@@ -48,13 +48,8 @@ if ($mudou==1){
 	$_sqlu = 'UPDATE liberacao SET ';
 	$_sqlu .= "username = ".$usuario;
 	$_sqlu .= ' where username = '.$usuario_original;
-
-	#echo $_sql;
-
 	executa_sql($_sqlu,"","",false,false);
-
 	gravaoperacoes("users","A",$_SESSION["usuarioUser"],"Alteradas liberacões do ".$usuario_original." para usário ".$usuario);
-	
 }
 
 $_sql = 'UPDATE users SET ';
@@ -66,10 +61,8 @@ $_sql .= ' where codigo = '.$cod;
 
 #echo $_sql;
 
-executa_sql($_sql,"Usuário atualizado com sucesso!","Erro na atualização do Usuário",true,false);
+executa_sql($_sql,"Usuário atualizado com sucesso!","Erro na atualização do Usuário",true,true);
 
 gravaoperacoes("users","A",$_SESSION["usuarioUser"],"Alterado usuário ".$usuario);
-
-
 
 ?>

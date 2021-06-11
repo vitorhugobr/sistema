@@ -1,12 +1,12 @@
 <?php 
 // somente utilizado pelo Pujol = id=2 --  CRON NO SITE PUJOL
 include_once("../utilitarios/funcoes.php");
-$_SG['servidor'] = "www.vitor.poa.br";
-$_SG['banco'] = "vitorpoa_teste";
-$_SG['usuario'] = "vitorpoa_user";
-$_SG['senha'] = "vhmo@2017";
+$_SESSION['servidor'] = "www.vitor.poa.br";
+$_SESSION['banco'] = "vitorpoa_teste";
+$_SESSION['usuario'] = "vitorpoa_user";
+$_SESSION['senha'] = "vhmo@2017";
 
-$_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 
 if(!$_con) {  
 	echo "Não foi possivel conectar ao MySQL. Erro " .
@@ -63,12 +63,12 @@ if($_res->num_rows==0) {
 
 // conectar ao banco do usuário
 
-$_SG['servidor'] = "www.rpujol.com.br";
-$_SG['banco'] = "rpujolco_pujol";
-$_SG['usuario'] = "rpujolco_pujol";
-$_SG['senha'] = "vhm@2019";
+$_SESSION['servidor'] = "www.rpujol.com.br";
+$_SESSION['banco'] = "rpujolco_pujol";
+$_SESSION['usuario'] = "rpujolco_pujol";
+$_SESSION['senha'] = "vhm@2019";
 
-$_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 
 //$datatoday  = date('d/m/Y', strtotime("+1 days"));	AUMENTA X DIAS NA DATA DE HOJE
 $hoje  = date('d/m/Y');	

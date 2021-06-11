@@ -8,13 +8,13 @@ function busca_usuario() {
 	  document.form1.txtusuario.focus();
 	  return false;
   }
-  ajax('busca_usuario.php?usuario='+usuar, 'carregando');
+  ajax('busca_usuario.php?usuario='+usuar, 'modal');
 }
 			
 //--------------------------------------------------------------------------------------------------------------------			
 function busca_user(usuario) {
   //alert(usuario);
-  ajax('busca_usuario.php?usuario='+usuario, 'carregando');
+  ajax('busca_usuario.php?usuario='+usuario, 'modal');
   }
 			
 //--------------------------------------------------------------------------------------------------------------------			
@@ -45,14 +45,19 @@ function altera_usuario() {
 	  document.form1.txtemail.focus();
 	  return false;
   }
+    
+  var mudou = document.form1.mudou_usuario.value;
+  
+  var usuario_original = document.form1.nome_usuario.value;
+    
   AjaxRequest();
   if(!Ajax) {
 	  alert('Não foi  possível iniciar o AJAX');
 	  return;
   }	
-  //alert('codigo='+cod+'usu='+usu+'&niv='+nivel+'&nome='+nome+'&email='+email);
+  //alert('codigo='+cod+'usu='+usu+'&niv='+nivel+'&nomeUSUARIO='+nome+'&email='+email);
   if (confirm("Confirma a informações do usuário..: "+usu+" ?")){
-		ajax('altera_usuario.php?codigo='+cod+'&usu='+usu+'&niv='+nivel+'&nome='+nome+'&email='+email, 'carregando');
+		ajax('altera_usuario.php?codigo='+cod+'&usu='+usu+'&niv='+nivel+'&nome='+nome+'&email='+email+'&mudou='+mudou+'&usuario_original='+usuario_original, 'modal');
   }
   
 }
@@ -100,7 +105,7 @@ function grava_usuario() {
   }	
   //alert(dados);
   if (confirm("Confirma a Inclusão do usuário..: "+usu+" ?\nNão esquecer de liberar acessos ao sistema!\nSenha inicial é 123456")){
-		ajax(dados, 'carregando');
+		ajax(dados, 'modal');
   }
 //  myFunction();
 
@@ -108,17 +113,17 @@ function grava_usuario() {
 //-------------------------------
 function inclui_usuario(){
 	document.form1.txtusuario.focus();
-	document.getElementById("btnnovo").disabled = true;
-	document.getElementById("btngrava").disabled = false;
-	document.getElementById("btnexclui").disabled = true;
-	document.getElementById("btncancela").disabled = false;
+	document.getElementById("btnnovo").style.display = "none";
+	document.getElementById("btngrava").style.display = "block";
+	document.getElementById("btnexclui").style.display = "none";
+	document.getElementById("btncancela").style.display = "block";
 	
 	document.getElementById('txtusuario').disabled = false;
 	document.getElementById('txtnivel').disabled = false;
 	document.getElementById('txtnome').disabled = false;
 	document.getElementById('txtemail').disabled = false;
 	
-	ajax('inclui_usuario.php', 'carregando');	
+	ajax('inclui_usuario.php', 'modal');	
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -126,14 +131,14 @@ function excluir_usuario() {
   var cod = document.form1.txtcodigo.value;
   var usu = document.form1.txtusuario.value;
   if (confirm("Confirma a Exclusão do usuário..: "+usu+" ?\nTodas as liberações também serão excluídas!")){
-	  ajax('exclui_usuario.php?cod='+cod+'&usuario='+usu, 'carregando');
+	  ajax('exclui_usuario.php?cod='+cod+'&usuario='+usu, 'modal');
   }
  limpa_usuario();
 }			
 //-----------------------------------------------------------------------------------------------------------
 function deleta_cancela_usuario() {
 	var cod = document.form1.txtcodigo.value;
-	ajax('exclui_cancela_usuario.php?cod='+cod, 'carregando');
+    ajax('exclui_cancela_usuario.php?cod='+cod, 'modal'); 
 	limpa_usuario();
 }			
 //--------------------------------------------------------------------------------------------------------------------			

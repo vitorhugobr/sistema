@@ -2,15 +2,15 @@
 # formato da imagem a enviar: (9 colunas por 5 linhas no photoshop)
 session_start();
 
-$_SG['servidor'] = "191.252.101.58";
-$_SG['banco'] = "drthiago_sigre";
-$_SG['usuario'] = "sigre";
-$_SG['senha'] = "sigre2018";
+$_SESSION['servidor'] = "191.252.101.58";
+$_SESSION['banco'] = "drthiago_sigre";
+$_SESSION['usuario'] = "sigre";
+$_SESSION['senha'] = "sigre2018";
 
 $politico = 'Deputado Dr Thiago';
 $email_pol ='duharte@terra.com.br';
 
-$_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 if(!$_con) {  
 	echo "Não foi possivel conectar ao MySQL. Erro " .
 			mysqli_connect_errno() . " : " . mysql_connect_error();

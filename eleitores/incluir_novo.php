@@ -239,7 +239,7 @@ $mysql_query1 = $_con->query($strsql);
     
 if ($mysql_query1) {
 	$sql = 'SELECT MAX(CODIGO) AS codigo FROM cadastro';
-	$mysql_query = $conn->query($sql);
+	$mysql_query = $_con->query($sql);
 	if ($mysql_query->num_rows<1) {
 		echo '<script>alert("ERRO ao ler cadastro!");</script>';					
 	}else{

@@ -34,7 +34,7 @@ function pesquisarusuario(usu) {
 		return;
 	}
 //	alert(usuario);
-	ajax3('busca_user.php?user='+usuario,'carregando');
+	ajax3('busca_user.php?user='+usuario,'modal');
 
 
 }			

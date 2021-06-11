@@ -1,6 +1,6 @@
 <?php
 # formato da imagem a enviar: (9 colunas por 5 linhas no photoshop) -- TAREFA CRON NO SITE VITOR.POA
-
+use PHPMailer \ PHPMailer \ PHPMailer;
 include_once("../utilitarios/funcoes.php");
 $prg = $_SERVER['SCRIPT_NAME'];
 $id = 1; // usuario =A(100,80);
@@ -12,12 +12,12 @@ $politico= 'Dep. Dr Thiago';
 #$email_pol= 'dr.thiago@al.rs.gov.br';
 $email_pol = 'duharte@terra.com.br';
 // conectar ao banco do usuário
-$_SG['servidor'] = "191.252.101.58";
-$_SG['banco'] = "drthiago_sigre";
-$_SG['usuario'] = "sigre";
-$_SG['senha'] = "sigre2018";
+$_SESSION['servidor'] = "191.252.101.58";
+$_SESSION['banco'] = "drthiago_sigre";
+$_SESSION['usuario'] = "sigre";
+$_SESSION['senha'] = "sigre2018";
 
-$_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 if(!$_con) {  
 	echo "Não foi possivel conectar ao MySQL. Erro " .
 			mysqli_connect_errno() . " : " . mysql_connect_error();
@@ -34,12 +34,21 @@ $datatoday = getdate();
 $dia = $datatoday["mday"];
 $mes = $datatoday["mon"];
 
-require_once("../phpmailer/class.phpmailer.php");
-require_once("../phpmailer/class.smtp.php");
+require_once("../phpmailer/PHPMailer.php");
+require_once("../phpmailer/SMTP.php");
+require_once('../phpmailer/Exception.php');
 
-$_sql = 'SELECT * from emails_aniver where MONTH(aniver)= '.$mes.' AND DAYOFMONTH(aniver) = '.$dia;
-#$_sql = 'SELECT * FROM emails_aniver WHERE codigo=6955'; // este é o código que deu errado no enviar
-#$_sql = 'SELECT * FROM emails_aniver WHERE codigo=41293';  //Este é meu código no cadastro
+
+$_sql = 'select 
+    `cadastro`.`CODIGO` AS `codigo`,
+    `cadastro`.`SEXO` AS `sexo`,
+    `cadastro`.`NOME` AS `nome`,
+    `cadastro`.`EMAIL` AS `email`,
+    `cadastro`.`DTNASC` AS `aniver`,
+    `cadastro`.`APELIDO` AS `apelido` 
+  from 
+    `cadastro` 
+  where ((MONTH(cadastro.DTNASC)= '.$mes.') AND (DAYOFMONTH(cadastro.DTNASC) = '.$dia.') and (`cadastro`.`RECEBEMAIL` = 1) and (`cadastro`.`EMAIL` > "A") and (`cadastro`.`CONDICAO` = 1))';
 $_res = $_con->query($_sql);
 $qtd_emails= 0;
 $pessoas="";
@@ -159,10 +168,14 @@ if($_res->num_rows>0){
 				</font></p></td>  </tr>
 			</table>
 			</body>
-			</html>';			
+			</html>';
 		$mail = new PHPMailer(true);
+
 		try {
+			$mail->Priority = 1;
 			# Define os dados do servidor e tipo de conexão
+			$mail->setLanguage('br');
+			$mail->SMTPDebug = true;
 			$mail->IsSMTP(); // Define que a mensagem será SMTP
 			$mail->Host = "empregosnainternet.com.br"; # Endereço do servidor SMTP
 			$mail->Port = 587; // Porta TCP para a conexão
@@ -228,17 +241,14 @@ if($_res->num_rows>0){
 			$strsql5 .= implode(",", array_values($fieldList));
 			$strsql5 .= ")";
 			$resposta = $_con->query($strsql5);				
- 		} catch (phpmailerException $e) {
-			$pessoas .= '<b>'.str_pad($codigo,7).' - '.$nome.' - ERRO! <br><i>   Erro: ' . $e->errorMessage();'</i></b><br>';
-			$emailserrados .= '<b>'.str_pad($codigo,7).' - '.$nome.' - ERRO! <br><i>   Erro: ' . $e->errorMessage();'</i></b><br>';	
-		} catch (Exception $e) {
+ 		} catch (Exception $e) {
 			$pessoas .= '<b>'.str_pad($codigo,7).' - '.$nome.' - '.$email.' - ERRO! <br><i>   Erro: ' . $e->getMessage();'</i></b><br>';
 			$emailserrados .= '<b>'.str_pad($codigo,7).' - '.$nome.' - ERRO! <br><i>   Erro: ' . $e->getMessage();'</i></b><br>';
 		} 
 	}
 }
 
-$final = '<br><br><font color="#FF0004" style="font-family: Verdana; font-style: italic; font-size: 9px;">Este é um e-mail automático disparado pelo sistema. Favor não respondê-lo, pois esta conta não é monitorada. </font>';
+$final = '<br><br><font color="#FF0004" style="font-family: Verdana; font-style: italic; font-size: 9px;">Este é um e-mail automático disparado pelo sistema. Favor não respondê-lo, pois esta conta não é monitorada.</font>';
 
 if ($tot_pessoas_select== 0){
 	echo 'Nenhuma mensagem enviada em '.date("d/m/Y");
@@ -252,30 +262,56 @@ if ($tot_pessoas_select== 0){
 	}else{
 		$mens_qtde = '<pre>Foram enviadas '.$qtd_emails.' de '.$tot_pessoas_select.' possíveis mensagens de e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final.'</pre>';
 	}
-
 	$headers  = "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8\r\n";
 	$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-	$subject = 'E-mails para Aniversariantes - Dr Thiago'; # Assunto da mensagem
-	$message = stripslashes($mens_qtde);
-	$to = 'Dr Thiago Duarte<duharte@terra.com.br>';
-	mail($to, $subject, $message, $headers);
-	echo "E-mail enviado com sucesso!";
+	$subject = 'E-mails para Aniversariantes '.date("d/m/Y").' - Dr Thiago'; # Assunto da mensagem
+	$message = $mens_qtde;
+	$to = $email_pol;
+	$enviado = mail($to, $subject, $message, $headers);
+	if ($enviado) {
+		echo "E-mail enviado";
+	} else {
+		$headers  = "MIME-Version: 1.0\r\n";
+		$headers .= "Content-type: text/html; charset=utf-8\r\n";
+		$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
+		$subject = 'Erro Aniver Dia '.date("d/m/Y").' Info - Dr Thiago'; # Assunto da mensagem
+		$message = 'Erro ao enviar e-mail com resumo de aniversariantes para Dr Thiago.<br>'.stripslashes($mens_qtde).'<br>'.$pessoas.'<br>aniver_dodia_thiago.php';//Pretty error messages from PHPMailer
+		$to = 'Vitor H M Oliveira<vhmoliveira@protonmail.com>';
+		mail($to, $subject, $message, $headers);
+	}
+
 	if ($emailserrados<>'') {
-		try {
-			$headers  = "MIME-Version: 1.0\r\n";
-			$headers .= "Content-type: text/html; charset=utf-8\r\n";
-			$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-			$subject = 'E-mails c/ ERRO de Aniversariantes - Dr Thiago'; # Assunto da mensagem
-		 	$emailserrados .= '<br>'.$prg;
-			$message = stripslashes($emailserrados);
-			$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
-			mail($to, $subject, $message, $headers);
-			echo "E-mail enviado com sucesso!";
-		} catch (Exception $e) {
-			echo "Não foi possível enviar o e-mail com erros.";
-			echo "<b>Erro de Qq outra natureza:</b> " . $e->getMessage(); //Boring error messages from anything else!
-		}	
+		$mail = new PHPMailer(true); 
+		$mail->Priority = 1;
+		$mail->setLanguage('br');
+		$mail->SMTPDebug = true;
+		$mail->IsSMTP(); // Define que a mensagem será SMTP
+		$mail->Host = "empregosnainternet.com.br"; # Endereço do servidor SMTP
+		$mail->Port = 587; // Porta TCP para a conexão
+		$mail->SMTPAuth = true; # Usar autenticação SMTP - Sim
+		$mail->Username = 'folder'; # Usuário de e-mail
+		$mail->Password = 'cfcd378b6'; // # Senha do usuário de e-mail
+		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+		$mail->CharSet = "UTF-8";
+		$mail->smtpConnect(
+			array(
+				"ssl" => array(
+				"verify_peer" => false,
+				"verify_peer_name" => false,
+				"allow_self_signed" => true
+				)
+			)
+		);
+		$mail->From = 'sigre@vitor.poa.br';
+		$mail->FromName = 'Sistema Sigre'; 
+		$mail->IsHTML(true); 
+		$mail->AddAddress('vitorhugo@protonmail.com', 'Vitor H M Oliveira'); 
+		$mail->Subject = "Emails com ERRO no envio - Dr Thiago "; 
+		$mail->setFrom('sigre@vitor.poa.br', 'Sistema Sigre');
+		$mail->Body    = stripslashes($emailserrados);
+		$mail->AltBody = stripslashes($emailserrados);
+		$mail->Send();			
 	}
 }
 	

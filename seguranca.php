@@ -4,13 +4,8 @@
 // ==============================
 $_SG['conectaServidor'] = true;    // Abre uma conexão com o servidor MySQL?
 $_SG['abreSessao'] = true;         // Inicia a sessão com um session_start()?
-$_SG['caseSensitive'] = false;     // Usar case-sensitive? Onde 'thiago' é diferente de 'THIAGO'
+$_SG['caseSensitive'] = true;     // Usar case-sensitive? Onde 'thiago' é diferente de 'THIAGO'
 $_SG['validaSempre'] = true;       // Deseja validar o usuário e a senha a cada carregamento de página?
-// Evita que, ao mudar os dados do usuário no banco de dado o mesmo contiue logado.
-//$_SG['servidor'] = 'localhost';    // Servidor MySQL
-//$_SG['usuario'] = 'root';          // Usuário MySQL
-//$_SG['senha'] = '';                // Senha MySQL
-//$_SG['banco'] = 'sigre';            // Banco de dados MySQL
 $_SG['paginaLogin'] = 'index.php'; // Página de login
 $_SG['tabela'] = 'users';       // Nome da tabela onde os usuários são salvos
 // Verifica se precisa iniciar a sessão
@@ -21,14 +16,14 @@ if ($_SG['abreSessao'] == true) {
 }
 
 // ==============================
-include_once('connections/banco.php');
+include_once('connections/connect.php');
 // Data no passado
 // ======================================
 //   ~ Não edite a partir deste ponto ~
 // ======================================
 // Verifica se precisa fazer a conexão com o MySQL
 if ($_SG['conectaServidor'] == true) {
-	$_SG['link'] = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+	$_SG['link'] = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 if(!$_SG['link']) {  
 	echo "Não foi possivel conectar ao MySQL. Erro " .
 			mysqli_connect_errno() . " : " . mysql_connect_error();
@@ -52,47 +47,42 @@ function validaUsuario($usuario, $senha) {
   $nsenha = addslashes($senha);
   $_SESSION['usuarioSenha'] = md5($nsenha);
   // Monta uma consulta SQL (query) para procurar um usuário
-  $sql = "SELECT * FROM `".$_SG['tabela']."` WHERE ".$cS." `usuario` = '".$nusuario."' AND ".$cS." `senha` = '".md5($nsenha)."' LIMIT 1";
-	try{
-		// Faz conexão com banco de daddos
-		$pdo = new PDO("mysql:host=".HOST.";dbname=".DB.";",USER, PASS);
-		$pdo->exec("set names utf8");
-		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		array(PDO::ATTR_PERSISTENT => true);
-	}catch(PDOException $e){
-		// Caso ocorra algum erro na conexão com o banco, exibe a mensagem
-		echo 'Função validaUsuario - Falha ao conectar no banco de dados: '.$e->getMessage();
-		session_unset();
-		session_destroy();
-		session_start();
-
-		die;
-	}
-	//echo $sql;
-	$sql = $pdo->prepare($sql);
-	$sql->execute();
-	$total = $sql->rowCount();
-	if($total==0){
-    // Nenhum registro foi encontrado => o usuário é inválido
-    	return false;
-	}else{
-		// Definimos a mensagem de erro
-		while($dados = $sql->fetch()) {	
-			$_SESSION['usuarioCodigo'] = $dados['codigo']; // Pega o valor da coluna 'id do registro encontrado no MySQL	
-			$_SESSION['usuarioUser'] = $dados['usuario']; // Pega o valor da coluna 'nome' do registro encontrado no MySQL	
-			$_SESSION['usuarioNivel'] = $dados['nivel']; // Pega o valor da coluna 'nivel' do registro encontrado no MySQL	
-			$_SESSION['usuarioNome'] = $dados['nome']; // Pega o valor da coluna 'nome' do registro encontrado no MySQL
-			$_SESSION['foto'] = $dados['foto']; // Pega o o nome do arquivo da foto
-			$_SESSION['agenda'] = $dados['host_pol']; // Pega o o nome do arquivo da foto
-			$nome = $_SESSION['usuarioNome'];
-			$pieces = explode(" ", $nome);
-			$primnome =  $pieces[0]; 
-			$_SESSION['primnome'] = $primnome;
-			$_SESSION['nometela'] = '<span class="badge">Usuário: '.$primnome.'</span>';
-
-			//$_SESSION['codCadastro'] = $dados['codcadastro']; // Pega o valor da coluna 'codcadastro' do registro encontrado no MySQL		
-		}
-		return true;
+  $sql = "SELECT * FROM `users` WHERE ".$cS." `usuario` = '".$nusuario."' AND ".$cS." `senha` = '".md5($nsenha)."' LIMIT 1";
+  try{
+      // Faz conexão com banco de daddos
+      $pdo = new PDO("mysql:host=".$_SESSION['servidor'].";dbname=".$_SESSION['banco'].";",$_SESSION['usuario'],$_SESSION['senha']);
+      $pdo->exec("set names utf8");
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      array(PDO::ATTR_PERSISTENT => true);
+  }catch(PDOException $e){
+      // Caso ocorra algum erro na conexão com o banco, exibe a mensagem
+      echo 'Função validaUsuario - Falha ao conectar no banco de dados: '.$e->getMessage();
+      session_unset();
+      session_destroy();
+      session_start();
+      die;
+  }
+  $sql = $pdo->prepare($sql);
+  $sql->execute();
+  $total = $sql->rowCount();
+  if($total==0){
+  // Nenhum registro foi encontrado => o usuário é inválido
+      return false;
+  }else{
+      // Definimos a mensagem de erro
+      while($dados = $sql->fetch()) {	
+          $_SESSION['usuarioCodigo'] = $dados['codigo']; // Pega o valor da coluna 'codigo do registro	
+          $_SESSION['usuarioUser'] = $dados['usuario']; // Pega o valor da coluna 'usuario' do registro	
+          $_SESSION['usuarioNivel'] = $dados['nivel']; // Pega o valor da coluna 'nivel' do registro
+          $_SESSION['usuarioNome'] = $dados['nome']; // Pega o valor da coluna 'nome' do registro
+          $_SESSION['foto'] = $dados['foto']; // Pega o o nome do arquivo da foto
+          $nome = $_SESSION['usuarioNome'];
+          $pieces = explode(" ", $nome);
+          $primnome =  $pieces[0]; // Pega o primeiro nome do campo usuarioNome
+          $_SESSION['primnome'] = $primnome;
+          $_SESSION['nometela'] = '<span class="badge">Usuário: '.$primnome.'</span>';
+      }
+      return true;
 	}
 	// Verifica a opção se sempre validar o login
 	if ($_SG['validaSempre'] == true) {
@@ -138,7 +128,17 @@ function expulsaVisitante() {
 //  header("Location: ".$_SG['paginaLogin']);
   header("Location: index.php");
 }
+/* encerra o sistema pela cabeçalho */
+function encerraSistema() {
+  // Remove as variáveis da sessão (caso elas existam)
+  unset($_SESSION['usuarioCodigo'], $_SESSION['usuarioNome'], $_SESSION['usuarioLogin'], $_SESSION['usuarioSenha']);
+  $_SESSION['loginErro'] = "Saída do Sistema com sucesso!";
+  // Manda pra tela de login
+  header("Location: ../index.php");
+}
+
 /**
+
 * Função para expulsar um visitante
 */
 function expulsaVisitante2() {
@@ -157,4 +157,3 @@ function expulsaVisitante3() {
   // Manda pra tela de login
   header("Location: ajax.php");
 }
-

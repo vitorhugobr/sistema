@@ -6,7 +6,7 @@ function altera_exame(exame) {
 		alert('não foi  possível iniciar o AJAX');
 		return;
 	}
-	ajax('altera_exame.php?id='+exame+'&descricao='+document.form1.txtdescricao.value, 'carregando');
+	ajax('altera_exame.php?id='+exame+'&descricao='+document.form1.txtdescricao.value, 'modal');
 	document.getElementById('edicao').innerHTML = "";
 }
 			
@@ -27,13 +27,13 @@ function carga_exames(pagina) {
 function descreveexame() {
   "use strict";
   if (Ajax.readyState == 1) {
-	  document.getElementById('carregando').innerHTML = '<img src="../imagens/ajax-loading2.gif" class="div-ajax-carregamento-pagina">'; ;
+	  document.getElementById('modal').innerHTML = '<img src="../imagens/ajax-loading2.gif" class="div-ajax-carregamento-pagina">'; ;
   }
   if (Ajax.readyState == 4) {					
 	  if (Ajax.status == 200) {
 		  // Receberemos um XML com as informações do CEP...
 		  var xmldoc = Ajax.responseXML;						
-		  document.getElementById('carregando').innerHTML = "";   
+		  document.getElementById('modal').innerHTML = "";   
 		  if(xmldoc.hasChildNodes()) {
 			  var nos = xmldoc.getElementsByTagName('info');
 			  if (nos.length===0){
@@ -63,7 +63,7 @@ function excluiexame(exame) {
 		return;
 	}
 	if (confirm("Confirma a Exclusão do exame..: "+exame)){
-		ajax2('exclui_exame.php?id='+exame, 'carregando');
+		ajax2('exclui_exame.php?id='+exame, 'modal');
 	}
 }
 			
@@ -76,7 +76,7 @@ function exclui_exame_solicitado(exame) {
 		return;
 	}
 	if (confirm("Confirma a Exclusão da solicitação do exame?")){
-		ajax2('exclui_exame_solicitado.php?id='+exame, 'carregando');
+		ajax2('exclui_exame_solicitado.php?id='+exame, 'modal');
 	}
 }
 
@@ -88,7 +88,7 @@ function excluir_item_exame(exame,id_exame) {
 		return;
 	}
 	if (confirm("Confirma a Exclusão do item do Exame?")){
-		ajax2('exclui_item_exame.php?cod_exame='+exame+'&id_exame='+id_exame, 'carregando');
+		ajax2('exclui_item_exame.php?cod_exame='+exame+'&id_exame='+id_exame, 'modal');
 	}
 }
 			
@@ -100,7 +100,7 @@ function exclui_exame(exame) {
 		return;
 	}
 	if (confirm("Confirma a Exclusão do exame..: "+exame)){
-		ajax2('exclui_todo_exame.php?id='+exame, 'carregando');
+		ajax2('exclui_todo_exame.php?id='+exame, 'modal');
 	}
 }
 			
@@ -137,7 +137,7 @@ function gravar_exames(cod_cadastro,total) {
 			alert('não foi  possível iniciar o AJAX');
 			return;
 		}
-		ajax2(parString, 'carregando');
+		ajax2(parString, 'modal');
 
 		// vai gravar os exames em itens_exames
 		for (var j=0; j<=total-1;j++){
@@ -152,11 +152,11 @@ function gravar_exames(cod_cadastro,total) {
 					return;
 				}
 				//alert(parStr);
-				ajax(parStr, 'carregando');
+				ajax(parStr, 'modal');
 			}
 		}
 	}
-	//window.location.replace("cadastro.php?codigo=0");
+	//window.location.replace("cadastro.php");
 
 }
 //--------------------------------------------------------------------------------------------------------------------			

@@ -271,7 +271,7 @@ function abrir_cadastro_pelo_apoio(cod_cadastro) {
 	}
 
 	ajax2("inicializa_global.php?cod_cadastro="+cod_cadastro,"carregando");
-	var param = '../eleitores/cadastro.php?codigo=0';
+	var param = '../eleitores/cadastro.php';
 	//alert(param);
 	open(param,"_self");		
 	

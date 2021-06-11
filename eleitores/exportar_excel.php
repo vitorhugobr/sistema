@@ -3,7 +3,7 @@ include_once("../seguranca.php");
 protegePagina();
 include_once("../utilitarios/funcoes.php");
 date_default_timezone_set('America/Sao_Paulo');
-$id = $_SESSION['id'];
+$id = $_SESSION['cod_usuario'];
 
 $_SESSION['funcao']="Exportar para Excel";
 ?>
@@ -658,7 +658,7 @@ function geraexcel(){
 	
     document.getElementById('mens').innerHTML = select;	
 
-	ajax('gera_excel.php?string='+select,'carregando');
+	ajax('gera_excel.php?string='+select,'modal');
   
 }
 

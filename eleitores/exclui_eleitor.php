@@ -5,6 +5,7 @@ protegePagina();
 include("../utilitarios/funcoes.php");
 
 $codigo = $_GET["P0"];
+
 $_SESSION['ult_eleitor_pesquisado']=0;
 
 $strsql3 = "DELETE FROM visitas where visitas.Visitante =". $codigo;

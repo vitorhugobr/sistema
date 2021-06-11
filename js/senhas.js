@@ -6,7 +6,7 @@ function grava_senha() {
 		if ($senha == $atual){
 			var r = confirm("Confirma a alteração da Senha?");
 			if (r == true) {
-				ajax('altera_senha.php?cod='+$cod+'&senha='+$senha, 'carregando');
+				ajax('altera_senha.php?cod='+$cod+'&senha='+$senha, 'modal');
 			} else {
 				alert("Operação CANCELADA pelo usuário!");
 				return false;
@@ -28,7 +28,7 @@ function busca_usuario() {
 			document.form1.txtUser.focus();
 			return false;
 		}
-		ajax('busca_user.php?user='+usuar+'&prg=ps', 'carregando');
+		ajax('busca_user.php?user='+usuar+'&prg=ps', 'modal');
 	}
 			
 //--------------------------------------------------------------------------------------------------------------------			

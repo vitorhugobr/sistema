@@ -2,7 +2,6 @@
 // Inclui o arquivo com o sistema de segurança
 require_once("seguranca.php");
 
-
 // Verifica se um formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   // Salva duas variáveis com o que foi digitado no formulário
@@ -68,7 +67,7 @@ function gravar($tabela, $operacao, $usuario, $conteudo) {
 	$strsqlo .= ')';
 	
 	// Faz conexão com banco de dados
-	$pdosqlo = new PDO("mysql:host=".HOST.";dbname=".DB.";",USER, PASS);
+	$pdosqlo = new PDO("mysql:host=".$_SESSION['servidor'].";dbname=".$_SESSION['banco'].";",$_SESSION['usuario'], $_SESSION['senha']);
 	$pdosqlo->exec("set names utf8");
 	$pdosqlo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	array(PDO::ATTR_PERSISTENT => true);

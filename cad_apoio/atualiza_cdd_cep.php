@@ -1,9 +1,9 @@
 <?php
-$_SG['servidor'] = "www.vitor.poa.br";
-$_SG['banco'] = "vitorpoa_teste";
-$_SG['usuario'] = "vitorpoa_user";
-$_SG['senha'] = "vhmo@2017";
-$_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+$_SESSION['servidor'] = "www.vitor.poa.br";
+$_SESSION['banco'] = "vitorpoa_teste";
+$_SESSION['usuario'] = "vitorpoa_user";
+$_SESSION['senha'] = "vhmo@2017";
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 if(!$_con) {  
 	echo "Não foi possivel conectar ao MySQL. Erro " .
 			mysqli_connect_errno() . " : " . mysql_connect_error();

@@ -13,7 +13,7 @@ function altera_consulta(id, indice) {
   var parString="id="+id+"&prioridade="+pri+"&situacao="+sit+"&fones="+tel+"&observacoes="+obs;
   //alert (parString);
   if (confirm("Confirma alteração?")){
-	ajax3('altera_consulta.php?'+parString,'carregando');
+	ajax3('altera_consulta.php?'+parString,'modal');
   }else{
 	alert("Cancelada pelo usuário!");	
   }			
@@ -45,7 +45,7 @@ function excluir_consulta(id) {
 	var parString = "excluir_lista_consulta.php?id="+id;
 //	alert(parString);
 	if (confirm("Confirma a Exclusão da Consulta?")){
-		ajax(parString,'carregando');	
+		ajax(parString,'modal');	
 	}
 }
 //-------------------------------------------------------------------------------------------------------------
@@ -55,7 +55,7 @@ function fecha_agenda_espera(clinica,data_agenda) {
 	var parString = "fecha_agenda_espera.php?clinica="+clinica+"&data_agenda="+data_agenda;
 //	alert(parString);
 	if (confirm("Confirma a Fechamento da Agenda?")){
-		ajax(parString,'carregando');	
+		ajax(parString,'modal');	
 	}
 }
 //------------------------------------------------------------------------------

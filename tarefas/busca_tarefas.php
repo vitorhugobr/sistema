@@ -26,14 +26,14 @@ if ($_SESSION['usuarioNivel']<2){
 		$busca .= " order by status, data_tarefa desc, nome asc";
 	}
 }
-//echo "pesquisa: ".$busca.'<br>';
+#echo "pesquisa: ".$busca.'<br>';
 
 $limite = $_con->query($busca);
 
 //echo 'Regs: '. $limite->num_rows;
 $totreg = $limite->num_rows;
 
-$total_reg = "12"; // número de registros por página	
+$total_reg = 11; // número de registros por página	
 
 $pagina=$_GET['pagina'];
 

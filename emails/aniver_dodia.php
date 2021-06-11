@@ -1,14 +1,14 @@
 <?php
 # formato da imagem a enviar: (9 colunas por 5 linhas no photoshop)
 session_start();
-$_SG['servidor'] = "www.vitor.poa.br";
-$_SG['banco'] = "vitorpoa_teste";
-$_SG['usuario'] = "vitorpoa_user";
-$_SG['senha'] = "vhmo@2017";
+$_SESSION['servidor'] = "www.vitor.poa.br";
+$_SESSION['banco'] = "vitorpoa_teste";
+$_SESSION['usuario'] = "vitorpoa_user";
+$_SESSION['senha'] = "vhmo@2017";
 
 
 include_once("../utilitarios/funcoes.php");
-$_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 if(!$_con) {  
 	echo "Não foi possivel conectar ao MySQL. Erro " .
 			mysqli_connect_errno() . " : " . mysql_connect_error();
@@ -106,8 +106,17 @@ require_once("../phpmailer/class.phpmailer.php");
 require_once("../phpmailer/class.smtp.php");
 
 # Inicia a classe PHPMailer
-$_sql = 'SELECT * from emails_aniver where MONTH(aniver)= '.$mes.' AND DAYOFMONTH(aniver) = '.$dia;
-#$_sql = 'SELECT * FROM emails_aniver WHERE codigo=11650';
+$_sql = 'select 
+    `cadastro`.`CODIGO` AS `codigo`,
+    `cadastro`.`SEXO` AS `sexo`,
+    `cadastro`.`NOME` AS `nome`,
+    `cadastro`.`EMAIL` AS `email`,
+    `cadastro`.`DTNASC` AS `aniver`,
+    `cadastro`.`APELIDO` AS `apelido` 
+  from 
+    `cadastro` 
+  where ((MONTH(cadastro.DTNASC)= '.$mes.') AND (DAYOFMONTH(cadastro.DTNASC) = '.$dia.') and (`cadastro`.`RECEBEMAIL` = 1) and (`cadastro`.`EMAIL` > "A") and (`cadastro`.`CONDICAO` = 1))';
+
 $_res = $_con->query($_sql);
 $qtd_emails= 0;
 $pessoas="";

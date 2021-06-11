@@ -64,7 +64,7 @@ if ($mysql_query->num_rows<1) {
 	
 	if ($qtdinv==0) {
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Nenhum E-mail Inválido<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
-		exit('<script>location.href = "../eleitores/cadastro.php?codigo=0"</script>'); 
+		exit('<script>location.href = "../eleitores/cadastro.php"</script>'); 
 
 	}
 
@@ -143,10 +143,11 @@ $_SESSION['funcao']="E-mails inválidos ".$qtdinv;
 
 <script>
 function abrir_cadastro_pelo_apoio(cod_cadastro) {
-	var param = '../eleitores/cadastro.php?codigo='+cod_cadastro;
+    $_SESSION['ult_eleitor_pesquisado']=cod_cadastro;
+	//ajax2("../cad_apoio/inicializa_global.php?cod_cadastro="+cod_cadastro,"carregando");
+	var param = '../eleitores/cadastro.php';
 	//alert(param);
-	//ajax5('../eleitores/cadastro.php?codigo='+cod_cadastro, 'carregando');
-	open(param,"_self");	
+	open(param,"_self");		
 	
 }
 	  

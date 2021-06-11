@@ -7,22 +7,6 @@
 	text-align: right;
 	
 }
-.nome_usuario_index {
-	font-family: Verdana, Geneva, sans-serif;
-	font-weight: bold;
-	font-size: 22px;
-	color: #FFF500;
-	text-align: center;
-	
-}
-.data_hora_index {
-	font-family: Tahoma, Geneva, sans-serif;
-	font-size: 9px;
-	font-style: normal;
-	color: #FFF;
-	text-align: center;
-}
-
 /*# sourceMappingURL=bootstrap.css.map */
 .rodape {
 	font-family: Tahoma, Geneva, sans-serif;

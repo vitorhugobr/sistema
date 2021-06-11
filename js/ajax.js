@@ -178,98 +178,96 @@ function ajaxN(urlN,divN){
 //-------------------------------------------------------------------------------------------------------
 function ajax(url,div){
 "use strict";
-	if (url==""){
-	 return;
-	}
-	//alert('funcao ajax com '+url+' - '+div);
-	 var div = document.getElementById(div);
-	 div.innerHTML = '<img src="../imagens/aguardar.gif" class="div-ajax-carregamento-pagina">'; 
-
-	 xhReq.open("GET",url,true);
-	 
-	 xhReq.onreadystatechange=function() {
-		  if(xhReq.readyState === 4) {
-			   div.innerHTML = xhReq.responseText ;
-			   geraJS(xhReq.responseText);
-		  }
-	 }
-	 xhReq.send(null);
+    var div = document.getElementById(div);
+    div.innerHTML = '<img src="../imagens/aguarde_engrenagens.gif">'; 
+    openModal();
+    xhReq.open("GET",url,true);      
+    xhReq.onreadystatechange=function() {
+    	if(xhReq.readyState == 4 && xhReq.status == 200) {
+          closeModal();            
+     	  div.innerHTML = xhReq.responseText ;
+      	  geraJS(xhReq.responseText);
+    	}
+    }
+    xhReq.send(null);
 }
 //-------------------------------------------------------------------------------------------------------		  
 function ajax2(url2,div2){
 "use strict";
-	 var div2 = document.getElementById(div2);
-	 div2.innerHTML = '<img src="../imagens/aguardar.gif" class="div-ajax-carregamento-pagina">'; 
-
-	 xhReq2.open("GET",url2,true);
-	 
-	 xhReq2.onreadystatechange=function() {
-		  if(xhReq2.readyState === 4) {
-			   div2.innerHTML = xhReq2.responseText ;
-			   geraJS2(xhReq2.responseText);
-		  }
-	 }
-	 xhReq2.send(null);
+    var div2 = document.getElementById(div2);
+    div2.innerHTML = '<img src="../imagens/aguarde_engrenagens.gif">'; 
+    openModal();
+    xhReq2.open("GET",url2,true);      
+    xhReq2.onreadystatechange=function() {
+    	if(xhReq2.readyState == 4 && xhReq2.status == 200) {
+          closeModal();            
+     	  div2.innerHTML = xhReq2.responseText ;
+      	  geraJS2(xhReq2.responseText);
+    	}
+    }
+    xhReq2.send(null);
 }
 		  
 //-------------------------------------------------------------------------------------------------------		  
 function ajax3(url3,div3){
 "use strict";
-	 var div3 = document.getElementById(div3);
-	 div3.innerHTML = '<img src="../imagens/aguardar.gif" class="div-ajax-carregamento-pagina">'; 
-
-	 xhReq3.open("GET",url3,true);
-	 
-	 xhReq3.onreadystatechange=function() {
-		  if(xhReq3.readyState === 4) {
-			   div3.innerHTML = xhReq3.responseText ;
-			   geraJS3(xhReq3.responseText);
-		  }
-	 }
-	 xhReq3.send(null);
+    var div3 = document.getElementById(div3);
+    div3.innerHTML = '<img src="../imagens/aguarde_engrenagens.gif">'; 
+    openModal();
+    xhReq3.open("GET",url3,true);      
+    xhReq3.onreadystatechange=function() {
+    	if(xhReq3.readyState == 4 && xhReq3.status == 200) {
+          closeModal();            
+     	  div3.innerHTML = xhReq3.responseText ;
+      	  geraJS3(xhReq3.responseText);
+    	}
+    }
+    xhReq3.send(null);
 }
 //-------------------------------------------------------------------------------------------------------
 function ajax4(url4,div4){
 "use strict";
-	 var div4 = document.getElementById(div4);
-	 div4.innerHTML = '<img src="../imagens/aguardar.gif" class="div-ajax-carregamento-pagina">'; 
-
-	 xhReq4.open("GET",url4,true);
-	 
-	 xhReq4.onreadystatechange=function() {
-		  if(xhReq4.readyState === 4) {
-			   div4.innerHTML = xhReq4.responseText ;
-			   geraJS4(xhReq4.responseText);
-		  }
-	 }
-	 xhReq4.send(null);
+    var div4 = document.getElementById(div4);
+    div4.innerHTML = '<img src="../imagens/aguarde_engrenagens.gif">'; 
+    openModal();
+    xhReq4.open("GET",url4,true);      
+    xhReq4.onreadystatechange=function() {
+    	if(xhReq4.readyState == 4 && xhReq4.status == 200) {
+          closeModal();            
+     	  div4.innerHTML = xhReq4.responseText ;
+      	  geraJS4(xhReq4.responseText);
+    	}
+    }
+    xhReq4.send(null);
 }
 //-------------------------------------------------------------------------------------------------------
 function ajax5(url5,div5){
 "use strict";
-	 var div5 = document.getElementById(div5);
-	 div5.innerHTML = '<img src="../imagens/aguardar.gif" class="div-ajax-carregamento-pagina">'; 
-
-	 xhReq5.open("GET",url5,true);
-	 
-	 xhReq5.onreadystatechange=function() {
-		  if(xhReq5.readyState === 4) {
-			   div5.innerHTML = xhReq5.responseText ;
-			   geraJS5(xhReq5.responseText);
-		  }
-	 }
-	 xhReq5.send(null);
+    var div5 = document.getElementById(div5);
+    div5.innerHTML = '<img src="../imagens/aguarde_engrenagens.gif">'; 
+    openModal();
+    xhReq5.open("GET",url5,true);      
+    xhReq5.onreadystatechange=function() {
+    	if(xhReq5.readyState == 4 && xhReq5.status == 200) {
+          closeModal();            
+     	  div5.innerHTML = xhReq5.responseText ;
+      	  geraJS5(xhReq5.responseText);
+    	}
+    }
+    xhReq5.send(null);
 }
 
 //-------------------------------------------------------------------------------------------------------
 function ajax6(url6,div6){
 "use strict";
     var div6 = document.getElementById(div6);
-    div6.innerHTML = '<img src="../imagens/aguardar.gif" class="div-ajax-carregamento-pagina">'; 
+    div6.innerHTML = '<img src="../imagens/aguarde_engrenagens.gif">'; 
+    openModal();
     xhReq6.open("GET",url6,true);      
     xhReq6.onreadystatechange=function() {
-    	if(xhReq6.readyState === 4) {
-      	  div6.innerHTML = xhReq6.responseText ;
+    	if(xhReq6.readyState == 4 && xhReq6.status == 200) {
+          closeModal();            
+     	  div6.innerHTML = xhReq6.responseText ;
       	  geraJS6(xhReq6.responseText);
     	}
     }
@@ -278,16 +276,19 @@ function ajax6(url6,div6){
 //-------------------------------------------------------------------------------------------------------
 function ajaxP(urlP,divP){
 "use strict";
-    var divP = document.getElementById(divP);
-    divP.innerHTML = '<img src="../imagens/aguardar.gif" class="div-ajax-carregamento-pagina">'; 
+    
+    document.getElementById(divP).innerHTML = '<img src="../imagens/aguarde_engrenagens.gif">'; 
+    openModal();
     xhReqP.open("GET",urlP,true);      
     xhReqP.onreadystatechange=function() {
-    	if(xhReqP.readyState === 4) {
-      	  divP.innerHTML = xhReqP.responseText ;
+    	if(xhReqP.readyState == 4 && xhReqP.status == 200) {
+          closeModal();            
+      	  document.getElementById(divP).innerHTML = xhReq6.responseText ;
       	  geraJSP(xhReqP.responseText);
     	}
     }
     xhReqP.send(null);
+
 }
 //-----------------------------------------------------------------------------------------------------
 function voltaPag(IDPag) {
@@ -305,3 +306,34 @@ function myFunction() {
     location.reload();
 }
 //-----------------------------------------------------------------------------------------------------
+function openModal() {
+    document.getElementById('modal').style.display = 'block';
+    document.getElementById('fade').style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('modal').style.display = 'none';
+    document.getElementById('fade').style.display = 'none';
+}
+
+function loadAjax(page) {
+    document.getElementById('results').innerHTML = '';
+    openModal();
+    var xhr = false;
+    if (window.XMLHttpRequest) {
+        xhr = new XMLHttpRequest();
+    }
+    else {
+        xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    if (xhr) {
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                closeModal();
+                document.getElementById("results").innerHTML = xhr.responseText;
+            }
+        }
+        xhr.open("GET", page, true);
+        xhr.send(null);
+    }
+}

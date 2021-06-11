@@ -10,27 +10,6 @@ if (liberado(1000)==0){
 }
 $_SESSION['funcao']="Cadastro";
 
-	$codigo =  $_GET['codigo'];
-	$theValue = (!get_magic_quotes_gpc()) ? addslashes($codigo) : $codigo;
-	$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-	$codigo = $theValue;
-//echo 'Codigo recebido -> '.$codigo.' <-<br>';
-if (($codigo == 0) OR ($codigo=NULL)){ 
-//	echo 'vlr session '. $_SESSION['ult_eleitor_pesquisado'].'<br>';
-	if ($_SESSION['ult_eleitor_pesquisado'] > 0){
-//		echo 'tem valr session<br>';
-		$codigo = $_SESSION['ult_eleitor_pesquisado'];
-	}else{
-//		echo 'session não criada';
-		$_SESSION['ult_eleitor_pesquisado'] = 0;
-	}
-}else{
-	$_SESSION['ult_eleitor_pesquisado'] = $codigo;
-//    echo 'alguma coisa';
-}
-
-
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -44,9 +23,8 @@ if (($codigo == 0) OR ($codigo=NULL)){
 <title>Cadastro</title>
 <link rel="icon" href="../imagens/favicon.ico">
 <!--- Component CSS -->
-  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
 <link href="../css/all.css" rel="stylesheet">
 <link href="../css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 <link href="../css/sticky-footer-navbar.css" rel="stylesheet">
@@ -67,48 +45,6 @@ if (($codigo == 0) OR ($codigo=NULL)){
 <script src="../js/ie-emulation-modes-warning.js"></script>
 <script type="text/javascript" src="../js/autocomplete.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script>
-//function checkAnyFormFieldEdited() {
-//    /*
-//     * If any field is edited,then only it will enable Save button
-//     */
-//    $(':text').keypress(function(e) { // text written
-//		alert("The text has been changed.");
-//    });
-//
-//    $(':text').keyup(function(e) {
-//        if (e.keyCode == 8 || e.keyCode == 46) { //backspace and delete key
-//    	alert("The text has been changed.");
-//        } else { // rest ignore
-//            e.preventDefault();
-//        }
-//    });
-//    $(':text').bind('paste', function(e) { // text pasted
-//    	alert("The text has been changed.");
-//    });
-//
-//    $('select').change(function(e) { // select element changed
-//    	alert("The text has been changed.");
-//    });
-//
-//    $(':radio').change(function(e) { // radio changed
-//    	alert("The text has been changed.");
-//    });
-//}
-//$(document).ready(function(){
-////    $(':text').keypress(function(e) { // text written
-////		alert("The text has been changed.");
-////    });
-//	
-////  $("input").change(function(){
-////    alert("The text has been changed.");
-////  });
-////  $("select").change(function(){
-////    alert("Select has been changed.");
-////  });
-//});
-</script>
-
 <script>
 function enableFields(verdade){
 	var totalFields = document.form1.elements.length;
@@ -136,42 +72,36 @@ function inclui_novo(){
 	document.getElementById("btnCancel").disabled = false;
 	document.getElementById("btnExcCad").disabled = false;
 	document.getElementById("btnAltCad").disabled = false;		
-	document.getElementById("btn_endereco").disabled = false;
+	//document.getElementById("btn_endereco").disabled = false;
 	document.getElementById("btnincvis").disabled = false;
 	enableFields(false);
 	document.form1.txtcodigo.disabled = true;
 	document.getElementById("chkcondicao").checked = true;
-	ajax("incluir_novo.php",'carregando');	
+	ajax("incluir_novo.php",'modal');	
 }
 
 function cancela_novo() {
 	var cod = document.form1.txtcodigo.value;
-	ajax('exclui_novo.php?cod='+cod, 'carregando');
+	ajax('exclui_novo.php?cod='+cod, 'modal');
 }			
 
 	</script>
 </head>
-
-<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" role="document" onLoad="javascript:enableFields(true);PesquisaEleitor(<?php echo $_SESSION['ult_eleitor_pesquisado']?>);" onFocus="PesquisaEleitor(<?php echo $_SESSION['ult_eleitor_pesquisado']?>);">
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="javascript:enableFields(true);PesquisaEleitor(<?php echo $_SESSION['ult_eleitor_pesquisado']?>)">
 
 <?php 
-	include("../utilitarios/cabecalho.php"); ?>	  
- <?php
+	include("../utilitarios/cabecalho.php"); ?>	 
 
-if(isset($_SESSION['msg'])){
-	echo $_SESSION['msg'];
-	unset($_SESSION['msg']);
-}
-?>
-<nav class="nav navbar-expand-sm shadow-sm navbar-light sticky-top">
+<nav class="nav stick-top navbar-expand-sm shadow-sm navbar-light">
 	<div class="container-fluid" style="align-items: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
 		<span class="navbar-brand"></span>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<?php
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <?php
 				if (liberado(1001)>0){ 
 						echo '<li class="nav-item active">
 						<button type="button" id="btnNovo" name="btnNovo" class="btn btn-sm btn-incluir" onclick="javascript:inclui_novo();">
@@ -215,57 +145,47 @@ if(isset($_SESSION['msg'])){
 					</li>';
 				} 
 				?>
-				<li class="nav-item">
-					 <button type="button" class="btn btn-sm btn-limpatela" onclick="javascript:reload_cadastro();">
-					<i class="fas fa-eraser" aria-hidden="true text-muted" aria-hidden="true"></i> Limpar Tela
-					</button>
-				</li> 
-				<li class="nav-item">
-					 <button type="button" class="btn btn-sm btn-voltar" onclick="javascript:window.history.back();">
-					<i class="fas fa-backward" aria-hidden="true text-muted" aria-hidden="true"></i> Voltar Tela Anterior
-					</button>
-				</li> 
-				<li class="nav-item">
-					 	<a href="../relatorios/cadastro_duplos.php" class="btn btn-yellow btn-sm" role="button">
-					 		<i class="fas fa-list"></i> Cadastros Duplos
-					 	</a>
-				</li>
-				<li class="nav-item">
-					 	<a href="../relatorios/emails_invalidos.php" class="btn btn-cyan btn-sm" role="button">
-					 		<i class="fas fa-envelope"></i> E-mails Inválidos
-					 	</a>
-				</li>
-				<li class="nav-item">
-					<a href="../index2.php" class="btn btn-menu btn-sm" role="button">
-						<i class="fas fa-list-ul" aria-hidden="true text-muted" aria-hidden="true"></i> Menu
-					</a>
-				</li>
-			</ul>
-		</div>
+            <li class="nav-item">
+              <button type="button" class="btn btn-sm btn-limpatela" onclick="javascript:reload_cadastro();"> <i class="fas fa-eraser" aria-hidden="true text-muted"></i> Limpar Tela </button>
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-sm btn-voltar" onclick="javascript:window.history.back();"> <i class="fas fa-backward" aria-hidden="true text-muted"></i> Voltar Tela Anterior </button>
+            </li>
+            <li class="nav-item"> <a href="../relatorios/cadastro_duplos.php" class="btn btn-yellow btn-sm" role="button"> <i class="fas fa-list"></i> Cadastros Duplos </a> </li>
+            <li class="nav-item"> <a href="../relatorios/emails_invalidos.php" class="btn btn-cyan btn-sm" role="button"> <i class="fas fa-envelope"></i> E-mails Inválidos </a> </li>
+            <li class="nav-item"> <a href="../index2.php" class="btn btn-menu btn-sm" role="button"> <i class="fas fa-list-ul" aria-hidden="true text-muted"></i> Menu </a> </li>
+          </ul>
+        </div>
 	</div>
 </nav>
+ <?php
+
+if(isset($_SESSION['msg'])){
+	echo $_SESSION['msg'];
+	unset($_SESSION['msg']);
+}
+?>
 
 <form name="form1" method="post" action="">
 <div class="container-fluid">
 	<div class="btn-toolbar mb-3" role="toolbar" aria-label="Informações">
- 	  <div id="mensagem_sistema" class="col-12"></div>
+ 	  <div id="mensagem_sistema" class="col-12 badge badge-danger">Campos em VERMELHO - preenchimento obrigatório></div>
 	  <div class="btn-group btn-group-sm" role="group" aria-label="Principal" id="home">
 		<a href="#" class="btn btn-cancelar btn-sm">Dados Gerais</a>
 		<a href="#tela_enderecos" class="btn btn-cancelar btn-sm">Endereços</a>
 		<a href="#tela_contatos" class="btn btn-cancelar btn-sm">Contatos</a>
 		<a href="#tela_demandas" class="btn btn-cancelar btn-sm">Demandas</a>
 		<?php 
-			if (liberado(1010)>0){  ?>
+			if (liberado(1010)>0)  ?>
 				<a href="#tela_prontuarios" class="btn btn-cancelar btn-sm">Prontuários</a>
-		<?php } 
-			if (liberado(1011)>0){  ?>
+		<?php  
+			if (liberado(1011)>0)  ?>
 				<a href="#tela_receituarios" class="btn btn-cancelar btn-sm">Receituários</a>
-		<?php } 
-			if (liberado(1009)>0){  ?>
-				<a href="#tela_exames" class="btn btn-cancelar btn-sm">Exames</a>	  </div>
+		<?php  
+			if (liberado(1009)>0)  ?>
+				<a href="#tela_exames" class="btn btn-cancelar btn-sm">Exames</a>	  
+      </div>
 	  <div class="input-group">&nbsp;&nbsp;
-		<?php } 
-		?>
 	  </div>
 	</div>
  
@@ -350,7 +270,91 @@ if(isset($_SESSION['msg'])){
 		</select>
     </div>
   </div>
-  
+
+    
+  <div class="jumbotron" id="tela_demandas">
+   <!-- endereços-->
+	  <div class="form-row col-form-label-sm">
+        <div class="col-sm-1" align="right">
+		  <label class="textoAzul" for="chkfiliado">Endereço</label>							
+		</div>
+
+        <div class="col-6">
+		  <input type="text" id="txtpesqendereco" name="txtpesqendereco" maxlength="80" size="'60" placeholder="Informe o endereço para pesquisar eleitor pelo endereço">
+	    </div>	
+          <div class="col-sm-5 textoVermelho" align="left"><i class="fas fa-arrow-circle-left" aria-hidden="true text-muted"></i> Usar este campo APENAS para consulta!</div>
+	  </div>
+	<div class="form-row col-form-label-sm">
+		<div class="col-sm-1" align="right">
+		  <label class="textoAzul" for="chkfiliado">Logradouro</label>							
+		</div>
+		<div class="col-sm-5">
+		  <input class="form form-control" name="rua" type="text" id="rua" size="50" maxlength="50" onChange="javascript:this.value=this.value.toUpperCase();">							
+		</div>
+		<div class="col-sm-1" align="right">
+		  <label for="cep" class="textoAzul">CEP</label>
+		</div>
+		<div class="col-sm=2">
+			<input type="text" id="cep" name="cep" class="form form-control" size="8" maxlength="8" >
+		</div>
+		<div class="col-sm-3">
+			<button name="btnUpdEnd" id="btnUpdEnd" class="btn btn-consultar btn-sm" onclick="javascript:buscacep(document.form1.cep.value);" type="button"><i class="fas fa-search"></i> Consultar</button>		
+		</div>
+   	 </div>
+	<div class="form-row col-form-label-sm">
+		<div class="col-1" align="right">
+			<label class="textoAzul">Tipologia</label>
+		</div>
+		<div class="col-2">
+			<input class="form form-control" name="tipolog" type="text" id="tipolog" size="10" maxlength="10" onChange="javascript:this.value=this.value.toUpperCase();">
+		</div>
+		<div class="col-1" align="right">
+			<label class="textoAzul">Bairro</label>
+		</div>
+		<div class="col-2">
+			<input class="form form-control" name="bairro" type="text" id="bairro" size="20" maxlength="20" onChange="javascript:this.value=this.value.toUpperCase();"/>
+		</div>
+		<div class="col-1" align="right">
+			<label class="textoAzul">Cidade</label>
+		</div>
+		<div class="-col-3">
+			<input class="from form-control" name="cidade" type="text" id="cidade" size="30" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();"/>
+		</div>
+		<div class="col-1" align="right">
+			<label class="textoAzul">UF</label>
+		</div>
+		<div class="col-1">
+			<input class="form form-control" name="uf" type="text" id="uf" size="2" maxlength="2" onChange="javascript:this.value=this.value.toUpperCase();"/>
+		</div>
+	</div>	
+	<div class="form-row col-form-label-sm">
+		<div class="col-1" align="right">
+			<label class="textoAzul">Numero</label>
+		</div>
+		<div class="col-2">
+			<input class="form form-control" name="numero" type="text" id="numero" size="6" maxlength="6">
+		</div>
+		<div class="col-1">
+			<label class="textoAzul">Complemento</label>
+		</div>
+		<div class="col-2">
+			<input class="form form-control" name="complemento" type="text" id="complemento" size="20" maxlength="20" onChange="javascript:this.value=this.value.toUpperCase();"/>
+			<input name="tipo" type="hidden" id="tipo" value="RESIDENCIAL">
+			<input name="padrao" type="hidden" id="padrao" value="S">
+			<input name="id_endereco" type="hidden" id="id_endereco">
+			<input name="reg" type="hidden" id="reg">
+		</div>
+	</div>
+<!--	<div class="form-row col-form-label-sm">
+		<div class="col-12 text-center">
+			  <button id="btn_endereco" name="btn_endereco" class="btn btn-alterar btn-sm" onclick='javascript:atual_ender();'>
+				<i class="fas fa-save" aria-hidden="true"></i> Gravar Endereço
+			  </button>
+		</div>
+	</div>
+-->  
+    </div>
+    
 <!--  nova linha -->  
  
   <div class="form-row col-form-label-sm">
@@ -530,84 +534,6 @@ if(isset($_SESSION['msg'])){
   </div>
   <hr />
    
-  <!-- endereços-->
-  <div class="jumbotron" id="tela_enderecos">
-	  <div class="form-row col-form-label-sm">
-		  <div class="col-1 h6 align-content-center" id="enderecos"><a href="#"><img src="../imagens/toppage.png">&nbsp;<sub>ENDEREÇO</sub></a>&nbsp;
-		  </div>
-		  <div class="col-8">
-			<input type="text" id="txtpesqendereco" name="txtpesqendereco" maxlength="80" size="'60" placeholder="Informe o endereço para pesquisar eleitor pelo endereço">
-		  </div>	
-	  </div>
-	<div class="form-row col-form-label-sm">
-		<div class="col-sm-1" align="right">
-		  <label class="textoAzul" for="chkfiliado">Logradouro</label>							
-		</div>
-		<div class="col-sm-5">
-		  <input class="form form-control" name="rua" type="text" id="rua" size="50" maxlength="50" onChange="javascript:this.value=this.value.toUpperCase();">							
-		</div>
-		<div class="col-sm-1" align="right">
-		  <label for="cep" class="textoAzul">CEP</label>
-		</div>
-		<div class="col-sm=2">
-			<input type="text" id="cep" name="cep" class="form form-control" size="8" maxlength="8" >
-		</div>
-		<div class="col-sm-3">
-			<button name="btnUpdEnd" id="btnUpdEnd" class="btn btn-consultar btn-sm" onclick="javascript:buscacep(document.form1.cep.value);" type="button"><i class="fas fa-search"></i> Consultar</button>		
-		</div>
-   	 </div>
-	<div class="form-row col-form-label-sm">
-		<div class="col-1" align="right">
-			<label class="textoAzul">Tipologia</label>
-		</div>
-		<div class="col-2">
-			<input class="form form-control" name="tipolog" type="text" id="tipolog" size="10" maxlength="10" onChange="javascript:this.value=this.value.toUpperCase();">
-		</div>
-		<div class="col-1" align="right">
-			<label class="textoAzul">Bairro</label>
-		</div>
-		<div class="col-2">
-			<input class="form form-control" name="bairro" type="text" id="bairro" size="20" maxlength="20" onChange="javascript:this.value=this.value.toUpperCase();"/>
-		</div>
-		<div class="col-1" align="right">
-			<label class="textoAzul">Cidade</label>
-		</div>
-		<div class="-col-3">
-			<input class="from form-control" name="cidade" type="text" id="cidade" size="30" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();"/>
-		</div>
-		<div class="col-1" align="right">
-			<label class="textoAzul">UF</label>
-		</div>
-		<div class="col-1">
-			<input class="form form-control" name="uf" type="text" id="uf" size="2" maxlength="2" onChange="javascript:this.value=this.value.toUpperCase();"/>
-		</div>
-	</div>	
-	<div class="form-row col-form-label-sm">
-		<div class="col-1" align="right">
-			<label class="textoAzul">Numero</label>
-		</div>
-		<div class="col-2">
-			<input class="form form-control" name="numero" type="text" id="numero" size="6" maxlength="6">
-		</div>
-		<div class="col-1">
-			<label class="textoAzul">Complemento</label>
-		</div>
-		<div class="col-8">
-			<input class="form form-control" name="complemento" type="text" id="complemento" size="20" maxlength="20" onChange="javascript:this.value=this.value.toUpperCase();"/>
-			<input name="tipo" type="hidden" id="tipo" value="RESIDENCIAL">
-			<input name="padrao" type="hidden" id="padrao" value="S">
-			<input name="id_endereco" type="hidden" id="id_endereco">
-			<input name="reg" type="hidden" id="reg">
-		</div>
-	</div>
-	<div class="form-row col-form-label-sm">
-		<div class="col-12 text-center">
-			  <button id="btn_endereco" name="btn_endereco" class="btn btn-alterar btn-sm" onclick='javascript:atual_ender();'>
-				<i class="fas fa-save" aria-hidden="true"></i> Gravar Endereço
-			  </button>
-		</div>
-	</div>
-   </div>
   
   <!-- contatos -->
   <div class="jumbotron" id="tela_contatos">
@@ -700,13 +626,44 @@ Exames</div>
        			<div id="lblrespcad" class="text text-danger"></div>
 			</div>
    	</div>
+
  <!-- Final das linhas--> 
 </div>
 </form>
 <script language="javascript">
 function reload_cadastro() {
-	var param = 'cadastro.php?codigo=0';
-	open(param,"_self");	
+	document.form1.txtcodigo.value = "";
+	document.form1.txtnome.value = "";
+	document.form1.txtsexo.value = "";
+	document.getElementById('lbldtcad').innerHTML = "";  // data cadastramento
+	document.form1.txtdtnasc.value = "";
+	document.form1.txtcargo.value = "";
+	document.form1.txtresidencial.value = "";					
+	document.form1.txtcelular.value = "";
+	document.form1.txtcomercial.value = "";
+	document.form1.txtcpf.value = "";
+	document.form1.txtobs.value = "";	
+	document.form1.txtemail.value = "";
+	document.form1.txtgrupo.value = "";	
+	document.form1.txtorigem.value = "";
+	document.form1.txtprofissao.value = "";
+	document.form1.txtzona.value = "";
+	document.form1.txtsecao.value = "";
+	document.form1.txtpaimae.value = "";				
+	document.form1.chkfiliado.checked = false;
+	document.form1.txtempresa.value = "";
+	document.form1.chkvotou.checked = false;	
+	document.form1.txtramo.value = "";
+	document.form1.chkemail.checked= false;	
+	document.form1.chkimpresso.checked = false;	
+	document.form1.txtcampanha.value = "";	
+	document.form1.txtface.value = "";	
+	document.form1.txttwitter.value = "";	
+	document.form1.txtoutra.value = "";	
+	document.form1.txtapelido.value = "";	
+	document.form1.txtestadocivil.value = "";	
+	document.form1.txtclass.value = "";	
+    ajax('zera_codigo.php','modal');
 }
 
 </script>

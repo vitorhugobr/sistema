@@ -47,9 +47,10 @@ if($total==0){
 		document.form1.txtemail.value = '<?php echo $email ?>';		
 		//document.getElementById("txtemail").disabled = false;
 		document.getElementById("imgfoto").src = '<?php echo $imagem ?>';
-		document.getElementById("btnnovo").disabled = true;;
-		document.getElementById("btngrava").disabled = false;
-		document.getElementById("btnexclui").disabled = false;
+		document.getElementById("btnnovo").style.display = "none";;
+		document.getElementById("btngrava").style.display = "block";
+		document.getElementById("btnexclui").disabled = "block";
+        //document.getElementById("btncancela").style.display="block";
 		document.form1.txtnivel.focus();
 		</script>
 		<?php

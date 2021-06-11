@@ -15,7 +15,7 @@ if (liberado(3000)==0)) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Segurança">
   <meta name="author" content="Vitor H M Oliveira">
-  <title>Arbitragem</title>
+  <title>Segurança</title>
   <script src="../js/jquery.min.js"></script>
   <script src="../js/bootstrap.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../css/sticky-footer-navbar.css"/>

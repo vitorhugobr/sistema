@@ -55,7 +55,7 @@
 				$_SESSION['msg'] = "<div class='alert alert-danger' role='alert'>".$error[5]."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 			}else{
 				$sql = "UPDATE users SET foto='$nome_imagem.jpg' WHERE codigo=$codigo";
-				$pdosql = new PDO("mysql:host=".HOST.";dbname=".DB.";",USER, PASS);
+    	         $pdosql = new PDO("mysql:host=".$_SESSION['servidor'].";dbname=".$_SESSION['banco'].";",$_SESSION['usuario'], $_SESSION['senha']);
 				$pdosql->exec("set names utf8");
 				$pdosql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 				array(PDO::ATTR_PERSISTENT => true);

@@ -126,11 +126,11 @@ if (!$_SESSION["V_1000"]){
 	<script language="javascript">
   function excluirelation(id) {
     if (confirm("Confirma a Exclusão do relacionamento?")){
-      ajax('exclui_relation.php?id='+id,'carregando');			
+      ajax('exclui_relation.php?id='+id,'modal');			
     }
   }
   function reload_cadastro() {
-	ajax('zera_codigo.php','carregando');
+	ajax('zera_codigo.php','modal');
   }
   
   function novoeleitor(cod){

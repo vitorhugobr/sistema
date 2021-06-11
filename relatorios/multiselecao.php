@@ -57,15 +57,9 @@ if ($opcao==8){
 <script type="text/javascript" src="../js/autocomplete.js"></script>
 <script src="../js/ie10-viewport-bug-workaround.js"></script>
 </head>
-<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" role="document" onFocus="javascript:location.reload();">
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onFocus="javascript:location.reload();">
 
 <?php include_once("../utilitarios/cabecalho.php");?>
-	<?php
-	if(isset($_SESSION['msg'])){
-		echo $_SESSION['msg'];
-		unset($_SESSION['msg']);
-	}
-	?>
 
 	<form name="form1" method="POST" action="monta.php" target="_blank">
   	<div class="custom-control custom-checkbox custom-control-inline">
@@ -85,14 +79,20 @@ if ($opcao==8){
 				  </a>
 		<input name="hPV" type="hidden" id="hPV">
   	</div>
-  		<div class="text-center"> Defina quais registros serão selecionados:&nbsp;&nbsp;
+	<?php
+	if(isset($_SESSION['msg'])){
+		echo $_SESSION['msg'];
+		unset($_SESSION['msg']);
+	}
+	?>        
+    <div class="text-center"> Defina quais registros serão selecionados:&nbsp;&nbsp;
             <p>
                 <input type="radio" name="condicao" value="T" onClick="setacondicao(3)" checked/> Todos
                 <input type="radio" name="condicao" value="A" onClick="setacondicao(1)"/> Ativos
                 <input type="radio" name="condicao" value="I" onClick="setacondicao(0)"/> Inativos
             </p>
 		<input name="condition" type="hidden" id="condition" value="3">
-		</div>
+    </div>
 
 		<table class="table table-striped table-sm">
 			<thead class="thead-dark">

@@ -2,14 +2,14 @@
 //
 date_default_timezone_set('America/Sao_Paulo');
 
-$_SG['servidorcomum'] = "www.vitor.poa.br";
-$_SG['bancocomum'] = "vitorpoa_teste";
-$_SG['usuariocomum'] = "vitorpoa_user";
-$_SG['senhacomum'] = "vhmo@2017";
+$_SESSION['servidorcomum'] = "www.vitor.poa.br";
+$_SESSION['bancocomum'] = "vitorpoa_teste";
+$_SESSION['usuariocomum'] = "vitorpoa_user";
+$_SESSION['senhacomum'] = "vhmo@2017";
 
-$_con  = new mysqli($_SG['servidorcomum'],$_SG['usuariocomum'],$_SG['senhacomum'],$_SG['bancocomum']);	
+$_con  = new mysqli($_SESSION['servidorcomum'],$_SESSION['usuariocomum'],$_SESSION['senhacomum'],$_SESSION['bancocomum']);	
 if(!$_con) {  
-	echo "Não foi possivel conectar ao MySQLi " .$_SG['servidor']."<br> Erro " .
+	echo "Não foi possivel conectar ao MySQLi " .$_SESSION['servidor']."<br> Erro " .
 			mysqli_connect_errno() . " : " . mysql_connect_error();
 	exit;
 }
@@ -20,67 +20,60 @@ mysqli_query($_con, 'SET character_set_client=utf8');
 mysqli_query($_con, 'SET character_set_results=utf8');
 $limpeza="";
 $horaini = date("d-m-Y H:i:s");
-for ($i = 1; $i <= 7; $i++) {
+for ($i = 1; $i <= 2; $i++) {
 	switch ($i) {
-		case 1:  //Dr Thiago
-			$_SG['servidor'] = "191.252.101.58";
-			$_SG['banco'] = "drthiago_sigre";
-			$_SG['usuario'] = "sigre";
-			$_SG['senha'] = "sigre2018";
-			$_SG['politico'] = "Dr Thiago";
-			//	senha cpanel:   usuário: 
-			break;
-		case 2:  // Pujol
-			$_SG['servidor'] = "www.rpujol.com.br";
-			$_SG['banco'] = "rpujolco_pujol";
-			$_SG['usuario'] = "rpujolco_pujol";
-			$_SG['senha'] = "vhm@2019";
-			$_SG['politico'] = "Pujol";
-			//  senha cpanel: "VHMO@@2019"  usuário: "rpujolcom"
-			break;
-		case 3:  // Mauro Pinheiro
-			$_SG['servidor'] = "www.mauropinheiro.net.br";
-			$_SG['banco'] = "mauropin_mauro";
-			$_SG['usuario'] = "mauropinheironet";
-			$_SG['senha'] = "UIT8765%kuyi&*";
-			$_SG['politico'] = "Mauro Pinheiro";
-			//	senha cpanel: "UIT8765%kuyi&*"  usuário: "mauropinheironet"
-			break;
-		case 4:  // Domingos Cunha
-			$_SG['servidor'] = "www.domingoscunha.com.br";
-			$_SG['banco'] = "domingos_domingos";
-			$_SG['usuario'] = "domingos_domingo";
-			$_SG['senha'] = "domi@2019";
-			$_SG['politico'] = "Domingos Cunha";
-			//	senha cpanel: "%Yb[2,XNP=D%"  usuário: "domingoscunhacom"
-			break;
-		case 5:  // Tessaro
-			$_SG['servidor'] = "www.vereadortessaro.com.br";
-			$_SG['banco'] = "vereador_sigre";
-			$_SG['usuario'] = "vereador_tessaro";
-			$_SG['senha'] = "tessaro@2019";
-			$_SG['politico'] = "Tessaro";
-			//	senha cpanel:    usuário: 
-			break;
-		case 6:  // Democratas Porto Alegre
-			$_SG['servidor'] = "www.rpujol.com.br";
-			$_SG['banco'] = "rpujolco_dem";
-			$_SG['usuario'] = "rpujolco_dem";
-			$_SG['senha'] = "democrataspoa@2019";
-			$_SG['politico'] = "Dem PoA";
-			//	senha cpanel: "VHMO@@2019"  usuário: "rpujolcom"
-			break;
-		case 7:  // Sebastião Melo
-			$_SG['servidor'] = "www.sebastiaomelo.poa.br";
-			$_SG['usuario'] = "sebastia_melo";
-			$_SG['senha'] = "lmqY{uxa(WrL";
-			$_SG['banco'] = "sebastia_sigre"; 
-			$_SG['politico'] = "Sebastião Melo";
-			//	senha cpanel: "=1fTUSoRJ}Ru"  usuário: "sebastiaomelopoa"
-			break;
+	case 1:  //Dr Thiago
+		$_SESSION['servidor'] = "191.252.101.58";
+		$_SESSION['banco'] = "drthiago_sigre";
+		$_SESSION['usuario'] = "sigre";
+		$_SESSION['senha'] = "sigre2018";
+		//	senha cpanel:   usuário: 
+		break;
+//	case 2:  // Pujol
+//		$_SESSION['servidor'] = "www.rpujol.com.br";
+//		$_SESSION['banco'] = "rpujolco_pujol";
+//		$_SESSION['usuario'] = "rpujolco_pujol";
+//		$_SESSION['senha'] = "vhm@2019";
+//		//  senha cpanel: "@H2n,?9#l0pR"  usuário: "rpujolcom"
+//		break;
+//	case 3:  // Mauro Pinheiro
+//		$_SESSION['servidor'] = "www.mauropinheiro.net.br";
+//		$_SESSION['banco'] = "mauropin_mauro";
+//		$_SESSION['usuario'] = "mauropin_mauro";
+//		$_SESSION['senha'] = "vitor@2020";
+//		//	senha cpanel: "ae(Zx!Ncjt^7"  usuário: "mauropinheironet"
+//		break;
+//	case 4:  // Tessaro
+//		$_SESSION['servidor'] = "www.vereadortessaro.com.br";
+//		$_SESSION['banco'] = "vereador_sigre";
+//		$_SESSION['usuario'] = "vereador_tessaro";
+//		$_SESSION['senha'] = "tessaro@2019";
+//		//	senha cpanel: "cKGm;!X$aNdZ"    usuário: "vereadortessaroc"
+//		break;
+//	case 5:  // Democratas Porto Alegre
+//		$_SESSION['servidor'] = "www.rpujol.com.br";
+//		$_SESSION['banco'] = "rpujolco_dem";
+//		$_SESSION['usuario'] = "rpujolco_dem";
+//		$_SESSION['senha'] = "democrataspoa@2019";
+//		//	senha cpanel: "VHMO@@2019"  usuário: "rpujolcom"
+//		break;
+	case 2:  // Sebastião Melo
+		$_SESSION['servidor'] = "www.sebastiaomelo.poa.br";
+		$_SESSION['usuario'] = "sebastia_melo";
+		$_SESSION['senha'] = "lmqY{uxa(WrL";
+		$_SESSION['banco'] = "sebastia_sigre"; 
+		//	senha cpanel: "@H2n,?9#l0pR"  usuário: "sebastiaomelopoa"
+		break;
+//	case 7:  // Luiz Braz
+//		$_SESSION['servidor'] = "www.vitor.poa.br";
+//		$_SESSION['usuario'] = "vitorpoa_luiz";
+//		$_SESSION['senha'] = "braz@2020";
+//		$_SESSION['banco'] = "vitorpoa_luizbraz"; 
+//		//	senha cpanel: "K_8zE{VmHQy1"  usuário: "vitorpoa"
+//		break;
 	}
 
-	$mysqli = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+	$mysqli = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 
 	/* check connection */
 	if (mysqli_connect_errno()) {
@@ -90,7 +83,7 @@ for ($i = 1; $i <= 7; $i++) {
 	$query = "select * from cdd";
 	$mysql_query = $_con->query($query);
 	$tot=0;
-	$limpeza .= "<strong><i>".$_SG['politico'].'</i></strong><br>';
+	$limpeza .= "<strong><i>".$_SESSION['servidor'].'</i></strong><br>';
 	while ($dados_s = $mysql_query->fetch_assoc()) {
 		$cepi = $dados_s["inicial"];
 		$cepf = $dados_s["final"];

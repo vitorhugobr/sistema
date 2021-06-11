@@ -90,15 +90,16 @@ if(isset($_SESSION['msg'])){
 	unset($_SESSION['msg']);
 }
 ?>
-<pre><div class="col-12">
-                       <strong>CEP</strong>: <input  type="text"  id="cep" name="cep" maxlength="8" size="8" autofocus/> <button class="btn btn-consultar btn-sm" type="button" onclick="ajax('pesquisa_ajax.php?cep='+document.getElementById('cep').value+'&consulta=cep','carregando');"> <i class="fas fa-search" aria-hidden="true"></i> Pesquisar </button> <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm" title="Pesquisa Correios" target="_blank">Buscar no site dos Correios</a></div>
+<pre>
+<div class="col-12">
+                       <strong>CEP</strong>: <input  type="text"  id="cep" name="cep" maxlength="8" size="12" autofocus/> <button class="btn btn-consultar btn-sm" type="button" onclick="ajax('pesquisa_ajax.php?cep='+document.getElementById('cep').value+'&consulta=cep','modal');"> <i class="fas fa-search" aria-hidden="true"></i> Buscar </button> <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/BuscaCepEndereco.cfm" title="Pesquisa Correios" target="_blank">Buscar no site dos Correios</a></div>
 <div class="col-12">                 <strong>Tipologia</strong>: <input  name="tipologia" type="text" id="tipologia" size="10" maxlength="10" placeholder="Rua, Avenida etc"  onChange="javascript:this.value=this.value.toUpperCase();" /></div>
 <div class="col-6">                <strong>Logradouro</strong>: <input name="rua" type="text" id="rua"  placeholder="NOME DO LOGRADOURO" maxlength="50" onChange="javascript:this.value=this.value.toUpperCase();" /></div>
 <div class="col-12">                 <strong>Numeração</strong>: <input name="numeracao" type="text" id="numeracao"  maxlength="50" onChange="javascript:this.value=this.value.toUpperCase();" /></div>		
 <div class="col-12">                 <strong>Bairro</strong>(1): <input name="bairro" type="text" id="bairro" size="30" placeholder="BAIRRO DO LOGRADOURO" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();" /> </div>       
 <div class="col-12">                 <strong>Bairro(2)</strong>: <input  name="bairro2" type="text" id="bairro2" size="30"  maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();" /></div>       
-<div class="col-12">                    <strong>Cidade</strong>: <input name="cidade" type="text" id="cidade" size="30" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();" /> </div>              
-<div class="col-12">                        <strong>UF</strong>: <input name="uf" type="text" id="uf" size="2" maxlength="2" onChange="javascript:this.value=this.value.toUpperCase();" /></div>
+<div class="col-12">                    <strong>Cidade</strong>: <input name="cidade" type="text" id="cidade" size="30" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();" value="PORTO ALEGRE" /> </div>              
+<div class="col-12">                        <strong>UF</strong>: <input name="uf" type="text" id="uf" size="2" maxlength="2" onChange="javascript:this.value=this.value.toUpperCase();" value="RS"/></div>
 <div class="col-12">  <strong> Região entrega ECT(CDD)</strong>: <input name="reg" type="text" id="reg" size="3" maxlength="3" onChange="javascript:this.value=this.value.toUpperCase();" /></div>
 <div class="col-12">          <strong>Última alteração:</strong> <span id="dtcad"></span> <strong>por</strong> <span id="respcad"></span> </div>
 

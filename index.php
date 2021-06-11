@@ -21,10 +21,9 @@ if (!file_exists($arqconfig)) {
 
 $linhas = explode("\n", file_get_contents($arqconfig));
 $_SESSION['id'] = $linhas[0]; // usuario =A(100,80);
-$_SESSION['versao']= $linhas[1];
-#echo $_SESSION['id']."<br>";
+$_SESSION['versao']= '20.29.09-01:10';
+include_once("connections/banco.php");
 include_once("seguranca.php");
-
 require_once("utilitarios/funcoes.php");
 
 $sql = "SELECT * from config where id = ".$_SESSION['id'];
@@ -68,9 +67,9 @@ try{
 		  $_SESSION['fones_pol'] = $dados_s['fones_pol'];
 		  $_SESSION['email_pol'] = $dados_s['email_pol'];
 		  $_SESSION['partido'] = $dados_s['partido']; 
-		  $_SESSION['servidor']= $dados_s['host_pol'];
 		  $_SESSION['user_login']= $dados_s['login_pol'];
-		  $_SESSION['user_pass']= $dados_s['passw_pol'];	  
+		  $_SESSION['user_pass']= $dados_s['passw_pol'];
+          $_SESSION['agenda'] = $dados_s['host_pol'];
 	  	  $imagem = $dados_s['endfoto'];
 			if ($dados_s['ativo']==1){
 				header("Location: manutencao.html");		
@@ -145,7 +144,7 @@ $_SESSION['ult_eleitor_pesquisado']=0;
   <div class="text-center mb-4">
     <img class="mb-4" src="imagens/vhmo.png" alt="" width="32" height="32"><br>
     <h5 align="center">
-<div id="time" class="data_hora_index"></div>
+<div id="time" class="rodape"></div>
 <script >
 	function checkTime(i) {
 			if (i < 10) {
@@ -168,13 +167,13 @@ $_SESSION['ult_eleitor_pesquisado']=0;
 	}
 	startTime();
 </script>
-<div id="time" class="data_hora_index">
+<div id="time" class="rodape">
 <?php echo date('d/m/Y')?></div></h5>
-	<div class="nome_usuario_index" >
+	<div class="sigla_sistema">
 		<?php echo $_SESSION['sistemaabrev']?></div>
-	<div class="data_hora_index">
+	<div class="rodape">
 	<?php echo $_SESSION['versao'].'-'.$_SESSION['id'];?></div>
-	<div class="nome_usuario_index"><?php echo $_SESSION['politico'] ?>
+	<div class="politico"><?php echo $_SESSION['politico'] ?>
   	</div>
    <div class="form-signin-heading text-danger">Área Restrita <?php echo $area_acesso; ?>
    </div>

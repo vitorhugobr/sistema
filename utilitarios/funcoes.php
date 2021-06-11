@@ -763,13 +763,13 @@ function gravaoperacoes($tabela, $operacao, $usuario, $conteudo) {
 	$strsqlo .= ')';
 	
 	// Faz conexão com banco de dados
-	$pdosqlo = new PDO("mysql:host=".HOST.";dbname=".DB.";",USER, PASS);
-	$pdosqlo->exec("set names utf8");
-	$pdosqlo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$pdo = new PDO("mysql:host=".$_SESSION['servidor'].";dbname=".$_SESSION['banco'].";",$_SESSION['usuario'], $_SESSION['senha']);
+	$pdo->exec("set names utf8");
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	array(PDO::ATTR_PERSISTENT => true);
 	//echo $msgok;
 	try{
-		$statementSql = $pdosqlo->prepare($strsqlo);
+		$statementSql = $pdo->prepare($strsqlo);
 		$statementSql->execute();
 		return $statementSql->rowCount();;
 	}catch(PDOException $e){
@@ -777,7 +777,7 @@ function gravaoperacoes($tabela, $operacao, $usuario, $conteudo) {
 		//die;
 		return false;
 	}
-	$pdosqlo= null;
+	$pdo= null;
 }
 //----------------------------------------------------------------------------------------------------------------------
 /** Função para executar comando mysql*/
@@ -787,37 +787,36 @@ function executa_sql($sql, $msgok, $msgerro, $display_msg, $atualiza_pagina) {
 	// $msgerro é a mensagem em casa de ERRO
 	// $display_msg é se a mensagem será mostrada(true) ou não(false)
 	// $atualiza_pagina é se a tela será atualizada(true) ou não(false)
-	// Faz conexão com banco de dados
-	$pdosql = new PDO("mysql:host=".HOST.";dbname=".DB.";",USER, PASS);
-	$pdosql->exec("set names utf8");
-	$pdosql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+   //	 Faz conexão com banco de dados
+	$pdo = new PDO("mysql:host=".$_SESSION['servidor'].";dbname=".$_SESSION['banco'].";",$_SESSION['usuario'], $_SESSION['senha']);
+    
+	$pdo->exec("set names utf8");
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	array(PDO::ATTR_PERSISTENT => true);
 	//echo $msgok;
 	try{
-		$statementSql = $pdosql->prepare($sql);
+		$statementSql = $pdo->prepare($sql);
 		$statementSql->execute();
 		if ($display_msg){
 			$_SESSION['msg'] = "<div class='alert alert-success alert-dismissible fade show' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgok."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
 		}
 		if ($atualiza_pagina){
-
-				echo '<script>window.location.reload();</script>'; 
-			
+			echo '<script>window.location.reload();</script>'; 
 		}
 		return $statementSql->rowCount();
 	}catch(PDOException $e){  // Caso ocorra algum erro exibe a mensagem
 		if ($e->errorInfo[1] == 1062) {      // duplicate entry, do something else
  			$_SESSION['msg'] = "<div class='alert alert-danger alert-dismissible fade show'' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro.". JÁ EXISTE ESTE REGISTRO!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  		
 		} else {      // an error other than duplicate entry occurred
- 			$_SESSION['msg'] = "<div class='alert alert-danger alert-dismissible fade show'' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro." Motivo:\n".$e->getMessage()."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  			
+ 			$_SESSION['msg'] = "<div class='alert alert-danger alert-dismissible fade show'' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro." Motivo ERRO:\n".$e->getMessage()." - ".$sql."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  			
 		}
 		//die;
 		return false;
 	}
-	$pdosql= null;
+	$pdo= null;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------------------------------
 /** Função para executar comando mysql*/
 function executa_sql_comum($sql, $msgok, $msgerro, $display_msg, $atualiza_pagina) {
 	// $sql é a instrução sql a ser executada
@@ -826,13 +825,14 @@ function executa_sql_comum($sql, $msgok, $msgerro, $display_msg, $atualiza_pagin
 	// $display_msg é se a mensagem será mostrada(true) ou não(false)
 	// $atualiza_pagina é se a tela será atualizada(true) ou não(false)
 	// Faz conexão com banco de dados
-	$pdosql = new PDO("mysql:host=".HOSTCOMUM.";dbname=".DBCOMUM.";",USERCOMUM, PASSCOMUM);
-	$pdosql->exec("set names utf8");
-	$pdosql->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$pdo = new PDO("mysql:host=".$_SESSION['servidorcomum'].";dbname=".$_SESSION['bancocomum'].";",$_SESSION['usuariocomum'], $_SESSION['senhacomum']);
+
+	$pdo->exec("set names utf8");
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	array(PDO::ATTR_PERSISTENT => true);
 	//echo $msgok;
 	try{
-		$statementSql = $pdosql->prepare($sql);
+		$statementSql = $pdo->prepare($sql);
 		$statementSql->execute();
 		if ($display_msg){
 			$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgok."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
@@ -845,12 +845,12 @@ function executa_sql_comum($sql, $msgok, $msgerro, $display_msg, $atualiza_pagin
 		if ($e->errorInfo[1] == 1062) {      // duplicate entry, do something else
  			$_SESSION['msg'] = "<div class='alert alert-danger' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro.". JÁ EXISTE ESTE REGISTRO!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  		
 		} else {      // an error other than duplicate entry occurred
- 			$_SESSION['msg'] = "<div class='alert alert-danger' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro." Motivo:\n".$e->getMessage()."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  			
+ 			$_SESSION['msg'] = "<div class='alert alert-danger' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro." Motivo ERRO:\n".$e->getMessage()."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  			
 		}
 		//die;
 		return false;
 	}
-	$pdosql= null;
+	$pdo= null;
 }
 //----------------------------------------------------------------------------------------------------------------------
 /*****
@@ -978,8 +978,7 @@ function datadehoje()
 
 //---------------------------------------------------------------------------------------------------------------------
 function buscar_ultima_consulta($cod_cadastro) {
-  $cons  = new mysqli(HOST,USER,PASS,DB);	
-  if(!$cons) {  
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);  if(!$cons) {  
 	  echo "Não foi possivel conectar ao MySQL. Erro " .
 			  mysqli_connect_errno() . " : " . mysql_connect_error();
 	  exit;
@@ -999,7 +998,7 @@ function buscar_ultima_consulta($cod_cadastro) {
 }
 //---------------------------------------------------------------------------------------------------------------------
 function busca_qtde_respostas($cod_demanda) {
-  $cons  = new mysqli(HOST,USER,PASS,DB);	
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
   if(!$cons) {  
 	  echo "Não foi possivel conectar ao MySQL. Erro " .
 			  mysqli_connect_errno() . " : " . mysql_connect_error();
@@ -1020,7 +1019,7 @@ function busca_qtde_respostas($cod_demanda) {
 }
 //--------------------------------------------------------------------------------------------------------------------
 function busca_qtde_faltas($cod_cadastro) {
-  $cons  = new mysqli(HOST,USER,PASS,DB);	
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
   if(!$cons) {  
 	  echo "Não foi possivel conectar ao MySQL. Erro " .
 			  mysqli_connect_errno() . " : " . mysql_connect_error();
@@ -1042,8 +1041,7 @@ function busca_qtde_faltas($cod_cadastro) {
 //--------------------------------------------------------------------------------------------------------------------
 function busca_tarefa($demanda) {
 	
-  $cons  = new mysqli(HOST,USER,PASS,DB);	
-  if(!$cons) {  
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);  if(!$cons) {  
 	  echo "Não foi possivel conectar ao MySQL. Erro " .
 			  mysqli_connect_errno() . " : " . mysql_connect_error();
 	  exit;
@@ -1054,7 +1052,26 @@ function busca_tarefa($demanda) {
   mysqli_query($cons, 'SET character_set_client=utf8');
   mysqli_query($cons, 'SET character_set_results=utf8');
 
-  $query2 = "SELECT * FROM busca_encaminha WHERE numero=".$demanda;
+  $query2 = "select 
+    `e`.`numero` AS `numero`,
+    `c`.`NOME` AS `nome`,
+    `e`.`data` AS `data`,
+    `secretarias`.`descricao` AS `secretaria`,
+    `e`.`protocolo` AS `protocolo`,
+    `e`.`situacao` AS `situacao2`,
+    `e`.`situacao` AS `situacao`,
+    `e`.`temresponsavel` AS `temresponsavel`,
+    `e`.`tarefa` AS `tarefa`,
+    `e`.`operador` AS `operador`,
+    `e`.`assunto` AS `assunto`,
+    `e`.`descricao` AS `descricao`,
+    `e`.`codigo` AS `codigo`,
+    `users`.`usuario` AS `usuario`,
+    `e`.`endereco` AS `endereco` 
+  from 
+    (((`encaminhamentos` `e` left join `cadastro` `c` on(`c`.`CODIGO` = `e`.`codigo`)) left join `secretarias` on(`e`.`assunto` = `secretarias`.`codigo`)) left join `users` on(`e`.`temresponsavel` = `users`.`codigo`)) 
+  WHERE numero = ".$demanda." order by 
+    `e`.`data` desc";
   $mysql_query2 = $cons->query($query2);
   $qtderegs2 = $mysql_query2->num_rows;
   if ($qtderegs2>0) {
@@ -1068,7 +1085,7 @@ function busca_tarefa($demanda) {
 }
 //--------------------------------------------------------------------------------------------------------------------
 function busca_grupos() {
-  $cons  = new mysqli(HOST,USER,PASS,DB);	
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
   if(!$cons) {  
 	  echo "Não foi possivel conectar ao MySQL. Erro " .
 			  mysqli_connect_errno() . " : " . mysql_connect_error();
@@ -1096,7 +1113,7 @@ function busca_grupos() {
 }
 //--------------------------------------------------------------------------------------------------------------------
 function busca_secretaria($codigo) {
-  $cons  = new mysqli(HOST,USER,PASS,DB);	
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
   if(!$cons) {  
 	  echo "Não foi possivel conectar ao MySQL. Erro " .
 			  mysqli_connect_errno() . " : " . mysql_connect_error();
@@ -1122,7 +1139,7 @@ return $retorno;
 }
 //--------------------------------------------------------------------------------------------------------------------
 function busca_email_user($codigo) {
-  $cons  = new mysqli(HOST,USER,PASS,DB);	
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
   if(!$cons) {  
 	  echo "Não foi possivel conectar ao MySQL. Erro " .
 			  mysqli_connect_errno() . " : " . mysql_connect_error();
@@ -1148,7 +1165,7 @@ function busca_email_user($codigo) {
 }
 //--------------------------------------------------------------------------------------------------------------------
 function busca_user($codigo) {
-  $cons  = new mysqli(HOST,USER,PASS,DB);	
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
   if(!$cons) {  
 	  echo "Não foi possivel conectar ao MySQL. Erro " .
 			  mysqli_connect_errno() . " : " . mysql_connect_error();
@@ -1172,7 +1189,7 @@ function busca_user($codigo) {
   }
 	return $retorno;
 }
-//--------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
 // Esta função buscará se o user está liberado para usar uma função do sistema
 function liberado($funcao) {  
 	#echo "Liberado ".$funcao."<br>";

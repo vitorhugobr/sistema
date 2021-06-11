@@ -1,6 +1,7 @@
 <?php  
 include_once("../seguranca.php"); // Inclui o arquivo com o sistema de segurança
 protegePagina(); 
+include_once("../utilitarios/funcoes.php");
 $_SESSION['funcao'] = "Usuários";
 
 ?>
@@ -35,18 +36,63 @@ $_SESSION['funcao'] = "Usuários";
 			document.form1.mudou_usuario.value = 1;
 		}
 	});
-
+    window.onload = function() {
+        document.getElementById("btncancela").style.display="none";
+        document.getElementById("btngrava").style.display="none";
+        document.getElementById("btnexclui").style.display="none";
+    };
 </script>
 </head>
 <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
 <?php include_once("../utilitarios/cabecalho.php");?>
-<?php
-if(isset($_SESSION['msg'])){
-	echo $_SESSION['msg'];
-	unset($_SESSION['msg']);
-}
-?>
-<div id="carga_foto"></div>
+  <nav class="navbar navbar-expand-sm navbar-light shadow-sm">
+  	<div class="container">
+    	<span class="navbar-brand">
+        </span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+			  <?php 
+              if (liberado(4000)>0){   
+                echo '<li class="nav-item"><button type="button" name="btnnovo" id="btnnovo" class="btn btn-sm btn-incluir" onclick="inclui_usuario()">
+				<i class="fas fa-plus"></i> Novo
+			         </button></li>';
+                echo '<li class="nav-item"><button type="button" name="btngrava" id="btngrava" class="btn btn-success btn-sm" value="Gravar" onClick="altera_usuario()" >
+				<i class="fas fa-save"></i> Gravar
+                    </button></li>';
+                echo '<li class="nav-item"><button type="button" class="btn btn-sm btn-excluir" name="btnexclui" id="btnexclui" onclick="excluir_usuario()" >
+				<i class="fas fa-user-times" aria-hidden="true text-muted" aria-hidden="true"></i> Excluir
+			         </button></li>';
+                echo '<li class="nav-item"><button type="button" id="btncancela" name="btncancela" class="btn btn-sm btn-cancelar" onclick="deleta_cancela_usuario()">
+				<i class="fas fa-undo" aria-hidden="true text-muted" aria-hidden="true"></i> Cancelar
+			         </button></li>';
+              }
+              echo '<li class="nav-item"><button type="button" class="btn btn-sm btn-limpatela" onclick="javascript:location.reload();">
+				<i class="fas fa-eraser" aria-hidden="true text-muted" aria-hidden="true"></i> Limpar Tela
+			    </button></li>';
+                ?>
+              <li class="nav-item">
+                  <a href="../senhas/index.php" class="btn btn-voltar btn-sm" role="button">
+                      <i class="fas fa-backward" aria-hidden="true"></i>  Voltar
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="../index2.php" class="btn btn-menu btn-sm" role="button">
+                      <i class="fas fa-list-ul" aria-hidden="true"></i>  Menu
+                  </a>
+              </li>
+          </ul>
+      </div>
+   	</div>
+   </nav>
+	<?php
+	if(isset($_SESSION['msg'])){
+		echo $_SESSION['msg'];
+		unset($_SESSION['msg']);
+	}
+	?><div id="carga_foto"></div>
 <form action="" method="post" name="form1" id="form1" enctype="multipart/form-data">
       <table width="100%" border="0">
         <tr>
@@ -112,30 +158,6 @@ if(isset($_SESSION['msg'])){
             <input name="txtconfirma" type="hidden" id="txtconfirma" size="50" maxlength="50" />
           </td>
         </tr>
-       <tr>
-          <td>&nbsp;</td>
-          <td>
-			<button type="button" name="btnnovo" id="btnnovo" class="btn btn-sm btn-incluir" onclick="inclui_usuario()">
-				<i class="fas fa-plus"></i> Novo
-			</button>
-            <button type="hidden" name="btngrava" id="btngrava" class="btn btn-success btn-sm" value="Gravar" onClick="altera_usuario()" disabled>
-				<i class="fas fa-save"></i> Gravar
-            </button>
-			<button type="button" class="btn btn-sm btn-excluir" name="btnexclui" id="btnexclui" onclick="excluir_usuario()" disabled>
-				<i class="fas fa-user-times" aria-hidden="true text-muted" aria-hidden="true"></i> Excluir
-			</button>
-			<button type="button" id="btncancela" name="btncancela" class="btn btn-sm btn-cancelar" onclick="deleta_cancela_usuario()" disabled>
-				<i class="fas fa-undo" aria-hidden="true text-muted" aria-hidden="true"></i> Cancelar
-			</button>
-			<button type="button" class="btn btn-sm btn-limpatela" onclick="javascript:location.reload();">
-				<i class="fas fa-eraser" aria-hidden="true text-muted" aria-hidden="true"></i> Limpar Tela
-			</button>
-			<button type="button" class="btn btn-sm btn-voltar" onclick="voltaPag('../senhas/index.php')">
-				<i class="fas fa-backward" aria-hidden="true text-muted" aria-hidden="true"></i> Voltar
-			</button>
-		   </td>
-
-        </tr>        
 	</table>
     <div class="container-fluid"s>
     	<div class="row text-primary">

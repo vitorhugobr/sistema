@@ -27,14 +27,14 @@ if ($mysql_query->num_rows<1) {
 	  echo '</script>';
 	}else{
 	  echo "<script>";
-	  echo 'document.form1.txtnome.value= "'.$usu.'";';
+	  echo 'document.form1.txtnome.value= "'.$nome.'";';
 	  echo 'document.form1.txtCodigo.value ="'. $codigo.'";';		
 	  echo 'document.form1.txtUser.value ="'. $usu.'";';			
 	  echo 'document.form1.txtusuario.value ="'. $usu.'";';			
 	  echo 'document.form1.txtNivel.value ="'. $niv.'";';			
 	  echo 'document.form1.txtSenha0.value ="";';			
 	  echo 'document.form1.txtSenha1.value ="";';			
-	  echo 'document.form1.txtSenha0.focus() ="";';			
+	  echo 'document.form1.txtSenha0.focus();';			
 	  echo '</script>';
 	}
   }

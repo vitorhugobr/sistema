@@ -22,7 +22,7 @@ function altera_campanha(campanha) {
 		alert('não foi  possível iniciar o AJAX');
 		return;
 	}
-	ajax('altera_campanha.php?campanha='+campanha+'&desc='+document.form1.txtdescricao.value, 'carregando');
+	ajax('altera_campanha.php?campanha='+campanha+'&desc='+document.form1.txtdescricao.value, 'modal');
 	document.getElementById('edicao').innerHTML = "";
 }
 			

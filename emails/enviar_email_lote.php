@@ -1,6 +1,6 @@
 <?php 
 session_start();
-$_SESSION['id']=2;
+
 include('../connections/banco.php');
 
 $politico = 'Reginaldo Pujol';

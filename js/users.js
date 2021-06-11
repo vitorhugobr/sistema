@@ -9,7 +9,7 @@ function buscaUser() {
 		return;
 	}
 //	alert(usuario);
-	ajax3('busca_user.php?user='+usuario+'&prg=ac','carregando');
+	ajax3('busca_user.php?user='+usuario+'&prg=ac','modal');
 	ajax2('busca_liberacoes.php?user='+usuario,'liberacoes');
 
 }			
@@ -80,6 +80,6 @@ function buscar_usuario() {
 		return;
 	}
   	//alert('Chama busca_usuario');	
-	ajax('busca_usuario.php?user='+usuario,'carregando');
+	ajax('busca_usuario.php?user='+usuario,'modal');
 }
 //-----------------------------------------------------------

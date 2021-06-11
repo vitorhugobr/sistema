@@ -40,7 +40,7 @@ $strsql .= ")";
 
 gravaoperacoes("visitas","I", $_SESSION["usuarioUser"],"Incluída visita #: ".$codigo);
 			
-$resposta = executa_sql($strsql,"Contato/Visitas incluída com sucesso!","ERRO ao incluir contato/visita",false,false);
+$resposta = executa_sql($strsql,"Contato/Visitas incluída com sucesso!","ERRO ao incluir contato/visita",true,false);
 			
 ?>
 

@@ -6,9 +6,7 @@ require_once('../utilitarios/funcoes.php');
 
 // função abaixo usada somente aqui
 function liberado_aqui($usuario,$funcao){
-	$_cono  = new mysqli(HOST,USER,PASS,DB);
-
-	if(!$_cono) {  
+    $_cono  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	if(!$_cono) {  
 		echo "Não foi possível conectar ao MySQL. Erro " .
 				mysqli_connect_errno() . " : " . mysql_connect_error();
 		exit;

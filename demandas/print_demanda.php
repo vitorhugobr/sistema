@@ -193,8 +193,4 @@ if ($mysql_query->num_rows<1) {
 //	
 
 $pdf->Output(); // IMPRIME O PDF NA TELA
-
 ?>
-
-
-

@@ -44,9 +44,9 @@ function atual_ender() {
 	}
 	//alert(parString);
 	if (tipo==='A'){
-   		ajax5('atualiza_endereco.php?'+parString, 'carregando');
+   		ajax5('atualiza_endereco.php?'+parString, 'modal');
 	}else{
-   		ajax5('inclui_endereco.php?'+parString, 'carregando');
+   		ajax5('inclui_endereco.php?'+parString, 'modal');
 	}
 }
 
@@ -66,7 +66,7 @@ function buscacep(cod) {
 		return false;
 	}
 	//alert(cod);
-	ajax5('busca_cep.php?codigo='+cod, 'carregando');
+	ajax5('busca_cep.php?codigo='+cod, 'modal');
 
 }			
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ function busca_cod_cep(cod) {
 		return false;
 	}
 	//alert(cod);
-	ajax5('busca_cep.php?codigo='+cod, 'carregando');
+	ajax5('busca_cep.php?codigo='+cod, 'modal');
 
 }			
 //------------------------------------------------------------------------------------------------------------------------------------			
@@ -95,7 +95,7 @@ function buscarua() {
 		document.form1.rua.focus();
 		return false;
 	}
-	ajax5('busca_rua.php?rua='+rua, 'carregando');
+	ajax5('busca_rua.php?rua='+rua, 'modal');
 
 }			
 //------------------------------------------------------------------------------------------------------------------------------------			

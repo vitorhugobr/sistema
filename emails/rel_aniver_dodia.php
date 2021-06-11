@@ -4,15 +4,15 @@ session_start();
 
 include_once("../utilitarios/funcoes.php");
 
-$_SG['servidor'] = "www.vitor.poa.br";
+$_SESSION['servidor'] = "www.vitor.poa.br";
 
-$_SG['banco'] = "vitorpoa_teste";
+$_SESSION['banco'] = "vitorpoa_teste";
 
-$_SG['usuario'] = "vitorpoa_user";
+$_SESSION['usuario'] = "vitorpoa_user";
 
-$_SG['senha'] = "vhmo@2017";
+$_SESSION['senha'] = "vhmo@2017";
 
-$_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 
 if(!$_con) {  
 
@@ -43,7 +43,6 @@ if (!file_exists($arqconfig)) {
 $linhas = explode("\n", file_get_contents($arqconfig));
 $id = $linhas[0]; // usuario =A(100,80);
 $versao= $linhas[1];
-$_SESSION['id'] = $id;
 
 $_sql = "SELECT * from config where id = ".$id;
 

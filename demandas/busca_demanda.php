@@ -5,7 +5,26 @@ require_once('../utilitarios/funcoes.php');
 
 $numero = $_GET['numero'];
 
-$query = "SELECT * FROM busca_encaminha WHERE numero = $numero";
+$query = "select 
+    `e`.`numero` AS `numero`,
+    `c`.`NOME` AS `nome`,
+    `e`.`data` AS `data`,
+    `secretarias`.`descricao` AS `secretaria`,
+    `e`.`protocolo` AS `protocolo`,
+    `e`.`situacao` AS `situacao2`,
+    `e`.`situacao` AS `situacao`,
+    `e`.`temresponsavel` AS `temresponsavel`,
+    `e`.`tarefa` AS `tarefa`,
+    `e`.`operador` AS `operador`,
+    `e`.`assunto` AS `assunto`,
+    `e`.`descricao` AS `descricao`,
+    `e`.`codigo` AS `codigo`,
+    `users`.`usuario` AS `usuario`,
+    `e`.`endereco` AS `endereco` 
+  from 
+    (((`encaminhamentos` `e` left join `cadastro` `c` on(`c`.`CODIGO` = `e`.`codigo`)) left join `secretarias` on(`e`.`assunto` = `secretarias`.`codigo`)) left join `users` on(`e`.`temresponsavel` = `users`.`codigo`)) 
+  WHERE numero = $numero order by 
+    `e`.`data` desc ";
 
 $mysql_query = $_con->query($query);
 $mostra_demanda="";
@@ -319,19 +338,11 @@ $_SESSION['funcao']="Demanda # ".$numero;
 
 	</script>
 </head>
-<body onFocus="javascript:location.reload();">
+<body >
  <?php include_once("../utilitarios/cabecalho.php");?>
 
-  	<?php
-	if(isset($_SESSION['msg'])){
-		echo $_SESSION['msg'];
-		unset($_SESSION['msg']);
-	}
-	?>
- <form class="form-inline" name="form2" method="post" action="">
-
+  <div class="container-fluid">
   <nav class="navbar navbar-expand-sm navbar-light shadow-sm">
-  	<div class="container">
     	<span class="navbar-brand">
         </span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -388,9 +399,17 @@ $_SESSION['funcao']="Demanda # ".$numero;
               </li>
           </ul>
       </div>
-   	</div>
    </nav>
+   	</div>
+<?php
+    
+if(isset($_SESSION['msg'])){
+    echo $_SESSION['msg'];
+    unset($_SESSION['msg']);
+}
+?>
 
+ <form class="form-inline" name="form2" method="post" action="">
 
 <div class="container-fluid">
 	<div id="mostraE"><?php echo $mostra_demanda?></div>

@@ -40,7 +40,7 @@ if (liberado(5700)==0){
   	<script src="../js/ie10-viewport-bug-workaround.js"></script>
 	<script type="text/javascript" src="../js/autocomplete.js"></script>
 	</head>
-  <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="carga_secretarias(1)" onBlur="carga_secretarias(1)" onFocus="carga_secretarias(1)">
+  <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="carga_secretarias(1)">
 
 <?php include("../utilitarios/cabecalho.php"); ?>
     

@@ -1,5 +1,6 @@
 <?php
-# comando https://www.vitor.poa.br/sigre/emails/aniver_dodia_pujol_informado.php?codigo = 
+# comando https://www.vitor.poa.br/sigre/emails/aniver_dodia_thiago_informado.php?codigo = 
+use PHPMailer \ PHPMailer \ PHPMailer;
 $codigo = $_GET['codigo'];
 include_once("../utilitarios/funcoes.php");
 
@@ -12,12 +13,12 @@ $politico= 'Dep. Dr Thiago';
 #$email_pol= 'dr.thiago@al.rs.gov.br';
 $email_pol = 'duharte@terra.com.br';
 // conectar ao banco do usuário
-$_SG['servidor'] = "191.252.101.58";
-$_SG['banco'] = "drthiago_sigre";
-$_SG['usuario'] = "sigre";
-$_SG['senha'] = "sigre2018";
+$_SESSION['servidor'] = "191.252.101.58";
+$_SESSION['banco'] = "drthiago_sigre";
+$_SESSION['usuario'] = "sigre";
+$_SESSION['senha'] = "sigre2018";
 
-$_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 if(!$_con) {  
 	echo "Não foi possivel conectar ao MySQL. Erro " .
 			mysqli_connect_errno() . " : " . mysql_connect_error();
@@ -34,10 +35,21 @@ $datatoday = getdate();
 $dia = $datatoday["mday"];
 $mes = $datatoday["mon"];
 
-require_once("../phpmailer/class.phpmailer.php");
-require_once("../phpmailer/class.smtp.php");
+require_once("../phpmailer/PHPMailer.php");
+require_once("../phpmailer/SMTP.php");
+require_once("../phpmailer/Exception.php");
 
-$_sql = 'SELECT * from emails_aniver where MONTH(aniver)= '.$mes.' AND DAYOFMONTH(aniver) = '.$dia.' AND codigo='.$codigo;
+$_sql = 'select 
+    `cadastro`.`CODIGO` AS `codigo`,
+    `cadastro`.`SEXO` AS `sexo`,
+    `cadastro`.`NOME` AS `nome`,
+    `cadastro`.`EMAIL` AS `email`,
+    `cadastro`.`DTNASC` AS `aniver`,
+    `cadastro`.`APELIDO` AS `apelido` 
+  from 
+    `cadastro` 
+  where MONTH(`cadastro`.`DTNASC`)= '.$mes.' AND DAYOFMONTH(`cadastro`.`DTNASC`) = '.$dia.' AND `cadastro`.`CODIGO`='.$codigo;
+
 echo $_sql.'<br'>
 $_res = $_con->query($_sql);
 $qtd_emails= 0;
@@ -249,62 +261,20 @@ if ($tot_pessoas_select== 0){
 	}else{
 		$mens_qtde = '<pre>Foram enviadas '.$qtd_emails.' de '.$tot_pessoas_select.' possíveis mensagens de e-mail de aniversário em '.date("d/m/Y").', conforme abaixo:<br>'.$pessoas.$final.'</pre>';
 	}
-	# Inicia a classe PHPMailer
-	$mail = new PHPMailer(true);
-	try {
-		# Define os dados do servidor e tipo de conexão
-		$mail->IsSMTP(); // Define que a mensagem será SMTP
-		$mail->Host = "empregosnainternet.com.br"; # Endereço do servidor SMTP
-		$mail->Port = 587; // Porta TCP para a conexão
-		$mail->SMTPAuth = true; # Usar autenticação SMTP - Sim
-		$mail->Username = 'folder'; # Usuário de e-mail
-		$mail->Password = 'cfcd378b6'; // # Senha do usuário de e-mail
-		$mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
-		$mail->CharSet = "UTF-8";
-		$mail->smtpConnect(
-			array(
-				"ssl" => array(
-				"verify_peer" => false,
-				"verify_peer_name" => false,
-				"allow_self_signed" => true
-				)
-			)
-		);
-		# Define o remetente (você)
-		$mail->From = 'sigre@vitor.poa.br'; # Seu e-mail
-		$mail->FromName = 'Sistema Sigre'; // Seu nome
-		# Define os dados técnicos da Mensagem
-		$mail->IsHTML(true); # Define que o e-mail será enviado como HTML
-		#$mail->addBCC("vhmoliveira@gmail.com","Vitor H M Oliveira");
-		$mail->AddAddress($email_pol, $politico); # Os campos  podem ser substituidos por variáveis
-		$mail->Subject = "E-mails para Aniversariantes - Dr Thiago"; # Assunto da mensagem
-		$mail->setFrom('sigre@vitor.poa.br', 'Sistema Sigre');
-		$mail->Body    = stripslashes($mens_qtde);
-		$mail->AltBody = stripslashes($mens_qtde);
-		#echo $mens_qtde."<br>";
-		$mail->Send();
-		echo "E-mail enviado com sucesso!";
-	} catch (phpmailerException $e) {
-		$headers  = "MIME-Version: 1.0\r\n";
-		$headers .= "Content-type: text/html; charset=utf-8\r\n";
-		$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-		$subject = "Erro Aniver Dia Info - Dr Thiago"; # Assunto da mensagem
-		$message = "Não foi possível enviar e-mail aniver do dia informado.<br><b>Erro do PHPMailer:</b> " . $e->errorMessage().'<br><br>'.stripslashes($mens_qtde).'<br>'.$pessoas;//Pretty error messages from PHPMailer
-		$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
-		mail($to, $subject, $message, $headers);
-		echo "Não foi possível enviar o e-mail final.";
-		echo "<b>Erro do PHPMailer:</b> " . $e->errorMessage();//Pretty error messages from PHPMailer
-	} catch (Exception $e) {
-		$headers  = "MIME-Version: 1.0\r\n";
-		$headers .= "Content-type: text/html; charset=utf-8\r\n";
-		$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-		$subject = "Erro Aniver Dia Info - Dr Thiago"; # Assunto da mensagem
-		$message = "Não foi possível enviar e-mail aniver do dia informado.<br><b>Erro do PHPMailer:</b> " . $e->getMessage().'<br><br>'.stripslashes($mens_qtde).'<br>'.$pessoas;//Pretty error messages from PHPMailer
-		$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
-		mail($to, $subject, $message, $headers);
-		echo "Não foi possível enviar o e-mail final.";
-		echo "<b>Erro de Qq outra natureza:</b> " . $e->getMessage(); //Boring error messages from anything else!
-	}		
+	$headers  = "MIME-Version: 1.0\r\n";
+	$headers .= "Content-type: text/html; charset=utf-8\r\n";
+	$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
+	$subject = 'E-mails para Aniversariante '.date("d/m/Y").' - Dr Thiago'; # Assunto da mensagem
+	$message = $mens_qtde;
+	$to = $email_pol;
+	$enviado = mail($to, $subject, $message, $headers);
+	if ($enviado) {
+		echo "E-mail enviado";
+	} else {
+		echo "E-mail NÃO enviado";
+	}
+
 }
+
 	
 ?>

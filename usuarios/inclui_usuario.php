@@ -8,10 +8,6 @@ $nivel = 2;
 $nome  = "";
 $senha = md5("123456");
 $email = "";
-// codigo
-$theValue = (!get_magic_quotes_gpc()) ? addslashes($cod) : $cod;
-$theValue = ($theValue != "") ? intval($theValue) : "NULL";
-$cod = $theValue;
 
 // usuario
 $theValue = (!get_magic_quotes_gpc()) ? addslashes($usuario) : $usuario;
@@ -40,18 +36,18 @@ $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
 $email = $theValue;
 
 $strsql = 'INSERT into users VALUES (';
-$strsql .= $cod;
+$strsql .= "NULL";
 $strsql .= ",".$usuario;
 $strsql .= ",".$senha;
 $strsql .= ",".$nivel;
 $strsql .= ",".$nome;
 $strsql .= ",".$email;
-$strsql .= ",'','usuario.png'";
+$strsql .= ",'NULL','usuario.png'";
 $strsql .= ')';
 
-//echo $strsql;
+#echo $strsql;
 
-executa_sql($strsql,"Usuário incluído com sucesso!","Erro na inclusão do Usuário",true,false);
+executa_sql($strsql,"Usuário incluído com sucesso!","Erro na inclusão do Usuário",false,false);
 
 $sql = 'SELECT MAX(codigo) AS codigo FROM users';
 $mysql_query = $_con->query($sql);

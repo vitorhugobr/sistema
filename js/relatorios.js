@@ -155,7 +155,7 @@ function pedeDetRua(){
 function montarel() {
 	var tipo = document.form1.htipo.value;
 	var opcao = document.form1.hopcao.value;
-	ajax('monta.php?htipo='+tipo+'&hopcao='+opcao,'carregando');
+	ajax('monta.php?htipo='+tipo+'&hopcao='+opcao,'modal');
 }	
 //---------------------------------------------------------------------------------------------------------------------
 function myPrametros(lin,valorpassado) {

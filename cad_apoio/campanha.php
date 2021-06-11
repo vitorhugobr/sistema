@@ -41,7 +41,7 @@ if (liberado(5700)==0){
   	<script src="../js/ie10-viewport-bug-workaround.js"></script>
 	<script type="text/javascript" src="../js/autocomplete.js"></script>
 	</head>
-  <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="carga_campanhas(1)" onBlur="carga_campanhas(1)" onFocus="carga_campanhas(1)">
+  <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="carga_campanhas(1)">
 
 <?php include("../utilitarios/cabecalho.php"); ?>
     
@@ -93,7 +93,7 @@ if(isset($_SESSION['msg'])){
     <tr>
       <td valign="top">
       	<div style="width:100%; height: 570px; overflow: auto;">
-					<div class="table-responsive" id="dados"></div>
+            <div class="table-responsive" id="dados"></div>
         </div>
         </td>
       <td width="40%" valign="top">

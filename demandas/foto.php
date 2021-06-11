@@ -46,7 +46,7 @@ $_SESSION['sequencia'] = $seq;
 		  var demanda = document.form1.demanda.value;
 		  var seq = document.form1.seq.value;
 		alert(demanda+" - "+seq+" - "+foto);
-		ajax2('salvar_imagem.php?demanda='+demanda+'&seq='+seq,'carregando');
+		ajax2('salvar_imagem.php?demanda='+demanda+'&seq='+seq,'modal');
 	  }
   }	
   //-------------------------------------------------------------------------------------------------------------

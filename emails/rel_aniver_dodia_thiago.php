@@ -15,12 +15,12 @@ echo 'iniciando... '.$id_pol.'<br>';
 // conectar ao banco do usuário
 
 // conectar ao banco do usuário
-$_SG['servidor'] = "191.252.101.58";
-$_SG['banco'] = "drthiago_sigre";
-$_SG['usuario'] = "sigre";
-$_SG['senha'] = "sigre2018";
+$_SESSION['servidor'] = "191.252.101.58";
+$_SESSION['banco'] = "drthiago_sigre";
+$_SESSION['usuario'] = "sigre";
+$_SESSION['senha'] = "sigre2018";
 
-$_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 
 if(!$_con) {  
 	echo "Não foi possivel conectar ao MySQL. Erro " .
@@ -131,10 +131,10 @@ if ($qtd_emails== 0){
 	$headers  = "MIME-Version: 1.0\r\n";
 	$headers .= "Content-type: text/html; charset=utf-8\r\n";
 	$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-	$subject = "E-mails para Aniversariantes - Dr Thiago"; # Assunto da mensagem
+	$subject = "Aniversariantes ".$hoje." - Dr Thiago";
 	$message = $mens_qtde;
 	$to = $email_pol;
-	#$to .= ', vhmoliveira@gmail.com';
+	//$to .= ', vitorhugo@protonmail.com';
 	$enviado = mail($to, $subject, $message, $headers);
 	if ($enviado) {
 		echo "E-mail enviado";
@@ -142,9 +142,9 @@ if ($qtd_emails== 0){
 		$headers  = "MIME-Version: 1.0\r\n";
 		$headers .= "Content-type: text/html; charset=utf-8\r\n";
 		$headers .= "From: Sistema Sigre<sigre@vitor.poa.br>\r\n";
-		$subject = "Erro Rel Aniver Dia - Dr Thiago"; # Assunto da mensagem
-		$message = 'Erro ao enviar e-mail com resumo de aniversariantes.<br>'.stripslashes($mens_qtde).'<br>'.$pessoas.'<br>'.$prg;//Pretty error messages from PHPMailer
-		$to = 'Vitor H M Oliveira<vhmoliveira@gmail.com>';
+		$subject = "Erro Rel Aniver Dia - Dr Thiago"; 
+		$message = 'Erro ao enviar e-mail com resumo de aniversariantes.<br>' . stripslashes($mens_qtde) . '<br>' . $pessoas . '<br>' . $prg;
+		$to = 'Vitor H M Oliveira<vitorhugo@protonmail.com>';
 		mail($to, $subject, $message, $headers);
 		echo "Não foi possível enviar o e-mail - ".$prg;
 	}	

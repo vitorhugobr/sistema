@@ -229,7 +229,7 @@ echo $displayEnc;
 <script>
 function exclui_duplo(cod_cadastro,nome_cadastro) {
 	if (confirm("Confirma a Exclusão do registro duplo de "+nome_cadastro)){
-		ajax('../eleitores/exclui_eleitor.php?P0'+cod_cadastro,'carregando');
+		ajax('../eleitores/exclui_eleitor.php?P0'+cod_cadastro,'modal');
 }
 </script>
 <script>

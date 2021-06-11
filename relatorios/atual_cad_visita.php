@@ -20,7 +20,7 @@ $pdf=new FPDF();
 
 $pdf->Open();
 
-$_con  = new mysqli(HOST,USER,PASS,DB);
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
 
 if(!$_con) {  
 

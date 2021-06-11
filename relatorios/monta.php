@@ -80,15 +80,90 @@ case 1:{
 	$numnapag=0;
 	$numpag = 0;
 	$numlin=99;
-	list ($_sql, $parametros) = monta_sql();    //retornam valores nestas duas variáveis da função monta_sql()
-	//$_sql = "SELECT * FROM relatorios_view WHERE ((cidade = 'VIAMÃO' and rua > '') and (grupo = 140 or grupo = 131 )) order by rua, reg";	
-
+    $registros = 0;
+	list ($_sql, $parametros) = monta_sql();    //retornam valores nestas duas variáveis da função #monta_sql()
+//    $parametros="";
+//	$_sql = 'SELECT 
+//  month(cadastro.DTNASC) AS mes,
+//  dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
+//  cadastro.CODIGO as codigo,
+//  cadastro.NOME as nome,
+//  cadastro.SEXO as sexo,
+//  cadastro.DTCAD as dtcad,
+//  cadastro.DTNASC as dtnasc,
+//  cadastro.CARGO as cargo,
+//  cadastro.FONE_RES as fone_res,
+//  cadastro.FONE_CEL as fone_cel,
+//  cadastro.FONE_COM as fone_com,
+//  cadastro.CPF as cpf,
+//  cadastro.CONDICAO as condicao,
+//  cadastro.EMAIL as email,
+//  cadastro.GRUPO as grupo,
+//  cadastro.ORIGEM as origem,
+//  cadastro.PROFISSAO as profissao,
+//  cadastro.ZONAL as zonal,
+//  cadastro.SECCAO as seccao,
+//  cadastro.PAI_MAE as pai_mae,
+//  cadastro.FILIADO as filiado,
+//  cadastro.RECEBEMAT as recebemat,
+//  cadastro.RESPCADASTRO as respcadastro,
+//  cadastro.DTULTALT as dtultalt,
+//  cadastro.EMPRESA as empresa,
+//  cadastro.VOTOU as votou,
+//  cadastro.RAMO as ramo,
+//  cadastro.RECEBEMAIL as recebemail,
+//  cadastro.IMPRESSO as impresso,
+//  cadastro.ENVIADO as enviado,
+//  cadastro.CAMPANHA as campanha,
+//  cadastro.FACEBOOK as facebook,
+//  cadastro.TWITTER as twitter,
+//  cadastro.OUTRAREDE as outrarede,
+//  cadastro.APELIDO as apelido,
+//  cadastro.EST_CIVIL as est_civil,
+//  cadastro.CLASSI as classi,
+//  cadastro.OBS as obs,
+//  enderecos.cep,
+//  enderecos.tipolog,
+//  enderecos.rua,
+//  enderecos.bairro,
+//  enderecos.cidade,
+//  enderecos.uf,
+//  enderecos.numero,
+//  enderecos.complemento,
+//  enderecos.padrao,
+//  enderecos.tipo,
+//  enderecos.reg,
+//  origem.Descricao as desc_origem ,
+//  grupos.NOMEGRP as desc_grupo,
+//  grupos.GRUPO AS cod_grupo,
+//  origem.Origem AS cod_origem
+//FROM
+//  cadastro
+//  LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
+//  LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
+//  LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE
+//   (grupo > 1 and grupo < 22) 
+//   OR (grupo > 47 and grupo < 61) 
+//   OR grupo = 62 
+//   OR grupo = 63 
+//   OR grupo = 65 
+//   OR (grupo > 67 and grupo < 76) 
+//   OR (grupo > 77 and grupo < 97) 
+//   OR grupo = 179 
+//   OR grupo = 163 
+//   OR grupo = 169 
+//   OR grupo = 98 
+//   OR grupo = 23 
+//   OR grupo = 24 
+//   order by  enderecos.rua, enderecos.numero,
+//  enderecos.complemento';	
+    #echo $_sql;
 	if ($_sql==""){
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>NENHUMA OPÇÃO INFORMADA<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';
 	}
 	$_res = $_con->query($_sql);
-		if($_res->num_rows>0){
+    if($_res->num_rows>0){
 			$pdf=new PDF('P','mm','A4');
 			$registros = $_res->num_rows;
 			//$pdf->Open();
@@ -202,7 +277,7 @@ case 1:{
 			$pdf->MultiCell(0,3, utf8_decode("Parâmetros : ".$parametros),0,'L',0);
 			//$pdf->ln(3);
 			//$pdf->MultiCell(0,3, utf8_decode("SQL : ".$_sql),0,'L',0);
-			$pdf->Output("D","gerencial.pdf");	
+			$pdf->Output();	
 			ob_end_flush();
 			$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Relatório Gerencial criado com ".$_res->num_rows." registros<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
 			echo '<script>self.window.close();</script>';
@@ -221,9 +296,60 @@ case 3:{
 	$etq = 0;   // esta variável controla se imprime na etiqueta esquerda ou direita. 0 = esquerda
 	$qtdetq = 0;
 	$tot_geral_reg = 0;
-	$_sql = montacep();
+	//$_sql = montacep();
 	list ($_sql, $parametros) = montacep();    //retornam valores nestas duas variáveis da função monta_sql()
-	#echo $_sql;
+	//echo $_sql;
+//    $_sql="select 
+//    month(`cadastro`.`DTNASC`) AS `mes`,
+//    dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
+//    `enderecos`.`id` AS `id`,
+//    `enderecos`.`cep` AS `cep`,
+//    `enderecos`.`tipolog` AS `tipolog`,
+//    `enderecos`.`rua` AS `rua`,
+//    `enderecos`.`bairro` AS `bairro`,
+//    `enderecos`.`cidade` AS `cidade`,
+//    `enderecos`.`uf` AS `uf`,
+//    `enderecos`.`numero` AS `numero`,
+//    `enderecos`.`complemento` AS `complemento`,
+//    `enderecos`.`padrao` AS `padrao`,
+//    `enderecos`.`tipo` AS `tipo`,
+//    `enderecos`.`reg` AS `reg`,
+//    `cadastro`.`CODIGO` AS `codigo`,
+//    `cadastro`.`NOME` AS `nome`,
+//    `cadastro`.`SEXO` AS `sexo`,
+//    `cadastro`.`DTNASC` AS `dtnasc`,
+//    `cadastro`.`GRUPO` AS `grupo`,
+//    `cadastro`.`ORIGEM` AS `origem`,
+//    `cadastro`.`RECEBEMAT` AS `recebemat`,
+//    `cadastro`.`PROFISSAO` AS `profissao`,
+//    `cadastro`.`ZONAL` AS `zonal`,
+//    `cadastro`.`SECCAO` AS `seccao`,
+//    `cadastro`.`CAMPANHA` AS `campanha`,
+//    `cadastro`.`CONDICAO` AS `condicao` 
+//  from 
+//    (`enderecos` left join `cadastro` on((`cadastro`.`CODIGO` = `enderecos`.`codigo`))) 
+//  WHERE
+//  (cadastro.CONDICAO = 1 and
+//  (cadastro.GRUPO > 1 AND 
+//  cadastro.GRUPO < 22) OR 
+//  (cadastro.GRUPO > 47 AND 
+//  cadastro.GRUPO < 61) OR 
+//  cadastro.GRUPO = 62 OR 
+//  cadastro.GRUPO = 63 OR 
+//  cadastro.GRUPO = 65 OR 
+//  (cadastro.GRUPO > 67 AND 
+//  cadastro.GRUPO < 76) OR 
+//  (cadastro.GRUPO > 77 AND 
+//  cadastro.GRUPO < 97) OR 
+//  cadastro.GRUPO = 179 OR 
+//  cadastro.GRUPO = 163 OR 
+//  cadastro.GRUPO = 169 OR 
+//  cadastro.GRUPO = 98 OR 
+//  cadastro.GRUPO = 23 OR 
+//  cadastro.GRUPO = 24)
+//ORDER BY
+//  enderecos.reg,
+//  cadastro.NOME";
 	if ($_sql==""){
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>NENHUMA OPÇÃO INFORMADA<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';
@@ -328,9 +454,9 @@ case 3:{
 			  $pdf->Cell(104, 0,$tipolog.' '.utf8_decode($rua).' '.$numero.'  '.utf8_decode($compl), 0, 1);
 			  $pdf->ln(5);
 			  $pdf->Cell(8);
-			  $pdf->SetFont('Courier', '',8);
-			  $pdf->Cell(104, 0, utf8_decode($auxcidade).' '.$auxuf, 0, 0);
-			  $pdf->Cell(104, 0, utf8_decode($cidade).' '.$uf, 0, 1);
+			  $pdf->SetFont('Courier', '',7);
+			  $pdf->Cell(104, 0, utf8_decode($auxbairro).' '.utf8_decode($auxcidade).' '.$auxuf, 0, 0);
+			  $pdf->Cell(104, 0, utf8_decode($bairro).' '.utf8_decode($cidade).' '.$uf, 0, 1);
 			  $pdf->ln(5);
 			  $pdf->Cell(8);
 			  $pdf->Cell(104, 0,$auxcep, 0, 0);
@@ -383,8 +509,8 @@ case 3:{
 			  $pdf->Cell(105, 0, $auxtipolog.' '.utf8_decode($auxrua).' '.$auxnumero.'  '.$auxcompl, 0, 1);
 			  $pdf->ln(5);
 			  $pdf->Cell(8);
-			  $pdf->SetFont('Courier', '',8);
-			  $pdf->Cell(105, 0, utf8_decode($auxcidade).' '.$auxuf, 0, 1);
+			  $pdf->SetFont('Courier', '',7);
+			  $pdf->Cell(105, 0, utf8_decode($auxbairro).' '.utf8_decode($auxcidade).' '.$auxuf, 0, 1);
 			  $pdf->ln(5);
 			  $pdf->Cell(8);
 			  $pdf->Cell(105, 0,$auxcep, 0, 1);
@@ -474,12 +600,12 @@ case 3:{
 		}	
 		//$pdf->Cell(90, 0, utf8_decode($_sql), 0, 1);
 
-		$pdf->Output("D","etiquetas.pdf");	
+		$pdf->Output();	
 		ob_end_flush();
-		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Etiquetas criadas<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
+		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Etiquetas geradas com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
 		echo '<script>self.window.close();</script>';
 	}else{
-		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>RETORNOU CONJUNTO VAZIO - $_sql<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Nenhuma etiqueta foi gerada. Nenhum registro satisfez a consulta<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';
 	}
 	break;
@@ -704,13 +830,13 @@ case 5:{
 			$pdf->ln(5);
 			$pdf->ln(5);
 		}								
-		$pdf->Output("D","aniversarios.pdf");	
+		$pdf->Output();	
 		ob_end_flush();
-		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Etiquetas de Aniversários criadas com sucesso<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
+		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Etiquetas de Aniversários geradas com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
 		echo '<script>self.window.close();</script>';
 		
 	}else{
-		$_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>NENHUMA ETIQUETA CRIADA<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+		$_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>NENHUMA ETIQUETA GERADA<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';
 	}
 	break;
@@ -823,12 +949,12 @@ case 6:{
 		$pdf->SetFont('Arial','B', 10);
 		$pdf->ln(5);
 		$pdf->Cell(0, 0, "Total aniversariantes ".str_pad($registros,60),0, 0);
-		$pdf->Output("D","aniversariantes_do_dia.pdf");	
+		$pdf->Output();	
 		ob_end_flush();
-		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Relatório Aniversariantes de ".$_POST['txtdia']." a ".$_POST['txtdiaf'].'/'.$_POST['txtmes']." criado com sucesso<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
+		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Relatório Aniversariantes de ".$_POST['txtdia']." a ".$_POST['txtdiaf'].'/'.$_POST['txtmes']." gerado com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
 		echo '<script>self.window.close();</script>';		
 	}else{
-		$_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>NENHUM aniversariante no período indicado<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+		$_SESSION['msg'] = "<div class='alert alert-warning' role='alert'>NENHUM aniversariante no período indicado!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';			}
 	break;
 }
@@ -1023,13 +1149,13 @@ case 7:{   // Relatório de demandas
 			}		 
 				
 		}	
-		$pdf->Output("D","demandas.pdf");
+		$pdf->Output();
 		ob_end_flush();
-		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i>Relatório Demandas emitido com sucesso<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
+		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i>Relatório Demandas gerado com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
 		echo '<script>self.window.close();</script>';
 		
 	}else{
-		$_SESSION['msg'] = "<div class='alert alert-warning' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i>Nenhuma  Demanda encontrada - $_sql<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+		$_SESSION['msg'] = "<div class='alert alert-warning' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i>Nenhuma  Demanda encontrada!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';
 
 	}
@@ -1157,9 +1283,9 @@ function monta_sql(){
 	while ($linha < 13) {
 		$varcampo = $_POST["campo".$linha];
 		$varoperador = $_POST["operador".$linha];
-		$varexpressao = $_POST["expressao".$linha];
+		$varexpressao = $_POST["valorexpressao".$linha];
 		
-		if (isset($_POST["expressao".$linha])){
+		if (isset($_POST["textoexpressao".$linha])){
 			$varconteudoexp = $_POST["textoexpressao".$linha];
 		}else{
 			$varconteudoexp = "";			
@@ -1179,6 +1305,9 @@ function monta_sql(){
 			}
 			if ($varcampo == "nome" || $varcampo == "cidade" || $varcampo == "rua" || $varcampo == "bairro" || $varcampo == "complemento"){
 				$varexpressao= "'" . $varexpressao . "'";				
+			}
+			if ($varcampo == "grupo" || $varcampo == "origem"){
+				$varcampo= "cadastro." . $varcampo;				
 			}
 			$conector = "";
 			if ($varconector <> "") {
@@ -1211,13 +1340,13 @@ function monta_sql(){
 							$compoesort=true;
 						}
 						break;
-					case "grupo":
+					case "cadastro.grupo":
 						if ($jatemgrupo==false){
 							$compoesort=true;
 							$jatemgrupo=true;
 						}
 						break;
-					case "origem":
+					case "cadastro.origem":
 						if ($jatemorigem==false){
 							$compoesort=true;
 							$jatemorigem=true;
@@ -1315,7 +1444,7 @@ function monta_sql(){
 		$parametros2 = " (Todos Registros)"; 
 		if (isset($_POST['condicao'])) {
 			if ($_POST['condicao']=="1"){
-				$stringWhere .= " and condicao = 1";
+				$stringWhere .= " condicao = 1";
 				$parametros2= " (registros ATIVOS)"; 
 			}
 			if ($_POST['condicao']=="0"){
@@ -1331,14 +1460,71 @@ function monta_sql(){
 			$stringWhere .= ")";
 		}	
 
-		$sql = 'SELECT * FROM relatorios_view WHERE ';
+		$sql = 'SELECT 
+        month(cadastro.DTNASC) AS mes,
+        cadastro.CODIGO as codigo,
+        cadastro.NOME as nome,
+        cadastro.SEXO as sexo,
+        cadastro.DTCAD as dtcad,
+        cadastro.DTNASC as dtnasc,
+        cadastro.CARGO as cargo,
+        cadastro.FONE_RES as fone_res,
+        cadastro.FONE_CEL as fone_cel,
+        cadastro.FONE_COM as fone_com,
+        cadastro.CPF as cpf,
+        cadastro.CONDICAO as condicao,
+        cadastro.EMAIL as email,
+        cadastro.GRUPO as grupo,
+        cadastro.ORIGEM as origem,
+        cadastro.PROFISSAO as profissao,
+        cadastro.ZONAL as zonal,
+        cadastro.SECCAO as seccao,
+        cadastro.PAI_MAE as pai_mae,
+        cadastro.FILIADO as filiado,
+        cadastro.RECEBEMAT as recebemat,
+        cadastro.RESPCADASTRO as respcadastro,
+        cadastro.DTULTALT as dtultalt,
+        cadastro.EMPRESA as empresa,
+        cadastro.VOTOU as votou,
+        cadastro.RAMO as ramo,
+        cadastro.RECEBEMAIL as recebemail,
+        cadastro.IMPRESSO as impresso,
+        cadastro.ENVIADO as enviado,
+        cadastro.CAMPANHA as campanha,
+        cadastro.FACEBOOK as facebook,
+        cadastro.TWITTER as twitter,
+        cadastro.OUTRAREDE as outrarede,
+        cadastro.APELIDO as apelido,
+        cadastro.EST_CIVIL as est_civil,
+        cadastro.CLASSI as classi,
+        cadastro.OBS as obs,
+        enderecos.cep,
+        enderecos.tipolog,
+        enderecos.rua,
+        enderecos.bairro,
+        enderecos.cidade,
+        enderecos.uf,
+        enderecos.numero,
+        enderecos.complemento,
+        enderecos.padrao,
+        enderecos.tipo,
+        enderecos.reg,
+        origem.Descricao as desc_origem ,
+        grupos.NOMEGRP as desc_grupo,
+        grupos.GRUPO AS cod_grupo,
+        origem.Origem AS cod_origem
+      FROM
+        cadastro
+        LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
+        LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
+        LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE ';
 
-		if ($primorderby == 0) {
-			$strorderby = " order by reg";
-			$primorderby=1;			
-		}else {
-			$strorderby = $strorderby . ", reg";
-		}
+//		if ($primorderby == 0) {
+//			$strorderby = " order by reg";
+//			$primorderby=1;			
+//		}else {
+//			$strorderby = $strorderby . ", reg";
+//		}
 
 		$sql .= $stringWhere .' '. $strorderby;
 
@@ -1400,6 +1586,10 @@ function montacep() {
 			if ($varcampo == "nome" || $varcampo=="cidade"|| $varcampo=="rua" || $varcampo=="bairro" || $varcampo=="complemento"){
 				$varexpressao= "'" . $varexpressao . "'";				
 			}
+            if ($varcampo == "grupo" || $varcampo == "origem"){
+				$varcampo= "cadastro." . $varcampo;				
+			}
+
 			$conector = "";
 			if ($varconector <> "") {
 				//echo "CONECTOR ".$varconector."<br>";
@@ -1430,13 +1620,13 @@ function montacep() {
 							$compoesort=true;
 						}
 						break;
-					case "grupo":
+					case "cadastro.grupo":
 						if ($jatemgrupo==false){
 							$compoesort=true;
 							$jatemgrupo=true;
 						}
 						break;
-					case "origem":
+					case "cadastro.origem":
 						if ($jatemorigem==false){
 							$compoesort=true;
 							$jatemorigem=true;
@@ -1506,7 +1696,7 @@ function montacep() {
 				
 				if ($compoesort){
 					if ($primorderby == 0) {
-						$strorderby = " order by ";
+						$strorderby = " order by reg, ";
 						$primorderby=1;			
 					}else {
 						$strorderby .= ",";
@@ -1534,7 +1724,7 @@ function montacep() {
 		$parametros2 = " (Todos Registros)"; 
 		if (isset($_POST['condicao'])) {
 			if ($_POST['condicao']=="A"){
-				$stringWhere .= ") and (condicao = 1";
+				$stringWhere .= ") (condicao = 1";
 				$parametros2= " (registros ATIVOS)"; 
 			}
 			if ($_POST['condicao']=="I"){
@@ -1550,19 +1740,77 @@ function montacep() {
 			$stringWhere .= ")";
 		}	
 
-		$sql = 'SELECT * FROM relatorios_etq WHERE ';
+		$sql = 'SELECT 
+        month(cadastro.DTNASC) AS mes,
+        dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
+        cadastro.CODIGO as codigo,
+        cadastro.NOME as nome,
+        cadastro.SEXO as sexo,
+        cadastro.DTCAD as dtcad,
+        cadastro.DTNASC as dtnasc,
+        cadastro.CARGO as cargo,
+        cadastro.FONE_RES as fone_res,
+        cadastro.FONE_CEL as fone_cel,
+        cadastro.FONE_COM as fone_com,
+        cadastro.CPF as cpf,
+        cadastro.CONDICAO as condicao,
+        cadastro.EMAIL as email,
+        cadastro.GRUPO as grupo,
+        cadastro.ORIGEM as origem,
+        cadastro.PROFISSAO as profissao,
+        cadastro.ZONAL as zonal,
+        cadastro.SECCAO as seccao,
+        cadastro.PAI_MAE as pai_mae,
+        cadastro.FILIADO as filiado,
+        cadastro.RECEBEMAT as recebemat,
+        cadastro.RESPCADASTRO as respcadastro,
+        cadastro.DTULTALT as dtultalt,
+        cadastro.EMPRESA as empresa,
+        cadastro.VOTOU as votou,
+        cadastro.RAMO as ramo,
+        cadastro.RECEBEMAIL as recebemail,
+        cadastro.IMPRESSO as impresso,
+        cadastro.ENVIADO as enviado,
+        cadastro.CAMPANHA as campanha,
+        cadastro.FACEBOOK as facebook,
+        cadastro.TWITTER as twitter,
+        cadastro.OUTRAREDE as outrarede,
+        cadastro.APELIDO as apelido,
+        cadastro.EST_CIVIL as est_civil,
+        cadastro.CLASSI as classi,
+        cadastro.OBS as obs,
+        enderecos.cep,
+        enderecos.tipolog,
+        enderecos.rua,
+        enderecos.bairro,
+        enderecos.cidade,
+        enderecos.uf,
+        enderecos.numero,
+        enderecos.complemento,
+        enderecos.padrao,
+        enderecos.tipo,
+        enderecos.reg,
+        origem.Descricao as desc_origem ,
+        grupos.NOMEGRP as desc_grupo,
+        grupos.GRUPO AS cod_grupo,
+        origem.Origem AS cod_origem
+      FROM
+        cadastro
+        LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
+        LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
+        LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE (enderecos.cep > 0) and ';
 
 		if ($primorderby == 0) {
 			$strorderby = " order by reg";
 			$primorderby=1;			
-		}else {
-			$strorderby = $strorderby . ", reg";
+//		}else {
+//			$strorderby = $strorderby . ", reg";
 		}
 
 		$sql .= $stringWhere .' '. $strorderby;
 
-		#echo $sql."<br>".$parametros;
-		#debug();
+		//echo $sql."<br>".$parametros;
+		//debug();
 		return array ($sql,$parametros);
 	} else {
 		return array ("","");
@@ -1603,16 +1851,133 @@ function monta_ani(){
 	$diaf = $_POST['txtdiaf'];
 	$mes = $_POST['txtmes'];
 	if ($_POST['hopcao'] == 6){
-		$sql = 'SELECT * from relatorios_view where mes = '.$mes.' AND (dia >= '.$dia.' AND dia <= '.$diaf.') and condicao=1 and rua >"" and cep > 0 ORDER BY mes, dia, nome';
+		$sql = 'SELECT 
+        month(cadastro.DTNASC) AS mes,
+        dayofmonth(`cadastro`.`DTNASC`) AS dia,
+        cadastro.CODIGO as codigo,
+        cadastro.NOME as nome,
+        cadastro.SEXO as sexo,
+        cadastro.DTCAD as dtcad,
+        cadastro.DTNASC as dtnasc,
+        cadastro.CARGO as cargo,
+        cadastro.FONE_RES as fone_res,
+        cadastro.FONE_CEL as fone_cel,
+        cadastro.FONE_COM as fone_com,
+        cadastro.CPF as cpf,
+        cadastro.CONDICAO as condicao,
+        cadastro.EMAIL as email,
+        cadastro.GRUPO as grupo,
+        cadastro.ORIGEM as origem,
+        cadastro.PROFISSAO as profissao,
+        cadastro.ZONAL as zonal,
+        cadastro.SECCAO as seccao,
+        cadastro.PAI_MAE as pai_mae,
+        cadastro.FILIADO as filiado,
+        cadastro.RECEBEMAT as recebemat,
+        cadastro.RESPCADASTRO as respcadastro,
+        cadastro.DTULTALT as dtultalt,
+        cadastro.EMPRESA as empresa,
+        cadastro.VOTOU as votou,
+        cadastro.RAMO as ramo,
+        cadastro.RECEBEMAIL as recebemail,
+        cadastro.IMPRESSO as impresso,
+        cadastro.ENVIADO as enviado,
+        cadastro.CAMPANHA as campanha,
+        cadastro.FACEBOOK as facebook,
+        cadastro.TWITTER as twitter,
+        cadastro.OUTRAREDE as outrarede,
+        cadastro.APELIDO as apelido,
+        cadastro.EST_CIVIL as est_civil,
+        cadastro.CLASSI as classi,
+        cadastro.OBS as obs,
+        enderecos.cep,
+        enderecos.tipolog,
+        enderecos.rua,
+        enderecos.bairro,
+        enderecos.cidade,
+        enderecos.uf,
+        enderecos.numero,
+        enderecos.complemento,
+        enderecos.padrao,
+        enderecos.tipo,
+        enderecos.reg,
+        origem.Descricao as desc_origem ,
+        grupos.NOMEGRP as desc_grupo,
+        grupos.GRUPO AS cod_grupo,
+        origem.Origem AS cod_origem
+      FROM
+        cadastro
+        LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
+        LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
+        LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) 
+        where (MONTH(cadastro.DTNASC) = '.$mes.' AND (DAYOFMONTH(cadastro.DTNASC) >= '.$dia.' AND DAYOFMONTH(cadastro.DTNASC) <= '.$diaf.') and cadastro.condicao=1 and enderecos.rua >"" and enderecos.cep >0) ORDER BY MONTH(cadastro.DTNASC), DAYOFMONTH(cadastro.DTNASC), cadastro.NOME';        
+        
 	}else{
-		$sql = 'SELECT * from relatorios_view where mes= '.$mes.' AND (dia >= '.$dia.' AND dia <= '.$diaf.') and condicao=1 and rua >"" and cep >0 ORDER BY reg, nome';
+		$sql = 'SELECT 
+        month(cadastro.DTNASC) AS mes,
+        dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
+        cadastro.CODIGO as codigo,
+        cadastro.NOME as nome,
+        cadastro.SEXO as sexo,
+        cadastro.DTCAD as dtcad,
+        cadastro.DTNASC as dtnasc,
+        cadastro.CARGO as cargo,
+        cadastro.FONE_RES as fone_res,
+        cadastro.FONE_CEL as fone_cel,
+        cadastro.FONE_COM as fone_com,
+        cadastro.CPF as cpf,
+        cadastro.CONDICAO as condicao,
+        cadastro.EMAIL as email,
+        cadastro.GRUPO as grupo,
+        cadastro.ORIGEM as origem,
+        cadastro.PROFISSAO as profissao,
+        cadastro.ZONAL as zonal,
+        cadastro.SECCAO as seccao,
+        cadastro.PAI_MAE as pai_mae,
+        cadastro.FILIADO as filiado,
+        cadastro.RECEBEMAT as recebemat,
+        cadastro.RESPCADASTRO as respcadastro,
+        cadastro.DTULTALT as dtultalt,
+        cadastro.EMPRESA as empresa,
+        cadastro.VOTOU as votou,
+        cadastro.RAMO as ramo,
+        cadastro.RECEBEMAIL as recebemail,
+        cadastro.IMPRESSO as impresso,
+        cadastro.ENVIADO as enviado,
+        cadastro.CAMPANHA as campanha,
+        cadastro.FACEBOOK as facebook,
+        cadastro.TWITTER as twitter,
+        cadastro.OUTRAREDE as outrarede,
+        cadastro.APELIDO as apelido,
+        cadastro.EST_CIVIL as est_civil,
+        cadastro.CLASSI as classi,
+        cadastro.OBS as obs,
+        enderecos.cep,
+        enderecos.tipolog,
+        enderecos.rua,
+        enderecos.bairro,
+        enderecos.cidade,
+        enderecos.uf,
+        enderecos.numero,
+        enderecos.complemento,
+        enderecos.padrao,
+        enderecos.tipo,
+        enderecos.reg,
+        origem.Descricao as desc_origem ,
+        grupos.NOMEGRP as desc_grupo,
+        grupos.GRUPO AS cod_grupo,
+        origem.Origem AS cod_origem
+      FROM
+        cadastro
+        LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
+        LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
+        LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) where MONTH(cadastro.DTNASC) = '.$mes.' AND (DAYOFMONTH(cadastro.DTNASC) >= '.$dia.' AND DAYOFMONTH(cadastro.DTNASC) <= '.$diaf.') and cadastro.condicao=1 and enderecos.rua >"" and enderecos.cep >0 ORDER BY enderecos.reg, cadastro.NOME';
 	}
 	return $sql;	
 }
 //--------------------------------------------------------------------------------------------------------------------
 function busca_secretaria($codigo) {
-  $cons  = new mysqli(HOST,USER,PASS,DB);	
-  if(!$cons) {  
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);  if(!$cons) {  
 	  echo "Não foi possivel conectar ao MySQL. Erro " .
 			  mysqli_connect_errno() . " : " . mysql_connect_error();
 	  exit;

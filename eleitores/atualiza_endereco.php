@@ -111,11 +111,31 @@ $_sql = "Update enderecos set ";
 	$_sql.= ",tipo=".$tipo;
 	$_sql.= ",reg=".$reg;
 	$_sql.= " where id=".$id;
-	$_res = $_con->query($_sql);
+	//$_res = $_con->query($_sql);
 
 gravaoperacoes("enderecos","A", $_SESSION["usuarioUser"],"comando : ".$_sql);
 
-executa_sql($_sql,"Endereço alterado com sucesso ","Endereço NÃO alterado",false,false);
+  $pdo = new PDO("mysql:host=".$_SESSION['servidor'].";dbname=".$_SESSION['banco'].";",$_SESSION['usuario'], $_SESSION['senha']);
+
+  $pdo->exec("set names utf8");
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  array(PDO::ATTR_PERSISTENT => true);
+  try{
+      $statementSql = $pdo->prepare($_sql);
+      $statementSql->execute();
+      return $statementSql->rowCount();
+  }catch(PDOException $e){  // Caso ocorra algum erro exibe a mensagem
+      if ($e->errorInfo[1] == 1062) {      // duplicate entry, do something else
+          $_SESSION['msg'] = "<div class='alert alert-danger alert-dismissible fade show'' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro.". JÁ EXISTE ESTE REGISTRO!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  		
+      } else {      // an error other than duplicate entry occurred
+          $_SESSION['msg'] = "<div class='alert alert-danger alert-dismissible fade show'' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro." Motivo:\n".$e->getMessage()."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  			
+      }
+      //die;
+  }
+  $pdo= null;
+
+
+//executa_sql($_sql,"Endereço alterado com sucesso ","Endereço NÃO alterado",false,false);
 	
 
 	// altera no banco
@@ -126,7 +146,25 @@ $strsql = 'UPDATE cadastro SET ';
 	$strsql .= ' WHERE CODIGO='.$codigo;
 /*	echo '<script>alert("'.$strsql.'")</script>';*/
 
-executa_sql($strsql,"Endereço alterado com sucesso ","Endereço NÃO alterado",false,true);
+//executa_sql($strsql,"Endereço alterado com sucesso ","Endereço NÃO alterado",true,true);
+  $pdo = new PDO("mysql:host=".$_SESSION['servidor'].";dbname=".$_SESSION['banco'].";",$_SESSION['usuario'], $_SESSION['senha']);
+
+  $pdo->exec("set names utf8");
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  array(PDO::ATTR_PERSISTENT => true);
+  try{
+      $statementSql = $pdo->prepare($strsql);
+      $statementSql->execute();
+      return $statementSql->rowCount();
+  }catch(PDOException $e){  // Caso ocorra algum erro exibe a mensagem
+      if ($e->errorInfo[1] == 1062) {      // duplicate entry, do something else
+          $_SESSION['msg'] = "<div class='alert alert-danger alert-dismissible fade show'' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro.". JÁ EXISTE ESTE REGISTRO!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  		
+      } else {      // an error other than duplicate entry occurred
+          $_SESSION['msg'] = "<div class='alert alert-danger alert-dismissible fade show'' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> ".$msgerro." Motivo:\n".$e->getMessage()."<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  			
+      }
+      //die;
+  }
+  $pdo= null;
 
 
 ?>

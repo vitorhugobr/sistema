@@ -3,15 +3,6 @@ require_once("seguranca.php"); // Inclui o arquivo com o sistema de segurança
 require_once("utilitarios/funcoes.php");
 protegePagina(); // Chama a função que protege a p&Aacute;gina
 $primMenu = 0;
-$arqconfig = md5("mapa").".txt";
-if (!file_exists($arqconfig)) {
-	echo 'IMPOSSÍVEL ACESSAR O SISTEMA.<br>Arquivo de configuração excluído ou danificado! ';
-	die;
-} 	
-
-$linhas = explode("\n", file_get_contents($arqconfig));
-$_SESSION['id'] = $linhas[0]; // usuario =A(100,80);
-$_SESSION['versao']= $linhas[1];
 $_SESSION['recarrega'] = false;
 $_SESSION['mudoutarefa'] = false;
 $_SESSION['id_exame'] = 0;
@@ -220,7 +211,7 @@ if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
   		<!-- ALTERAR CONFORME MÊS   -->
 		<div id="sidebar-wrapper">
      	<ul class="sidebar-nav">
-      	<li><div align="center"><img src="imagens/prevencao.png" height="85"></div></li>
+      	<li><div align="center" class="text-white-50">MENU PRINCIPAL</div></li>
       	<?php 
 		if ($_SESSION['id']<2){
         	$sqlLib = "SELECT * FROM liberado where username = '" . $_SESSION['usuarioUser'] . "' and nivel = 1 and liberada_sistema= 1 order by descricao_menu";
@@ -230,10 +221,10 @@ if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
         $res30 = $_con->query($sqlLib);
         if ($res30->num_rows ==0){
         	echo '<li>
-                <a href="#"><i class="fas fa-skull"> </i> ERRO</a>
+                <a href="#"><i class="fas fa-skull"> </i> ERRO </a>
                 </li>';
         }else{
-			if ((liberado(6800)>0) AND ($_SESSION['id'] == 0)){
+			if ((liberado(6800)>0) AND ($_SESSION['id'] == 1)){
 				echo '<li><a href="https://calendar.google.com/calendar/embed?src=duartethiago025%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
 			}
 			if ((liberado(6800)>0) AND ($_SESSION['id'] == 2)){
@@ -246,13 +237,16 @@ if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
 				echo '<li><a href="https://calendar.google.com/calendar/embed?src=domingos.sigre%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
 			}
 			if ((liberado(6800)>0) AND ($_SESSION['id'] == 5)){
-				echo '<li><a href="https://calendar.google.com/calendar/embed?src=maurop.sigre%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
+				echo '<li><a href="https://calendar.google.com/calendar/embed?src=tessaro.sigre%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
 			}
 			if ((liberado(6800)>0) AND ($_SESSION['id'] == 6)){
 				echo '<li><a href="https://calendar.google.com/calendar/embed?src=democrataspoa%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
 			}
  			if ((liberado(6800)>0) AND ($_SESSION['id'] == 7)){
 				echo '<li><a href="https://calendar.google.com/calendar/embed?src=melo.sigre%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
+			}
+ 			if ((liberado(6800)>0) AND ($_SESSION['id'] == 9)){
+				echo '<li><a href="https://calendar.google.com/calendar/embed?src=vhmoliveira%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
 			}
          	while($_row =  $res30->fetch_assoc()) {
 				$funcao = $_row["funcao"];
@@ -278,7 +272,7 @@ if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
           } 
 		}
         ?>
-      	<li> <a href="logout.php"><i class="fas fa-share-square"></i> Sair</a> </li>
+      	<li> <a href="logout.php"><i class="fas fa-share-square"></i> Sair Sistema</a> </li>
      	
       	<?php 
 			$_SESSION['imagem_camp']= "../imagens/fundobranco.jpg";
@@ -294,7 +288,7 @@ if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
 		?>
 			<p></p>
    		<div style="text-align: center; color: yellow; font-size: 11px "><?php echo $datas_hoje;?></div>
-   		<div align="center"><img src="imagens/alcool_gel.png" height="40"></div>
+   		<div align="center"><img src="imagens/alcool_gel2.png" height="40"></div>
     	</ul>
   	</div>
   <!-- /#sidebar-wrapper --> 

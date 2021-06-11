@@ -5,7 +5,6 @@ include_once("../utilitarios/funcoes.php");
 $_SESSION['funcao']="Demandas";
 
 $result_demandas = "select * from demandas_view";
-#$resultado_demandas = mysqli_query($conn, $result_demandas);
 $mysql_query = $_con->query($result_demandas);
 ?>
 <html>
@@ -61,9 +60,10 @@ $mysql_query = $_con->query($result_demandas);
 </head>
 <body>
 <?php include_once("../utilitarios/cabecalho.php"); ?>
-  <nav class="navbar navbar-expand-sm navbar-light shadow-sm">
-  	<div class="container">
-    	<span class="navbar-brand">
+<nav class="nav navbar-expand-sm shadow-sm navbar-light">
+  
+	<div class="container-fluid" style="align-items: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">    	
+	<span class="navbar-brand">
         </span>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

@@ -8,7 +8,7 @@ function abrir_cadastro(cod_cadastro) {
 	}
 
 	ajax2("inicializa_global.php?cod_cadastro="+cod_cadastro,"carregando");
-	var param = '../eleitores/cadastro.php?codigo='+cod_cadastro;
+	var param = '../eleitores/cadastro.php';
 	//alert(param);
 	open(param,"_self");		
 	
@@ -81,7 +81,7 @@ function excluir_espera(id) {
 	var parString = "excluir_lista_espera.php?id="+id;
 //	alert(parString);
 	if (confirm("Confirma a Exclusão da Lista de Espera?")){
-		ajax(parString,'carregando');	
+		ajax(parString,'modal');	
 	}
 }
 //------------------------------------------------------------------------------
@@ -94,7 +94,7 @@ function gerar_consultas(clinica , data_consulta) {
 			alert('não foi  possível iniciar o AJAX');
 			return;
 		}
-		ajax(param,'carregando');	
+		ajax(param,'modal');	
 	}
 }	
 //-----------------------------------------------------------

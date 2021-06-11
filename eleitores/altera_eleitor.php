@@ -2,7 +2,6 @@
 include_once("../seguranca.php"); // Inclui o arquivo com o sistema de segurança
 include("../utilitarios/funcoes.php");
 date_default_timezone_set('America/Sao_Paulo');
-//debug();
 $codigo = $_GET["P0"];		 
 $nome = strtoupper($_GET["P1"]);
 $sexo = $_GET["P2"];
@@ -42,6 +41,20 @@ $enviado = $_GET["P33"];
 $apelido = strtoupper($_GET["P34"]);
 $estciv = $_GET["P35"];
 $class = $_GET["P36"];
+//******************************************
+// dados do endereço 
+$id_endereco = $_GET['P37'];
+$rua = strtoupper($_GET['P38']);
+$cep = $_GET['P39'];
+$tipolog = strtoupper($_GET['P40']);
+$bairro = strtoupper($_GET['P41']);
+$cidade = strtoupper($_GET['P42']);
+$uf = strtoupper($_GET['P43']);
+$numero = $_GET['P44'];
+$complemento = strtoupper($_GET['P45']);
+$reg = $_GET['P46'];
+//******************************************
+
 $_SESSION['ult_eleitor_pesquisado'] = $codigo;
 
 // CODIGO
@@ -301,7 +314,83 @@ $strsql .= ' WHERE CODIGO='.$codigo;
 
 //echo $strsql;
 //debug();
-gravaoperacoes("Cadastro","A", $_SESSION["usuarioUser"],$strsql);
-executa_sql($strsql,"Cadastro atualizado com sucesso","ERRO ao atualizar cadastro",true,true);
+$resp = executa_sql($strsql,"Cadastro atualizado com sucesso!","ERRO ao atualizar cadastro",true,false);
+
+gravaoperacoes("cadastro","A", $_SESSION["usuarioUser"],$strsql);
+
+$strsql2 = "delete from `enderecos` where id = ".$id_endereco;
+
+if ($id_endereco!=""){
+    $resposta = executa_sql($strsql2,"","",false,false);
+}
+
+// codigo
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($codigo) : $codigo;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$codigo = $theValue;
+
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($id_endereco) : $id_endereco;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$id_endereco = $theValue;
+
+// cep
+
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($cep) : $cep;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$cep = $theValue;
+
+
+// tipolog
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($tipolog) : $tipolog;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$tipolog = $theValue;
+
+// rua
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($rua) : $rua;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$rua = $theValue;
+
+// bairro
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($bairro) : $bairro;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$bairro = $theValue;
+
+// cidade
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($cidade) : $cidade;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$cidade = $theValue;
+
+// uf
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($uf) : $uf;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "RS";
+$uf = $theValue;
+
+// numero
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($numero) : $numero;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$numero = $theValue;
+
+// compl
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($complemento) : $complemento;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$complemento = $theValue;
+
+// padra
+$padrao = 'S';
+
+// tipo
+$tipo = 'RESIDENCIAL';
+
+// reg - para correios
+$theValue = (!get_magic_quotes_gpc()) ? addslashes($reg) : $reg;
+$theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
+$reg = $theValue;
+
+if (($cep<>"") and ($cep!="NULL")){
+  $_sql = "Insert into enderecos  values(".$id_endereco.",".$codigo.",".$cep.",".$tipolog.",".$rua.",".$bairro.",".$cidade.",".$uf.",".$numero.",".$complemento.",'S','RESIDENCIAL',".$reg.")";
+  $resp2 = executa_sql($_sql,"Cadastro atualizado com sucesso!","ERRO ao atualizar cadastro",true,true);
+}else{
+  echo '<script>window.location.reload();</script>'; 
+}
 
 ?>

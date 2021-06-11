@@ -17,7 +17,7 @@ require_once ('../utilitarios/funcoes.php');
 		/* fetch associative array */
 		while ($row = mysqli_fetch_assoc($result)) {?>
 			<li onselect="this.text.value = '<?php echo $row["RUA"] ?>';busca_Cep(<?php echo $row["CEP"]?>);">
-			<span class="informal"><?php echo $row["CEP"] ?></span>
+			<span><?php echo $row["CEP"] ?></span>
         	<?php 	if ($temcidade == 'N'){
 			 			echo $row["TIPOLOG"].' '.$row["RUA"].' '.strtoupper($row["NUMERACAO"]).' em '.$row["CIDADE"];
 					}else{

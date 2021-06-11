@@ -14,7 +14,7 @@ function AlteraEnd(id){
 
 function AtualizaEleitor(y_funcao) {
 	//alert("function AtualizaEleitor");
-	var CadArray = new Array(37);
+	var CadArray = new Array(47);
 	
 	CadArray[0]  = document.form1.txtcodigo.value;
 	CadArray[1]  = document.form1.txtnome.value;
@@ -77,10 +77,21 @@ function AtualizaEleitor(y_funcao) {
 	CadArray[33] = 0;	
 	CadArray[34] = document.form1.txtapelido.value;	
 	CadArray[35] = document.form1.txtestadocivil.value;	
-	CadArray[36] = document.form1.txtclass.value;	
+	CadArray[36] = document.form1.txtclass.value;
+    // endereço //
+	CadArray[37] = document.form1.id_endereco.value;
+    CadArray[38] = document.form1.rua.value;
+    CadArray[39] = document.form1.cep.value;
+    CadArray[40] = document.form1.tipolog.value;
+    CadArray[41] = document.form1.bairro.value;
+    CadArray[42] = document.form1.cidade.value;
+    CadArray[43] = document.form1.uf.value;
+    CadArray[44] = document.form1.numero.value;
+    CadArray[45] = document.form1.complemento.value;
+    CadArray[46] = document.form1.reg.value;
 	// montagem dos parâmetros para passar
 	var parString="";
-	for (var i=0; i<37; i++) {
+	for (var i=0; i<47; i++) {
 		if (i===0){
 			parString = "P"+i+"="+CadArray[i];	
 		}else{
@@ -90,8 +101,11 @@ function AtualizaEleitor(y_funcao) {
 	//alert(y_funcao);
 	//alert (parString);
 	if (y_funcao==="A"){
-		if (confirm("Confirma a Alteração no registro de "+document.form1.txtnome.value)){
-			ajax2('altera_eleitor.php?'+parString,'carregando');
+		if (confirm("Confirma o cadastro de "+document.form1.txtnome.value)){
+			ajax2('altera_eleitor.php?'+parString,'modal');
+//           if (document.form1.rua.value != "") {
+//                atual_ender();
+//            }
 		}
 	}else{
 		if (y_funcao==="P"){
@@ -99,7 +113,7 @@ function AtualizaEleitor(y_funcao) {
 			open(parametro,null,'height=600,width=1200,top=100,left=100,status=no,titlebar=no,toolbar=no,scrollbars=yes,menubar=no,location=no');
 		}else{
 			if (confirm("Confirma a Exclusão do registro de "+document.form1.txtnome.value)){
-				ajax('exclui_eleitor.php?'+parString,'carregando');
+				ajax('exclui_eleitor.php?'+parString,'modal');
 			}
 		}
 	}	
@@ -135,7 +149,7 @@ function EditSolution(id){
 function Exclui_ender(id) {
 
 	if (confirm("Confirma a Exclusão do Endereço?")){
-		ajax('exclui_endereco.php?id='+id,'carregando');			
+		ajax('exclui_endereco.php?id='+id,'modal');			
 	}
 
 }
@@ -147,7 +161,7 @@ function excluir_receituario(id) {
 	var parString = "exclui_receituario.php?id="+id;
 //	alert(parString);
 	if (confirm("Confirma a Exclusão do Receituário")){
-		ajax(parString,'carregando');	
+		ajax(parString,'modal');	
 	}
 }
 //------------------------------------------------------------------------------
@@ -158,7 +172,7 @@ function excluir_remedio(id) {
 	var parString = "exclui_remedio.php?id="+id;
 //	alert(parString);
 	if (confirm("Confirma a Exclusão do medicamento")){
-		ajax(parString,'carregando');	
+		ajax(parString,'modal');	
 	}
 }
 //------------------------------------------------------------------------------
@@ -166,7 +180,7 @@ function excluir_remedio(id) {
 function exclui_visita(id) {
 
 	if (confirm("Confirma a Exclusão do Contato?")){
-		ajax('exclui_visita.php?id='+id,'carregando');			
+		ajax('exclui_visita.php?id='+id,'modal');			
 	}
 
 }
@@ -178,7 +192,7 @@ function grava_prontuario(){
 //	var diagnos = CKEDITOR.instances.diagnostic.getData();
 //	alert(parametros);
 	if (confirm("Confirma a gravação do Prontuário ")){
-		ajaxPost("gravar_prontuario.php","carregando");
+		ajaxPost("gravar_prontuario.php","modal");
 	}
 }
 
@@ -196,7 +210,7 @@ function gravar_remedio(id,indice) {
   var parString = "gravar_remedio.php?"+parString;
 //	alert(parString);
 	if (confirm("Confirma a Alteração do medicamento")){
-		ajax(parString,'carregando');	
+		ajax(parString,'modal');	
 	}
 }
 //------------------------------------------------------------------------------
@@ -208,7 +222,7 @@ function imprime() {
 			return;
 		}
 		//limpaTela();
-		ajax('eleitor_fpdf.php','carregando');
+		ajax('eleitor_fpdf.php','modal');
 }	
 //-----------------------------------------------------------------------------------------------------------------
 function imprime_atestado(cod_cadastro) {
@@ -249,7 +263,7 @@ function inclui_receituario(cod_cad){
 
 //------------------------------------------------------------------------------------
 function LimpaSessionCod(){
-	ajax3('zera_codigo.php','carregando');
+	ajax3('zera_codigo.php','modal');
 
 }
 
@@ -316,14 +330,14 @@ function PesquisaEleitor(cod){
 	}else{
 		enableFields(false);
 		//alert(cod);
-		ajax('busca_eleitor.php?codigo='+cod,'carregando');
+		ajaxP('busca_eleitor.php?codigo='+cod,'modal');
 	}
 
 }
 //-----------------------------------------------------------------------------------------------------------------
 function pesquisaprontuario(id){
 //	alert(id);
-	ajax5('busca_prontuario.php?id='+id,'carregando');
+	ajax5('busca_prontuario.php?id='+id,'modal');
 }
 
 //--------------------------------------------------------------------------
@@ -364,7 +378,7 @@ function valida_cadastro(x_funcao) {
 		if (!document.form1.txtemail.value=="") { 		
 			var er = new RegExp(/^[A-Za-z0-9_\-\.]+@[A-Za-z0-9_\-\.]{2,}\.[A-Za-z0-9]{2,}(\.[A-Za-z0-9])?/);
 			var email = $('#txtemail').val();		
-			if( email == '' || !er.test(email) ) { 
+			if(!er.test(email) ) { 
 				alert('Preencha o campo email corretamente\nApenas com caracteres válidos'); 
 				document.form1.txtemail.focus();
 				return false; 
@@ -451,9 +465,9 @@ function atual_ender() {
 	}
 	//alert(parString);
 	if (tipo==='A'){
-   		ajax5('atualiza_endereco.php?'+parString, 'carregando');
+   		ajax5('atualiza_endereco.php?'+parString, 'modal');
 	}else{
-   		ajax5('inclui_endereco.php?'+parString, 'carregando');
+   		ajax5('inclui_endereco.php?'+parString, 'modal');
 	}
 }
 
@@ -473,7 +487,7 @@ function buscacep(cod) {
 		return false;
 	}
 	//alert(cod);
-	ajax5('busca_cep.php?codigo='+cod, 'carregando');
+	ajax5('busca_cep.php?codigo='+cod, 'modal');
 
 }			
 //----------------------------------------------------------------------------------------------------------------------------------
@@ -491,7 +505,7 @@ function busca_cod_cep(cod) {
 		return false;
 	}
 	//alert(cod);
-	ajax5('busca_cep.php?codigo='+cod, 'carregando');
+	ajax5('busca_cep.php?codigo='+cod, 'modal');
 
 }			
 //------------------------------------------------------------------------------------------------------------------------------------			
@@ -502,7 +516,18 @@ function buscarua() {
 		document.form1.rua.focus();
 		return false;
 	}
-	ajax5('busca_rua.php?rua='+rua, 'carregando');
+	ajax5('busca_rua.php?rua='+rua, 'modal');
 
 }			
-//------------------------------------------------------------------------------------------------------------------------------------			
+//---------------------------------------------------------------------------------------------------------
+
+function abrir_cadastro_pelo_apoio(cod_cadastro) {
+    //$_SESSION['ult_eleitor_pesquisado'] = cod_cadastro;
+	ajax4("../cad_apoio/inicializa_global.php?cod_cadastro="+cod_cadastro,"carregando");
+	var param = '../eleitores/cadastro.php';
+	//alert(param);
+	open(param,"_self");		
+	
+}
+	  
+//---------------------------------------------------------------------------------------------------------

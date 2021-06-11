@@ -39,7 +39,7 @@ if (liberado(5900)==0){
   <script src="../js/ie10-viewport-bug-workaround.js"></script>
 	<script type="text/javascript" src="../js/autocomplete.js"></script>
 	</head>
-  <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="carga_ramos(1)" onBlur="carga_ramos(1)" onFocus="carga_ramos(1)">
+  <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="carga_ramos(1)">
 <?php include("../utilitarios/cabecalho.php"); ?>	  
 
 <form name="form1" method="post" action="">

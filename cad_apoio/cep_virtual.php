@@ -24,7 +24,7 @@ function busca_cep($cep){
 </head>
 <body>
 <?php
-	$resultado_busca = busca_cep('95997000');
+	$resultado_busca = busca_cep('92025313');
 
 echo "<pre> Array Retornada:
  ".print_r($resultado_busca, true)."</pre>";

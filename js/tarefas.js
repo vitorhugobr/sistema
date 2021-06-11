@@ -17,7 +17,7 @@ function carga_tarefas(pagina,status) {
 		return;
 	}
 //	alert("Status 0");
-	ajax('busca_tarefas.php?pagina='+pagina+'&status='+status, 'carregando');
+	ajax2('busca_tarefas.php?pagina='+pagina+'&status='+status, 'tarefas');
 }
 //--------------------------------------------------------------------------------------------------------------------			
 function incluir_tarefa() {
@@ -29,7 +29,7 @@ function incluir_tarefa() {
 	var parametros;
 	parametros= "usuario="+document.form1.txtusuario.value+"&priority="+document.form1.txtprioridade.value+"&assunto="+document.form1.txtassunto.value+"&tarefa="+document.form1.txttarefa.value+"&email="+document.form1.txtemail.value+"&chkemail="+document.form1.chkemail.checked;
 	//alert(parametros);
-	ajax('inclui_tarefa.php?'+parametros, 'carregando');
+	ajax('inclui_tarefa.php?'+parametros, 'modal');
 }
 //--------------------------------------------------------------------------------------------------------------------			
 function carga_todas() {
@@ -52,7 +52,7 @@ function busca_usuario(user) {
 		return;
 	}
 //	alert("Status 3");
-	ajax('busca_usuario.php?codigo='+user, 'carregando');
+	ajax('busca_usuario.php?codigo='+user, 'modal');
 }
 			
 			
@@ -84,7 +84,7 @@ function excluitarefa(id) {
 		return;
 	}
 	if (confirm("Confirma a Exclusão da tarefa #"+id+"?")){
-		ajax('exclui_tarefa.php?id='+id, 'carregando');
+		ajax('exclui_tarefa.php?id='+id, 'modal');
 	}
 }
 //--------------------------------------------------------------------------------------------------------------------			
@@ -96,7 +96,7 @@ function iniciatarefa(task) {
 	}
 	//alert("Vai gravar a data de hoje e histórico de início no arquivo historico_tarefas");
 	if (confirm("Confirma o início da tarefa "+task+"?")){
-		ajax('inicia_tarefa.php?tarefa='+task, 'carregando');
+		ajax('inicia_tarefa.php?tarefa='+task, 'modal');
 	}
 }
 //--------------------------------------------------------------------------------------------------------------------			
@@ -108,7 +108,7 @@ function encerratarefa(task) {
 	}
 	//alert("Vai gravar a data de hoje e histórico de início no arquivo historico_tarefas");
 	if (confirm("Confirma o Encerramento da tarefa "+task+"?")){
-		ajax('encerra_tarefa.php?tarefa='+task, 'carregando');
+		ajax('encerra_tarefa.php?tarefa='+task, 'modal');
 	}
 }
 //--------------------------------------------------------------------------------------------------------------------			
@@ -137,6 +137,6 @@ function incluir_historico() {
 	parametros= "id_tarefa="+document.form1.txtid_hist.value+"&data_hist="+document.form1.txtdata.value+"&descricao_hist="+document.form1.txthistorico.value;
 //	alert(parametros);
 	if (confirm("Confirma a Inclusão do histórico na tarefa?")){
-		ajax('inclui_historico.php?'+parametros, 'carregando');
+		ajax('inclui_historico.php?'+parametros, 'modal');
 	}
 }

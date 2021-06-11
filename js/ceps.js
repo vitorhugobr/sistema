@@ -38,7 +38,7 @@ function altera_Cep() {
 
 //	alert(parString);
 	if (confirm("Confirma a Alteração do CEP..: "+cod+"?")){
-		ajax('altera_cep.php?'+parString,'carregando');
+		ajax('altera_cep.php?'+parString,'modal');
 	}
 }	
 
@@ -110,7 +110,7 @@ function inclui_Cep() {
 	}
 
 	//alert(parString);
-	ajax('inclui_cep.php?'+parString,'carregando');
+	ajax('inclui_cep.php?'+parString,'modal');
 }	
 //-------------------------------------------------------------------------------------------------------------
 function exclui_Cep() {
@@ -127,7 +127,7 @@ function exclui_Cep() {
 	}
 	
 	if (confirm("Confirma a Exclusão do CEP..: "+cod+"?")){
-		ajax('exclui_cep.php?cep='+cod,'carregando');
+		ajax('exclui_cep.php?cep='+cod,'modal');
 	}
 }	
 //-------------------------------------------------------------------------------------------------------------
@@ -144,5 +144,5 @@ function busca_Cep(cod) {
 		document.form1.cep.focus();
 		return false;
 	}
-	ajax('pesquisa_ajax.php?cep='+cod+'&consulta=cep','carregando');}	
+	ajax('pesquisa_ajax.php?cep='+cod+'&consulta=cep','modal');}	
 //-------------------------------------------------------------------------------------------------------------

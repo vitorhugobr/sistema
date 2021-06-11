@@ -74,12 +74,12 @@ function AtualizaEleitor(y_funcao) {
 //	alert (parString);
 	if (y_funcao=="I") {
 		if (confirm("Confirma a Inclusão do registro de "+document.form1.txtNome.value)){
-			ajax('inclui_eleitor.php?'+parString,'carregando');	
+			ajax('inclui_eleitor.php?'+parString,'modal');	
 		}
 	}else{ 
 		if (y_funcao=="A"){
 			if (confirm("Confirma a Alteração no registro de "+document.form1.txtNome.value)){
-				ajax2('altera_eleitor.php?'+parString,'carregando');
+				ajax2('altera_eleitor.php?'+parString,'modal');
 			}
 		}else{
 			if (y_funcao=="P"){
@@ -87,7 +87,7 @@ function AtualizaEleitor(y_funcao) {
 			  	open(parametro,null,'height=600,width=1200,top=100,left=100,status=no,titlebar=no,toolbar=no,scrollbars=yes,menubar=no,location=no');
 			}else{
 				if (confirm("Confirma a Exclusão do registro de"+document.form1.txtNome.value)){
-					ajax('exclui_eleitor.php?'+parString,'carregando');
+					ajax('exclui_eleitor.php?'+parString,'modal');
 				}
 			}
 		}	
@@ -131,7 +131,7 @@ function EditSolution(id){
 function Exclui_ender(id) {
 
 	if (confirm("Confirma a Exclusão do Endereço?")){
-		ajax('exclui_endereco.php?id='+id,'carregando');			
+		ajax('exclui_endereco.php?id='+id,'modal');			
 	}
 
 }
@@ -143,7 +143,7 @@ function excluir_receituario(id) {
 	var parString = "exclui_receituario.php?id="+id;
 //	alert(parString);
 	if (confirm("Confirma a Exclusão do Receituário")){
-		ajax(parString,'carregando');	
+		ajax(parString,'modal');	
 	}
 }
 //------------------------------------------------------------------------------
@@ -154,7 +154,7 @@ function excluir_remedio(id) {
 	var parString = "exclui_remedio.php?id="+id;
 //	alert(parString);
 	if (confirm("Confirma a Exclusão do medicamento")){
-		ajax(parString,'carregando');	
+		ajax(parString,'modal');	
 	}
 }
 //------------------------------------------------------------------------------
@@ -162,7 +162,7 @@ function excluir_remedio(id) {
 function exclui_visita(id) {
 
 	if (confirm("Confirma a Exclusão do Contato?")){
-		ajax('exclui_visita.php?id='+id,'carregando');			
+		ajax('exclui_visita.php?id='+id,'modal');			
 	}
 
 }
@@ -202,7 +202,7 @@ function gravar_remedio(id,indice) {
 	var parString = "gravar_remedio.php?"+parString;
 //	alert(parString);
 	if (confirm("Confirma a Alteração do medicamento")){
-		ajax(parString,'carregando');	
+		ajax(parString,'modal');	
 	}
 }
 //------------------------------------------------------------------------------
@@ -214,7 +214,7 @@ function imprime() {
 			return;
 		}
 		//limpaTela();
-		ajax('eleitor_fpdf.php','carregando');
+		ajax('eleitor_fpdf.php','modal');
 }	
 //-----------------------------------------------------------------------------------------------------------------
 function imprime_atestado(cod_cadastro) {
@@ -276,7 +276,7 @@ function inclui_receituario(cod_cad){
 
 //------------------------------------------------------------------------------------
 function LimpaSessionCod(){
-	ajax3('zera_codigo.php','carregando');
+	ajax3('zera_codigo.php','modal');
 
 }
 
@@ -335,7 +335,7 @@ function PesquisaEleitor(cod){
 	}
 	//var nome = document.form1.txtNome.value;
 	//alert(cod);
-	ajax('busca_eleitor.php?codigo='+cod,'carregando');
+	ajax('busca_eleitor.php?codigo='+cod,'modal');
 	//ajax2('busca_enderecos.php?cod='+cod, 'dados');
 //	ajax3('busca_visitas.php?cod='+cod,'visit');
 //	ajax6('busca_demandas.php?cod='+cod,'solution');	
@@ -348,7 +348,7 @@ function PesquisaEleitor(cod){
 //-----------------------------------------------------------------------------------------------------------------
 function pesquisaprontuario(id){
 //	alert(id);
-	ajax5('busca_prontuario.php?id='+id,'carregando');
+	ajax5('busca_prontuario.php?id='+id,'modal');
 }
 
 //--------------------------------------------------------------------------

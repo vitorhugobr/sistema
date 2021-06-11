@@ -13,13 +13,13 @@ $politico= 'Ver Reginaldo Pujol';
 $email_pol= 'vereadorpujol@gmail.com';
 
 // conectar ao banco do usuário
-$_SG['servidor'] = "www.rpujol.com.br";
-$_SG['banco'] = "rpujolco_pujol";
-$_SG['usuario'] = "rpujolco_pujol";
-$_SG['senha'] = "vhm@2019";
+$_SESSION['servidor'] = "www.rpujol.com.br";
+$_SESSION['banco'] = "rpujolco_pujol";
+$_SESSION['usuario'] = "rpujolco_pujol";
+$_SESSION['senha'] = "vhm@2019";
 
 
-$_con  = new mysqli($_SG['servidor'],$_SG['usuario'],$_SG['senha'],$_SG['banco']);	
+$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);	
 if(!$_con) {  
 	echo "Não foi possivel conectar ao MySQL. Erro " .
 			mysqli_connect_errno() . " : " . mysql_connect_error();
@@ -38,8 +38,16 @@ $mes = $datatoday["mon"];
 
 require_once("../phpmailer/class.phpmailer.php");
 require_once("../phpmailer/class.smtp.php");
-
-$_sql = 'SELECT * from emails_aniver where codigo ='.$codigo;
+$_sql = 'select 
+    `cadastro`.`CODIGO` AS `codigo`,
+    `cadastro`.`SEXO` AS `sexo`,
+    `cadastro`.`NOME` AS `nome`,
+    `cadastro`.`EMAIL` AS `email`,
+    `cadastro`.`DTNASC` AS `aniver`,
+    `cadastro`.`APELIDO` AS `apelido` 
+  from 
+    `cadastro` 
+  where `cadastro`.`CODIGO` ='.$codigo;
 $_res = $_con->query($_sql);
 $qtd_emails= 0;
 $pessoas="";
