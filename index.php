@@ -6,6 +6,7 @@
 session_start();
 
 date_default_timezone_set('America/Sao_Paulo');
+
 $_SESSION['ult_etapa'] = 0;  // guarda a última etapa consultada na sessão.
 $_SESSION['sistema']= "Sistema de Gestão e Relacionamento com Eleitor";
 $_SESSION['sistemaabrev']= "SIGRE";
