@@ -294,62 +294,85 @@ case 3:{
 	// Etiqueta Geral
 	$ebct = array();
 	$etq = 0;   // esta variável controla se imprime na etiqueta esquerda ou direita. 0 = esquerda
-	$qtdetq = 0;
+	$qtdetq = 0; 
 	$tot_geral_reg = 0;
 	//$_sql = montacep();
 	list ($_sql, $parametros) = montacep();    //retornam valores nestas duas variáveis da função monta_sql()
 	//echo $_sql;
-//    $_sql="select 
-//    month(`cadastro`.`DTNASC`) AS `mes`,
-//    dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
-//    `enderecos`.`id` AS `id`,
-//    `enderecos`.`cep` AS `cep`,
-//    `enderecos`.`tipolog` AS `tipolog`,
-//    `enderecos`.`rua` AS `rua`,
-//    `enderecos`.`bairro` AS `bairro`,
-//    `enderecos`.`cidade` AS `cidade`,
-//    `enderecos`.`uf` AS `uf`,
-//    `enderecos`.`numero` AS `numero`,
-//    `enderecos`.`complemento` AS `complemento`,
-//    `enderecos`.`padrao` AS `padrao`,
-//    `enderecos`.`tipo` AS `tipo`,
-//    `enderecos`.`reg` AS `reg`,
-//    `cadastro`.`CODIGO` AS `codigo`,
-//    `cadastro`.`NOME` AS `nome`,
-//    `cadastro`.`SEXO` AS `sexo`,
-//    `cadastro`.`DTNASC` AS `dtnasc`,
-//    `cadastro`.`GRUPO` AS `grupo`,
-//    `cadastro`.`ORIGEM` AS `origem`,
-//    `cadastro`.`RECEBEMAT` AS `recebemat`,
-//    `cadastro`.`PROFISSAO` AS `profissao`,
-//    `cadastro`.`ZONAL` AS `zonal`,
-//    `cadastro`.`SECCAO` AS `seccao`,
-//    `cadastro`.`CAMPANHA` AS `campanha`,
-//    `cadastro`.`CONDICAO` AS `condicao` 
-//  from 
-//    (`enderecos` left join `cadastro` on((`cadastro`.`CODIGO` = `enderecos`.`codigo`))) 
-//  WHERE
-//  (cadastro.CONDICAO = 1 and
-//  (cadastro.GRUPO > 1 AND 
-//  cadastro.GRUPO < 22) OR 
-//  (cadastro.GRUPO > 47 AND 
-//  cadastro.GRUPO < 61) OR 
-//  cadastro.GRUPO = 62 OR 
-//  cadastro.GRUPO = 63 OR 
-//  cadastro.GRUPO = 65 OR 
-//  (cadastro.GRUPO > 67 AND 
-//  cadastro.GRUPO < 76) OR 
-//  (cadastro.GRUPO > 77 AND 
-//  cadastro.GRUPO < 97) OR 
-//  cadastro.GRUPO = 179 OR 
-//  cadastro.GRUPO = 163 OR 
-//  cadastro.GRUPO = 169 OR 
-//  cadastro.GRUPO = 98 OR 
-//  cadastro.GRUPO = 23 OR 
-//  cadastro.GRUPO = 24)
+//    $_sql="SELECT 
+//  month(cadastro.DTNASC) AS mes,
+//  dayofmonth(`cadastro`.`DTNASC`) AS `dia`,	
+//  enderecos.id,
+//  enderecos.cep,
+//  enderecos.tipolog,
+//  enderecos.rua,
+//  enderecos.bairro,
+//  enderecos.cidade,
+//  enderecos.uf,
+//  enderecos.numero,
+//  enderecos.complemento,
+//  enderecos.padrao,
+//  enderecos.tipo,
+//  enderecos.reg,
+//  cadastro.CODIGO AS codigo,
+//  cadastro.NOME AS nome,
+//  cadastro.SEXO AS sexo,
+//  cadastro.DTNASC AS dtnasc,
+//  cadastro.GRUPO AS grupo,
+//  cadastro.ORIGEM AS origem,
+//  cadastro.RECEBEMAT AS recebemat,
+//  cadastro.PROFISSAO AS profissao,
+//  cadastro.ZONAL AS zonal,
+//  cadastro.SECCAO AS seccao,
+//  cadastro.CAMPANHA AS campanha,
+//  cadastro.CONDICAO AS condicao
+//FROM
+//  enderecos
+//  LEFT OUTER JOIN cadastro ON (cadastro.CODIGO = enderecos.codigo)
+//WHERE
+//  cadastro.CONDICAO = 1 AND 
+//  enderecos.cep > 0 AND ( 
+//  (cadastro.GRUPO = 2) OR 
+//  (cadastro.GRUPO = 7) OR 
+//  (cadastro.GRUPO = 25) OR 
+//  (cadastro.GRUPO > 26 AND 
+//  cadastro.GRUPO < 34) OR 
+//  (cadastro.GRUPO > 34 AND 
+//  cadastro.GRUPO < 40) OR 
+//  (cadastro.GRUPO > 40 AND 
+//  cadastro.GRUPO < 45) OR 
+//  (cadastro.GRUPO > 99 AND 
+//  cadastro.GRUPO < 103) OR    
+//  cadastro.GRUPO = 105 OR 
+//  cadastro.GRUPO = 106 OR 
+//  cadastro.GRUPO = 108 OR 
+//  cadastro.GRUPO = 109 OR 
+//  cadastro.GRUPO = 111 OR 
+//  cadastro.GRUPO = 112 OR
+//  cadastro.GRUPO = 114 OR  
+// (cadastro.GRUPO > 115 AND 
+//  cadastro.GRUPO < 131) OR
+//  cadastro.GRUPO = 132 OR 
+//  cadastro.GRUPO = 133 OR 
+//  cadastro.GRUPO = 141 OR 
+//  cadastro.GRUPO = 142 OR 
+//  cadastro.GRUPO = 144 OR 
+//  cadastro.GRUPO = 146 OR
+//  cadastro.GRUPO = 148 OR 
+//  cadastro.GRUPO = 149 OR 
+//  cadastro.GRUPO = 150 OR 
+//  cadastro.GRUPO = 151 OR 
+//  cadastro.GRUPO = 153 OR 
+//  cadastro.GRUPO = 154 OR 
+//  cadastro.GRUPO = 155 OR
+//  cadastro.GRUPO = 160 OR 
+//  cadastro.GRUPO = 164 OR 
+//  cadastro.GRUPO = 171 OR 
+//  cadastro.GRUPO = 178)
 //ORDER BY
 //  enderecos.reg,
-//  cadastro.NOME";
+//  cadastro.NOME
+//";
 	if ($_sql==""){
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>NENHUMA OPÇÃO INFORMADA<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';
