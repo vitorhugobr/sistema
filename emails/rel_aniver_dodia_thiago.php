@@ -145,7 +145,7 @@ if ($qtd_emails== 0){
 		$subject = "Erro Rel Aniver Dia - Dr Thiago"; 
 		$message = 'Erro ao enviar e-mail com resumo de aniversariantes.<br>' . stripslashes($mens_qtde) . '<br>' . $pessoas . '<br>' . $prg;
 		$to = 'Vitor H M Oliveira<vitorhugo@protonmail.com>';
-		mail($to, $subject, $message, $headers);
+		//mail($to, $subject, $message, $headers);
 		echo "Não foi possível enviar o e-mail - ".$prg;
 	}	
 }

@@ -278,7 +278,7 @@ if ($tot_pessoas_select== 0){
 		$subject = 'Erro Aniver Dia '.date("d/m/Y").' Info - Dr Thiago'; # Assunto da mensagem
 		$message = 'Erro ao enviar e-mail com resumo de aniversariantes para Dr Thiago.<br>'.stripslashes($mens_qtde).'<br>'.$pessoas.'<br>aniver_dodia_thiago.php';//Pretty error messages from PHPMailer
 		$to = 'Vitor H M Oliveira<vhmoliveira@protonmail.com>';
-		mail($to, $subject, $message, $headers);
+		//mail($to, $subject, $message, $headers);
 	}
 
 	if ($emailserrados<>'') {
@@ -311,7 +311,7 @@ if ($tot_pessoas_select== 0){
 		$mail->setFrom('sigre@vitor.poa.br', 'Sistema Sigre');
 		$mail->Body    = stripslashes($emailserrados);
 		$mail->AltBody = stripslashes($emailserrados);
-		$mail->Send();			
+		//$mail->Send();			
 	}
 }
 	

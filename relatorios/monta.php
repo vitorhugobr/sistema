@@ -81,7 +81,7 @@ case 1:{
 	$numpag = 0;
 	$numlin=99;
     $registros = 0;
-	list ($_sql, $parametros) = monta_sql();    //retornam valores nestas duas variáveis da função #monta_sql()
+	//list ($_sql, $parametros) = monta_sql();    //retornam valores nestas duas variáveis da função #monta_sql()
 //    $parametros="";
 //	$_sql = 'SELECT 
 //  month(cadastro.DTNASC) AS mes,
@@ -142,19 +142,146 @@ case 1:{
 //  LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
 //  LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
 //  LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE
-//   (grupo > 1 and grupo < 22) 
-//   OR (grupo > 47 and grupo < 61) 
-//   OR grupo = 62 
-//   OR grupo = 63 
-//   OR grupo = 65 
-//   OR (grupo > 67 and grupo < 76) 
-//   OR (grupo > 77 and grupo < 97) 
-//   OR grupo = 179 
-//   OR grupo = 163 
-//   OR grupo = 169 
-//   OR grupo = 98 
-//   OR grupo = 23 
-//   OR grupo = 24 
+// grupos.GRUPO =	1
+//or grupos.GRUPO = 2
+//or grupos.GRUPO = 3
+//or grupos.GRUPO = 4
+//or grupos.GRUPO = 5
+//or grupos.GRUPO = 6
+//or grupos.GRUPO = 7
+//or grupos.GRUPO = 9
+//or grupos.GRUPO = 10
+//or grupos.GRUPO = 11
+//or grupos.GRUPO = 14
+//or grupos.GRUPO = 15
+//or grupos.GRUPO = 16
+//or grupos.GRUPO = 17
+//or grupos.GRUPO = 18
+//or grupos.GRUPO = 19
+//or grupos.GRUPO = 21
+//or grupos.GRUPO = 22
+//or grupos.GRUPO = 25
+//or grupos.GRUPO = 28
+//or grupos.GRUPO = 31
+//or grupos.GRUPO = 32
+//or grupos.GRUPO = 40
+//or grupos.GRUPO = 41
+//or grupos.GRUPO = 44
+//or grupos.GRUPO = 45
+//or grupos.GRUPO = 46
+//or grupos.GRUPO = 49
+//or grupos.GRUPO = 56
+//or grupos.GRUPO = 60
+//or grupos.GRUPO = 63
+//or grupos.GRUPO = 67
+//or grupos.GRUPO = 70
+//or grupos.GRUPO = 71
+//or grupos.GRUPO = 75
+//or grupos.GRUPO = 77
+//or grupos.GRUPO = 81
+//or grupos.GRUPO = 88
+//or grupos.GRUPO = 89
+//or grupos.GRUPO = 94
+//or grupos.GRUPO = 99
+//or grupos.GRUPO = 101
+//or grupos.GRUPO = 102
+//or grupos.GRUPO = 103
+//or grupos.GRUPO = 104
+//or grupos.GRUPO = 107
+//or grupos.GRUPO = 108
+//or grupos.GRUPO = 109
+//or grupos.GRUPO = 111
+//or grupos.GRUPO = 113
+//or grupos.GRUPO = 118
+//or grupos.GRUPO = 119
+//or grupos.GRUPO = 122
+//or grupos.GRUPO = 127
+//or grupos.GRUPO = 131
+//or grupos.GRUPO = 132
+//or grupos.GRUPO = 135
+//or grupos.GRUPO = 136
+//or grupos.GRUPO = 137
+//or grupos.GRUPO = 138
+//or grupos.GRUPO = 139
+//or grupos.GRUPO = 140
+//or grupos.GRUPO = 144
+//or grupos.GRUPO = 146
+//or grupos.GRUPO = 147
+//or grupos.GRUPO = 149
+//or grupos.GRUPO = 150
+//or grupos.GRUPO = 151
+//or grupos.GRUPO = 178
+//or grupos.GRUPO = 181
+//or grupos.GRUPO = 182
+//   order by  enderecos.rua, enderecos.numero,
+//  enderecos.complemento';	
+
+	
+	
+	
+//	$_sql = 'SELECT 
+//  month(cadastro.DTNASC) AS mes,
+//  dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
+//  cadastro.CODIGO as codigo,
+//  cadastro.NOME as nome,
+//  cadastro.SEXO as sexo,
+//  cadastro.DTCAD as dtcad,
+//  cadastro.DTNASC as dtnasc,
+//  cadastro.CARGO as cargo,
+//  cadastro.FONE_RES as fone_res,
+//  cadastro.FONE_CEL as fone_cel,
+//  cadastro.FONE_COM as fone_com,
+//  cadastro.CPF as cpf,
+//  cadastro.CONDICAO as condicao,
+//  cadastro.EMAIL as email,
+//  cadastro.GRUPO as grupo,
+//  cadastro.ORIGEM as origem,
+//  cadastro.PROFISSAO as profissao,
+//  cadastro.ZONAL as zonal,
+//  cadastro.SECCAO as seccao,
+//  cadastro.PAI_MAE as pai_mae,
+//  cadastro.FILIADO as filiado,
+//  cadastro.RECEBEMAT as recebemat,
+//  cadastro.RESPCADASTRO as respcadastro,
+//  cadastro.DTULTALT as dtultalt,
+//  cadastro.EMPRESA as empresa,
+//  cadastro.VOTOU as votou,
+//  cadastro.RAMO as ramo,
+//  cadastro.RECEBEMAIL as recebemail,
+//  cadastro.IMPRESSO as impresso,
+//  cadastro.ENVIADO as enviado,
+//  cadastro.CAMPANHA as campanha,
+//  cadastro.FACEBOOK as facebook,
+//  cadastro.TWITTER as twitter,
+//  cadastro.OUTRAREDE as outrarede,
+//  cadastro.APELIDO as apelido,
+//  cadastro.EST_CIVIL as est_civil,
+//  cadastro.CLASSI as classi,
+//  cadastro.OBS as obs,
+//  enderecos.cep,
+//  enderecos.tipolog,
+//  enderecos.rua,
+//  enderecos.bairro,
+//  enderecos.cidade,
+//  enderecos.uf,
+//  enderecos.numero,
+//  enderecos.complemento,
+//  enderecos.padrao,
+//  enderecos.tipo,
+//  enderecos.reg,
+//  origem.Descricao as desc_origem ,
+//  grupos.NOMEGRP as desc_grupo,
+//  grupos.GRUPO AS cod_grupo,
+//  origem.Origem AS cod_origem
+//FROM
+//  cadastro
+//  LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
+//  LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
+//  LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE
+//   (bairro like "%restinga%") 
+//   OR (bairro like "%COOP. BOMBEIROS%") 
+//   OR (bairro like "%COOP.DA FIGUEIRA%") 
+//   OR (bairro like "%PITINGA%") 
 //   order by  enderecos.rua, enderecos.numero,
 //  enderecos.complemento';	
     #echo $_sql;
@@ -332,43 +459,18 @@ case 3:{
 //WHERE
 //  cadastro.CONDICAO = 1 AND 
 //  enderecos.cep > 0 AND ( 
-//  (cadastro.GRUPO = 2) OR 
-//  (cadastro.GRUPO = 7) OR 
-//  (cadastro.GRUPO = 25) OR 
-//  (cadastro.GRUPO > 26 AND 
-//  cadastro.GRUPO < 34) OR 
-//  (cadastro.GRUPO > 34 AND 
-//  cadastro.GRUPO < 40) OR 
-//  (cadastro.GRUPO > 40 AND 
-//  cadastro.GRUPO < 45) OR 
-//  (cadastro.GRUPO > 99 AND 
-//  cadastro.GRUPO < 103) OR    
-//  cadastro.GRUPO = 105 OR 
-//  cadastro.GRUPO = 106 OR 
-//  cadastro.GRUPO = 108 OR 
-//  cadastro.GRUPO = 109 OR 
-//  cadastro.GRUPO = 111 OR 
-//  cadastro.GRUPO = 112 OR
-//  cadastro.GRUPO = 114 OR  
-// (cadastro.GRUPO > 115 AND 
-//  cadastro.GRUPO < 131) OR
-//  cadastro.GRUPO = 132 OR 
+//  (cadastro.GRUPO = 29) OR 
+//  (cadastro.GRUPO = 77) OR 
+//  (cadastro.GRUPO = 107) OR 
+//  cadastro.GRUPO = 181 OR 
 //  cadastro.GRUPO = 133 OR 
-//  cadastro.GRUPO = 141 OR 
-//  cadastro.GRUPO = 142 OR 
-//  cadastro.GRUPO = 144 OR 
-//  cadastro.GRUPO = 146 OR
-//  cadastro.GRUPO = 148 OR 
-//  cadastro.GRUPO = 149 OR 
-//  cadastro.GRUPO = 150 OR 
-//  cadastro.GRUPO = 151 OR 
-//  cadastro.GRUPO = 153 OR 
-//  cadastro.GRUPO = 154 OR 
-//  cadastro.GRUPO = 155 OR
-//  cadastro.GRUPO = 160 OR 
-//  cadastro.GRUPO = 164 OR 
-//  cadastro.GRUPO = 171 OR 
-//  cadastro.GRUPO = 178)
+//  cadastro.GRUPO = 109 OR 
+//  (cadastro.GRUPO >134 and 
+//  cadastro.GRUPO < 141) OR 
+//  cadastro.GRUPO = 174 OR
+//  cadastro.GRUPO = 182 OR 
+//  cadastro.GRUPO = 104 OR 
+//  cadastro.GRUPO = 103)
 //ORDER BY
 //  enderecos.reg,
 //  cadastro.NOME
