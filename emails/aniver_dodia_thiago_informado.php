@@ -48,7 +48,7 @@ $_sql = 'select
     `cadastro`.`APELIDO` AS `apelido` 
   from 
     `cadastro` 
-  where MONTH(`cadastro`.`DTNASC`)= '.$mes.' AND DAYOFMONTH(`cadastro`.`DTNASC`) = '.$dia.' AND `cadastro`.`CODIGO`='.$codigo;
+  where `cadastro`.`CODIGO`='.$codigo;
 
 echo $_sql.'<br'>
 $_res = $_con->query($_sql);

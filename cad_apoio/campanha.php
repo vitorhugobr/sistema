@@ -43,6 +43,7 @@ if (liberado(5700)==0){
 	</head>
   <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="carga_campanhas(1)">
 
+<div class="nav fixed-top container-fluid shadow mt-0 mb-0 bg-white rounded sticky-top">
 <?php include("../utilitarios/cabecalho.php"); ?>
     
     <form name="form1" method="post" action="">
@@ -81,7 +82,9 @@ if (liberado(5700)==0){
         </div>
     </nav>
 </div>
+	  </div>
 <div>
+	
 <?php
 if(isset($_SESSION['msg'])){
 	echo $_SESSION['msg'];

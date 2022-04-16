@@ -29,7 +29,7 @@ $respcadastro = $_SESSION["usuarioUser"];
 $empresa = "";
 $votou = "";
 $ramo = "";
-$recebemail = "";
+$recebemail = 0;
 $recimpresso = "";
 $enviado = 0;
 $campanha = "";
@@ -226,18 +226,22 @@ $class = $theValue;
 
 // altera no banco
 //debug();
-$strsql = 'INSERT into cadastro (CODIGO, DTCAD, CONDICAO, RESPCADASTRO, DTULTALT)  VALUES(';
+$strsql = 'INSERT into cadastro (CODIGO, DTCAD, CONDICAO, RESPCADASTRO, DTULTALT, RECEBEMAIL)  VALUES(';
 $strsql .= $codigo;
 $strsql .= ",'".date('Y-m-d H:i:s')."'";
 $strsql .= ",".$condicao;
 $strsql .= ",".$respcadastro;
 $strsql .= ",'".date('Y-m-d H:i:s')."'";
+$strsql .= ",0";
 $strsql .= ')';
 
-//echo $strsql;
-$mysql_query1 = $_con->query($strsql);
+
+
+$resposta = executa_sql($strsql,"Cadastro: código gerado com sucesso. Complete as informções e clique em GRAVAR.","Cadastro: NÃO foi possível gerar código",true,true);
+
+//$mysql_query1 = $_con->query($strsql);
     
-if ($mysql_query1) {
+if ($resposta>0) {
 	$sql = 'SELECT MAX(CODIGO) AS codigo FROM cadastro';
 	$mysql_query = $_con->query($sql);
 	if ($mysql_query->num_rows<1) {
@@ -245,9 +249,10 @@ if ($mysql_query1) {
 	}else{
 		while ($dados_s = $mysql_query->fetch_assoc()) {
 			$_SESSION['ult_eleitor_pesquisado']=$dados_s['codigo'];
-			echo '<script>';
-			echo 'PesquisaEleitor('.$dados_s['codigo'].')';
-			echo '</script>';
+			gravaoperacoes("cadastro","I", $_SESSION["usuarioUser"],"Incluído no cadastro Código #".$dados_s['codigo']);
+//			echo '<script>';
+//			echo 'PesquisaEleitor('.$dados_s['codigo'].')';
+//			echo '</script>';
 		}
 	}
 	exit;

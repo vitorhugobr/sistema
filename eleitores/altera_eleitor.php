@@ -314,9 +314,12 @@ $strsql .= ' WHERE CODIGO='.$codigo;
 
 //echo $strsql;
 //debug();
-$resp = executa_sql($strsql,"Cadastro atualizado com sucesso!","ERRO ao atualizar cadastro",true,false);
+
+$resp = executa_sql($strsql,"Cadastro #".$codigo." de ".$nome." foi atualizado com sucesso!","ERRO ao atualizar cadastro",true,true);
 
 gravaoperacoes("cadastro","A", $_SESSION["usuarioUser"],$strsql);
+
+$_SESSION['ult_eleitor_pesquisado']=0;
 
 $strsql2 = "delete from `enderecos` where id = ".$id_endereco;
 
@@ -388,7 +391,7 @@ $reg = $theValue;
 
 if (($cep<>"") and ($cep!="NULL")){
   $_sql = "Insert into enderecos  values(".$id_endereco.",".$codigo.",".$cep.",".$tipolog.",".$rua.",".$bairro.",".$cidade.",".$uf.",".$numero.",".$complemento.",'S','RESIDENCIAL',".$reg.")";
-  $resp2 = executa_sql($_sql,"Cadastro atualizado com sucesso!","ERRO ao atualizar cadastro",true,true);
+  $resp2 = executa_sql($_sql,"","",false,false);
 }else{
   echo '<script>window.location.reload();</script>'; 
 }

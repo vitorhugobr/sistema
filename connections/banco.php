@@ -28,40 +28,25 @@ switch ($_SESSION['cod_usuario']) {
 		//Usuário: sigre
 		//Senha: sig-2021		
 		break;
-	case 2:  // Pujol
-		$_SESSION['servidor'] = "www.rpujol.com.br";
-		$_SESSION['banco'] = "rpujolco_pujol";
-		$_SESSION['usuario'] = "rpujolco_pujol";
-		$_SESSION['senha'] = "vhm@2019";
-		//  senha cpanel: "@H2n,?9#l0pR"  usuário: "rpujolcom"
+	case 2:  // Emerson
+		$_SESSION['servidor'] = "www.serverwebdb.com.br";
+		$_SESSION['banco'] = "chaplinb_chaplin";
+		$_SESSION['usuario'] = "chaplinb_chaplin";
+		$_SESSION['senha'] = "HpcOKYN7b2E-";
+		//	senha cpanel: "QjT#mW@TxWgJ"  usuário: "chaplinbebidasco"		
 		break;
 	case 3:  // Mauro Pinheiro
-		$_SESSION['servidor'] = "www.mauropinheiro.net.br";
-		$_SESSION['banco'] = "mauropin_mauro";
-		$_SESSION['usuario'] = "mauropin_mauro";
-		$_SESSION['senha'] = "vitor@2020";
-		//	senha cpanel: ".@ypt?0iM_xF"  usuário: "mauropinheironet"
 		break;
-	case 4:  // Domingos Cunha
-		$_SESSION['servidor'] = "www.domingoscunha.com.br";
-		$_SESSION['banco'] = "domingos_domingos";
-		$_SESSION['usuario'] = "domingos_domingo";
-		$_SESSION['senha'] = "domi@2019";
-		//	senha cpanel: "%Yb[2,XNP=D%"  usuário: "domingoscunhacom"
+	case 4:  // PSC
+		$_SESSION['servidor'] = "www.vitor.poa.br";
+		$_SESSION['banco'] = "vitorpoa_psc";
+		$_SESSION['usuario'] = "vitorpoa_psc";
+		$_SESSION['senha'] = "vhmo@2022";
+		//	senha cpanel: "K_8zE{VmHQy1"  usuário: "vitorpoa"
 		break;
-	case 5:  // Tessaro
-		$_SESSION['servidor'] = "www.vereadortessaro.com.br";
-		$_SESSION['banco'] = "vereador_sigre";
-		$_SESSION['usuario'] = "vereador_tessaro";
-		$_SESSION['senha'] = "tessaro@2019";
-		//	senha cpanel: "cKGm;!X$aNdZ"    usuário: "vereadortessaroc"
+	case 5:  // 
 		break;
-	case 6:  // Democratas Porto Alegre
-		$_SESSION['servidor'] = "www.rpujol.com.br";
-		$_SESSION['banco'] = "rpujolco_dem";
-		$_SESSION['usuario'] = "rpujolco_dem";
-		$_SESSION['senha'] = "democrataspoa@2019";
-		//	senha cpanel: "VHMO@@2019"  usuário: "rpujolcom"
+	case 6:  // 
 		break;
 	case 7:  // Sebastião Melo
 		$_SESSION['servidor'] = "www.sebastiaomelo.poa.br";
@@ -70,24 +55,10 @@ switch ($_SESSION['cod_usuario']) {
 		$_SESSION['banco'] = "sebastia_sigre"; 
 		//	senha cpanel: "@H2n,?9#l0pR"  usuário: "sebastiaomelopoa"
 		break;
-	case 8:  // Luiz Braz
-		$_SESSION['servidor'] = "www.vitor.poa.br";
-		$_SESSION['usuario'] = "vitorpoa_luiz";
-		$_SESSION['senha'] = "braz@2020";
-		$_SESSION['banco'] = "vitorpoa_luizbraz"; 
-		//	senha cpanel: "K_8zE{VmHQy1"  usuário: "vitorpoa"
+	case 8:  // 
 		break;
-	case 9:  // Local Testes
-		$_SESSION['servidor'] = "localhost";
-		$_SESSION['usuario'] = "root";
-		$_SESSION['senha'] = "";
-		$_SESSION['banco'] = "sigre_local"; 
-/*      $_SESSION['servidor'] = "www.vitor.poa.br";
-        $_SESSION['banco'] = "vitorpoa_teste";
-        $_SESSION['usuario'] = "vitorpoa_user";
-        $_SESSION['senha'] = "vhmo@2017";
-*/		
-        break;		
+	case 9:  // 
+	        break;		
 }
 // --------INIBIR LINHAS ABAIXO QDO PRODUÇÃO----------------------------------------
 //		$_SESSION['servidor'] = "localhost";

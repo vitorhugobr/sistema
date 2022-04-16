@@ -1138,6 +1138,59 @@ function busca_secretaria($codigo) {
 return $retorno;
 }
 //--------------------------------------------------------------------------------------------------------------------
+function buscagrupo($codigo) {
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
+  if(!$cons) {  
+	  echo "Não foi possivel conectar ao MySQL. Erro " .
+			  mysqli_connect_errno() . " : " . mysql_connect_error();
+	  exit;
+  }  
+  mysqli_set_charset($cons,"utf8");
+  mysqli_query($cons, "SET NAMES 'utf8'");
+  mysqli_query($cons, 'SET character_set_connection=utf8');
+  mysqli_query($cons, 'SET character_set_client=utf8');
+  mysqli_query($cons, 'SET character_set_results=utf8');
+
+  $query2 = "SELECT * FROM grupos WHERE GRUPO=".$codigo;
+  $mysql_query2 = $cons->query($query2);
+  $qtderegs2 = $mysql_query2->num_rows;
+  if ($qtderegs2>0) {
+	  while ($dado2 = $mysql_query2->fetch_assoc()) {
+		$retorno = $dado2['NOMEGRP'];
+	  }	
+  }else{
+	  $retorno= $codigo." não cadastrado";					
+  }
+return $retorno;
+}
+//--------------------------------------------------------------------------------------------------------------------
+function buscaorigem($codigo) {
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
+  if(!$cons) {  
+	  echo "Não foi possivel conectar ao MySQL. Erro " .
+			  mysqli_connect_errno() . " : " . mysql_connect_error();
+	  exit;
+  }  
+  mysqli_set_charset($cons,"utf8");
+  mysqli_query($cons, "SET NAMES 'utf8'");
+  mysqli_query($cons, 'SET character_set_connection=utf8');
+  mysqli_query($cons, 'SET character_set_client=utf8');
+  mysqli_query($cons, 'SET character_set_results=utf8');
+
+  $query2 = "SELECT * FROM origem WHERE Origem=".$codigo;
+  $mysql_query2 = $cons->query($query2);
+  $qtderegs2 = $mysql_query2->num_rows;
+  if ($qtderegs2>0) {
+	  while ($dado2 = $mysql_query2->fetch_assoc()) {
+		$retorno = $dado2['Descricao'];
+	  }	
+  }else{
+	  $retorno= $codigo." não cadastrado";					
+  }
+return $retorno;
+}
+//--------------------------------------------------------------------------------------------------------------------
+
 function busca_email_user($codigo) {
   $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
   if(!$cons) {  
@@ -1163,6 +1216,33 @@ function busca_email_user($codigo) {
   }
 	return $retorno;
 }
+//--------------------------------------------------------------------------------------------------------------------
+function busca_nome($codigo) {
+  $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);
+  if(!$cons) {  
+	  echo "Não foi possivel conectar ao MySQL. Erro " .
+			  mysqli_connect_errno() . " : " . mysql_connect_error();
+	  exit;
+  }  
+  mysqli_set_charset($cons,"utf8");
+  mysqli_query($cons, "SET NAMES 'utf8'");
+  mysqli_query($cons, 'SET character_set_connection=utf8');
+  mysqli_query($cons, 'SET character_set_client=utf8');
+  mysqli_query($cons, 'SET character_set_results=utf8');
+
+  $query2 = "SELECT * FROM cadastro WHERE CODIGO = ".$codigo;
+  $mysql_query2 = $cons->query($query2);
+  $qtderegs2 = $mysql_query2->num_rows;
+  if ($qtderegs2>0) {
+	  while ($dado2 = $mysql_query2->fetch_assoc()) {
+		$retorno = $dado2['NOME'];
+	  }	
+  }else{
+	  $retorno="";					
+  }
+	return $retorno;
+}
+
 //--------------------------------------------------------------------------------------------------------------------
 function busca_user($codigo) {
   $cons  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'],$_SESSION['senha'],$_SESSION['banco']);

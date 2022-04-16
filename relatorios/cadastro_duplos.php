@@ -3,40 +3,7 @@ include_once("../seguranca.php");
 protegePagina();
 include_once("../utilitarios/funcoes.php");
 date_default_timezone_set('America/Sao_Paulo');
-$comando_sql= "select 
-    DISTINCT `c`.`CODIGO` AS `CODIGO`,
-    `c`.`NOME` AS `NOME`,
-    `c`.`SEXO` AS `SEXO`,
-    `c`.`DTNASC` AS `DTNASC`,
-    `c`.`FONE_RES` AS `FONE_RES`,
-    `c`.`FONE_CEL` AS `FONE_CEL`,
-    `c`.`FONE_COM` AS `FONE_COM`,
-    `c`.`EMAIL` AS `EMAIL`,
-    `c`.`GRUPO` AS `GRUPO`,
-    `c`.`ORIGEM` AS `ORIGEM`,
-    `c`.`PROFISSAO` AS `PROFISSAO`,
-    `c`.`ZONAL` AS `ZONAL`,
-    `c`.`PAI_MAE` AS `PAI_MAE`,
-    `c`.`FILIADO` AS `FILIADO`,
-    `c`.`RECEBEMAT` AS `RECEBEMAT`,
-    `c`.`VOTOU` AS `VOTOU`,
-    `c`.`RAMO` AS `RAMO`,
-    `c`.`RECEBEMAIL` AS `RECEBEMAIL`,
-    `e`.`cep` AS `cep`,
-    `e`.`tipolog` AS `tipolog`,
-    `e`.`rua` AS `rua`,
-    `e`.`bairro` AS `bairro`,
-    `e`.`cidade` AS `cidade`,
-    `e`.`uf` AS `uf`,
-    `e`.`numero` AS `numero`,
-    `e`.`complemento` AS `complemento`,
-    `e`.`tipo` AS `tipo`,
-    `e`.`padrao` AS `padrao`,
-    `e`.`reg` AS `reg`,
-    `g`.`NOMEGRP` AS `NOMEGRP` 
-  from 
-    ((`cadastro` `c` left join `grupos` `g` on(`c`.`GRUPO` = `g`.`GRUPO`)) left join `enderecos` `e` on(`c`.`CODIGO` = `e`.`codigo`)) WHERE NOME IN ( SELECT B.NOME FROM cadastro B GROUP BY B.NOME HAVING COUNT(*) > 1 ) ";
-$comando_sql.= " ORDER BY NOME";
+$comando_sql= "select * from cadastros_duplos";
 
 //echo "<br><br>".$comando_sql;
 $mysql_query = $_con->query($comando_sql);
@@ -212,7 +179,11 @@ $displayEnc .= '<thead class="thead-dark">
 while ($dados_s = $mysql_query->fetch_assoc()) {
 	$displayEnc .=  '<tr>
 				<td><div align="center">';
-    $displayEnc .= '<strong><a href="javascript:abrir_cadastro_pelo_apoio('.$dados_s["CODIGO"].')" class="text-primary">'.$dados_s["CODIGO"].'</a></strong>';
+	$displayEnc .='<strong><a href="../eleitores/cadastro.php?
+				codigo='.$dados_s["CODIGO"].'" class="text-primary">
+						'.$dados_s["CODIGO"].'
+						</a></strong>';
+    //$displayEnc .= '<a href="javascript:abrir_cadastro_pelo_apoio('.$dados_s["CODIGO"].')" class="text-primary">'.$dados_s["CODIGO"].'</a>';
 		$displayEnc .=  '</div></td>';
 		$displayEnc .=  '<td><div class="textoAzul" align="left">';
 			$displayEnc .=  $dados_s["NOME"];

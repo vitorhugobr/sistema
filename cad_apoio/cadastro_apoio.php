@@ -81,7 +81,7 @@ $mysql_query = $_con->query($comando_sql);
 	<script src="../js/carrega_ajax.js" type="text/javascript"></script>
     <!-- Bootstrap core CSS -->
 	<link href="../css/bootstrap.min.css" rel="stylesheet">
-	<style>
+<!--	<style>
 	#_VReportHeader {
 		font-family: Tahoma, Geneva, sans-serif;
 		font-size: 12px;
@@ -104,7 +104,7 @@ $mysql_query = $_con->query($comando_sql);
 		font-family:Tahoma, Geneva, sans-serif;
 		font-size: 12px;
 	}
-
+-->
 	</style>
 
     <style>
@@ -219,7 +219,11 @@ $mysql_query = $_con->query($comando_sql);
 		while ($dados_s = $mysql_query->fetch_assoc()) {
 			$displayEnc .=  '<tr>
 						<td><div align="center">';
-				$displayEnc .= '<strong><a href="javascript:abrir_cadastro_pelo_apoio('.$dados_s["CODIGO"].')" class="alert-link">'.$dados_s["CODIGO"].'</a></strong>';
+					
+				$displayEnc .= '<a href="../eleitores/cadastro.php?
+				codigo='.$dados_s["CODIGO"].'" class="btn btn-imprimir btn-sm" role="button">
+						<i class="fas fa-search" aria-hidden="true text-muted" aria-hidden="true"></i> '.$dados_s["CODIGO"].'
+						</a>';
 				$displayEnc .=  '</div></td>';
 				$displayEnc .=  '<td><div class="textoAzul" align="left">';
 					$displayEnc .=  $dados_s["NOME"];
@@ -269,10 +273,10 @@ function abrir_cadastro_pelo_apoio(cod_cadastro) {
 		alert('não foi  possível iniciar o AJAX');
 		return;
 	}
-
-	ajax2("inicializa_global.php?cod_cadastro="+cod_cadastro,"carregando");
+    //alert(cod_cadastro);
 	var param = '../eleitores/cadastro.php';
-	//alert(param);
+	<a href="../eleitores/cadastro.php?codigo="
+	ajax2("inicializa_global.php?cod_cadastro="+cod_cadastro,"carregando");
 	open(param,"_self");		
 	
 }

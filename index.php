@@ -22,15 +22,17 @@ if (!file_exists($arqconfig)) {
 
 $linhas = explode("\n", file_get_contents($arqconfig));
 $_SESSION['id'] = $linhas[0]; // usuario =A(100,80);
-$_SESSION['versao']= '20.29.09-01:10';
+$_SESSION['versao']= $linhas[1];
 include_once("connections/banco.php");
 include_once("seguranca.php");
 require_once("utilitarios/funcoes.php");
 
 $sql = "SELECT * from config where id = ".$_SESSION['id'];
+
+
 try{
 	// Faz conexão com banco de daddos
-	if ($_SERVER['DOCUMENT_ROOT']=="D:/wampserver64/www"){
+	if ($_SERVER['DOCUMENT_ROOT']=="D:/xampp/htdocs"){
 		$area_acesso = "TESTES";
 	} else {
 		$area_acesso = "Web";

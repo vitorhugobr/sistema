@@ -82,7 +82,8 @@ case 1:{
 	$numlin=99;
     $registros = 0;
 	//list ($_sql, $parametros) = monta_sql();    //retornam valores nestas duas variáveis da função #monta_sql()
-//    $parametros="";
+	
+    $parametros="";
 //	$_sql = 'SELECT 
 //  month(cadastro.DTNASC) AS mes,
 //  dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
@@ -216,74 +217,70 @@ case 1:{
 //   order by  enderecos.rua, enderecos.numero,
 //  enderecos.complemento';	
 
-	
-	
-	
-//	$_sql = 'SELECT 
-//  month(cadastro.DTNASC) AS mes,
-//  dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
-//  cadastro.CODIGO as codigo,
-//  cadastro.NOME as nome,
-//  cadastro.SEXO as sexo,
-//  cadastro.DTCAD as dtcad,
-//  cadastro.DTNASC as dtnasc,
-//  cadastro.CARGO as cargo,
-//  cadastro.FONE_RES as fone_res,
-//  cadastro.FONE_CEL as fone_cel,
-//  cadastro.FONE_COM as fone_com,
-//  cadastro.CPF as cpf,
-//  cadastro.CONDICAO as condicao,
-//  cadastro.EMAIL as email,
-//  cadastro.GRUPO as grupo,
-//  cadastro.ORIGEM as origem,
-//  cadastro.PROFISSAO as profissao,
-//  cadastro.ZONAL as zonal,
-//  cadastro.SECCAO as seccao,
-//  cadastro.PAI_MAE as pai_mae,
-//  cadastro.FILIADO as filiado,
-//  cadastro.RECEBEMAT as recebemat,
-//  cadastro.RESPCADASTRO as respcadastro,
-//  cadastro.DTULTALT as dtultalt,
-//  cadastro.EMPRESA as empresa,
-//  cadastro.VOTOU as votou,
-//  cadastro.RAMO as ramo,
-//  cadastro.RECEBEMAIL as recebemail,
-//  cadastro.IMPRESSO as impresso,
-//  cadastro.ENVIADO as enviado,
-//  cadastro.CAMPANHA as campanha,
-//  cadastro.FACEBOOK as facebook,
-//  cadastro.TWITTER as twitter,
-//  cadastro.OUTRAREDE as outrarede,
-//  cadastro.APELIDO as apelido,
-//  cadastro.EST_CIVIL as est_civil,
-//  cadastro.CLASSI as classi,
-//  cadastro.OBS as obs,
-//  enderecos.cep,
-//  enderecos.tipolog,
-//  enderecos.rua,
-//  enderecos.bairro,
-//  enderecos.cidade,
-//  enderecos.uf,
-//  enderecos.numero,
-//  enderecos.complemento,
-//  enderecos.padrao,
-//  enderecos.tipo,
-//  enderecos.reg,
-//  origem.Descricao as desc_origem ,
-//  grupos.NOMEGRP as desc_grupo,
-//  grupos.GRUPO AS cod_grupo,
-//  origem.Origem AS cod_origem
-//FROM
-//  cadastro
-//  LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
-//  LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
-//  LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE
-//   (bairro like "%restinga%") 
-//   OR (bairro like "%COOP. BOMBEIROS%") 
-//   OR (bairro like "%COOP.DA FIGUEIRA%") 
-//   OR (bairro like "%PITINGA%") 
-//   order by  enderecos.rua, enderecos.numero,
-//  enderecos.complemento';	
+  $_sql = 'SELECT 
+  month(cadastro.DTNASC) AS mes,
+  dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
+  cadastro.CODIGO as codigo,
+  cadastro.NOME as nome,
+  cadastro.SEXO as sexo,
+  cadastro.DTCAD as dtcad,
+  cadastro.DTNASC as dtnasc,
+  cadastro.CARGO as cargo,
+  cadastro.FONE_RES as fone_res,
+  cadastro.FONE_CEL as fone_cel,
+  cadastro.FONE_COM as fone_com,
+  cadastro.CPF as cpf,
+  cadastro.CONDICAO as condicao,
+  cadastro.EMAIL as email,
+  cadastro.GRUPO as grupo,
+  cadastro.ORIGEM as origem,
+  cadastro.PROFISSAO as profissao,
+  cadastro.ZONAL as zonal,
+  cadastro.SECCAO as seccao,
+  cadastro.PAI_MAE as pai_mae,
+  cadastro.FILIADO as filiado,
+  cadastro.RECEBEMAT as recebemat,
+  cadastro.RESPCADASTRO as respcadastro,
+  cadastro.DTULTALT as dtultalt,
+  cadastro.EMPRESA as empresa,
+  cadastro.VOTOU as votou,
+  cadastro.RAMO as ramo,
+  cadastro.RECEBEMAIL as recebemail,
+  cadastro.IMPRESSO as impresso,
+  cadastro.ENVIADO as enviado,
+  cadastro.CAMPANHA as campanha,
+  cadastro.FACEBOOK as facebook,
+  cadastro.TWITTER as twitter,
+  cadastro.OUTRAREDE as outrarede,
+  cadastro.APELIDO as apelido,
+  cadastro.EST_CIVIL as est_civil,
+  cadastro.CLASSI as classi,
+  cadastro.OBS as obs,
+  enderecos.cep,
+  enderecos.tipolog,
+  enderecos.rua,
+  enderecos.bairro,
+  enderecos.cidade,
+  enderecos.uf,
+  enderecos.numero,
+  enderecos.complemento,
+  enderecos.padrao,
+  enderecos.tipo,
+  enderecos.reg,
+  origem.Descricao as desc_origem ,
+  grupos.NOMEGRP as desc_grupo,
+  grupos.GRUPO AS cod_grupo,
+  origem.Origem AS cod_origem
+FROM
+  cadastro
+  LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
+  LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
+  LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE
+  (cidade = "Porto Alegre") and
+   ((bairro like "teresopolis%") or
+   (bairro like "%nonoai%") )
+   order by enderecos.bairro, enderecos.rua, enderecos.numero,
+  enderecos.complemento';	
     #echo $_sql;
 	if ($_sql==""){
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>NENHUMA OPÇÃO INFORMADA<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
@@ -426,55 +423,70 @@ case 3:{
 	//$_sql = montacep();
 	list ($_sql, $parametros) = montacep();    //retornam valores nestas duas variáveis da função monta_sql()
 	//echo $_sql;
-//    $_sql="SELECT 
-//  month(cadastro.DTNASC) AS mes,
-//  dayofmonth(`cadastro`.`DTNASC`) AS `dia`,	
-//  enderecos.id,
-//  enderecos.cep,
-//  enderecos.tipolog,
-//  enderecos.rua,
-//  enderecos.bairro,
-//  enderecos.cidade,
-//  enderecos.uf,
-//  enderecos.numero,
-//  enderecos.complemento,
-//  enderecos.padrao,
-//  enderecos.tipo,
-//  enderecos.reg,
-//  cadastro.CODIGO AS codigo,
-//  cadastro.NOME AS nome,
-//  cadastro.SEXO AS sexo,
-//  cadastro.DTNASC AS dtnasc,
-//  cadastro.GRUPO AS grupo,
-//  cadastro.ORIGEM AS origem,
-//  cadastro.RECEBEMAT AS recebemat,
-//  cadastro.PROFISSAO AS profissao,
-//  cadastro.ZONAL AS zonal,
-//  cadastro.SECCAO AS seccao,
-//  cadastro.CAMPANHA AS campanha,
-//  cadastro.CONDICAO AS condicao
-//FROM
-//  enderecos
-//  LEFT OUTER JOIN cadastro ON (cadastro.CODIGO = enderecos.codigo)
-//WHERE
-//  cadastro.CONDICAO = 1 AND 
-//  enderecos.cep > 0 AND ( 
-//  (cadastro.GRUPO = 29) OR 
-//  (cadastro.GRUPO = 77) OR 
-//  (cadastro.GRUPO = 107) OR 
-//  cadastro.GRUPO = 181 OR 
-//  cadastro.GRUPO = 133 OR 
-//  cadastro.GRUPO = 109 OR 
-//  (cadastro.GRUPO >134 and 
-//  cadastro.GRUPO < 141) OR 
-//  cadastro.GRUPO = 174 OR
-//  cadastro.GRUPO = 182 OR 
-//  cadastro.GRUPO = 104 OR 
-//  cadastro.GRUPO = 103)
-//ORDER BY
-//  enderecos.reg,
-//  cadastro.NOME
-//";
+    $_sql="SELECT 
+  month(cadastro.DTNASC) AS mes,
+  dayofmonth(`cadastro`.`DTNASC`) AS `dia`,	
+  enderecos.id,
+  enderecos.cep,
+  enderecos.tipolog,
+  enderecos.rua,
+  enderecos.bairro,
+  enderecos.cidade,
+  enderecos.uf,
+  enderecos.numero,
+  enderecos.complemento,
+  enderecos.padrao,
+  enderecos.tipo,
+  enderecos.reg,
+  cadastro.CODIGO AS codigo,
+  cadastro.NOME AS nome,
+  cadastro.SEXO AS sexo,
+  cadastro.DTNASC AS dtnasc,
+  cadastro.GRUPO AS grupo,
+  cadastro.ORIGEM AS origem,
+  cadastro.RECEBEMAT AS recebemat,
+  cadastro.PROFISSAO AS profissao,
+  cadastro.ZONAL AS zonal,
+  cadastro.SECCAO AS seccao,
+  cadastro.CAMPANHA AS campanha,
+  cadastro.CONDICAO AS condicao
+FROM
+  enderecos
+  LEFT OUTER JOIN cadastro ON (cadastro.CODIGO = enderecos.codigo)
+WHERE
+  cadastro.CONDICAO = 1 AND 
+  enderecos.cep > 0 AND ( 
+  (cadastro.GRUPO = 190) OR 
+  (cadastro.GRUPO = 206) OR 
+  (cadastro.GRUPO = 188) OR 
+  cadastro.GRUPO = 181 OR 
+  cadastro.GRUPO = 183 OR 
+  cadastro.GRUPO = 186 OR 
+  cadastro.GRUPO = 204 OR
+  cadastro.GRUPO = 208 OR 
+  cadastro.GRUPO = 194 OR 
+  cadastro.GRUPO = 199 OR 
+  cadastro.GRUPO = 193 OR 
+  cadastro.GRUPO = 192 OR
+  cadastro.GRUPO = 203 OR
+  cadastro.GRUPO = 195 OR
+  cadastro.GRUPO = 209 OR
+  cadastro.GRUPO = 198 OR
+  cadastro.GRUPO = 184 OR
+  cadastro.GRUPO = 196 OR
+  cadastro.GRUPO = 185 OR
+  cadastro.GRUPO = 200 OR
+  cadastro.GRUPO = 191 OR
+  cadastro.GRUPO = 205 OR
+  cadastro.GRUPO = 187 OR
+  cadastro.GRUPO = 202 OR
+  cadastro.GRUPO = 201 OR
+  cadastro.GRUPO = 197
+	)
+ORDER BY
+  enderecos.reg,
+  cadastro.NOME
+";
 	if ($_sql==""){
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>NENHUMA OPÇÃO INFORMADA<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';

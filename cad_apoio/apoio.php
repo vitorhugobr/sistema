@@ -26,7 +26,8 @@ if (liberado(5500)==0) {
   <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
   </head>
-  <body>
+  <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
+<div class="nav fixed-top container-fluid shadow mt-0 mb-0 bg-white rounded sticky-top">
 
   <?php include_once("../utilitarios/cabecalho.php");?>
   
@@ -69,6 +70,7 @@ if (liberado(5500)==0) {
   </td>
   </tr>
   </table>
+	  </div>	
 <?php include_once("../utilitarios/rodape-fixo.php");?>
   </body>
 </html>

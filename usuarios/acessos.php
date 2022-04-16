@@ -118,7 +118,7 @@
 		echo 'Sem registros!';					
 	}else{
 		echo '<div class="row">
-		<div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2" align="left"><img src="../imagens/vhmo.png"></div>
+		<div class="col-12 col-sm-12 col-md-4 col-lg-2 col-xl-2" align="left"><img src="../imagens/vhmo.png"></div>
 		<div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8"" align="center">
 			<span class="sigla_sistema">SIGRE </div>
 		<div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2"" align="right"><span class="badge badge-info">Vitor</span></div>
@@ -127,22 +127,40 @@
 		echo '<table id="listar-usuario" class="table table-striped" style="width:100%">
 			<thead class="thead-light">
 				<tr>
-					<th>Data</th>
-					<th>Hora</th>
-					<th>Tabela</th>
-					<th>Operação</th>
-					<th>Operador</th>
+					<th width="10%">Data</th>
+					<th width="10%">Hora</th>
+					<th width="15%">Tabela</th>
+					<th width="20%">Operador</th>
+					<th width="25">Operação</th>
 				</tr>
+				<tr> <th width="80%" colspan="5">Conteúdo</th></tr>
 			</thead><tbody>';
 		while ($dados_busca = $mysql_query->fetch_assoc()) {	
 			$data = date("d/m/Y", strtotime($dados_busca["data"]));
 			$hora = $dados_busca['hora'];
 			$tabela = $dados_busca['tabela'];
 			$operacao = $dados_busca['operacao'];
+			$conteudo = $dados_busca['conteudo'];
+			switch ($operacao) {
+			case "A":  //Dr Thiago
+				$operacao = "ALTERAÇÃO";
+				break;
+			case "E":  //Dr Thiago
+				$operacao = "EXCLUSÃO";
+				break;
+			case "I":  //Dr Thiago
+				$operacao = "INCLUSÃO";
+				break;
+			case "L":  //Dr Thiago
+				$operacao = "LOGIN";
+				break;
+			}
 			$operador = $dados_busca['operador'];
+			
 			echo '<tr>
-					<td>'.$data.'</td><td>'.$hora.'</td><td>'.$tabela.'</td><td>'.$operacao.'</td><td>'.$operador.'</td>
+					<td>'.$data.'</td><td>'.$hora.'</td><td>'.$tabela.'</td><td><b>'.$operador.'</b></td><td>'.$operacao.'</td>
 				  </tr>';
+			echo '<tr><td colspan="5">'.$conteudo.'</td></tr>';
 		}
 		echo '</tbody></table>';		
 		echo '<footer class="footer">

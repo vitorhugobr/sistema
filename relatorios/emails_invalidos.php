@@ -41,7 +41,10 @@ if ($mysql_query->num_rows<1) {
 		#if (!Verify_Email_Address($dados_s["EMAIL"]) ){
 		if (!filter_var($dados_s["EMAIL"], FILTER_VALIDATE_EMAIL)) {
 			$displayEnc .=  '<tr><td><div align="center">';
-			$displayEnc .= '<strong><a href="javascript:abrir_cadastro_pelo_apoio('.$dados_s["CODIGO"].')" class="alert-link">'.$dados_s["CODIGO"].'</a></strong>';
+			$displayEnc .= '<strong><a href="../eleitores/cadastro.php?
+				codigo='.$dados_s["CODIGO"].'" class="text-primary">
+						'.$dados_s["CODIGO"].'
+						</a></strong>';
 			$displayEnc .=  '</div></td>';
 			$displayEnc .=  '<td><div class="textoAzul" align="left">';
 				$displayEnc .=  $dados_s["NOME"];

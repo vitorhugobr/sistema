@@ -1,5 +1,30 @@
 @charset "utf-8";
 
+	#_VReportHeader {
+		font-family: Tahoma, Geneva, sans-serif;
+		font-size: 12px;
+		font-weight: bold;
+		border-bottom: 0px;
+		width: 100%;
+		padding: 3px;
+		text-align: center;
+	}
+
+	#_VReportFooter {
+		font-family: Verdana, Geneva, sans-serif;
+		font-size: 12px;
+		border-top: 0px;
+		width: 100%;
+		text-align: center;
+	}
+
+	#_VReportContent{
+		font-family:Tahoma, Geneva, sans-serif;
+		font-size: 12px;
+	}
+
+
+
 .nome_usuario {
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 10px;

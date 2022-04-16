@@ -12,6 +12,6 @@ $strsql = "DELETE FROM `visitas` WHERE `Visita`= ".$codigo;
 
 gravaoperacoes("visitas","E", $_SESSION["usuarioUser"],"Excluída visita #: ".$codigo);
 
-$retorno= executa_sql($strsql,"Contato excluído com Sucesso","Contato NÃO excluído!",false,false);
+$retorno= executa_sql($strsql,"Contato excluído com Sucesso","Contato NÃO excluído!",true,true);
 
 ?>

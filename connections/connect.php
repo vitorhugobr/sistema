@@ -13,7 +13,8 @@ mysqli_query($_concomum, 'SET character_set_client=utf8');
 mysqli_query($_concomum, 'SET character_set_results=utf8');
 //---------------------------------------------------------
 
-$_con  = new mysqli($_SESSION['servidor'],$_SESSION['usuario'], $_SESSION['senha'],$_SESSION['banco']);	
+$_con  = new 
+mysqli($_SESSION['servidor'],$_SESSION['usuario'], $_SESSION['senha'],$_SESSION['banco']);	
 if(!$_con) {  
 	echo "Não foi possivel conectar ao MySQLi " .$_SESSION['servidor']."<br> Erro " .
 			mysqli_connect_errno() . " : " . mysql_connect_error();

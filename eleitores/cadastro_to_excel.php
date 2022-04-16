@@ -1,5 +1,6 @@
 <?php 
 include_once("../seguranca.php"); // Inclui o arquivo com o sistema de segurança
+include_once('../utilitarios/funcoes.php');
 protegePagina(); // Chama a função que protege a página
 // exportar Excel
 $_SESSION['funcao']="Exportar Excel";
@@ -61,19 +62,19 @@ if($_res->num_rows>0){
 	while($_row = $_res->fetch_assoc()) {
 		$tabela .= '<tr>';
 		$tabela .= '<td>'.$_row['CODIGO'].'</td>';
-		$tabela .= '<td>'.utf8_decode($_row['NOME']).'</td>';
+		$tabela .= '<td>'.$_row['NOME'].'</td>';
 		$tabela .= '<td>'.$_row['SEXO'].'</td>';
 		$tabela .= '<td>'.$_row['DTCAD'].'</td>';
 		$tabela .= '<td>'.$_row['DTNASC'].'</td>';
-		$tabela .= '<td>'.utf8_decode($_row['CARGO']).'</td>';
+		$tabela .= '<td>'.$_row['CARGO'].'</td>';
 		$tabela .= '<td>'.$_row['FONE_RES'].'</td>';
 		$tabela .= '<td>'.$_row['FONE_CEL'].'</td>';
 		$tabela .= '<td>'.$_row['FONE_COM'].'</td>';
 		$tabela .= '<td>'.$_row['CPF'].'</td>';
 		$tabela .= '<td>'.$_row['CONDICAO'].'</td>';
 		$tabela .= '<td>'.$_row['EMAIL'].'</td>';
-		$tabela .= '<td>'.$_row['GRUPO'].'</td>';
-		$tabela .= '<td>'.$_row['ORIGEM'].'</td>';
+		$tabela .= '<td>'.buscagrupo($_row['GRUPO']).'</td>';
+		$tabela .= '<td>'.buscaorigem($_row['ORIGEM']).'</td>';
 		$tabela .= '<td>'.$_row['PROFISSAO'].'</td>';
 		$tabela .= '<td>'.$_row['ZONAL'].'</td>';
 		$tabela .= '<td>'.$_row['SECCAO'].'</td>';
@@ -114,7 +115,7 @@ if($_res->num_rows>0){
 	header ('Cache-Control: no-cache, must-revalidate');
 	header ('Pragma: no-cache');
 	header ("Content-Disposition: attachment; filename=\"{$arquivo}\"");
-	echo $tabela;
+	//echo $tabela;
 	$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-exclamation' aria-hidden='true text-muted' aria-hidden='true'></i> Cadastro Exportado para Excel<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";  		
 
 }

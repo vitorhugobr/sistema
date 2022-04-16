@@ -1,4 +1,4 @@
-<div class="nav shadow mt-0 mb-0 bg-white rounded sticky-top">	
+<!-- <div class="nav fixed-top container-fluid shadow mt-0 mb-0 bg-white rounded sticky-top"> -->	
 	<div class='col-1 text-center'>
 		<img class="float" src="../imagens/vhmo.png" width="22" height="22"/>
 		<span class="mr-1 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['sistemaabrev']?></span> 
@@ -30,7 +30,7 @@
             <img src="../imagens/sair.png" title="Sair do Sistema" height="25">
         </a>    
     </div>
-</div>
+<!-- </div> -->
 <div id="results"><!-- Results are displayed here --></div>
 <div id="fade"></div>
 <div id="modal">

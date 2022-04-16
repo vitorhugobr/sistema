@@ -14,11 +14,12 @@ $strsql5 = "DELETE FROM enderecos where enderecos.codigo = ".$codigo;
 executa_sql($strsql3,"visitas excluído com sucesso","visitas NÃO excluído!",false,false);
 executa_sql($strsql4,"encaminhamentos excluído com sucesso","encaminhamentos NÃO excluído!",false,false);
 executa_sql($strsql5,"enderecos excluído com sucesso","endererecos NÃO excluído!",false,false);
-gravaoperacoes("cadastro","E", $_SESSION["usuarioUser"],"Excluído cadastro #: ".$codigo);
+$nome = busca_nome($codigo);
+gravaoperacoes("cadastro","E", $_SESSION["usuarioUser"],"Excluído cadastro #: ".$codigo." de ".$nome);
 
 $strsql2 = "DELETE from cadastro where cadastro.CODIGO = ".$codigo;
 
-executa_sql($strsql2,"Cadastro excluído com sucesso","Cadastro NÃO excluído!",true,true);
+executa_sql($strsql2,"Cadastro #".$codigo." de ".$nome." excluído com sucesso","Cadastro NÃO excluído!",true,true);
 //	
 
 ?>

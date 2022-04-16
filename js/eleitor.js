@@ -179,7 +179,7 @@ function excluir_remedio(id) {
 
 function exclui_visita(id) {
 
-	if (confirm("Confirma a Exclusão do Contato?")){
+	if (confirm("Confirma a Exclusão do Contato? ")){
 		ajax('exclui_visita.php?id='+id,'modal');			
 	}
 

@@ -442,6 +442,8 @@ if (isset($codigo)){
 			document.form1.txtnome.focus();
 			</script>
 			<?php
+			gravaoperacoes("cadastro","C", $_SESSION["usuarioUser"],"Consultou cadastro ".$codigo);
+
 		}		
 	#}
 }

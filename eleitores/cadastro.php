@@ -9,6 +9,11 @@ if (liberado(1000)==0){
 	return;
 }
 $_SESSION['funcao']="Cadastro";
+$codigo = $_GET["codigo"];	
+
+if ($codigo==0) {
+	$codigo=$_SESSION['ult_eleitor_pesquisado'];
+}
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -56,10 +61,11 @@ function enableFields(verdade){
 			document.form1.elements[i].style.backgroundColor = '#FFFFFF';
 		}
 	}
+
 	document.getElementById("txtpesqendereco").disabled = false;
 	document.getElementById("txtpesqendereco").style.backgroundColor = '#FFFFFF';
-	document.getElementById("txtcpf").disabled = false;
-	document.getElementById("txtcpf").style.backgroundColor = '#FFFFFF';
+	//document.getElementById("txtcpf").disabled = false;
+	//document.getElementById("txtcpf").style.backgroundColor = '#FFFFFF';
 	document.getElementById("txtemail").disabled = false;
 	document.getElementById("txtemail").style.backgroundColor = '#FFFFFF';
 	document.getElementById("txtcelular").disabled = false;
@@ -69,7 +75,7 @@ function enableFields(verdade){
 function inclui_novo(){
 	//document.getElementById('btnNovo').style.visibility = 'hidden';
 	document.getElementById("btnNovo").disabled = true;
-	document.getElementById("btnCancel").disabled = false;
+	//document.getElementById("btnCancel").disabled = false;
 	document.getElementById("btnExcCad").disabled = false;
 	document.getElementById("btnAltCad").disabled = false;		
 	//document.getElementById("btn_endereco").disabled = false;
@@ -77,21 +83,24 @@ function inclui_novo(){
 	enableFields(false);
 	document.form1.txtcodigo.disabled = true;
 	document.getElementById("chkcondicao").checked = true;
-	ajax("incluir_novo.php",'modal');	
+	ajax2("incluir_novo.php",'modal');	
 }
 
 function cancela_novo() {
 	var cod = document.form1.txtcodigo.value;
+	if ((cod==0) || (cod=="")) {
+		return false;
+	}
 	ajax('exclui_novo.php?cod='+cod, 'modal');
 }			
 
 	</script>
 </head>
-<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="javascript:enableFields(true);PesquisaEleitor(<?php echo $_SESSION['ult_eleitor_pesquisado']?>)">
 
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="javascript:enableFields(true);PesquisaEleitor(<?php echo $codigo?>)">
+<div class="nav fixed-top container-fluid shadow mt-0 mb-0 bg-white rounded sticky-top">
 <?php 
 	include("../utilitarios/cabecalho.php"); ?>	 
-
 <nav class="nav stick-top navbar-expand-sm shadow-sm navbar-light">
 	<div class="container-fluid" style="align-items: center; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">
 		<span class="navbar-brand"></span>
@@ -109,13 +118,13 @@ function cancela_novo() {
 						</button>
 					</li>';
 				}
-				if (liberado(1001)>0){ 
-						echo '<li class="nav-item">
-						<button type="button" disabled id="btnCancel" name="btnCancel" class="btn btn-sm btn-deep-cancelar" onclick="javascript:cancela_novo();">
-						<i class="fas fa-user-times" aria-hidden="true text-muted" aria-hidden="true"></i> Cancelar
-						</button>
-					</li>';
-				}
+//				if (liberado(1001)>0){ 
+//						echo '<li class="nav-item">
+//						<button type="button" disabled id="btnCancel" name="btnCancel" class="btn btn-sm btn-deep-cancelar" onclick="javascript:cancela_novo();">
+//						<i class="fas fa-user-times" aria-hidden="true text-muted" aria-hidden="true"></i> Cancelar
+//						</button>
+//					</li>';
+//				}
 				if (liberado(1002)>0){  
 						echo '<li class="nav-item">
 						<button type="button" id="btnAltCad" class="btn btn-sm btn-success" disabled onclick="javascript:validaA();">
@@ -158,6 +167,7 @@ function cancela_novo() {
         </div>
 	</div>
 </nav>
+</div>
  <?php
 
 if(isset($_SESSION['msg'])){
@@ -169,7 +179,7 @@ if(isset($_SESSION['msg'])){
 <form name="form1" method="post" action="">
 <div class="container-fluid">
 	<div class="btn-toolbar mb-3" role="toolbar" aria-label="Informações">
- 	  <div id="mensagem_sistema" class="col-12 badge badge-danger">Campos em VERMELHO - preenchimento obrigatório></div>
+ 	  <div id="mensagem_sistema" class="col-sm-12 badge badge-warning">Campos em VERMELHO - preenchimento obrigatório></div>
 	  <div class="btn-group btn-group-sm" role="group" aria-label="Principal" id="home">
 		<a href="#" class="btn btn-cancelar btn-sm">Dados Gerais</a>
 		<a href="#tela_enderecos" class="btn btn-cancelar btn-sm">Endereços</a>
@@ -270,74 +280,73 @@ if(isset($_SESSION['msg'])){
 		</select>
     </div>
   </div>
-
-    
-  <div class="jumbotron" id="tela_demandas">
-   <!-- endereços-->
-	  <div class="form-row col-form-label-sm">
+	
+	<table  cellspacing="2" width="100%" border="1">
+  <tbody bgcolor="#E7E7E7">
+    <tr>
+      <td>
+	
+  <!-- endereços-->
+  
+  <!--	  <div class="form-row col-form-label-sm">
+        <div class="col-sm-12" align="left">
+		  
+			<div class="custom-control custom-switch">
+				<input type="checkbox" class="custom-control-input" id="chkmudaend" name="chkmudaend">
+				<label class="custom-control-label textoAzul" for="chkmudaend">Alterar endereço?</label>
+   			</div>
+		 </div>
+	  </div>
+-->	  
+  <div class="form-row col-form-label-sm">
         <div class="col-sm-1" align="right">
-		  <label class="textoAzul" for="chkfiliado">Endereço</label>							
+		  <label class="textoAzul" for="txtpesqendereco">Endereço</label>							
 		</div>
-
         <div class="col-6">
 		  <input type="text" id="txtpesqendereco" name="txtpesqendereco" maxlength="80" size="'60" placeholder="Informe o endereço para pesquisar eleitor pelo endereço">
 	    </div>	
           <div class="col-sm-5 textoVermelho" align="left"><i class="fas fa-arrow-circle-left" aria-hidden="true text-muted"></i> Usar este campo APENAS para consulta!</div>
 	  </div>
 	<div class="form-row col-form-label-sm">
-		<div class="col-sm-1" align="right">
-		  <label class="textoAzul" for="chkfiliado">Logradouro</label>							
-		</div>
-		<div class="col-sm-5">
-		  <input class="form form-control" name="rua" type="text" id="rua" size="50" maxlength="50" onChange="javascript:this.value=this.value.toUpperCase();">							
-		</div>
-		<div class="col-sm-1" align="right">
+		<div class="col-sm-6">
+      		<label for="rua" class="textoAzul">Logradouro</label>
+      		<input type="text" class="form-control" id="rua" name="rua"  size="50" maxlength="50" onChange="javascript:this.value=this.value.toUpperCase();"> 
+    	</div>
+
+		<div class="col-sm-2" align="left">
 		  <label for="cep" class="textoAzul">CEP</label>
-		</div>
-		<div class="col-sm=2">
 			<input type="text" id="cep" name="cep" class="form form-control" size="8" maxlength="8" >
 		</div>
-		<div class="col-sm-3">
-			<button name="btnUpdEnd" id="btnUpdEnd" class="btn btn-consultar btn-sm" onclick="javascript:buscacep(document.form1.cep.value);" type="button"><i class="fas fa-search"></i> Consultar</button>		
+		<div class="col-sm-4">
+			<button name="btnUpdEnd" id="btnUpdEnd" class="btn btn-consultar btn-lg" onclick="javascript:buscacep(document.form1.cep.value);" type="button"><i class="fas fa-search"></i> Consultar por CEP</button>		
 		</div>
    	 </div>
 	<div class="form-row col-form-label-sm">
-		<div class="col-1" align="right">
+		
+		<div class="col-3" align="left">
 			<label class="textoAzul">Tipologia</label>
-		</div>
-		<div class="col-2">
 			<input class="form form-control" name="tipolog" type="text" id="tipolog" size="10" maxlength="10" onChange="javascript:this.value=this.value.toUpperCase();">
 		</div>
-		<div class="col-1" align="right">
+		<div class="col-3" align="left">
 			<label class="textoAzul">Bairro</label>
-		</div>
-		<div class="col-2">
 			<input class="form form-control" name="bairro" type="text" id="bairro" size="20" maxlength="20" onChange="javascript:this.value=this.value.toUpperCase();"/>
 		</div>
-		<div class="col-1" align="right">
+		<div class="col-4" align="left">
 			<label class="textoAzul">Cidade</label>
-		</div>
-		<div class="-col-3">
 			<input class="from form-control" name="cidade" type="text" id="cidade" size="30" maxlength="30" onChange="javascript:this.value=this.value.toUpperCase();"/>
 		</div>
-		<div class="col-1" align="right">
+		<div class="col-1" align="left">
 			<label class="textoAzul">UF</label>
-		</div>
-		<div class="col-1">
 			<input class="form form-control" name="uf" type="text" id="uf" size="2" maxlength="2" onChange="javascript:this.value=this.value.toUpperCase();"/>
 		</div>
 	</div>	
 	<div class="form-row col-form-label-sm">
-		<div class="col-1" align="right">
+		<div class="col-1" align="left">
 			<label class="textoAzul">Numero</label>
+			<input class="form form-control" name="numero" type="number" id="numero" size="6" maxlength="6">
 		</div>
 		<div class="col-2">
-			<input class="form form-control" name="numero" type="text" id="numero" size="6" maxlength="6">
-		</div>
-		<div class="col-1">
 			<label class="textoAzul">Complemento</label>
-		</div>
-		<div class="col-2">
 			<input class="form form-control" name="complemento" type="text" id="complemento" size="20" maxlength="20" onChange="javascript:this.value=this.value.toUpperCase();"/>
 			<input name="tipo" type="hidden" id="tipo" value="RESIDENCIAL">
 			<input name="padrao" type="hidden" id="padrao" value="S">
@@ -353,7 +362,10 @@ if(isset($_SESSION['msg'])){
 		</div>
 	</div>
 -->  
-    </div>
+</td>
+    </tr>
+  </tbody>
+</table>		  
     
 <!--  nova linha -->  
  
@@ -448,16 +460,16 @@ if(isset($_SESSION['msg'])){
 
   <div class="form-row col-form-label-sm">
     <div class="col-sm-3">
-      <label for="txtface" class="textoAzul">Facebook </label>
+      <label for="txtface" class="textoAzul">Facebook </label> <img class="float" src="../imagens/face.png" width="20" height="20"/>
        <input type="text" class="form-control" id="txtface" name="txtface">      
    </div>
     <div class="col-sm-3">
-      <label for="txttwitter" class="textoAzul">Twitter </label>
+      <label for="txttwitter" class="textoAzul">Instagram </label> <img class="float" src="../imagens/instagram.png" width="20" height="20"/>
       <input type="text" class="form-control" id="txttwitter" name="txttwitter">      
    </div>
-    <div class="col-sm-3">
-      <label for="txtoutra" class="textoAzul">Outra Rede Social </label>
-       <input type="text" class="form-control" id="txtoutra" name="txtoutra">      
+    <div class="col-sm-6">
+      <label for="txtoutra" class="textoAzul">Outras Redes Sociais </label> <img class="float" src="../imagens/sociais.png" height="20"/>
+       <input type="text" class="form-control" id="txtoutra" name="txtoutra" maxlength="220">      
     </div>
   </div>
 
@@ -536,23 +548,45 @@ if(isset($_SESSION['msg'])){
    
   
   <!-- contatos -->
-  <div class="jumbotron" id="tela_contatos">
+  <div class="jumbotron jumbotron-fluid" id="tela_contatos">
 	  <div class="form-row col-form-label-sm">
-		  <div class="h6 align-content-center" id="contatos"><a href="#"><img src="../imagens/toppage.png"></a>&nbsp;Contatos</div><br>
-		  <div class="col">
-			  <button id="btnincvis" name="btnincvis" type="button" class="btn btn-sm btn-incluir" onClick="javascript:OpenVisita();" disabled="disabled"><i class="fas fa-plus" aria-hidden="true text-muted" aria-hidden="true"></i> Novo Contato</button>
-		  </div>
+		  
+	  	<div class="h6 align-content-center" id="contatos"><a href="#"><img src="../imagens/toppage.png"></a>&nbsp;
+			<?php 
+			if ($_SESSION['partido'] = "psc") { 
+				echo 'Histórico'; 
+			} else {
+				echo 'Contato';
+			}?>
+		  </div><br>
+	   	<div class="col">
+		   <button id="btnincvis" name="btnincvis" type="button" class="btn btn-sm btn-incluir" onClick="javascript:OpenVisita();" disabled="disabled"><i class="fas fa-plus" aria-hidden="true text-muted" aria-hidden="true"></i>
+			<?php 
+			if ($_SESSION['partido'] = "psc") { 
+				echo 'Novo Histórico'; 
+			} else {
+				echo 'Novo Contato';
+			}?>	   
+			</button>
+	   	</div>	  
+		  
 	  </div>
 	  <div class="form-row col-form-label-sm">
 		<div class="col-sm-12">
 		  <input type="hidden" name="txtvisitas" id ="txtvisitas">
-		  <div id="visit">Sem Contatos</div>
+		  <div id="visit">
+			<?php 
+			if ($_SESSION['partido'] = "psc") { 
+				echo 'Sem Histórico'; 
+			} else {
+				echo 'Sem Contatos';
+			}?>	   
 		</div>
 	   </div>
   </div>
   
   <!-- demandas -->
-  <div class="jumbotron" id="tela_demandas">
+  <div class="jumbotron jumbotron-fluid" id="tela_demandas">
   <div class="form-row col-form-label-sm">
 	  <div class="h6 align-content-center" id="demandas"><a href="#"><img src="../imagens/toppage.png"></a>&nbsp;Demandas</div>
   </div>
@@ -568,7 +602,7 @@ if(isset($_SESSION['msg'])){
 	  <!-- prontuários só se id =1 -->
 	<?php
 	if (liberado(1010)>0){ ?>
-    <div class="jumbotron" id="tela_prontuarios">
+    <div class="jumbotron jumbotron-fluid" id="tela_prontuarios">
 	  <div class="form-row col-form-label-sm">
 		  <div class="h6 align-content-center" id="prontuarios"><a href="#"><img src="../imagens/toppage.png"></a>&nbsp;
 Prontuários</div>
@@ -582,7 +616,7 @@ Prontuários</div>
 	</div>
 <?php } 
 	if (liberado(1011)>0){ ?>
-    <div class="jumbotron" id="tela_receituarios">
+    <div class="jumbotron jumbotron-fluid" id="tela_receituarios">
 	  <div class="form-row col-form-label-sm">
 		  <div class="h6 align-content-center" id="receituarios"><a href="#"><img src="../imagens/toppage.png"></a>&nbsp;
 Receituários</div>
@@ -597,7 +631,7 @@ Receituários</div>
 	   <hr />
 <?php } 
 	if (liberado(1009)>0){ ?>
-    <div class="jumbotron" id="tela_exames">
+    <div class="jumbotron jumbotron-fluid" id="tela_exames">
 	  <div class="form-row col-form-label-sm">
 		  <div class="h6 align-content-center" id="exame"><a href="#"><img src="../imagens/toppage.png"></a>&nbsp;
 Exames</div>
@@ -670,14 +704,14 @@ function reload_cadastro() {
 <script type="text/javascript">
 	new Autocomplete("txtnome", function() { return "autocomplete_nome.php?typing=" + this.text.value;});
 	new Autocomplete("txtemail", function() { return "autocomplete_email.php?typing=" + this.text.value;});
-	new Autocomplete("txtcpf", function() { return "autocomplete_cpf.php?typing=" + this.text.value;});
+	//new Autocomplete("txtcpf", function() { return "autocomplete_cpf.php?typing=" + this.text.value;});
 	new Autocomplete("txtcodigo", function() { return "autocomplete_codigo.php?typing=" + this.text.value;});
 	new Autocomplete("txtcelular", function() { return "autocomplete_fone.php?campo=FONE_CEL&typing=" + this.text.value;});
 	new Autocomplete("txtpesqendereco", function() { return "autocompletecad_endereco.php?typing=" + this.text.value;});	
   new Autocomplete("rua", function() { return "autocompleterua.php?typing=" + this.text.value+"&city="+document.form1.cidade.value;});	
 </script>
 
-<?php include_once("../utilitarios/rodape.php");?>
+<?php include_once("../utilitarios/rodape-fixo.php");?>
 
 </body>
 </html>
