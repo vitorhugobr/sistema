@@ -1,9 +1,9 @@
 RewriteEngine on
-RewriteCond %{HTTP_HOST} ^domingoscunha.com.br/dem
+RewriteCond %{HTTP_HOST} ^sandromuttoni.com.br/sigre
 
 RewriteCond %{REQUEST_URI} !^/[0-9]+\..+\.cpaneldcv$
 RewriteCond %{REQUEST_URI} !^/\.well-known/pki-validation/[A-F0-9]{32}\.txt(?:\ Comodo\ DCV)?$
-RewriteRule ^ https://www.domingoscunha.com.br/dem%{REQUEST_URI} [L,R=301]
+RewriteRule ^ https://www.sandromuttoni.com.br/sigre%{REQUEST_URI} [L,R=301]
 
 RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d

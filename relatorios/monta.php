@@ -81,9 +81,9 @@ case 1:{
 	$numpag = 0;
 	$numlin=99;
     $registros = 0;
+    $parametros="";
 	//list ($_sql, $parametros) = monta_sql();    //retornam valores nestas duas variáveis da função #monta_sql()
 	
-    $parametros="";
 //	$_sql = 'SELECT 
 //  month(cadastro.DTNASC) AS mes,
 //  dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
@@ -143,81 +143,143 @@ case 1:{
 //  LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
 //  LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
 //  LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE
-// grupos.GRUPO =	1
-//or grupos.GRUPO = 2
-//or grupos.GRUPO = 3
-//or grupos.GRUPO = 4
+// grupos.GRUPO =	2
 //or grupos.GRUPO = 5
 //or grupos.GRUPO = 6
-//or grupos.GRUPO = 7
+//or grupos.GRUPO = 8
 //or grupos.GRUPO = 9
-//or grupos.GRUPO = 10
-//or grupos.GRUPO = 11
+//or grupos.GRUPO = 12
+//or grupos.GRUPO = 13
 //or grupos.GRUPO = 14
 //or grupos.GRUPO = 15
-//or grupos.GRUPO = 16
-//or grupos.GRUPO = 17
 //or grupos.GRUPO = 18
 //or grupos.GRUPO = 19
-//or grupos.GRUPO = 21
+//or grupos.GRUPO = 16
+//or grupos.GRUPO = 17
+//or grupos.GRUPO = 20
 //or grupos.GRUPO = 22
-//or grupos.GRUPO = 25
-//or grupos.GRUPO = 28
-//or grupos.GRUPO = 31
-//or grupos.GRUPO = 32
-//or grupos.GRUPO = 40
-//or grupos.GRUPO = 41
-//or grupos.GRUPO = 44
-//or grupos.GRUPO = 45
-//or grupos.GRUPO = 46
+//or grupos.GRUPO = 21
+//or grupos.GRUPO = 48
 //or grupos.GRUPO = 49
-//or grupos.GRUPO = 56
+//or grupos.GRUPO = 50
+//or grupos.GRUPO = 57
 //or grupos.GRUPO = 60
+//or grupos.GRUPO = 81
+//or grupos.GRUPO = 62
 //or grupos.GRUPO = 63
+//or grupos.GRUPO = 64
+//or grupos.GRUPO = 179
+//or grupos.GRUPO = 65
+//or grupos.GRUPO = 68
 //or grupos.GRUPO = 67
-//or grupos.GRUPO = 70
+//or grupos.GRUPO = 163
+//or grupos.GRUPO = 69
+//or grupos.GRUPO = 132
+//or grupos.GRUPO = 213
 //or grupos.GRUPO = 71
+//or grupos.GRUPO = 72
 //or grupos.GRUPO = 75
 //or grupos.GRUPO = 77
-//or grupos.GRUPO = 81
+//or grupos.GRUPO = 78
+//or grupos.GRUPO = 79
+//or grupos.GRUPO = 80
+//or grupos.GRUPO = 82
+//or grupos.GRUPO = 83
+//or grupos.GRUPO = 84
+//or grupos.GRUPO = 85
 //or grupos.GRUPO = 88
 //or grupos.GRUPO = 89
+//or grupos.GRUPO = 90
+//or grupos.GRUPO = 92
+//or grupos.GRUPO = 93
 //or grupos.GRUPO = 94
+//or grupos.GRUPO = 95
+//or grupos.GRUPO = 96
+//or grupos.GRUPO = 98
+//or grupos.GRUPO = 1
+//or grupos.GRUPO = 23
+//or grupos.GRUPO = 24
+//or grupos.GRUPO = 25
 //or grupos.GRUPO = 99
+//or grupos.GRUPO = 100
 //or grupos.GRUPO = 101
-//or grupos.GRUPO = 102
-//or grupos.GRUPO = 103
+//or grupos.GRUPO = 26
+//or grupos.GRUPO = 166
 //or grupos.GRUPO = 104
+//or grupos.GRUPO = 103
+//or grupos.GRUPO = 105
+//or grupos.GRUPO = 106
 //or grupos.GRUPO = 107
-//or grupos.GRUPO = 108
+//or grupos.GRUPO = 205
+//or grupos.GRUPO = 27
 //or grupos.GRUPO = 109
+//or grupos.GRUPO = 46
 //or grupos.GRUPO = 111
+//or grupos.GRUPO = 112
 //or grupos.GRUPO = 113
-//or grupos.GRUPO = 118
-//or grupos.GRUPO = 119
-//or grupos.GRUPO = 122
-//or grupos.GRUPO = 127
+//or grupos.GRUPO = 28
+//or grupos.GRUPO = 116
 //or grupos.GRUPO = 131
-//or grupos.GRUPO = 132
-//or grupos.GRUPO = 135
+//or grupos.GRUPO = 30
+//or grupos.GRUPO = 31
+//or grupos.GRUPO = 32
+//or grupos.GRUPO = 118
+//or grupos.GRUPO = 33
+//or grupos.GRUPO = 140
 //or grupos.GRUPO = 136
 //or grupos.GRUPO = 137
 //or grupos.GRUPO = 138
+//or grupos.GRUPO = 182
 //or grupos.GRUPO = 139
-//or grupos.GRUPO = 140
+//or grupos.GRUPO = 34
+//or grupos.GRUPO = 141
+//or grupos.GRUPO = 142
+//or grupos.GRUPO = 143
 //or grupos.GRUPO = 144
+//or grupos.GRUPO = 145
 //or grupos.GRUPO = 146
 //or grupos.GRUPO = 147
+//or grupos.GRUPO = 148
 //or grupos.GRUPO = 149
+//or grupos.GRUPO = 119
+//or grupos.GRUPO = 120
+//or grupos.GRUPO = 121
+//or grupos.GRUPO = 45
+//or grupos.GRUPO = 122
+//or grupos.GRUPO = 45
+//or grupos.GRUPO = 122
+//or grupos.GRUPO = 123
+//or grupos.GRUPO = 124
+//or grupos.GRUPO = 125
+//or grupos.GRUPO = 126
+//or grupos.GRUPO = 128
+//or grupos.GRUPO = 129
+//or grupos.GRUPO = 36
+//or grupos.GRUPO = 37
+//or grupos.GRUPO = 127
 //or grupos.GRUPO = 150
 //or grupos.GRUPO = 151
-//or grupos.GRUPO = 178
-//or grupos.GRUPO = 181
-//or grupos.GRUPO = 182
-//   order by  enderecos.rua, enderecos.numero,
-//  enderecos.complemento';	
+//or grupos.GRUPO = 153
+//or grupos.GRUPO = 61
+//or grupos.GRUPO = 154
+//or grupos.GRUPO = 155
+//or grupos.GRUPO = 156
+//or grupos.GRUPO = 157
+//or grupos.GRUPO = 158
+//or grupos.GRUPO = 159
+//or grupos.GRUPO = 38
+//or grupos.GRUPO = 39
+//or grupos.GRUPO = 160
+//or grupos.GRUPO = 40
+//or grupos.GRUPO = 42
+//or grupos.GRUPO = 41
+//or grupos.GRUPO = 43
+//or grupos.GRUPO = 44
+//   order by enderecos.cidade, enderecos.bairro, enderecos.rua, enderecos.numero,
+//  enderecos.complemento, nome';
 
-  $_sql = 'SELECT 
+	//------------------------------------------------
+  $_sql = "SELECT 
   month(cadastro.DTNASC) AS mes,
   dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
   cadastro.CODIGO as codigo,
@@ -275,13 +337,16 @@ FROM
   cadastro
   LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
   LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
-  LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE
-  (cidade = "Porto Alegre") and
-   ((bairro like "teresopolis%") or
-   (bairro like "%nonoai%") )
-   order by enderecos.bairro, enderecos.rua, enderecos.numero,
-  enderecos.complemento';	
-    #echo $_sql;
+  LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE 
+  (fone_res like '8%'
+  or fone_res like '9%'
+  or fone_com like '%8'
+  or fone_com like '9%'
+  or fone_cel like '%8'
+  or fone_com like '9%')
+  order by enderecos.cidade, enderecos.bairro, enderecos.rua, enderecos.numero,
+  enderecos.complemento, nome";
+   // echo $_sql;
 	if ($_sql==""){
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>NENHUMA OPÇÃO INFORMADA<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';
@@ -423,9 +488,10 @@ case 3:{
 	//$_sql = montacep();
 	list ($_sql, $parametros) = montacep();    //retornam valores nestas duas variáveis da função monta_sql()
 	//echo $_sql;
+	// COLOCAR O MESMO WHERE ABAIXO NO TOTAL DE ETIQUETAS
     $_sql="SELECT 
   month(cadastro.DTNASC) AS mes,
-  dayofmonth(`cadastro`.`DTNASC`) AS `dia`,	
+  dayofmonth(cadastro.DTNASC) AS dia,
   enderecos.id,
   enderecos.cep,
   enderecos.tipolog,
@@ -454,39 +520,100 @@ FROM
   enderecos
   LEFT OUTER JOIN cadastro ON (cadastro.CODIGO = enderecos.codigo)
 WHERE
-  cadastro.CONDICAO = 1 AND 
-  enderecos.cep > 0 AND ( 
-  (cadastro.GRUPO = 190) OR 
-  (cadastro.GRUPO = 206) OR 
-  (cadastro.GRUPO = 188) OR 
-  cadastro.GRUPO = 181 OR 
-  cadastro.GRUPO = 183 OR 
-  cadastro.GRUPO = 186 OR 
-  cadastro.GRUPO = 204 OR
-  cadastro.GRUPO = 208 OR 
-  cadastro.GRUPO = 194 OR 
-  cadastro.GRUPO = 199 OR 
-  cadastro.GRUPO = 193 OR 
-  cadastro.GRUPO = 192 OR
-  cadastro.GRUPO = 203 OR
-  cadastro.GRUPO = 195 OR
-  cadastro.GRUPO = 209 OR
-  cadastro.GRUPO = 198 OR
-  cadastro.GRUPO = 184 OR
-  cadastro.GRUPO = 196 OR
-  cadastro.GRUPO = 185 OR
-  cadastro.GRUPO = 200 OR
-  cadastro.GRUPO = 191 OR
-  cadastro.GRUPO = 205 OR
-  cadastro.GRUPO = 187 OR
-  cadastro.GRUPO = 202 OR
-  cadastro.GRUPO = 201 OR
-  cadastro.GRUPO = 197
-	)
+  ((cadastro.CONDICAO = 1 AND 
+  enderecos.cep > 0 AND  
+  cadastro.GRUPO = 211)
+	and
+	(enderecos.cidade= 'PORTO ALEGRE' AND (
+	enderecos.bairro = 'AGRONOMIA' or 
+	enderecos.bairro= 'AZENHA' or 
+	enderecos.bairro = 'BOM JESUS' or 
+	enderecos.bairro = 'BONSUCESSO' or 
+	enderecos.bairro = 'bom sucesso' or 
+	enderecos.bairro = 'CAMAQUA' or 
+	enderecos.bairro = 'CAVALHADA' or 
+	enderecos.bairro = 'CASCATA' OR  
+    enderecos.bairro = 'CEFER' OR 
+    enderecos.bairro = 'CHAC. DOS BOMB.2' OR  
+    enderecos.bairro = 'CHAC.BOMBEIRO' OR  
+    enderecos.bairro = 'CHACARA DAS PEDRAS' OR  
+    enderecos.bairro = 'CHACARA DOS  BOMBEIR' OR  
+    enderecos.bairro = 'CHACARA DOS  BOMBEIRO' OR  
+    enderecos.bairro = 'CIDADE BAIXA' OR  
+    enderecos.bairro = 'COHAB' OR  
+    enderecos.bairro = 'COHAB CAVALHADA' OR  
+    enderecos.bairro = 'COHAB COSTA E SILVA' OR  
+    enderecos.bairro = 'Cond. Jardim Mediane' OR  
+    enderecos.bairro = 'CONJ COSTA E SILVA' OR  
+    enderecos.bairro = 'COSTA  SILVA' OR  
+    enderecos.bairro = 'JARDIM FLORESTA' OR  
+    enderecos.bairro = 'JARDIM INGÁ' OR  
+    enderecos.bairro = 'JARDIM IPIRANGA' OR  
+    enderecos.bairro = 'JARDIM IPU' OR  
+    enderecos.bairro = 'JARDIM ITU SABARA' OR  
+    enderecos.bairro = 'JARDIM LEOPOLDINA' OR  
+    enderecos.bairro = 'JARDIM LINDÓIA' OR  
+    enderecos.bairro = 'JARDIM N° SENHORA DA' OR  
+    enderecos.bairro = 'JARDIM PLANALTO' OR  
+    enderecos.bairro = 'JARDIM SÃO PEDRO' OR  
+    enderecos.bairro = 'JARDIM VILA NOVA' OR  
+    enderecos.bairro = 'JD BOTANICO' OR  
+    enderecos.bairro = 'JD CARVALHO' OR  
+    enderecos.bairro = 'JD CASCATA' OR  
+    enderecos.bairro = 'JD DO SALSO' OR  
+    enderecos.bairro = 'JD DONA LEOPOLDINA' OR  
+    enderecos.bairro = 'JD FLORESTA' OR  
+    enderecos.bairro = 'JD IPU' OR  
+    enderecos.bairro = 'JD ITU SABARA' OR  
+    enderecos.bairro = 'JD ITU SAMBARA' OR  
+    enderecos.bairro = 'JD LEOPOLDINA' OR  
+    enderecos.bairro = 'JD LEOPOLDINA' OR  
+    enderecos.bairro = 'JD LINDOIA' OR  
+    enderecos.bairro = 'JD PLANALTO' OR  
+    enderecos.bairro = 'JD SABARA' OR  
+    enderecos.bairro = 'JD VILA NOVA' OR  
+    enderecos.bairro = 'JD. BANDEIRAS' OR  
+    enderecos.bairro = 'JD. CARVALHO' OR  
+    enderecos.bairro = 'JD. IPIRANGA' OR  
+    enderecos.bairro = 'JD. ITÚ SABARA' OR  
+    enderecos.bairro = 'JD. MONTE CRISTO' OR  
+    enderecos.bairro = 'JD. MORADA DO SOL' OR  
+    enderecos.bairro = 'JD. PROT. ALVES' OR  
+    enderecos.bairro = 'JD. SABARA' OR  
+    enderecos.bairro = 'JOÃO PESSOA' OR  
+    enderecos.bairro = 'SANTA TERESA' OR  
+    enderecos.bairro = 'SANTA TEREZA' OR  
+    enderecos.bairro = 'SANTANA' OR  
+    enderecos.bairro = 'STA TERESA' OR  
+    enderecos.bairro = 'STO ANTONIO' OR  
+    enderecos.bairro = 'TERESOPOLIS' OR  
+    enderecos.bairro = 'TIMBAUVA III' OR  
+    enderecos.bairro = 'VILA BATISTA FLORES' OR  
+    enderecos.bairro = 'VILA CONCEIÇÃO' OR  
+    enderecos.bairro = 'VILA DOS COMERCIARIO' OR  
+    enderecos.bairro = 'VILA FARRAPOS' OR  
+    enderecos.bairro = 'VILA IPIRAGA' OR  
+    enderecos.bairro = 'VILA IPIRANGA' OR  
+    enderecos.bairro = 'VILA JARDIM' OR  
+    enderecos.bairro = 'VILA JOAO PESSOA' OR  
+    enderecos.bairro = 'VILA MATO SAMPAIO' OR  
+    enderecos.bairro = 'VILA SAFIRA' OR  
+    enderecos.bairro = 'VILA SÃO JOSÉ' OR  
+    enderecos.bairro = 'VL IPIRANGA' OR  
+    enderecos.bairro = 'VL JARDIM' OR  
+    enderecos.bairro = 'VL JOAO PESSOA'
+    ) or 
+	(enderecos.cidade = 'CAXIAS DO SUL' or
+	enderecos.cidade = 'CACHOEIRINHA' or 
+	enderecos.cidade = 'GRAVATAI' or 
+	enderecos.cidade = 'VIAMÃO' or 
+	enderecos.cidade = 'LIVRAMENTO')))
 ORDER BY
   enderecos.reg,
-  cadastro.NOME
-";
+  enderecos.cidade,
+  enderecos.rua,
+  enderecos.numero,
+  enderecos.complemento;";
 	if ($_sql==""){
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>NENHUMA OPÇÃO INFORMADA<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';
@@ -665,85 +792,103 @@ ORDER BY
 		$descricao='';
 		$prilinha = 0;
 		$pdf->SetFont('Courier', 'B',8);
-		foreach ($ebct as $i => $value) {
-		  $chave = $i;
-		  if ($i == 999){
-			  $descricao = 'TOTAL DE ETIQUETAS IMPRESSAS = '.$tot_geral_reg;
-		  }else{
-			  if (is_int($i)){
-				  $_sql2 = 'Select * from cdd where reg = '.$i;
-				  //echo $_sql."<br>";
-				  $_res2 = $_concomum->query($_sql2);
-				  $total_num_rows = $_res->num_rows;
-				  if ($tot_geral_reg>0){
-					  while($_row2 = $_res2->fetch_assoc()) {
-						  $descricao = $_row2["descricao"];
-						  $qtd = "Quantidade de etiquetas: ".$ebct[$i];
-					  }
+
+// SELECT TEM DE SER O MESMO QUE GERA ETIQUETAS POREM COM O SOMATÓRIO DE ETIQUETAS POR REG
+		
+		$_sql2 = 'Select * from etiquetas_qtd_por_cdd';
+
+		$_res = $_con->query($_sql2);
+		$tot_geral_reg = 0;
+		$_anterior=0;
+
+		if($_res->num_rows>0){
+			$prilinha = 0;
+			while($_row = $_res->fetch_assoc()) {
+			  $reg = $_row["reg"];
+			  $totetq = $_row["totetq"];
+			  $descricao = $_row["descricao"];
+			  $tot_geral_reg = $tot_geral_reg + $totetq;
+			  if ($etq== 0 ){
+				  $auxcod = $reg;
+				  $auxnome = $descricao;
+				  $auxqtd = $totetq;
+				  $etq = 1;
+			  }else{						
+				  if ($prilinha ==0 ){
+					$sety = 15;					  
+					$prilinha =1;
+				  }else{
+					$sety = $sety + 35;
+				  }
+				  $pdf->SetY($sety);
+				  $pdf->Cell(8);
+				  $pdf->Cell(105, 0, '['.$auxcod.']  '.utf8_decode($auxnome), 0, 0);
+				  $pdf->Cell(50, 0, '['.$reg.']  '.utf8_decode($descricao), 0, 1);
+				  $pdf->ln(5);
+				  $pdf->Cell(8);
+				  $pdf->Cell(105, 0, 'Quantidade de etiquetas: '.utf8_decode($auxqtd), 0, 0);
+				  $pdf->Cell(50, 0, 'Quantidade de etiquetas: '.utf8_decode($totetq), 0, 1);
+				  $pdf->ln(5);
+				  $etq = 0;
+				  $qtdetq++;
+				  if ($qtdetq==8){  // qtde de etiquetas em cada coluna = 8. total 16 etq por pagina
+						$pdf->AddPage();
+						$pdf->SetX(0);
+						$sety = 15;
+						$pdf->SetY($sety);				
+						$qtdetq = 0;
+						$prilinha =0;
+				  }else{				  
+						// imprime duas linhas em branco
+						$pdf->Cell(105, 0,'  ', 0, 1);
+						$pdf->ln(5);
+						$pdf->Cell(105, 0,'  ', 0, 1);
+						$pdf->ln(5);
 				  }
 			  }
-		  }
-		  if ($etq== 0 ){
-			  $auxcod = $i;
-			  $auxnome = $descricao;
-			  $auxqtd = $qtd;
-			  $etq = 1;
-		  }else{						
-			  if ($prilinha ==0 ){
-				$sety = 15;					  
-				$prilinha =1;
-			  }else{
-				$sety = $sety + 35;
-			  }
-			  $pdf->SetY($sety);
-			  $pdf->Cell(8);
-			  $pdf->Cell(105, 0, '['.$auxcod.']  '.utf8_decode($auxnome), 0, 0);
-			  $pdf->Cell(50, 0, '['.$i.']  '.utf8_decode($descricao), 0, 1);
-			  $pdf->ln(5);
-			  $pdf->Cell(8);
-			  $pdf->Cell(105, 0, utf8_decode($auxqtd), 0, 0);
-			  $pdf->Cell(50, 0, utf8_decode($qtd), 0, 1);
-			  $pdf->ln(5);
-			  $etq = 0;
-			  $qtdetq++;
-			  if ($qtdetq==8){  // qtde de etiquetas em cada coluna = 8. total 16 etq por pagina
-					$pdf->AddPage();
-					$pdf->SetX(0);
-					$sety = 15;
-					$pdf->SetY($sety);				
-					$qtdetq = 0;
-					$prilinha =0;
-			  }else{				  
-					// imprime duas linhas em branco
-					$pdf->Cell(105, 0,'  ', 0, 1);
-					$pdf->ln(5);
-					$pdf->Cell(105, 0,'  ', 0, 1);
-					$pdf->ln(5);
-			  }
-		  }
-		}
-		if ($etq ==1){
-			if ($prilinha ==0 ){
-			  $sety = 15;					  
-			  $prilinha =1;
-			}else{
-			  $sety = $sety + 35;
 			}
-			$pdf->SetY($sety);
-			$pdf->Cell(8);
-			$pdf->Cell(90, 0, '['.$auxcod.']  '.utf8_decode($auxnome), 0, 1);
-			$pdf->ln(5);
-			$pdf->ln(5);
-		}	
+			if ($etq ==1){
+				if ($prilinha ==0 ){
+				  $sety = 15;					  
+				  $prilinha =1;
+				}else{
+				  $sety = $sety + 35;
+				}
+				$pdf->SetY($sety);
+				$pdf->Cell(8);
+				$pdf->Cell(90, 0, '['.$auxcod.']  '.utf8_decode($auxnome), 0, 1);
+				$pdf->ln(5);
+				$pdf->Cell(8);
+				$pdf->Cell(90, 0, 'Quantidade de etiquetas: '.$auxqtd, 0, 1);
+				$pdf->ln(5);
+			}	
 		//$pdf->Cell(90, 0, utf8_decode($_sql), 0, 1);
+			//==== total etqs
+			$pdf->SetY(35);
 
-		$pdf->Output();	
-		ob_end_flush();
+            $pdf->Cell(105, 0,'  ', 0, 1);
+            $pdf->ln(5);
+            $pdf->Cell(105, 0,'  ', 0, 1);
+            $pdf->ln(5);
+            $pdf->Cell(105, 0,'  ', 0, 1);
+            $pdf->ln(5);
+            $pdf->Cell(8);            
+			$pdf->Cell(90, 0, '[999]  TOTAL GERAL DE ETIQUETAS', 0, 1);
+
+			$pdf->ln(5);
+			$pdf->Cell(8);
+            $pdf->Cell(90, 0, $tot_geral_reg, 0, 1);
+            $pdf->ln(5);
+            $pdf->ln(5);				
+
+			$pdf->Output();	
+			ob_end_flush();
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'><i class='fas fa-check' aria-hidden='true text-muted' aria-hidden='true'></i> Etiquetas geradas com sucesso!<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";			
 		echo '<script>self.window.close();</script>';
 	}else{
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>Nenhuma etiqueta foi gerada. Nenhum registro satisfez a consulta<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';
+	}
 	}
 	break;
 }
@@ -1390,7 +1535,7 @@ default:
 	echo '<script>alert("'.$opcao.'");self.window.close();</script>';
 	break;
 }
-//=================================================================================================================================
+//==========================================================================================================================
 function monta_sql(){
 	// setup variables
 	$linha=1;
@@ -1429,6 +1574,7 @@ function monta_sql(){
 		}
 		$varconector = $_POST["conector".$linha];
 		$varclassifica = $_POST["classifica".$linha];
+		//echo "Campo da tela - ". $varcampo." Operador= ".$varoperador." Conteúdo= ".$varconteudoexp." Conector= ".$varconector." Classifica= ".$varclassifica."<br>";
 		$strconector= "";
 		if ($varcampo <> "") {
 			$qtde_param++;
@@ -1441,10 +1587,13 @@ function monta_sql(){
 				$varexpressao = "%" . $varexpressao . "%";				
 			}
 			if ($varcampo == "nome" || $varcampo == "cidade" || $varcampo == "rua" || $varcampo == "bairro" || $varcampo == "complemento"){
-				$varexpressao= "'" . $varexpressao . "'";				
-			}
-			if ($varcampo == "grupo" || $varcampo == "origem"){
-				$varcampo= "cadastro." . $varcampo;				
+				$varexpressao = "'" . $varconteudoexp . "'";				
+			}else{
+				if ($varcampo == "grupo" || $varcampo == "origem"){
+					$varcampo= "cadastro." . $varcampo;				
+				}else{
+					$varexpressao = $varconteudoexp;	
+				}
 			}
 			$conector = "";
 			if ($varconector <> "") {
@@ -1461,7 +1610,7 @@ function monta_sql(){
 			}
 			$strwhere[$linha] = $varcampo ." ". $varoperador ." ". $varexpressao. " ". $strconector;
 			$stringWhere .= $strwhere[$linha];
-			//echo $stringWhere.'<br>';
+			//echo "stringWhere= ". $stringWhere.'<br>';
 			if ($varclassifica <> "") {
 				$compoesort=false;
 				switch ($varcampo) {
@@ -1538,7 +1687,7 @@ function monta_sql(){
 						}
 						break;
 					case "complemento":
-						if ($jatemcomlemento==false){
+						if ($jatemcomplemento==false){
 							$compoesort=true;
 							$jatemcomplemento=true;
 						}

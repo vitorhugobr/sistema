@@ -81,9 +81,6 @@ if (liberado(5700)==0){
             </div>
         </div>
     </nav>
-</div>
-	  </div>
-<div>
 	
 <?php
 if(isset($_SESSION['msg'])){
@@ -91,7 +88,7 @@ if(isset($_SESSION['msg'])){
 	unset($_SESSION['msg']);
 }
 ?>
-</div>
+
 <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
     <tr>
       <td valign="top">
@@ -104,7 +101,8 @@ if(isset($_SESSION['msg'])){
       </td>
     </tr>
   </table>
-  </form>  
+  </form> 
+</div>
 <?php
 include("../utilitarios/rodape-fixo.php");
 }

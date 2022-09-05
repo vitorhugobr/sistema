@@ -27,9 +27,7 @@ if (liberado(5700)==0){
   <link href="../css/formata_textos.css" rel="stylesheet">
   <link href="../css/all.css" rel="stylesheet">
   <link href="../css/botoes.css" rel="stylesheet">
-  <script>
-    var retorno = carga_grupos(1);
-  </script>
+
   <script language="javascript" src="../js/grupos.js"></script>
   <script type="text/javascript" src="../js/ajax.js"></script>
   <script type="text/javascript" src="../js/carrega_ajax.js"></script>
@@ -41,12 +39,12 @@ if (liberado(5700)==0){
   </head>
   <body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="carga_grupos(1)">
 
-<div class="nav fixed-top container-fluid shadow mt-0 mb-0 bg-white rounded sticky-top">
-<?php include("../utilitarios/cabecalho.php"); ?>	  
+<!--<div class="nav fixed-top container-fluid shadow mt-0 mb-0 bg-white rounded sticky-top">
+--><?php include("../utilitarios/cabecalho.php"); ?>	  
 
 <form name="form1" method="post" action="">
     <nav class="navbar navbar-expand-sm navbar-light shadow-sm">
-        <div class="container">
+        <div class="container-fluid">
             <span class="navbar-brand"></span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -78,7 +76,6 @@ if (liberado(5700)==0){
             </div>
         </div>
     </nav>
-	</div>
 <?php
 if(isset($_SESSION['msg'])){
 	echo $_SESSION['msg'];
@@ -86,7 +83,7 @@ if(isset($_SESSION['msg'])){
 }
 ?>
 
-    <table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
+<table width="100%" border="0" align="center" cellpadding="2" cellspacing="0">
     <tr>
         <td valign="top"><div style="width:100%; overflow: auto;">
             <div class="dados" id="dados"></div>
@@ -95,6 +92,8 @@ if(isset($_SESSION['msg'])){
       </tr>
   </table>
   </form>
+<!--</div>
+-->
 <?php
 include("../utilitarios/rodape-fixo.php");
 }

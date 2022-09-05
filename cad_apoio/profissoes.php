@@ -46,7 +46,7 @@ if (liberado(5900)==0){
 
 <form name="form1" method="post" action="">
     <nav class="navbar navbar-expand-sm navbar-light shadow-sm">
-        <div class="container">
+        <div class="container-fluid">
             <span class="navbar-brand"></span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -78,7 +78,6 @@ if (liberado(5900)==0){
             </div>
         </div>
     </nav>
-	</div>
 	<?php
 	if(isset($_SESSION['msg'])){
 		echo $_SESSION['msg'];
@@ -99,6 +98,8 @@ if (liberado(5900)==0){
     </tr>
   </table>
   </form>  
+</div>
+
 <?php
 include("../utilitarios/rodape-fixo.php");
 }

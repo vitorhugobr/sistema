@@ -6,7 +6,7 @@ $descricao = $_GET['desc'];
 $theValue = (!get_magic_quotes_gpc()) ? addslashes($descricao) : $descricao;
 $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
 $descricao = $theValue;
-gravaoperacoes("profissao","I", $_SESSION["usuarioUser"],"Ramo incluído #: ".$codigo);
+
 $_sql = "Insert into ramo values(NULL,".$descricao.")";
 
 $resp = executa_sql_comum($_sql,"Ramo incluído com sucesso","Ramo NÃO incluído",true, true);
@@ -18,6 +18,7 @@ if ($mysql_query->num_rows<1) {
 }else{
 	while ($dados_s = $mysql_query->fetch_assoc()) {
 		$codigo = $dados_s['codigo'].'";';
+		gravaoperacoes("profissao","I", $_SESSION["usuarioUser"],"Ramo incluído #: ".$codigo);
 	}
 }
 

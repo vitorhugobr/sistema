@@ -11,7 +11,7 @@ function carga_grupos(pagina) {
 		alert('não foi  possível iniciar o AJAX');
 		return;
 	}
-//	alert("Carga");
+	//alert("Carga "+pagina);
 	ajax('busca_grupos.php?pagina='+pagina, 'dados');
 }
 			

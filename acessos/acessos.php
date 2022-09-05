@@ -42,6 +42,11 @@ session_start();
 			$password = "vhmo@2022";
 			break;
 		case 5:  // 
+			$site = 'Sandro Muttoni';
+			$servername = "www.serverwebdb.com.br";
+			$dbname = "sandromu_sigre";
+			$username = "sandromu_sigre";
+			$password = "q0?iYG!HM~s$";
 			break;
 		case 6:  // 
 			break;

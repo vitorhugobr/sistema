@@ -43,7 +43,7 @@ if (liberado(5600)==0){
 <?php include("../utilitarios/cabecalho.php"); ?>
 <form name="form1" method="post" action="">
     <nav class="navbar navbar-expand-sm navbar-light shadow-sm">
-        <div class="container">
+        <div class="container-fluid">
             <span class="navbar-brand"></span>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -85,7 +85,6 @@ if (liberado(5600)==0){
             </div>
         </div>
     </nav>
-	</div>
 <?php
 if(isset($_SESSION['msg'])){
 	echo $_SESSION['msg'];
@@ -106,6 +105,8 @@ if(isset($_SESSION['msg'])){
 <div class="col-12">          <strong>Última alteração:</strong> <span id="dtcad"></span> <strong>por</strong> <span id="respcad"></span> </div>
 
 </form>
+</div>
+
 <script type="text/javascript">
 	new Autocomplete("rua", function() { return "../eleitores/autocompleterua2.php?typing=" + this.text.value+'&city='+document.getElementById('cidade').value;});
 		</script>

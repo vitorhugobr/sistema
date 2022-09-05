@@ -167,6 +167,15 @@
 	text-align: left;
 }
 
+.textoVerdeLimao {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	text-transform: none;
+	color: #5BFF00;
+	font-weight: bold;
+	text-align: left;
+}
+
 .textoVerde12 {
 	font-family: Helvetica;
 	font-size: 12px;

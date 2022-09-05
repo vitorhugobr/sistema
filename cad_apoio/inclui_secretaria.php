@@ -6,7 +6,7 @@ $descricao = $_GET['desc'];
 $theValue = (!get_magic_quotes_gpc()) ? addslashes($descricao) : $descricao;
 $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
 $descricao = $theValue;
-gravaoperacoes("Secretaria","I", $_SESSION["usuarioUser"],"Secretaria incluída #: ".$codigo);
+
 
 $_sql = "Insert into secretarias values(NULL,".$descricao.")";
 
@@ -21,7 +21,7 @@ if ($mysql_query->num_rows<1) {
 }else{
 	while ($dados_s = $mysql_query->fetch_assoc()) {
 		$codigo = $dados_s['codigo'].'";';
-	}
+		gravaoperacoes("Secretaria","I", $_SESSION["usuarioUser"],"Secretaria incluída #: ".$codigo);	}
 }
 
 		

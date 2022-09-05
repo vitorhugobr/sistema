@@ -7,8 +7,6 @@ $theValue = (!get_magic_quotes_gpc()) ? addslashes($descricao) : $descricao;
 $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
 $descricao = $theValue;
 
-gravaoperacoes("profissao","I", $_SESSION["usuarioUser"],"Profissão incluída #: ".$codigo);
-
 $_sql = "Insert into profissao values(NULL,".$descricao.")";
 
 $resp = executa_sql_comum($_sql,"Profissão incluída com sucesso","Profissão NÃO incluída",true, true);
@@ -20,7 +18,7 @@ if ($mysql_query->num_rows<1) {
 }else{
 	while ($dados_s = $mysql_query->fetch_assoc()) {
 		$codigo = $dados_s['codigo'].'";';
-	}
+		gravaoperacoes("profissao","I", $_SESSION["usuarioUser"],"Profissão incluída #: ".$codigo);	}
 }
 
 ?>

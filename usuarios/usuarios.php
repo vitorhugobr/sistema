@@ -44,6 +44,7 @@ $_SESSION['funcao'] = "Usuários";
 </script>
 </head>
 <body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+<div class="nav fixed-top container-fluid shadow mt-0 mb-0 bg-white rounded sticky-top">
 <?php include_once("../utilitarios/cabecalho.php");?>
   <nav class="navbar navbar-expand-sm navbar-light shadow-sm">
   	<div class="container">
@@ -87,6 +88,7 @@ $_SESSION['funcao'] = "Usuários";
       </div>
    	</div>
    </nav>
+ </div>
 	<?php
 	if(isset($_SESSION['msg'])){
 		echo $_SESSION['msg'];

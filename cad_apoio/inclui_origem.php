@@ -7,8 +7,6 @@ $theValue = (!get_magic_quotes_gpc()) ? addslashes($descricao) : $descricao;
 $theValue = ($theValue != "") ? " '" . $theValue . "'" : "NULL";
 $descricao = $theValue;
 
-gravaoperacoes("grupos","I", $_SESSION["usuarioUser"],"Grupo incluído #: ".$codigo);
-
 $_sql = "Insert into origem values(NULL,".$descricao.")";
 
 $resp = executa_sql($_sql,"Origem incluída com sucesso","Origem NÃO incluída",true, true);
@@ -20,7 +18,7 @@ if ($mysql_query->num_rows<1) {
 }else{
 	while ($dados_s = $mysql_query->fetch_assoc()) {
 		$codigo = $dados_s['codigo'].'";';
-	}
+		gravaoperacoes("grupos","I", $_SESSION["usuarioUser"],"Grupo incluído #: ".$codigo);	}
 }
 
 ?>

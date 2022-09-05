@@ -16,7 +16,7 @@ $_SESSION['cod_usuario'] = $linhas[0]; // usuario =A(100,80);
 
 //----------------------------------------------------------------------------
 // Vitor POA
-switch ($_SESSION['cod_usuario']) {
+switch ($_SESSION['id']) {
 	case 1:  //Dr Thiago   www.drthiagoduarte.com.br
 		$_SESSION['servidor'] = "191.252.101.58";
 		$_SESSION['banco'] = "drthiago_sigre";
@@ -30,10 +30,11 @@ switch ($_SESSION['cod_usuario']) {
 		break;
 	case 2:  // Emerson
 		$_SESSION['servidor'] = "www.serverwebdb.com.br";
-		$_SESSION['banco'] = "chaplinb_chaplin";
-		$_SESSION['usuario'] = "chaplinb_chaplin";
-		$_SESSION['senha'] = "HpcOKYN7b2E-";
-		//	senha cpanel: "QjT#mW@TxWgJ"  usuário: "chaplinbebidasco"		
+		$_SESSION['banco'] = "emersonc_psc";
+		$_SESSION['usuario'] = "emersonc_psc";
+		$_SESSION['senha'] = "w3jDNEsN}7,+";
+		// gmail: emerson.sigre@gamil.com  senha: 3m3r50n@psc
+		//	senha cpanel: "QjT#mW@TxWgJ"  usuário: "emersoncorreaofi"		
 		break;
 	case 3:  // Mauro Pinheiro
 		break;
@@ -45,6 +46,11 @@ switch ($_SESSION['cod_usuario']) {
 		//	senha cpanel: "K_8zE{VmHQy1"  usuário: "vitorpoa"
 		break;
 	case 5:  // 
+		$_SESSION['servidor'] = "www.serverwebdb.com.br";
+		$_SESSION['banco'] = "sandromu_sigre";
+		$_SESSION['usuario'] = "sandromu_sigre";
+		$_SESSION['senha'] = "q0?iYG!HM~s$";
+		//	senha cpanel: "^Tsh-Q1(MvcE"  usuário: "sandromuttonicom"		
 		break;
 	case 6:  // 
 		break;

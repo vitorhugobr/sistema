@@ -199,17 +199,16 @@ if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
 			</div>  
 		</div>
 		<div class='col-2 text-justify'>    
-			<!-- <i class="fas fa-list fa-fw" title="Tarefas em Aberto"></i>
+			<i class="fas fa-list fa-fw" title="Tarefas em Aberto"></i>
 			<i class="badge badge-danger badge-counter" title="Tarefas em Aberto"><?php echo $tarefas_aberto; ?></i>&nbsp;
 			<i class="fas fa-bullhorn  fa-fw" title="Encaminhamentos"></i>
 			<i class="badge badge-danger badge-counter" title="Demandas sem Resposta"><?php echo $encaminha; ?></i>
-		--> 
 		</div>
 		<div class='col-1 text-right'>
 			<i class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $_SESSION['primnome']?></i>
 			<?php
 				$arquivo = "imagens/fotos/users/".$_SESSION['foto']; ?>
-				<img class="img-profile rounded-circle" src="<?php echo $arquivo ?>" height="30" width="30" title="<?php echo $_SESSION['usuarioNome']?>">
+				<img class="img-profile rounded-circle" src="<?php echo $arquivo ?>" height="40px" width="40px" title="<?php echo $_SESSION['usuarioNome']?>">
 		</div>
 		<div id="wrapper" class="toggled" > 
 			<!-- Sidebar -->
@@ -219,12 +218,6 @@ if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
 			<li>
 				<div align="center" class="text-white-50">MENU PRINCIPAL
 				</div>
-			</li>
-			<li>
-			<?php
-			$arquivo = "imagens/fotos/users/".$_SESSION['foto'];
-			echo '<img class="img-profile rounded-circle" src="'.$arquivo.'" height="40px" width="40px"> <i class="mr-2 d-none d-lg-inline textoVerdeLimao">'.$_SESSION['primnome'].'</i>';
-		?>
 			</li>
 			<?php 
 			//if ($_SESSION['id']<2){
@@ -248,13 +241,13 @@ if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
 					echo '<li><a href="https://calendar.google.com/calendar/embed?src=maurop.sigre%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
 				}
 				if ((liberado(6800)>0) AND ($_SESSION['id'] == 4)){
-					echo '<li><a href="https://calendar.google.com/calendar/embed?src=pscpoa20%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
+					echo '<li><a href="https://calendar.google.com/calendar/embed?src=domingos.sigre%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
 				}
 				if ((liberado(6800)>0) AND ($_SESSION['id'] == 5)){
-					//echo '<li><a href="https://calendar.google.com/calendar/embed?src=tessaro.sigre%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
+					echo '<li><a href="https://calendar.google.com/calendar/embed?src=tessaro.sigre%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
 				}
 				if ((liberado(6800)>0) AND ($_SESSION['id'] == 6)){
-					//echo '<li><a href="https://calendar.google.com/calendar/embed?src=democrataspoa%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
+					echo '<li><a href="https://calendar.google.com/calendar/embed?src=democrataspoa%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
 				}
 				if ((liberado(6800)>0) AND ($_SESSION['id'] == 7)){
 					echo '<li><a href="https://calendar.google.com/calendar/embed?src=melo.sigre%40gmail.com&ctz=America%2FSao_Paulo" target="new"><i class="fas fa-calendar"> </i> Agenda</a></li>';
@@ -315,7 +308,7 @@ if ((($diahj>15) and ($diahj<31)) AND ($meshj==12))
   <div align="center">      
 		<?php echo $_SESSION['host_pol']; ?>
 
-		<div id="DateCountdown" data-date="2022-10-03 00:00:00" style="width: 450px; height: 100px; padding: 0px; box-sizing: border-box></div>
+		<div id="DateCountdown" data-date="2022-10-03 17:00:00" style="width: 450px; height: 100px; padding: 0px; box-sizing: border-box></div>
 		<h5  align="center"><b>Eleições 2022. Para encerramento das urnas!</b></h5>	 
 		<script>
 		$("#DateCountdown").TimeCircles();

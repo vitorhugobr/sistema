@@ -14,15 +14,17 @@ $ano = date('Y');
 $_SESSION['autor']= "&copy 2016-$ano Vitor H M Oliveira";
 
 $_SESSION['ult_eleitor_pesquisado'] = 0;
-$arqconfig = md5("mapa").".txt";
-if (!file_exists($arqconfig)) {
-	echo 'IMPOSSÍVEL ACESSAR O SISTEMA.<br>Arquivo de configuração excluído ou danificado! ';
-	die;
-} 	
+if (!isset($_SESSION['id'])) {
+	$arqconfig = md5("mapa").".txt";
+	if (!file_exists($arqconfig)) {
+		echo 'IMPOSSÍVEL ACESSAR O SISTEMA.<br>Arquivo de configuração excluído ou danificado! ';
+		die;
+	} 	
 
-$linhas = explode("\n", file_get_contents($arqconfig));
-$_SESSION['id'] = $linhas[0]; // usuario =A(100,80);
-$_SESSION['versao']= $linhas[1];
+	$linhas = explode("\n", file_get_contents($arqconfig));
+	$_SESSION['id'] = $linhas[0]; // usuario =A(100,80);
+	$_SESSION['versao']= $linhas[1];
+}
 include_once("connections/banco.php");
 include_once("seguranca.php");
 require_once("utilitarios/funcoes.php");
@@ -61,7 +63,6 @@ try{
 	}else{
 		// Definimos a mensagem de erro
 		while($dados_s = $sql->fetch()) {	
-		  $_SESSION['id'] = $dados_s['id'];
 		  $_SESSION['politico'] = $dados_s['politico'];
 		  $_SESSION['ativo']= $dados_s['ativo'];
 		  $_SESSION['url']= $dados_s['endurl'];

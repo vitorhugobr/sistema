@@ -31,11 +31,11 @@ for ($i = 1; $i <= 7; $i++) {
 		//	senha cpanel:   usuário: 
 		break;
 	case 2:  // Emerson
-		$cliente = "Emerson Correa";
-		$_SESSION['servidor'] = "www.serverwebdb.com.br";
-		$_SESSION['banco'] = "chaplinb_chaplin";
-		$_SESSION['usuario'] = "chaplinb_chaplin";
-		$_SESSION['senha'] = "HpcOKYN7b2E-";
+//		$cliente = "Emerson Correa";
+//		$_SESSION['servidor'] = "www.serverwebdb.com.br";
+//		$_SESSION['banco'] = "chaplinb_chaplin";
+//		$_SESSION['usuario'] = "chaplinb_chaplin";
+//		$_SESSION['senha'] = "HpcOKYN7b2E-";
 		//	senha cpanel: "QjT#mW@TxWgJ"  usuário: "chaplinbebidasco"		
 		break;
 	case 3:  // Mauro Pinheiro
