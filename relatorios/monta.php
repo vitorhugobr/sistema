@@ -338,12 +338,8 @@ FROM
   LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
   LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
   LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE 
-  (fone_res like '8%'
-  or fone_res like '9%'
-  or fone_com like '%8'
-  or fone_com like '9%'
-  or fone_cel like '%8'
-  or fone_com like '9%')
+  enderecos.bairro LIKE '%SANTO ANTONIO%'
+  OR enderecos.bairro LIKE '%PARTENON%'
   order by enderecos.cidade, enderecos.bairro, enderecos.rua, enderecos.numero,
   enderecos.complemento, nome";
    // echo $_sql;
@@ -486,13 +482,49 @@ case 3:{
 	$qtdetq = 0; 
 	$tot_geral_reg = 0;
 	//$_sql = montacep();
-	list ($_sql, $parametros) = montacep();    //retornam valores nestas duas variáveis da função monta_sql()
+	//list ($_sql, $parametros) = montacep();    //retornam valores nestas duas variáveis da função monta_sql()
 	//echo $_sql;
-	// COLOCAR O MESMO WHERE ABAIXO NO TOTAL DE ETIQUETAS
-    $_sql="SELECT 
+	// COLOCAR O MESMO WHERE ABAIXO NO TOTAL DE ETIQUETAS view etiquetas_qtd_por_cdd
+	
+	$_sql = 'SELECT 
   month(cadastro.DTNASC) AS mes,
-  dayofmonth(cadastro.DTNASC) AS dia,
-  enderecos.id,
+  dayofmonth(`cadastro`.`DTNASC`) AS `dia`,
+  cadastro.CODIGO as codigo,
+  cadastro.NOME as nome,
+  cadastro.SEXO as sexo,
+  cadastro.DTCAD as dtcad,
+  cadastro.DTNASC as dtnasc,
+  cadastro.CARGO as cargo,
+  cadastro.FONE_RES as fone_res,
+  cadastro.FONE_CEL as fone_cel,
+  cadastro.FONE_COM as fone_com,
+  cadastro.CPF as cpf,
+  cadastro.CONDICAO as condicao,
+  cadastro.EMAIL as email,
+  cadastro.GRUPO as grupo,
+  cadastro.ORIGEM as origem,
+  cadastro.PROFISSAO as profissao,
+  cadastro.ZONAL as zonal,
+  cadastro.SECCAO as seccao,
+  cadastro.PAI_MAE as pai_mae,
+  cadastro.FILIADO as filiado,
+  cadastro.RECEBEMAT as recebemat,
+  cadastro.RESPCADASTRO as respcadastro,
+  cadastro.DTULTALT as dtultalt,
+  cadastro.EMPRESA as empresa,
+  cadastro.VOTOU as votou,
+  cadastro.RAMO as ramo,
+  cadastro.RECEBEMAIL as recebemail,
+  cadastro.IMPRESSO as impresso,
+  cadastro.ENVIADO as enviado,
+  cadastro.CAMPANHA as campanha,
+  cadastro.FACEBOOK as facebook,
+  cadastro.TWITTER as twitter,
+  cadastro.OUTRAREDE as outrarede,
+  cadastro.APELIDO as apelido,
+  cadastro.EST_CIVIL as est_civil,
+  cadastro.CLASSI as classi,
+  cadastro.OBS as obs,
   enderecos.cep,
   enderecos.tipolog,
   enderecos.rua,
@@ -504,116 +536,153 @@ case 3:{
   enderecos.padrao,
   enderecos.tipo,
   enderecos.reg,
-  cadastro.CODIGO AS codigo,
-  cadastro.NOME AS nome,
-  cadastro.SEXO AS sexo,
-  cadastro.DTNASC AS dtnasc,
-  cadastro.GRUPO AS grupo,
-  cadastro.ORIGEM AS origem,
-  cadastro.RECEBEMAT AS recebemat,
-  cadastro.PROFISSAO AS profissao,
-  cadastro.ZONAL AS zonal,
-  cadastro.SECCAO AS seccao,
-  cadastro.CAMPANHA AS campanha,
-  cadastro.CONDICAO AS condicao
+  origem.Descricao as desc_origem ,
+  grupos.NOMEGRP as desc_grupo,
+  grupos.GRUPO AS cod_grupo,
+  origem.Origem AS cod_origem
 FROM
-  enderecos
-  LEFT OUTER JOIN cadastro ON (cadastro.CODIGO = enderecos.codigo)
-WHERE
-  ((cadastro.CONDICAO = 1 AND 
-  enderecos.cep > 0 AND  
-  cadastro.GRUPO = 211)
-	and
-	(enderecos.cidade= 'PORTO ALEGRE' AND (
-	enderecos.bairro = 'AGRONOMIA' or 
-	enderecos.bairro= 'AZENHA' or 
-	enderecos.bairro = 'BOM JESUS' or 
-	enderecos.bairro = 'BONSUCESSO' or 
-	enderecos.bairro = 'bom sucesso' or 
-	enderecos.bairro = 'CAMAQUA' or 
-	enderecos.bairro = 'CAVALHADA' or 
-	enderecos.bairro = 'CASCATA' OR  
-    enderecos.bairro = 'CEFER' OR 
-    enderecos.bairro = 'CHAC. DOS BOMB.2' OR  
-    enderecos.bairro = 'CHAC.BOMBEIRO' OR  
-    enderecos.bairro = 'CHACARA DAS PEDRAS' OR  
-    enderecos.bairro = 'CHACARA DOS  BOMBEIR' OR  
-    enderecos.bairro = 'CHACARA DOS  BOMBEIRO' OR  
-    enderecos.bairro = 'CIDADE BAIXA' OR  
-    enderecos.bairro = 'COHAB' OR  
-    enderecos.bairro = 'COHAB CAVALHADA' OR  
-    enderecos.bairro = 'COHAB COSTA E SILVA' OR  
-    enderecos.bairro = 'Cond. Jardim Mediane' OR  
-    enderecos.bairro = 'CONJ COSTA E SILVA' OR  
-    enderecos.bairro = 'COSTA  SILVA' OR  
-    enderecos.bairro = 'JARDIM FLORESTA' OR  
-    enderecos.bairro = 'JARDIM INGÁ' OR  
-    enderecos.bairro = 'JARDIM IPIRANGA' OR  
-    enderecos.bairro = 'JARDIM IPU' OR  
-    enderecos.bairro = 'JARDIM ITU SABARA' OR  
-    enderecos.bairro = 'JARDIM LEOPOLDINA' OR  
-    enderecos.bairro = 'JARDIM LINDÓIA' OR  
-    enderecos.bairro = 'JARDIM N° SENHORA DA' OR  
-    enderecos.bairro = 'JARDIM PLANALTO' OR  
-    enderecos.bairro = 'JARDIM SÃO PEDRO' OR  
-    enderecos.bairro = 'JARDIM VILA NOVA' OR  
-    enderecos.bairro = 'JD BOTANICO' OR  
-    enderecos.bairro = 'JD CARVALHO' OR  
-    enderecos.bairro = 'JD CASCATA' OR  
-    enderecos.bairro = 'JD DO SALSO' OR  
-    enderecos.bairro = 'JD DONA LEOPOLDINA' OR  
-    enderecos.bairro = 'JD FLORESTA' OR  
-    enderecos.bairro = 'JD IPU' OR  
-    enderecos.bairro = 'JD ITU SABARA' OR  
-    enderecos.bairro = 'JD ITU SAMBARA' OR  
-    enderecos.bairro = 'JD LEOPOLDINA' OR  
-    enderecos.bairro = 'JD LEOPOLDINA' OR  
-    enderecos.bairro = 'JD LINDOIA' OR  
-    enderecos.bairro = 'JD PLANALTO' OR  
-    enderecos.bairro = 'JD SABARA' OR  
-    enderecos.bairro = 'JD VILA NOVA' OR  
-    enderecos.bairro = 'JD. BANDEIRAS' OR  
-    enderecos.bairro = 'JD. CARVALHO' OR  
-    enderecos.bairro = 'JD. IPIRANGA' OR  
-    enderecos.bairro = 'JD. ITÚ SABARA' OR  
-    enderecos.bairro = 'JD. MONTE CRISTO' OR  
-    enderecos.bairro = 'JD. MORADA DO SOL' OR  
-    enderecos.bairro = 'JD. PROT. ALVES' OR  
-    enderecos.bairro = 'JD. SABARA' OR  
-    enderecos.bairro = 'JOÃO PESSOA' OR  
-    enderecos.bairro = 'SANTA TERESA' OR  
-    enderecos.bairro = 'SANTA TEREZA' OR  
-    enderecos.bairro = 'SANTANA' OR  
-    enderecos.bairro = 'STA TERESA' OR  
-    enderecos.bairro = 'STO ANTONIO' OR  
-    enderecos.bairro = 'TERESOPOLIS' OR  
-    enderecos.bairro = 'TIMBAUVA III' OR  
-    enderecos.bairro = 'VILA BATISTA FLORES' OR  
-    enderecos.bairro = 'VILA CONCEIÇÃO' OR  
-    enderecos.bairro = 'VILA DOS COMERCIARIO' OR  
-    enderecos.bairro = 'VILA FARRAPOS' OR  
-    enderecos.bairro = 'VILA IPIRAGA' OR  
-    enderecos.bairro = 'VILA IPIRANGA' OR  
-    enderecos.bairro = 'VILA JARDIM' OR  
-    enderecos.bairro = 'VILA JOAO PESSOA' OR  
-    enderecos.bairro = 'VILA MATO SAMPAIO' OR  
-    enderecos.bairro = 'VILA SAFIRA' OR  
-    enderecos.bairro = 'VILA SÃO JOSÉ' OR  
-    enderecos.bairro = 'VL IPIRANGA' OR  
-    enderecos.bairro = 'VL JARDIM' OR  
-    enderecos.bairro = 'VL JOAO PESSOA'
-    ) or 
-	(enderecos.cidade = 'CAXIAS DO SUL' or
-	enderecos.cidade = 'CACHOEIRINHA' or 
-	enderecos.cidade = 'GRAVATAI' or 
-	enderecos.cidade = 'VIAMÃO' or 
-	enderecos.cidade = 'LIVRAMENTO')))
-ORDER BY
-  enderecos.reg,
-  enderecos.cidade,
-  enderecos.rua,
-  enderecos.numero,
-  enderecos.complemento;";
+  cadastro
+  LEFT OUTER JOIN enderecos ON (cadastro.CODIGO = enderecos.codigo)
+  LEFT OUTER JOIN origem ON (cadastro.ORIGEM = origem.Origem)
+  LEFT OUTER JOIN grupos ON (cadastro.GRUPO = grupos.GRUPO) WHERE
+  (condicao = 1 AND 
+  enderecos.cep > 0) AND (
+
+ grupos.GRUPO =	2
+or grupos.GRUPO = 5
+or grupos.GRUPO = 6
+or grupos.GRUPO = 8
+or grupos.GRUPO = 9
+or grupos.GRUPO = 12
+or grupos.GRUPO = 13
+or grupos.GRUPO = 14
+or grupos.GRUPO = 15
+or grupos.GRUPO = 18
+or grupos.GRUPO = 19
+or grupos.GRUPO = 16
+or grupos.GRUPO = 17
+or grupos.GRUPO = 20
+or grupos.GRUPO = 22
+or grupos.GRUPO = 21
+or grupos.GRUPO = 48
+or grupos.GRUPO = 49
+or grupos.GRUPO = 50
+or grupos.GRUPO = 57
+or grupos.GRUPO = 60
+or grupos.GRUPO = 81
+or grupos.GRUPO = 62
+or grupos.GRUPO = 63
+or grupos.GRUPO = 64
+or grupos.GRUPO = 179
+or grupos.GRUPO = 65
+or grupos.GRUPO = 68
+or grupos.GRUPO = 67
+or grupos.GRUPO = 163
+or grupos.GRUPO = 69
+or grupos.GRUPO = 132
+or grupos.GRUPO = 213
+or grupos.GRUPO = 71
+or grupos.GRUPO = 72
+or grupos.GRUPO = 75
+or grupos.GRUPO = 77
+or grupos.GRUPO = 78
+or grupos.GRUPO = 79
+or grupos.GRUPO = 80
+or grupos.GRUPO = 82
+or grupos.GRUPO = 83
+or grupos.GRUPO = 84
+or grupos.GRUPO = 85
+or grupos.GRUPO = 88
+or grupos.GRUPO = 89
+or grupos.GRUPO = 90
+or grupos.GRUPO = 92
+or grupos.GRUPO = 93
+or grupos.GRUPO = 94
+or grupos.GRUPO = 95
+or grupos.GRUPO = 96
+or grupos.GRUPO = 98
+or grupos.GRUPO = 1
+or grupos.GRUPO = 23
+or grupos.GRUPO = 24
+or grupos.GRUPO = 25
+or grupos.GRUPO = 99
+or grupos.GRUPO = 100
+or grupos.GRUPO = 101
+or grupos.GRUPO = 26
+or grupos.GRUPO = 166
+or grupos.GRUPO = 104
+or grupos.GRUPO = 103
+or grupos.GRUPO = 105
+or grupos.GRUPO = 106
+or grupos.GRUPO = 107
+or grupos.GRUPO = 205
+or grupos.GRUPO = 27
+or grupos.GRUPO = 109
+or grupos.GRUPO = 46
+or grupos.GRUPO = 111
+or grupos.GRUPO = 112
+or grupos.GRUPO = 113
+or grupos.GRUPO = 28
+or grupos.GRUPO = 116
+or grupos.GRUPO = 131
+or grupos.GRUPO = 30
+or grupos.GRUPO = 31
+or grupos.GRUPO = 32
+or grupos.GRUPO = 118
+or grupos.GRUPO = 33
+or grupos.GRUPO = 140
+or grupos.GRUPO = 136
+or grupos.GRUPO = 137
+or grupos.GRUPO = 138
+or grupos.GRUPO = 182
+or grupos.GRUPO = 139
+or grupos.GRUPO = 34
+or grupos.GRUPO = 141
+or grupos.GRUPO = 142
+or grupos.GRUPO = 143
+or grupos.GRUPO = 144
+or grupos.GRUPO = 145
+or grupos.GRUPO = 146
+or grupos.GRUPO = 147
+or grupos.GRUPO = 148
+or grupos.GRUPO = 149
+or grupos.GRUPO = 119
+or grupos.GRUPO = 120
+or grupos.GRUPO = 121
+or grupos.GRUPO = 45
+or grupos.GRUPO = 122
+
+or grupos.GRUPO = 45
+or grupos.GRUPO = 122
+or grupos.GRUPO = 123
+or grupos.GRUPO = 124
+or grupos.GRUPO = 125
+or grupos.GRUPO = 126
+or grupos.GRUPO = 128
+or grupos.GRUPO = 129
+or grupos.GRUPO = 36
+or grupos.GRUPO = 37
+or grupos.GRUPO = 127
+or grupos.GRUPO = 150
+or grupos.GRUPO = 151
+or grupos.GRUPO = 153
+or grupos.GRUPO = 61
+or grupos.GRUPO = 154
+or grupos.GRUPO = 155
+or grupos.GRUPO = 156
+or grupos.GRUPO = 157
+or grupos.GRUPO = 158
+or grupos.GRUPO = 159
+or grupos.GRUPO = 38
+or grupos.GRUPO = 39
+or grupos.GRUPO = 160
+or grupos.GRUPO = 40
+or grupos.GRUPO = 42
+or grupos.GRUPO = 41
+or grupos.GRUPO = 43
+or grupos.GRUPO = 44)
+   order by enderecos.reg, enderecos.cidade, enderecos.bairro, enderecos.rua, enderecos.numero,
+  enderecos.complemento, nome';
 	if ($_sql==""){
 		$_SESSION['msg'] = "<div class='alert alert-success' role='alert'>NENHUMA OPÇÃO INFORMADA<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 		echo '<script>self.window.close();</script>';

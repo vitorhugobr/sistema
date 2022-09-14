@@ -126,6 +126,7 @@ function cancela_novo() {
 //					</li>';
 //				}
 				if (liberado(1002)>0){  
+						//echo 'entrou';
 						echo '<li class="nav-item">
 						<button type="button" id="btnAltCad" class="btn btn-sm btn-success" disabled onclick="javascript:validaA();">
 						<i class="fas fa-save" aria-hidden="true text-muted" aria-hidden="true"></i> Gravar
@@ -146,22 +147,24 @@ function cancela_novo() {
 //							  </a>
 //						</li>';
 //				}
-				if ((liberado(1006)>0) and ($_SESSION['id']=1)){  
+				if ((liberado(1006)>0) and ($_SESSION['id']<2)){  
 						echo '<li class="nav-item">
 						<a href="cadastro_to_excel.php" title="Exportar Cadastro para Excel" class="btn btn-imprimir btn-sm" role="button">
 						<i class="fas fa-copy" aria-hidden="true text-muted" aria-hidden="true"></i> Exportar Cad. Excel
 						</a>
 					</li>';
 				} 
+				if ($_SESSION['usuarioNivel']<2) { 
+					echo '<li class="nav-item"> <a href="../relatorios/cadastro_duplos.php" class="btn btn-yellow btn-sm" role="button"> <i class="fas fa-list"></i> Cadastros Duplos </a> </li>';
+					echo '<li class="nav-item"> <a href="../relatorios/emails_invalidos.php" class="btn btn-cyan btn-sm" role="button"> <i class="fas fa-envelope"></i> E-mails Inválidos </a> </li>';
+				}
 				?>
-            <li class="nav-item">
-              <button type="button" class="btn btn-sm btn-limpatela" onclick="javascript:reload_cadastro();"> <i class="fas fa-eraser" aria-hidden="true text-muted"></i> Limpar Tela </button>
-            </li>
-            <li class="nav-item">
-              <button type="button" class="btn btn-sm btn-voltar" onclick="javascript:window.history.back();"> <i class="fas fa-backward" aria-hidden="true text-muted"></i> Voltar Tela Anterior </button>
-            </li>
-            <li class="nav-item"> <a href="../relatorios/cadastro_duplos.php" class="btn btn-yellow btn-sm" role="button"> <i class="fas fa-list"></i> Cadastros Duplos </a> </li>
-            <li class="nav-item"> <a href="../relatorios/emails_invalidos.php" class="btn btn-cyan btn-sm" role="button"> <i class="fas fa-envelope"></i> E-mails Inválidos </a> </li>
+			<li class="nav-item">
+            	<button type="button" class="btn btn-sm btn-limpatela" onclick="javascript:reload_cadastro();"> <i class="fas fa-eraser" aria-hidden="true text-muted"></i> Limpar Tela </button>
+ 			</li>
+			<li class="nav-item">
+				<button type="button" class="btn btn-sm btn-voltar" onclick="javascript:window.history.back();"> <i class="fas fa-backward" aria-hidden="true text-muted"></i> Voltar Tela Anterior </button>
+			</li>    
             <li class="nav-item"> <a href="../index2.php" class="btn btn-menu btn-sm" role="button"> <i class="fas fa-list-ul" aria-hidden="true text-muted"></i> Menu </a> </li>
           </ul>
         </div>

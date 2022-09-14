@@ -62,7 +62,15 @@ switch ($_SESSION['id']) {
 		//	senha cpanel: "@H2n,?9#l0pR"  usuário: "sebastiaomelopoa"
 		break;
 	case 8:  // 
+		$_SESSION['servidor'] = "www.vitor.poa.br";
+		$_SESSION['usuario'] = "vitorpoa_luiz";
+		$_SESSION['senha'] = "braz@2020";
+		$_SESSION['banco'] = "vitorpoa_luizbraz"; 
+
+		//	senha cpanel: "K_8zE{VmHQy1"  usuÃ¡rio: "vitorpoa"
+
 		break;
+
 	case 9:  // 
 	        break;		
 }
